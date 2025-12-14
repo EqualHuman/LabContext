@@ -122,18 +122,7 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   min-width:220px;
 }
 
-.brand-mark{
-  display:grid;
-  place-items:center;
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  background:rgba(47, 58, 119, 0.10);
-  border:1px solid rgba(47,58,119,0.18);
-  font-weight:750;
-  color:var(--indigo);
-  letter-spacing:0.5px;
-}
+
 
 .brand-text{display:flex; flex-direction:column; line-height: 1.1; gap:2px}
 .brand-name{
@@ -465,40 +454,14 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 /* --- Brand logo: hard constraints --- */
 
 .brand-mark {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  overflow: hidden; /* critical */
+  display: inline-flex;
+  align-items: center;
 }
 
 .brand-logo {
-  max-width: 26px;
-  max-height: 26px;
+  height: 28px;
   width: auto;
-  height: auto;
   display: block;
-  object-fit: contain;
-}
-.brand:hover 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: transparent; /* removes white/boxed background */
-  border: none;            /* removes outline */
-  overflow: hidden;
-}
-.brand-logo {
-  max-width: 26px;
-  max-height: 26px;
-  width: auto;
-  height: auto;
-  display: block;
-  object-fit: contain;
 }
 
 
