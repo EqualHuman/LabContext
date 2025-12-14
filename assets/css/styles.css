@@ -373,4 +373,26 @@ strong{font-weight:650}
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto}
 }
+.subnav{
+  margin-top:16px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.subnav-link{
+  padding:10px 12px;
+  border-radius:12px;
+  color:var(--muted);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.70);
+}
+.subnav-link:hover{
+  background:rgba(255,255,255,0.90);
+  color:var(--text);
+}
+.subnav-link.is-active{
+  color:var(--indigo);
+  background:rgba(47,58,119,0.08);
+  border:1px solid rgba(47,58,119,0.14);
+}
 
