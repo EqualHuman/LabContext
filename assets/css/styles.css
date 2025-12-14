@@ -481,6 +481,24 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   display: block;
   object-fit: contain;
 }
-.brand:hover .brand-mark {
-  background: rgba(47, 58, 119, 0.14);
+.brand:hover 
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: transparent; /* removes white/boxed background */
+  border: none;            /* removes outline */
+  overflow: hidden;
 }
+.brand-logo {
+  max-width: 26px;
+  max-height: 26px;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+
