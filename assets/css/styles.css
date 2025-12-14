@@ -128,14 +128,14 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   width:40px;
   height:40px;
   border-radius:12px;
-  background:linear-gradient(140deg, rgba(47,58,119,0.20), rgba(60,74,160,0.12));
-  border:1px solid rgba(47,58,119,0.22);
+  background:rgba(47, 58, 119, 0.10);
+  border:1px solid rgba(47,58,119,0.18);
   font-weight:750;
   color:var(--indigo);
   letter-spacing:0.5px;
 }
 
-.brand-text{display:flex; flex-direction:column; gap:2px}
+.brand-text{display:flex; flex-direction:column; line-height: 1.1; gap:2px}
 .brand-name{
   font-size:18px;
   font-weight:650;
@@ -470,12 +470,6 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: linear-gradient(
-    140deg,
-    rgba(47, 58, 119, 0.18),
-    rgba(60, 74, 160, 0.10)
-  );
-  border: 1px solid rgba(47, 58, 119, 0.22);
   overflow: hidden; /* critical */
 }
 
@@ -486,4 +480,7 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   height: auto;
   display: block;
   object-fit: contain;
+}
+.brand:hover .brand-mark {
+  background: rgba(47, 58, 119, 0.14);
 }
