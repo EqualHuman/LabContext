@@ -21,6 +21,65 @@
     if (isDeep) return "../";
     return "./";
   }
+  async function injectSharedLayout() {
+  const base = resolveBase();
+
+  // Header
+  const header = document.querySelector("header.site-header");
+  if (header) {
+    try {
+      const res = await fetch(base + "assets/partials/header.html", { cache: "no-store" });
+      if (res.ok) {
+        header.innerHTML = await res.text();
+      }
+    } catch (_) {}
+  }
+
+  // Footer
+  const footer = document.querySelector("footer.site-footer");
+  if (footer) {
+    try {
+      const res = await fetch(base + "assets/partials/footer.html", { cache: "no-store" });
+      if (res.ok) {
+        footer.innerHTML = await res.text();
+      }
+    } catch (_) {}
+  }
+
+  // Fix all relative links inside injected partials
+  document.querySelectorAll("[data-href]").forEach((el) => {
+    const href = el.getAttribute("data-href") || "";
+    el.setAttribute("href", base + href);
+  });
+
+  // Fix logo src
+  document.querySelectorAll("img[data-src]").forEach((img) => {
+    const src = img.getAttribute("data-src");
+    if (src) img.setAttribute("src", base + src);
+  });
+
+  // Mark active nav item
+  const path = window.location.pathname;
+
+  const is = (segment) => path.includes(`/${segment}/`) || path.endsWith(`/${segment}`) || path.includes(`/${segment}.html`);
+
+  document.querySelectorAll(".nav-link[data-nav]").forEach((a) => a.classList.remove("is-active"));
+
+  if (is("in-context")) {
+    const a = document.querySelector('.nav-link[data-nav="in-context"]');
+    if (a) a.classList.add("is-active");
+  } else if (is("education")) {
+    const a = document.querySelector('.nav-link[data-nav="education"]');
+    if (a) a.classList.add("is-active");
+  } else if (is("infographics")) {
+    const a = document.querySelector('.nav-link[data-nav="infographics"]');
+    if (a) a.classList.add("is-active");
+  } else if (is("about")) {
+    const a = document.querySelector('.nav-link[data-nav="about"]');
+    if (a) a.classList.add("is-active");
+  }
+}
+
 
   function uniqueFromKey(items, key) {
     const set = new Set();
@@ -246,15 +305,21 @@
   }
 
   // Boot
-  Promise.resolve()
-    .then(renderHomeLatest)
-    .then(renderInContextLibrary)
-    .then(renderInContextIssues)
-    .catch(() => {
-      const ids = ["latest-posts", "ic-library", "ic-issues"];
-      ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = '<p class="muted">Content list unavailable right now.</p>';
-      });
+// Boot
+Promise.resolve()
+  .then(injectSharedLayout)
+  .then(() => {
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  })
+  .then(renderHomeLatest)
+  .then(renderInContextLibrary)
+  .then(renderInContextIssues)
+  .catch(() => {
+    const ids = ["latest-posts", "ic-library", "ic-issues"];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<p class="muted">Content list unavailable right now.</p>';
     });
+  });
 })();
