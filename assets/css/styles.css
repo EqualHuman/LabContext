@@ -462,3 +462,28 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto}
 }
+/* --- Brand logo: hard constraints --- */
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(
+    140deg,
+    rgba(47, 58, 119, 0.18),
+    rgba(60, 74, 160, 0.10)
+  );
+  border: 1px solid rgba(47, 58, 119, 0.22);
+  overflow: hidden; /* critical */
+}
+
+.brand-logo {
+  max-width: 26px;
+  max-height: 26px;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
