@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Annie+Use+Your+Telescope&family=Alumni+Sans+Pinstripe&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&display=swap");
 
 
 :root{
@@ -438,23 +438,25 @@ strong{font-weight:650}
   box-shadow: inset 0 0 0 1px rgba(47, 58, 119, 0.18);
 }
 /* --- Editorial accent typography --- */
+/* --- Editorial accent typography: Alumni Sans Pinstripe --- */
 
-/* Hero & page subtitles: gentle human tone */
+/* Hero & page subtitles */
 .hero-subtitle,
 .page-subtitle {
-  font-family: "Annie Use Your Telescope", ui-sans-serif, system-ui;
-  letter-spacing: 0.3px;
-  font-size: 17px;
+  font-family: "Alumni Sans Pinstripe", ui-sans-serif, system-ui;
+  letter-spacing: 1px;
+  font-size: 15px;
+  text-transform: uppercase;
 }
 
-/* Optional future use: quiet editorial flourishes */
-.editorial-script {
-  font-family: "Mrs Saint Delafield", cursive;
-  font-size: 32px;
-  line-height: 1;
-  color: var(--indigo);
-  opacity: 0.75;
+/* Optional: very subtle meta text (dates, labels, context cues) */
+.post-meta,
+.control-label,
+.tiny {
+  font-family: "Alumni Sans Pinstripe", ui-sans-serif, system-ui;
+  letter-spacing: 0.8px;
 }
+
 
 /* Extremely subtle meta text option (use cautiously) */
 .meta-pinstripe {
