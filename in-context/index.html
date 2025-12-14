@@ -1,1 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>In Context · LabContext</title>
+  <meta name="description" content="In Context Library: evergreen public-facing resources, PSAs, myth-busting, safety explainers, and historical deep dives." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../" aria-label="LabContext home">
+        <span class="brand-mark" aria-hidden="true">LC</span>
+        <span class="brand-text">
+          <span class="brand-name">LabContext</span>
+          <span class="brand-tag">clarity for laboratory medicine</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link is-active" href="./">In Context</a>
+        <a class="nav-link" href="../education/">Education</a>
+        <a class="nav-link" href="../infographics/">Infographics</a>
+        <a class="nav-link" href="../about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-head">
+      <div class="container">
+        <h1 class="page-title">In Context</h1>
+        <p class="page-subtitle">
+          The Library: stable, linkable pages meant for direct lookup — not buried in monthly archives.
+        </p>
+
+        <div class="subnav" aria-label="In Context navigation">
+          <a class="subnav-link is-active" href="./">Library</a>
+          <a class="subnav-link" href="./monthly/">Monthly Issues</a>
+        </div>
+
+        <div class="controls">
+          <label class="control">
+            <span class="control-label">Search</span>
+            <input id="ic-search" class="input" type="search" placeholder="Search titles, summaries, tags…" autocomplete="off" />
+          </label>
+
+          <label class="control">
+            <span class="control-label">Filter by tag</span>
+            <select id="ic-tag" class="select">
+              <option value="">All</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="ic-tag-chips" class="chips" aria-label="Popular tags"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="ic-library" class="posts-list" aria-live="polite">
+          <noscript>
+            <p class="muted">Enable JavaScript to browse the library with search and tags.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="muted">© <span id="year"></span> LabContext</div>
+      <div class="footer-links">
+        <a href="../about/">Disclaimer</a>
+        <a href="../about/#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
 
