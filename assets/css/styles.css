@@ -1,42 +1,78 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap");
-
+/* LabContext — global styles (cleaned + reorganized)
+   Typography:
+   - Body: Source Sans 3 (modern, readable)
+   - Headings/brand: Source Serif 4 (professional, calm)
+*/
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap");
 
 :root{
+  /* Color system */
   --bg: #fbfbfd;
   --card: #ffffff;
   --text: #12131a;
   --muted: #5a6072;
   --line: rgba(18,19,26,0.10);
+
+  /* Brand */
   --indigo: #2f3a77;
   --indigo-2: #3c4aa0;
+  --header-tint: rgba(47,58,119,0.06);
+
+  /* Type */
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Layout */
   --shadow: 0 10px 28px rgba(18,19,26,0.08);
   --radius: 18px;
   --radius-sm: 12px;
   --container: 1040px;
 }
 
+/* ------------------------------
+   Base / Reset
+------------------------------ */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(47,58,119,0.10), transparent 50%),
-              radial-gradient(900px 500px at 85% 0%, rgba(60,74,160,0.08), transparent 55%),
-              var(--bg);
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(47,58,119,0.10), transparent 50%),
+    radial-gradient(900px 500px at 85% 0%, rgba(60,74,160,0.08), transparent 55%),
+    var(--bg);
   color:var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  line-height:1.55;
+  font-family:var(--font-sans);
+  line-height:1.6;
+  text-rendering:optimizeLegibility;
 }
 
 a{color:inherit; text-decoration:none}
 a:hover{text-decoration:none}
 strong{font-weight:650}
 
+/* Consistent heading font everywhere */
+h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
+  font-family:var(--font-serif);
+}
+
+/* ------------------------------
+   Layout helpers
+------------------------------ */
 .container{
   max-width:var(--container);
   margin:0 auto;
   padding:0 22px;
 }
 
+.grid-2{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:14px;
+}
+
+/* ------------------------------
+   Accessibility
+------------------------------ */
 .skip-link{
   position:absolute;
   left:-999px;
@@ -58,13 +94,17 @@ strong{font-weight:650}
   z-index:9999;
 }
 
+/* ------------------------------
+   Header / Nav (adds a subtle purple tint)
+------------------------------ */
 .site-header{
   position:sticky;
   top:0;
   z-index:50;
   backdrop-filter:saturate(120%) blur(12px);
-  background:rgba(251,251,253,0.75);
-  border-bottom:1px solid var(--line);
+  background:
+    linear-gradient(to bottom, rgba(47,58,119,0.10), rgba(251,251,253,0.72));
+  border-bottom:1px solid rgba(47,58,119,0.12);
 }
 
 .header-inner{
@@ -88,8 +128,8 @@ strong{font-weight:650}
   width:40px;
   height:40px;
   border-radius:12px;
-  background:linear-gradient(140deg, rgba(47,58,119,0.18), rgba(60,74,160,0.10));
-  border:1px solid rgba(47,58,119,0.20);
+  background:linear-gradient(140deg, rgba(47,58,119,0.20), rgba(60,74,160,0.12));
+  border:1px solid rgba(47,58,119,0.22);
   font-weight:750;
   color:var(--indigo);
   letter-spacing:0.5px;
@@ -97,8 +137,8 @@ strong{font-weight:650}
 
 .brand-text{display:flex; flex-direction:column; gap:2px}
 .brand-name{
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size:18px;
+  font-weight:650;
   letter-spacing:0.2px;
 }
 .brand-tag{
@@ -129,23 +169,26 @@ strong{font-weight:650}
   border:1px solid rgba(47,58,119,0.14);
 }
 
-.hero{
-  padding:54px 0 28px 0;
-}
+/* ------------------------------
+   Hero
+------------------------------ */
+.hero{padding:54px 0 28px 0}
+
 .hero-title{
   margin:0;
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-weight:650;
   letter-spacing:-0.3px;
-  line-height:1.15;
+  line-height:1.12;
   font-size:clamp(30px, 3.2vw, 44px);
 }
+
 .hero-subtitle{
   margin:14px 0 0 0;
   color:var(--muted);
   max-width:68ch;
   font-size:16px;
 }
+
 .hero-actions{
   margin-top:18px;
   display:flex;
@@ -153,6 +196,9 @@ strong{font-weight:650}
   flex-wrap:wrap;
 }
 
+/* ------------------------------
+   Buttons
+------------------------------ */
 .button{
   display:inline-flex;
   align-items:center;
@@ -173,28 +219,34 @@ strong{font-weight:650}
   border:1px solid rgba(47,58,119,0.18);
   box-shadow:none;
 }
-.button-ghost:hover{
-  background:rgba(255,255,255,0.85);
-}
+.button-ghost:hover{background:rgba(255,255,255,0.85)}
 
+/* ------------------------------
+   Cards (Quiet links + Post cards)
+------------------------------ */
 .quiet-links{
   margin-top:22px;
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:14px;
 }
-.quiet-card{
+
+.quiet-card,
+.post-card{
   display:block;
   padding:16px;
   border-radius:var(--radius);
-  background:rgba(255,255,255,0.80);
+  background:rgba(255,255,255,0.86);
   border:1px solid var(--line);
   box-shadow:0 1px 0 rgba(18,19,26,0.04);
 }
-.quiet-card:hover{
+
+.quiet-card:hover,
+.post-card:hover{
   box-shadow:var(--shadow);
   background:rgba(255,255,255,0.92);
 }
+
 .quiet-card-title{
   font-weight:650;
   letter-spacing:0.1px;
@@ -205,9 +257,32 @@ strong{font-weight:650}
   font-size:14px;
 }
 
-.section{
-  padding:28px 0;
+/* Post card internals */
+.post-meta{color:var(--muted); font-size:12px}
+.post-title{margin-top:6px; font-weight:700; letter-spacing:0.1px}
+.post-summary{margin-top:6px; color:var(--muted); font-size:14px; max-width:85ch}
+
+.post-tags{
+  margin-top:10px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
+
+.tag{
+  font-size:12px;
+  color:var(--indigo);
+  background:rgba(47,58,119,0.08);
+  border:1px solid rgba(47,58,119,0.14);
+  padding:6px 8px;
+  border-radius:999px;
+}
+
+/* ------------------------------
+   Sections / Lists
+------------------------------ */
+.section{padding:28px 0}
+
 .section-head{
   display:flex;
   align-items:baseline;
@@ -215,16 +290,15 @@ strong{font-weight:650}
   gap:12px;
   margin-bottom:12px;
 }
+
 .section-title{
   margin:0;
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size:22px;
   letter-spacing:-0.2px;
+  line-height:1.2;
 }
-.section-link{
-  color:var(--indigo);
-  font-size:14px;
-}
+
+.section-link{color:var(--indigo); font-size:14px}
 
 .posts-grid{
   display:grid;
@@ -238,150 +312,34 @@ strong{font-weight:650}
   gap:12px;
 }
 
-.post-card{
-  display:block;
-  padding:16px;
-  border-radius:var(--radius);
-  background:rgba(255,255,255,0.86);
-  border:1px solid var(--line);
-}
-.post-card:hover{box-shadow:var(--shadow)}
-.post-meta{
-  color:var(--muted);
-  font-size:12px;
-}
-.post-title{
-  margin-top:6px;
-  font-weight:700;
-  letter-spacing:0.1px;
-}
-.post-summary{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:14px;
-  max-width:85ch;
-}
-.post-tags{
-  margin-top:10px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-.tag{
-  font-size:12px;
-  color:var(--indigo);
-  background:rgba(47,58,119,0.08);
-  border:1px solid rgba(47,58,119,0.14);
-  padding:6px 8px;
-  border-radius:999px;
-}
+/* ------------------------------
+   Page head
+------------------------------ */
+.page-head{padding:42px 0 14px 0}
 
-.page-head{
-  padding:42px 0 14px 0;
-}
 .page-title{
   margin:0;
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size:34px;
   letter-spacing:-0.3px;
   line-height:1.1;
 }
+
 .page-subtitle{
   margin:10px 0 0 0;
   color:var(--muted);
   max-width:75ch;
 }
 
-.controls{
-  margin-top:18px;
-  display:grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap:12px;
-}
-.control{display:flex; flex-direction:column; gap:8px}
-.control-label{font-size:12px; color:var(--muted)}
-.input, .select{
-  width:100%;
-  padding:12px 12px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.88);
-  border:1px solid var(--line);
-  color:var(--text);
-}
-.input:focus, .select:focus{outline:3px solid rgba(60,74,160,0.22); outline-offset:2px}
-
-.chips{
-  margin-top:12px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-.chip{
-  border-radius:999px;
-  border:1px solid rgba(47,58,119,0.14);
-  background:rgba(47,58,119,0.06);
-  color:var(--indigo);
-  padding:8px 10px;
-  font-size:12px;
-  cursor:pointer;
-}
-.chip:hover{background:rgba(47,58,119,0.10)}
-.chip:focus{outline:3px solid rgba(60,74,160,0.22); outline-offset:2px}
-
-.grid-2{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:14px;
-}
-
-.prose{
-  max-width:78ch;
-}
-.prose h2{
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  margin:22px 0 8px 0;
-}
-.prose ul{color:var(--muted)}
-
-.muted{color:var(--muted)}
-.tiny{font-size:12px}
-
-.site-footer{
-  border-top:1px solid var(--line);
-  padding:18px 0;
-  margin-top:18px;
-  background:rgba(251,251,253,0.55);
-}
-.footer-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.footer-links{
-  display:flex;
-  gap:12px;
-}
-.footer-links a{color:var(--muted)}
-.footer-links a:hover{color:var(--text)}
-
-@media (max-width: 940px){
-  .quiet-links{grid-template-columns:1fr}
-  .posts-grid{grid-template-columns:1fr}
-  .controls{grid-template-columns:1fr}
-  .grid-2{grid-template-columns:1fr}
-  .brand{min-width:auto}
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{scroll-behavior:auto}
-}
+/* ------------------------------
+   Subnav (In Context tabs)
+------------------------------ */
 .subnav{
   margin-top:16px;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
 }
+
 .subnav-link{
   padding:10px 12px;
   border-radius:12px;
@@ -398,89 +356,109 @@ strong{font-weight:650}
   background:rgba(47,58,119,0.08);
   border:1px solid rgba(47,58,119,0.14);
 }
-/* --- Global top-section brand veil --- */
 
-/* Apply a subtle indigo wash to hero and page headers */
-.hero,
-.page-head {
-  position: relative;
-  isolation: isolate;
+/* ------------------------------
+   Controls / Inputs
+------------------------------ */
+.controls{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap:12px;
 }
 
-/* Soft indigo veil layer */
-.hero::before,
-.page-head::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      900px 420px at 20% -20%,
-      rgba(47, 58, 119, 0.14),
-      transparent 55%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(47, 58, 119, 0.06),
-      rgba(47, 58, 119, 0.00)
-    );
-  z-index: -1;
-  pointer-events: none;
+.control{display:flex; flex-direction:column; gap:8px}
+.control-label{font-size:12px; color:var(--muted)}
+
+.input, .select{
+  width:100%;
+  padding:12px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.88);
+  border:1px solid var(--line);
+  color:var(--text);
+  font-family:var(--font-sans);
+}
+.input:focus, .select:focus{
+  outline:3px solid rgba(60,74,160,0.22);
+  outline-offset:2px;
 }
 
-/* Slightly strengthen separation under the header */
-.site-header {
-  border-bottom: 1px solid rgba(47, 58, 119, 0.16);
+/* Chips */
+.chips{
+  margin-top:12px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-/* Optional: gently reinforce active nav context */
-.nav-link.is-active {
-  box-shadow: inset 0 0 0 1px rgba(47, 58, 119, 0.18);
+.chip{
+  border-radius:999px;
+  border:1px solid rgba(47,58,119,0.14);
+  background:rgba(47,58,119,0.06);
+  color:var(--indigo);
+  padding:8px 10px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--font-sans);
 }
-/* --- Editorial accent typography --- */
-/* --- Editorial accent typography: Alumni Sans Pinstripe --- */
+.chip:hover{background:rgba(47,58,119,0.10)}
+.chip:focus{outline:3px solid rgba(60,74,160,0.22); outline-offset:2px}
 
-/* Hero & page subtitles */
-.hero-subtitle,
-.page-subtitle {
-  font-family: "Alumni Sans Pinstripe", ui-sans-serif, system-ui;
-  letter-spacing: 1px;
-  font-size: 15px;
-  text-transform: uppercase;
-}
+/* ------------------------------
+   Prose
+------------------------------ */
+.prose{max-width:78ch}
 
-/* Optional: very subtle meta text (dates, labels, context cues) */
-.post-meta,
-.control-label,
-.tiny {
-  font-family: "Alumni Sans Pinstripe", ui-sans-serif, system-ui;
-  letter-spacing: 0.8px;
-}
-
-
-/* Extremely subtle meta text option (use cautiously) */
-.meta-pinstripe {
-  font-family: "Alumni Sans Pinstripe", ui-sans-serif, system-ui;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-/* --- Global modern body typography --- */
-
-body {
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI,
-               Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-}
-/* Improve clarity on small UI text */
-.post-meta,
-.control-label,
-.brand-tag {
-  font-weight: 450;
+.prose h2{
+  margin:22px 0 8px 0;
+  font-size:20px;
+  line-height:1.25;
 }
 
-/* Slightly strengthen buttons and nav */
-.button,
-.nav-link {
-  font-weight: 500;
+.prose ul{color:var(--muted)}
+
+/* ------------------------------
+   Footer
+------------------------------ */
+.site-footer{
+  border-top:1px solid var(--line);
+  padding:18px 0;
+  margin-top:18px;
+  background:rgba(251,251,253,0.55);
 }
 
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
 
+.footer-links{display:flex; gap:12px}
+.footer-links a{color:var(--muted)}
+.footer-links a:hover{color:var(--text)}
+
+/* ------------------------------
+   Utilities
+------------------------------ */
+.muted{color:var(--muted)}
+.tiny{font-size:12px}
+
+/* ------------------------------
+   Responsive
+------------------------------ */
+@media (max-width: 940px){
+  .quiet-links{grid-template-columns:1fr}
+  .posts-grid{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .brand{min-width:auto}
+}
+
+/* ------------------------------
+   Reduced motion
+------------------------------ */
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto}
+}
