@@ -1,11 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Site</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LabContext</title>
+  <meta name="description" content="LabContext is a calm, open-access clarification resource for laboratory medicine." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <h1>It works 🎉</h1>
-  <p>My domain is officially connected.</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="LabContext home">
+        <span class="brand-mark" aria-hidden="true">LC</span>
+        <span class="brand-text">
+          <span class="brand-name">LabContext</span>
+          <span class="brand-tag">clarity for laboratory medicine</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link is-active" href="in-context/">In Context</a>
+        <a class="nav-link" href="education/">Education</a>
+        <a class="nav-link" href="infographics/">Infographics</a>
+        <a class="nav-link" href="about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">A quiet reference library for understanding lab medicine.</h1>
+        <p class="hero-subtitle">
+          Read what’s current in <strong>In Context</strong>, then go deeper in <strong>Education</strong> when you’re ready.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="in-context/">Browse In Context</a>
+          <a class="button button-ghost" href="education/">Open Education Library</a>
+        </div>
+
+        <div class="quiet-links">
+          <a class="quiet-card" href="in-context/">
+            <div class="quiet-card-title">In Context</div>
+            <div class="quiet-card-desc">Fresh articles, PSAs, breakthroughs, and public-facing explanations.</div>
+          </a>
+
+          <a class="quiet-card" href="education/">
+            <div class="quiet-card-title">Education</div>
+            <div class="quiet-card-desc">Evergreen concepts, mechanisms, and interpretation logic.</div>
+          </a>
+
+          <a class="quiet-card" href="infographics/">
+            <div class="quiet-card-title">Infographics</div>
+            <div class="quiet-card-desc">Shareable visuals with printable PDF downloads (coming soon).</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Latest in In Context</h2>
+          <a class="section-link" href="in-context/">View all</a>
+        </div>
+
+        <div id="latest-posts" class="posts-grid" aria-live="polite">
+          <noscript>
+            <p class="muted">Enable JavaScript to see the latest posts list. You can still browse all posts in In Context.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="muted">© <span id="year"></span> LabContext</div>
+      <div class="footer-links">
+        <a href="about/">Disclaimer</a>
+        <a href="about/#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
