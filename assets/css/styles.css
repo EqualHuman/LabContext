@@ -726,3 +726,199 @@ h1,h2,h3,
     transform: none !important;
   }
 }
+/* =====================================================
+   LABCONTEXT — NEW VISUAL BASELINE (FROM SCRATCH)
+   Calm, editorial, modern. No grey. No silver. No glass.
+===================================================== */
+
+/* ---------- Color system ---------- */
+:root{
+  /* Page */
+  --page-bg: #fbfafc;              /* warm paper */
+  --page-wash: #f4f1f8;            /* faint lavender wash */
+
+  /* Ink */
+  --ink-main: #1c1630;             /* soft ink, not black */
+  --ink-muted: #6a5f85;            /* warm muted purple */
+
+  /* Brand */
+  --brand-purple: #5a3fa3;
+  --brand-purple-soft: #ede8fb;
+
+  /* Accent */
+  --accent-pink: #e77fb2;
+  --accent-pink-soft: #fde9f3;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-soft: #faf7ff;
+
+  /* Radius */
+  --radius-lg: 24px;
+  --radius-md: 18px;
+}
+
+/* ---------- Page background ---------- */
+body{
+  background:
+    radial-gradient(1200px 600px at 15% -10%, var(--page-wash), transparent 60%),
+    var(--page-bg);
+  color: var(--ink-main);
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3,
+.brand-name{
+  color: var(--ink-main);
+}
+
+.muted,
+.panel-subtitle,
+.context-desc{
+  color: var(--ink-muted);
+}
+
+/* ---------- Header (layout unchanged, visuals reset) ---------- */
+.site-header{
+  background: transparent;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+.site-header::after{
+  content:"";
+  display:block;
+  height:1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(90,63,163,0.18),
+    transparent
+  );
+}
+
+/* Nav pills — light, calm */
+.nav-link{
+  background: transparent;
+  color: var(--ink-main);
+}
+
+.nav-link:hover{
+  background: var(--brand-purple-soft);
+  color: var(--brand-purple);
+}
+
+.nav-link.is-active{
+  background: var(--brand-purple-soft);
+  color: var(--brand-purple);
+}
+
+/* ---------- Primary buttons ---------- */
+.button{
+  background: var(--brand-purple);
+  border: none;
+  color: #fff;
+}
+
+.button:hover{
+  background: #4d3490;
+}
+
+/* Ghost buttons */
+.button-ghost{
+  background: var(--accent-pink-soft);
+  border: none;
+  color: #7a2d57;
+}
+
+.button-ghost:hover{
+  background: #f9d7e7;
+}
+
+/* ---------- SECTION SURFACES (key change) ---------- */
+/* These are no longer “cards”. They are soft sections. */
+
+.panel{
+  background: linear-gradient(
+    to bottom,
+    var(--surface),
+    var(--surface-soft)
+  );
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow:
+    0 8px 30px rgba(90,63,163,0.08);
+}
+
+/* No hover shine. No lift. Just stability. */
+.panel:hover{
+  box-shadow:
+    0 10px 36px rgba(90,63,163,0.10);
+}
+
+/* Quick Finder gets the *only* tinted emphasis */
+.panel-qf{
+  background:
+    radial-gradient(
+      600px 200px at 10% 0%,
+      rgba(231,127,178,0.18),
+      transparent 60%
+    ),
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #faf5ff
+    );
+}
+
+/* ---------- Inner links / rows ---------- */
+.feature-link,
+.context-item,
+.post-card,
+.quiet-card{
+  background: transparent;
+  border: none;
+  padding: 14px 0;
+  box-shadow: none;
+}
+
+/* Divider instead of boxes */
+.feature-link + .feature-link,
+.context-item + .context-item{
+  border-top: 1px solid rgba(90,63,163,0.12);
+}
+
+/* Hover = text emphasis only */
+.feature-link:hover .feature-link-title,
+.context-item:hover .context-title{
+  color: var(--brand-purple);
+}
+
+/* ---------- Headings inside sections ---------- */
+.panel-title{
+  color: var(--brand-purple);
+}
+
+/* ---------- Chips ---------- */
+.chip{
+  background: var(--brand-purple-soft);
+  border: none;
+  color: var(--brand-purple);
+}
+
+.chip:hover{
+  background: #e3dcfb;
+}
+
+/* ---------- Inputs ---------- */
+.input{
+  background: #ffffff;
+  border: 1px solid rgba(90,63,163,0.18);
+  border-radius: var(--radius-md);
+}
+
+.input:focus{
+  outline: none;
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 0 3px rgba(231,127,178,0.22);
+}
