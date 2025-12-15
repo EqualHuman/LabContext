@@ -1280,3 +1280,119 @@ body.page-home .chip:hover{
     transform: none !important;
   }
 }
+/* ==============================
+   HOMEPAGE: weightless futuristic panels (NO shine)
+   Paste at END of styles.css
+============================== */
+
+body.page-home{
+  --float-bg: rgba(255,255,255,0.075);
+  --float-bg-2: rgba(255,255,255,0.060);
+  --float-edge: rgba(255,255,255,0.085);
+  --float-edge-2: rgba(255,255,255,0.050);
+
+  /* Lighter, less “clunky” elevation */
+  --float-shadow: 0 10px 28px rgba(0,0,0,0.34);
+  --float-shadow-hover: 0 14px 38px rgba(0,0,0,0.42);
+}
+
+/* Kill ANY sheen sweep you may have from earlier experiments */
+body.page-home .panel::after,
+body.page-home .feature-link::after,
+body.page-home .context-item::after,
+body.page-home .post-card::after,
+body.page-home .quiet-card::after{
+  content: none !important;
+}
+
+/* Core surfaces: weightless, minimal, not “boxed” */
+body.page-home .panel,
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card,
+body.page-home .quiet-card{
+  border: none !important;
+  background: linear-gradient(to bottom, var(--float-bg), var(--float-bg-2)) !important;
+
+  /* keep blur subtle so it reads “clean”, not foggy */
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+
+  /* one soft shadow only */
+  box-shadow: var(--float-shadow) !important;
+
+  /* no glossy highlights */
+  position: relative;
+  overflow: hidden;
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+/* Ultra-subtle “rim” (not a shine). Makes it feel like a thin surface. */
+body.page-home .panel::before,
+body.page-home .feature-link::before,
+body.page-home .context-item::before,
+body.page-home .post-card::before,
+body.page-home .quiet-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  box-shadow:
+    inset 0 0 0 1px var(--float-edge),
+    inset 0 0 0 2px var(--float-edge-2);
+  opacity: 1;
+}
+
+/* Hover: tiny lift + slightly stronger shadow (NO glow, NO shine) */
+body.page-home .panel:hover,
+body.page-home .feature-link:hover,
+body.page-home .context-item:hover,
+body.page-home .post-card:hover,
+body.page-home .quiet-card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--float-shadow-hover) !important;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.085), rgba(255,255,255,0.065)) !important;
+}
+
+/* Keep “static” advice card from moving */
+body.page-home .context-item-static:hover{
+  transform: none !important;
+  box-shadow: var(--float-shadow) !important;
+}
+
+/* Make panels feel less heavy: a touch more breathing room + roundness consistency */
+body.page-home .panel{
+  border-radius: 22px !important;
+  padding: 22px !important;
+}
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card,
+body.page-home .quiet-card{
+  border-radius: 18px !important;
+}
+
+/* Optional: tone down any leftover “thick” button shadows on homepage */
+body.page-home .button,
+body.page-home .panel-link{
+  box-shadow: 0 12px 28px rgba(0,0,0,0.40) !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.page-home .panel,
+  body.page-home .feature-link,
+  body.page-home .context-item,
+  body.page-home .post-card,
+  body.page-home .quiet-card{
+    transition: none !important;
+  }
+  body.page-home .panel:hover,
+  body.page-home .feature-link:hover,
+  body.page-home .context-item:hover,
+  body.page-home .post-card:hover,
+  body.page-home .quiet-card:hover{
+    transform: none !important;
+  }
+}
