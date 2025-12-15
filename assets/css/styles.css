@@ -1,7 +1,4 @@
-Replace **everything** in `assets/css/styles.css` with the single cleaned file below (this removes the repeated/older “homepage banner / welcome tile / intro strip / newsletter” blocks and keeps only the final homepage dashboard + header emphasis, consistent with the calm LabContext direction ).
-
-```css
-/* LabContext — global styles (cleaned + deduped)
+/* LabContext — global styles (cleaned + organized)
    Typography:
    - Body: Source Sans 3
    - Headings/brand/ui accents: Source Serif 4
@@ -63,10 +60,12 @@ a{ color:inherit; text-decoration:none; }
 a:hover{ text-decoration:none; }
 strong{ font-weight:650; }
 
-/* Force form controls to inherit the site typography */
+/* Force form controls to inherit site typography (fixes “Search looks different”) */
 button, input, select, textarea{
   font: inherit;
   letter-spacing: inherit;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* Headings use serif for editorial calm */
@@ -194,7 +193,7 @@ h1,h2,h3,
   color:var(--muted);
 }
 
-/* Optional header right (if/when you add search next to nav) */
+/* Header right (search + nav) */
 .header-right{
   display:flex;
   align-items:center;
@@ -235,12 +234,10 @@ h1,h2,h3,
   color: rgba(18,19,26,0.72);
   cursor:pointer;
 
-  /* match nav tone */
+  /* match nav vibe */
   font-family: var(--font-serif);
-  font-weight: 600;
-  letter-spacing: 0.08px;
-  -webkit-appearance: none;
-  appearance: none;
+  font-weight:600;
+  letter-spacing:0.08px;
 }
 
 .header-search-btn:hover{
@@ -261,7 +258,7 @@ h1,h2,h3,
   padding:6px 10px;
   border-radius:10px;
   background: transparent;
-  border: none;                 /* no halos */
+  border: none; /* no halos */
   font-family: var(--font-serif);
   font-weight:600;
   letter-spacing:0.08px;
@@ -277,7 +274,7 @@ h1,h2,h3,
 }
 
 .nav-link.is-active{
-  background: rgba(85,64,121,0.12);  /* tonal highlight only */
+  background: rgba(85,64,121,0.12); /* tonal highlight only */
   color: var(--indigo);
   font-weight:650;
 }
@@ -285,16 +282,9 @@ h1,h2,h3,
 /* Ensure NO underline indicator survives anywhere */
 .nav-link::after{ content:none !important; }
 
-/* Normalize Search nav link to match others exactly */
-.nav-link[data-nav="search"],
-.nav-link-search{
-  font-family: var(--font-serif) !important;
-  font-weight: 600 !important;
-  color: rgba(18,19,26,0.72) !important;
-}
-
 /* ==============================
-   Hero
+   HERO (Homepage section)
+   If you want this homepage-only, see section 2 below.
 ============================== */
 .hero{ padding:54px 0 28px 0; }
 
@@ -368,6 +358,7 @@ h1,h2,h3,
 
 /* ==============================
    Cards (Quiet links + Post cards)
+   If you want these homepage-only, see section 2 below.
 ============================== */
 .quiet-links{
   margin-top:22px;
@@ -392,7 +383,11 @@ h1,h2,h3,
   box-shadow:var(--shadow);
 }
 
-.quiet-card-title{ font-weight:650; letter-spacing:0.1px; }
+.quiet-card-title{
+  font-weight:650;
+  letter-spacing:0.1px;
+}
+
 .quiet-card-desc{
   margin-top:6px;
   color:var(--muted);
@@ -560,11 +555,13 @@ h1,h2,h3,
    Prose
 ============================== */
 .prose{ max-width:78ch; }
+
 .prose h2{
   margin:22px 0 8px 0;
   font-size:20px;
   line-height:1.25;
 }
+
 .prose ul{ color:var(--muted); }
 
 /* ==============================
@@ -595,262 +592,6 @@ h1,h2,h3,
 .tiny{ font-size:12px; }
 
 /* ==============================
-   HOMEPAGE DASHBOARD (interactive, not flashy)
-============================== */
-
-/* Welcome strip */
-.home .home-welcome{ padding: 14px 0 10px 0; }
-.home .home-welcome-box{
-  width: 100%;
-  max-width: none;
-  padding: 14px 18px;
-  border-radius: 16px;
-  background: rgba(237,231,243,0.70);
-  border: 1px solid rgba(85,64,121,0.18);
-  box-shadow: 0 10px 24px rgba(18,19,26,0.04);
-}
-.home .home-welcome-text{
-  margin: 0;
-  color: rgba(18,19,26,0.76);
-  font-size: 14.5px;
-  line-height: 1.6;
-}
-.home .home-welcome-text strong{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: var(--indigo);
-}
-
-/* Layout */
-.home .home-dash{ padding: 10px 0 24px 0; }
-.home .home-grid{
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 14px;
-  align-items: start;
-}
-.home .home-left,
-.home .home-right{ display: grid; gap: 14px; }
-
-/* Panels */
-.home .panel{
-  padding: 16px;
-  border-radius: calc(var(--radius) + 2px);
-  background: rgba(255,255,255,0.84);
-  border: 1px solid var(--line);
-  box-shadow: 0 1px 0 rgba(18,19,26,0.04);
-}
-.home .panel-accent{
-  background:
-    radial-gradient(520px 220px at 18% 20%, rgba(85,64,121,0.12), transparent 60%),
-    rgba(255,255,255,0.84);
-}
-.home .panel-spotlight{
-  background:
-    radial-gradient(520px 220px at 85% 10%, rgba(106,84,148,0.12), transparent 62%),
-    rgba(255,255,255,0.84);
-}
-.home .panel-head{ margin-bottom: 12px; }
-.home .panel-title{
-  margin: 0;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: -0.2px;
-  font-size: 20px;
-  line-height: 1.2;
-}
-.home .panel-subtitle{
-  margin: 6px 0 0 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-.home .row-between{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-.home .panel-link{
-  color: var(--indigo);
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-/* Quick Finder */
-.home .home-search{
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
-  align-items: center;
-  margin-top: 12px;
-}
-.home .home-search-btn{ padding: 12px 14px; border-radius: 14px; }
-.home .home-chips{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.home .home-details{ margin-top: 12px; }
-.home .home-summary{
-  cursor: pointer;
-  font-family: var(--font-serif);
-  letter-spacing: 0.06px;
-  color: rgba(18,19,26,0.76);
-}
-.home .home-details-body{
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-/* Intent buttons */
-.home .intent-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
-.home .intent{
-  text-align: left;
-  padding: 12px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(251,251,253,0.72);
-  cursor: pointer;
-  transition: background 140ms ease, transform 140ms ease;
-}
-.home .intent:hover{
-  background: rgba(237,231,243,0.35);
-  transform: translateY(-0.5px);
-}
-.home .intent.is-selected{
-  background: rgba(237,231,243,0.65);
-  border: 1px solid rgba(85,64,121,0.22);
-}
-.home .intent-title{
-  display: block;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: rgba(18,19,26,0.88);
-}
-.home .intent-desc{
-  display: block;
-  margin-top: 4px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.home .intent-result{
-  margin-top: 12px;
-  padding: 12px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(255,255,255,0.70);
-}
-.home .intent-result-title{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-}
-.home .intent-result-desc{
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-.home .intent-result-actions{ margin-top: 10px; }
-
-/* Tiles */
-.home .tiles{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 10px;
-}
-.home .tile{
-  display: block;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(255,255,255,0.78);
-  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
-}
-.home .tile:hover{
-  background: rgba(237,231,243,0.35);
-  box-shadow: var(--shadow);
-  transform: translateY(-0.5px);
-}
-.home .tile-title{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-}
-.home .tile-desc{
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* Monthly + Featured cards */
-.home .monthly-card,
-.home .featured-card{
-  display: block;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(251,251,253,0.72);
-  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
-}
-.home .monthly-card:hover,
-.home .featured-card:hover{
-  background: rgba(237,231,243,0.35);
-  box-shadow: var(--shadow);
-  transform: translateY(-0.5px);
-}
-.home .monthly-kicker{
-  font-size: 12px;
-  color: rgba(18,19,26,0.62);
-}
-.home .monthly-title,
-.home .featured-title{
-  margin-top: 6px;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-}
-.home .monthly-summary,
-.home .featured-summary{
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-.home .spotlight-actions{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-/* Latest list (denser than cards; still clickable + clear) */
-.home .latest-list{
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
-}
-.home .latest-list .post-card{
-  padding: 12px 12px;
-  border-radius: 16px;
-}
-.home .latest-list .post-title{ font-size: 15px; }
-.home .latest-list .post-summary{ font-size: 13.5px; }
-
-
-/* ==============================
    Responsive
 ============================== */
 @media (max-width: 940px){
@@ -860,28 +601,24 @@ h1,h2,h3,
   .grid-2{ grid-template-columns:1fr; }
 
   .brand{ min-width:auto; }
+
   .header-inner{
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     padding: 12px 0;
   }
+
   .header-right{
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 10px;
   }
+
   .header-search-input{
     width: min(100%, 320px);
   }
-
-  /* homepage dashboard */
-  .home .home-grid{ grid-template-columns: 1fr; }
-  .home .tiles{ grid-template-columns: 1fr; }
-  .home .intent-grid{ grid-template-columns: 1fr; }
-  .home .home-search{ grid-template-columns: 1fr; }
-  .home .home-search-btn{ width: 100%; }
 }
 
 /* ==============================
@@ -889,696 +626,4 @@ h1,h2,h3,
 ============================== */
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior:auto; }
-}
-/* ==============================
-   GRADIENT UNIFICATION (calm, not sporadic)
-   Paste at very end of styles.css
-============================== */
-
-/* 1) One consistent background wash (site-wide) */
-:root{
-  --wash-1: radial-gradient(1100px 520px at 18% -8%, rgba(85,64,121,0.09), transparent 55%);
-  --wash-2: radial-gradient(900px 520px at 88% 0%, rgba(106,84,148,0.07), transparent 58%);
-  --wash-3: radial-gradient(900px 520px at 45% 110%, rgba(85,64,121,0.05), transparent 62%);
-  --paper-wash: var(--wash-1), var(--wash-2), var(--wash-3), var(--bg);
-
-  /* Subtle “accent strip” used inside panels (instead of full-card gradients) */
-  --panel-strip: linear-gradient(90deg, rgba(85,64,121,0.10), rgba(85,64,121,0.00));
-}
-
-/* Replace the body background with the unified wash */
-body{
-  background: var(--paper-wash);
-}
-
-/* 2) Make panels mostly solid (reduce “random gradient card” feeling) */
-.home .panel,
-.quiet-card,
-.post-card{
-  background: rgba(255,255,255,0.86);
-}
-
-/* 3) Keep “special” panels special… but use a consistent, restrained strip */
-.home .panel-accent,
-.home .panel-spotlight{
-  position: relative;
-  background: rgba(255,255,255,0.86); /* solid base */
-}
-
-/* Accent strip on the left for special panels (quiet + consistent) */
-.home .panel-accent::before,
-.home .panel-spotlight::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 12px;
-  bottom: 12px;
-  width: 10px;
-  border-radius: 10px;
-  background: var(--panel-strip);
-  pointer-events: none;
-}
-
-/* Optional: tiny top tint so “special” reads as intentional, not random */
-.home .panel-accent::after,
-.home .panel-spotlight::after{
-  content: "";
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  top: 0;
-  height: 42px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(237,231,243,0.55), rgba(237,231,243,0));
-  pointer-events: none;
-}
-
-/* 4) Keep hover consistent (no extra gradient surprises) */
-.home .panel:hover,
-.quiet-card:hover,
-.post-card:hover{
-  background: rgba(237,231,243,0.32);
-}
-
-/* 5) Reduced motion: nothing animated here, but keep safe */
-@media (prefers-reduced-motion: reduce){
-  .home .panel-accent::before,
-  .home .panel-spotlight::before,
-  .home .panel-accent::after,
-  .home .panel-spotlight::after{
-    transition: none !important;
-  }
-}
-/* ==============================
-   HOMEPAGE: Exam Prep + Concepts + Infographic spotlight
-   Paste at end of styles.css
-============================== */
-
-.home .feature-links{
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.home .feature-link{
-  display: block;
-  padding: 12px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(251,251,253,0.74);
-  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
-}
-
-.home .feature-link:hover{
-  background: rgba(237,231,243,0.35);
-  box-shadow: var(--shadow);
-  transform: translateY(-0.5px);
-}
-
-.home .feature-link-title{
-  display: block;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: rgba(18,19,26,0.90);
-}
-
-.home .feature-link-desc{
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13.5px;
-  line-height: 1.45;
-}
-
-/* Infographic spotlight card */
-.home .spotlight-card{
-  display: block;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(255,255,255,0.80);
-  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
-}
-
-.home .spotlight-card:hover{
-  background: rgba(237,231,243,0.35);
-  box-shadow: var(--shadow);
-  transform: translateY(-0.5px);
-}
-
-.home .spotlight-kicker{
-  display: block;
-  font-size: 12px;
-  color: rgba(18,19,26,0.62);
-}
-
-.home .spotlight-title{
-  display: block;
-  margin-top: 6px;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: rgba(18,19,26,0.92);
-}
-
-.home .spotlight-desc{
-  display: block;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-/* ==============================
-   HOMEPAGE HEADERS: centered + clearer (no vertical bars)
-   + consistent, non-splotchy gradients
-============================== */
-
-/* Make homepage panels feel separated (without getting louder) */
-.home .home-left,
-.home .home-right{
-  gap: 18px;
-}
-
-.home .panel{
-  position: relative;
-  background: rgba(255,255,255,0.88);
-  border: 1px solid rgba(18,19,26,0.11);
-  box-shadow: 0 10px 24px rgba(18,19,26,0.05);
-  overflow: hidden;
-}
-
-/* Remove any special-case panel gradients so nothing looks random */
-.home .panel-accent,
-.home .panel-spotlight{
-  background: rgba(255,255,255,0.88) !important;
-}
-
-/* Panel header layout: center title, keep optional link on right */
-.home .panel-head{
-  padding-left: 0;
-  margin-bottom: 14px;
-}
-
-.home .row-between{
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Title becomes a centered “pill label” */
-.home .panel-title{
-  grid-column: 2;
-  justify-self: center;
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(237,231,243,0.75);
-  border: 1px solid rgba(85,64,121,0.18);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.15px;
-  line-height: 1.2;
-}
-
-/* Optional header link stays right, quieter */
-.home .panel-link{
-  grid-column: 3;
-  justify-self: end;
-  font-size: 13.5px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(18,19,26,0.08);
-  color: var(--indigo);
-}
-
-.home .panel-link:hover{
-  background: rgba(237,231,243,0.45);
-  border-color: rgba(85,64,121,0.16);
-}
-
-/* Subtitle reads as part of the header, centered and contained */
-.home .panel-subtitle{
-  margin: 10px auto 0 auto;
-  max-width: 70ch;
-  text-align: center;
-  color: rgba(18,19,26,0.66);
-  font-size: 14px;
-}
-
-/* Section headers (e.g., Latest…) get the same centered pill treatment */
-.home .section-head{
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 10px;
-  padding-left: 0;
-  margin-bottom: 12px;
-}
-
-.home .section-title{
-  grid-column: 2;
-  justify-self: center;
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(237,231,243,0.75);
-  border: 1px solid rgba(85,64,121,0.18);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.15px;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.home .section-link{
-  grid-column: 3;
-  justify-self: end;
-  font-size: 13.5px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(18,19,26,0.08);
-}
-
-.home .section-link:hover{
-  background: rgba(237,231,243,0.45);
-  border-color: rgba(85,64,121,0.16);
-}
-
-/* Mobile: allow the “View all” chip to drop under the centered title */
-@media (max-width: 640px){
-  .home .row-between,
-  .home .section-head{
-    grid-template-columns: 1fr;
-    justify-items: start;
-  }
-
-  .home .panel-title,
-  .home .section-title{
-    grid-column: auto;
-    justify-self: start;
-  }
-
-  .home .panel-link,
-  .home .section-link{
-    grid-column: auto;
-    justify-self: start;
-  }
-
-  .home .panel-subtitle{
-    text-align: left;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-/* ==============================
-   HOMEPAGE PANEL HEADERS — anchored & calm
-============================== */
-
-/* Panels feel more distinct vertically */
-.home .panel{
-  background: rgba(255,255,255,0.90);
-  box-shadow: 0 12px 26px rgba(18,19,26,0.06);
-}
-
-/* Header layout: title + optional link on same baseline */
-.home .panel-head{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-/* Header pill becomes smaller + grounded */
-.home .panel-title{
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  border-radius: 12px;
-  background: rgba(237,231,243,0.70);
-  border: 1px solid rgba(85,64,121,0.18);
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-}
-
-/* Subtitle sits UNDER header, left-aligned (much calmer) */
-.home .panel-subtitle{
-  margin-top: 8px;
-  max-width: 60ch;
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(18,19,26,0.66);
-}
-
-/* Header links become quiet pills */
-.home .panel-link{
-  font-size: 13.5px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.65);
-  border: 1px solid rgba(18,19,26,0.10);
-  color: var(--indigo);
-}
-
-.home .panel-link:hover{
-  background: rgba(237,231,243,0.45);
-  border-color: rgba(85,64,121,0.16);
-}
-
-/* Section headers (Latest, Featured, etc.) match panels */
-.home .section-head{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.home .section-title{
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  border-radius: 12px;
-  background: rgba(237,231,243,0.70);
-  border: 1px solid rgba(85,64,121,0.18);
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-}
-
-/* Restore visual balance between columns */
-.home .home-grid{
-  align-items: start;
-}
-
-/* Slight vertical breathing room between left panels */
-.home .home-left{
-  gap: 20px;
-}
-/* ==============================
-   HOMEPAGE PANEL HIERARCHY REFINEMENT
-   Clearer headers, calmer flow
-============================== */
-
-/* Stronger internal spacing so panels don’t blend together */
-.home .panel{
-  padding-top: 18px;
-}
-
-/* Header reads as a header, not a floating badge */
-.home .panel-title{
-  background: transparent;
-  border: none;
-  padding: 0;
-  border-radius: 0;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.25px;
-}
-
-/* Subtle underline separator instead of vertical bar */
-.home .panel-head{
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid rgba(18,19,26,0.08);
-}
-
-/* Subtitle stays clearly attached to the header */
-.home .panel-subtitle{
-  margin-top: 6px;
-  max-width: 62ch;
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(18,19,26,0.65);
-}
-
-/* Panel links feel like utilities, not competing headers */
-.home .panel-link{
-  background: rgba(237,231,243,0.55);
-  border: 1px solid rgba(85,64,121,0.16);
-  font-size: 13px;
-}
-
-/* Space feature blocks so content breathes */
-.home .feature-links{
-  gap: 12px;
-}
-
-/* Make section breaks more obvious in left column */
-.home .home-left > .panel + .panel{
-  margin-top: 4px;
-}
-/* ==============================
-   HOMEPAGE MODULE RESET (no gradients/strips + fixed columns)
-   Paste at VERY END of styles.css
-============================== */
-
-.home .home-dash{
-  padding: 18px 0 28px 0;
-}
-
-/* FIX COLUMNS: stable two-column layout that won’t “drift” */
-.home .home-grid{
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
-}
-
-.home .home-left,
-.home .home-right{
-  display: grid;
-  gap: 18px;
-  min-width: 0;
-}
-
-/* MODULE LOOK: solid panels, no internal gradient/bands */
-.home .panel{
-  background: rgba(255,255,255,0.88);
-  border: 1px solid rgba(18,19,26,0.10);
-  box-shadow: 0 10px 22px rgba(18,19,26,0.04);
-}
-
-/* Kill any “special panel” gradient treatments */
-.home .panel-accent,
-.home .panel-spotlight{
-  background: rgba(255,255,255,0.88) !important;
-}
-
-/* Remove any decorative strip pseudo-elements if they exist */
-.home .panel-accent::before,
-.home .panel-spotlight::before,
-.home .panel::before,
-.home .panel::after{
-  content: none !important;
-  display: none !important;
-}
-
-/* HEADER: simple, clear, not pill/strip based */
-.home .panel-head{
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 0 10px 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-}
-
-.home .panel-title{
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  border-radius: 0;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  line-height: 1.2;
-}
-
-.home .panel-subtitle{
-  margin: 6px 0 0 0;
-  max-width: 62ch;
-  color: rgba(18,19,26,0.66);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* Links as subtle chips (optional, but keeps it “module-y” without bars/strips) */
-.home .panel-link{
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(237,231,243,0.45);
-  border: 1px solid rgba(85,64,121,0.14);
-  color: var(--indigo);
-  font-size: 13.5px;
-  white-space: nowrap;
-}
-
-.home .panel-link:hover{
-  background: rgba(237,231,243,0.65);
-  border-color: rgba(85,64,121,0.18);
-}
-
-/* If any header “row-between” grid rules exist, force it back to normal */
-.home .row-between{
-  display: flex !important;
-  align-items: baseline !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-}
-
-/* Optional: soften the page wash so the modules don’t “run together” */
-body{
-  background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(85,64,121,0.08), transparent 52%),
-    radial-gradient(900px 500px at 85% 0%, rgba(106,84,148,0.06), transparent 58%),
-    var(--bg);
-}
-
-/* Responsive: stack cleanly */
-@media (max-width: 940px){
-  .home .home-grid{
-    grid-template-columns: 1fr;
-  }
-}
-/* ==============================
-   HOMEPAGE COLUMN FIX — true module layout
-============================== */
-
-/* Force the dashboard area to respect container width */
-.home .home-dash{
-  max-width: var(--container);
-  margin: 0 auto;
-}
-
-/* HARD LOCK: two equal columns */
-.home .home-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-  width: 100%;
-}
-
-/* Prevent either column from collapsing */
-.home .home-left,
-.home .home-right{
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 0;
-  width: 100%;
-}
-
-/* If the right column has fewer panels, keep it visually present */
-.home .home-right::before{
-  content: "";
-  display: block;
-  height: 0;
-}
-
-/* Panels stay modular, flat, and consistent */
-.home .panel{
-  background: #ffffff;
-  border: 1px solid rgba(18,19,26,0.10);
-  box-shadow: 0 8px 20px rgba(18,19,26,0.04);
-}
-
-/* Kill any remaining decorative artifacts */
-.home .panel::before,
-.home .panel::after,
-.home .panel-accent::before,
-.home .panel-accent::after,
-.home .panel-spotlight::before,
-.home .panel-spotlight::after{
-  content: none !important;
-  display: none !important;
-}
-
-/* Ensure nothing inside panels stretches the column oddly */
-.home .panel *{
-  max-width: 100%;
-}
-
-/* Mobile: intentional stack */
-@media (max-width: 940px){
-  .home .home-grid{
-    grid-template-columns: 1fr;
-  }
-}
-/* ==============================
-   HOMEPAGE COLUMN FIX — true module layout
-============================== */
-
-/* Force the dashboard area to respect container width */
-.home .home-dash{
-  max-width: var(--container);
-  margin: 0 auto;
-}
-
-/* HARD LOCK: two equal columns */
-.home .home-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-  width: 100%;
-}
-
-/* Prevent either column from collapsing */
-.home .home-left,
-.home .home-right{
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 0;
-  width: 100%;
-}
-
-/* If the right column has fewer panels, keep it visually present */
-.home .home-right::before{
-  content: "";
-  display: block;
-  height: 0;
-}
-
-/* Panels stay modular, flat, and consistent */
-.home .panel{
-  background: #ffffff;
-  border: 1px solid rgba(18,19,26,0.10);
-  box-shadow: 0 8px 20px rgba(18,19,26,0.04);
-}
-
-/* Kill any remaining decorative artifacts */
-.home .panel::before,
-.home .panel::after,
-.home .panel-accent::before,
-.home .panel-accent::after,
-.home .panel-spotlight::before,
-.home .panel-spotlight::after{
-  content: none !important;
-  display: none !important;
-}
-
-/* Ensure nothing inside panels stretches the column oddly */
-.home .panel *{
-  max-width: 100%;
-}
-
-/* Mobile: intentional stack */
-@media (max-width: 940px){
-  .home .home-grid{
-    grid-template-columns: 1fr;
-  }
 }
