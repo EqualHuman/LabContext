@@ -1207,3 +1207,25 @@ button, input, select, textarea {
     align-items: flex-start;
   }
 }
+/* ==============================
+   HOMEPAGE WELCOME MESSAGE (minimal)
+============================== */
+
+.home .home-welcome{
+  padding: 10px 0 4px 0;
+}
+
+.home .home-welcome-text{
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--muted);
+  max-width: 75ch;
+}
+
+.home .home-welcome-text strong{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: var(--text);
+}
