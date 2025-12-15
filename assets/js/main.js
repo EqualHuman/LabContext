@@ -70,7 +70,7 @@ function resolveBase() {
     if (header) {
       try {
         header.innerHTML = await fetchText(base + "assets/partials/header.html");
-      } catch (e) {
+      } catch (e) { console.warn(e); }
         console.warn(e);
       }
     }
@@ -80,7 +80,7 @@ function resolveBase() {
     if (footer) {
       try {
         footer.innerHTML = await fetchText(base + "assets/partials/footer.html");
-      } catch (e) {
+      } catch (e) { console.warn(e); }
         console.warn(e);
       }
     }
@@ -248,11 +248,22 @@ function resolveBase() {
 // ------------------------------
 // HOME: Featured (3 Blog items)
 // ------------------------------
+// ------------------------------
+// HOME: Featured (3 Blog items)
+// ------------------------------
 async function renderHomeLatest(base) {
   const mount = document.getElementById("home-featured");
   if (!mount) return;
 
-  const library = await fetchJson(base + "data/in_context_library.json");
+  let library = [];
+  try {
+    library = await fetchJson(base + "data/in_context_library.json");
+  } catch (e) {
+    mount.innerHTML = "";
+    renderEmpty(mount, "Featured unavailable right now.");
+    console.warn(e);
+    return;
+  }
 
   const sorted = (library || [])
     .slice()
@@ -280,38 +291,19 @@ async function renderHomeLatest(base) {
 }
 
 
-  // Featured
-  if (featuredMount) {
-    featuredMount.innerHTML = "";
-    const p = sorted[0];
-    const featuredCard = makeCard({
-      title: p.title,
-      meta: "", // no dates
-      summary: p.summary,
-      tags: p.tags || [],
-      href: p.link || "#",
-    });
-    featuredCard.classList.add("post-card-featured");
-    featuredMount.appendChild(featuredCard);
-  }
-
-  // List (remaining)
-  if (gridMount) {
-    gridMount.innerHTML = "";
-    const rest = featuredMount ? sorted.slice(1) : sorted.slice(0);
-    rest.forEach((p) => {
-      gridMount.appendChild(
-        makeCard({
-          title: p.title,
-          meta: "", // no dates
-          summary: p.summary,
-          tags: p.tags || [],
-          href: p.link || "#",
-        })
-      );
-    });
-  }
+  sorted.forEach((p) => {
+    mount.appendChild(
+      makeCard({
+        title: p.title,
+        meta: "", // no dates
+        summary: p.summary,
+        tags: p.tags || [],
+        href: p.link || "#",
+      })
+    );
+  });
 }
+
 
 // ------------------------------
 // HOME: latest Monthly Issue teaser
