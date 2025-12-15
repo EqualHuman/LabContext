@@ -1221,3 +1221,203 @@ h1,h2,h3,
     grid-template-columns: 1fr !important;
   }
 }
+/* ==============================
+   Modern depth pass (3D + calmer hierarchy)
+   Paste at END of styles.css
+============================== */
+
+:root{
+  /* Depth system */
+  --shadow-1: 0 1px 0 rgba(18,19,26,0.04), 0 10px 24px rgba(18,19,26,0.06);
+  --shadow-2: 0 1px 0 rgba(18,19,26,0.05), 0 16px 40px rgba(18,19,26,0.10);
+  --shadow-3: 0 2px 0 rgba(18,19,26,0.06), 0 22px 60px rgba(18,19,26,0.14);
+
+  /* Modern borders/highlights */
+  --line-strong: rgba(18,19,26,0.12);
+  --surface: rgba(255,255,255,0.92);
+  --surface-2: rgba(255,255,255,0.86);
+  --inset-highlight: inset 0 1px 0 rgba(255,255,255,0.70);
+}
+
+/* Give the whole page a slightly richer “paper” look */
+body{
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(85,64,121,0.12), transparent 55%),
+    radial-gradient(900px 500px at 85% 0%, rgba(106,84,148,0.10), transparent 60%),
+    linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(18,19,26,0.015)),
+    var(--bg);
+}
+
+/* ------------------------------
+   Panels: elevate + layered border
+------------------------------ */
+.page-home .panel{
+  background: linear-gradient(to bottom, var(--surface), var(--surface-2));
+  border: 1px solid rgba(18,19,26,0.10);
+  box-shadow: var(--shadow-1);
+  position: relative;
+}
+
+.page-home .panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  box-shadow: var(--inset-highlight);
+  opacity: 0.9;
+}
+
+/* Accent panels get a soft “tinted surface” instead of flat fill */
+.page-home .panel-accent,
+.page-home .panel.panel-qf{
+  background:
+    radial-gradient(800px 220px at 15% 0%, rgba(85,64,121,0.10), transparent 55%),
+    linear-gradient(to bottom, rgba(237,231,243,0.55), rgba(255,255,255,0.88));
+  border-color: rgba(85,64,121,0.18);
+}
+
+/* Spotlight panels: slightly higher elevation than standard panels */
+.page-home .panel-spotlight{
+  box-shadow: var(--shadow-2);
+}
+
+/* ------------------------------
+   “Card within card” items: modern tile feel
+------------------------------ */
+.page-home .feature-link,
+.page-home .context-item,
+.post-card,
+.quiet-card{
+  background: linear-gradient(to bottom, rgba(255,255,255,0.90), rgba(255,255,255,0.78));
+  border: 1px solid rgba(18,19,26,0.10);
+  box-shadow: 0 1px 0 rgba(18,19,26,0.03);
+  position: relative;
+}
+
+.page-home .feature-link::before,
+.page-home .context-item::before,
+.post-card::before,
+.quiet-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
+  opacity: 0.9;
+}
+
+/* Hover = lift + slightly stronger border (modern) */
+.page-home .feature-link:hover,
+.page-home .context-item:hover,
+.post-card:hover,
+.quiet-card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+  border-color: rgba(18,19,26,0.14);
+}
+
+/* Keep static advice tile from “lifting” */
+.page-home .context-item-static:hover{
+  transform: none;
+  box-shadow: 0 1px 0 rgba(18,19,26,0.03);
+}
+
+/* ------------------------------
+   Buttons: make them feel clickable (depth)
+------------------------------ */
+.button,
+.page-home .panel-link{
+  box-shadow: 0 10px 18px rgba(85,64,121,0.18);
+}
+
+.button:active,
+.page-home .panel-link:active{
+  transform: translateY(0px);
+  box-shadow: 0 8px 14px rgba(85,64,121,0.16);
+}
+
+/* Ghost buttons also get subtle depth */
+.button-ghost,
+.page-home .context-btn{
+  box-shadow: 0 8px 14px rgba(18,19,26,0.06);
+}
+
+.button-ghost:active,
+.page-home .context-btn:active{
+  transform: translateY(0px);
+  box-shadow: 0 6px 10px rgba(18,19,26,0.05);
+}
+
+/* ------------------------------
+   Inputs + chips: modern softness + focus clarity
+------------------------------ */
+.input,
+.select,
+.header-search-input{
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(18,19,26,0.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.80);
+}
+
+.input:focus,
+.select:focus,
+.header-search-input:focus{
+  border-color: rgba(85,64,121,0.30);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    0 0 0 3px rgba(85,64,121,0.18);
+  outline: none;
+}
+
+/* Chips: more “pill” + tiny depth */
+.chip{
+  background: linear-gradient(to bottom, rgba(85,64,121,0.08), rgba(85,64,121,0.04));
+  border: 1px solid rgba(85,64,121,0.18);
+  box-shadow: 0 6px 12px rgba(18,19,26,0.05);
+}
+
+.chip:hover{
+  background: linear-gradient(to bottom, rgba(85,64,121,0.12), rgba(85,64,121,0.06));
+  transform: translateY(-1px);
+}
+
+/* ------------------------------
+   Header: add a subtle “modern” highlight line
+------------------------------ */
+.site-header{
+  position: sticky;
+}
+
+.site-header::after{
+  content:"";
+  display:block;
+  height: 1px;
+  background: rgba(255,255,255,0.14);
+}
+
+/* ------------------------------
+   Reduce “boxy” feel: spacing + rounding consistency
+------------------------------ */
+.page-home .panel{
+  border-radius: 20px;
+}
+
+.page-home .feature-link,
+.page-home .context-item,
+.post-card,
+.quiet-card{
+  border-radius: 18px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .page-home .feature-link:hover,
+  .page-home .context-item:hover,
+  .post-card:hover,
+  .quiet-card:hover,
+  .chip:hover{
+    transform: none;
+  }
+}
