@@ -11,15 +11,15 @@
 <body class="home">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Shared header injection (matches other pages) -->
+  <!-- Shared header injection -->
   <header class="site-header"></header>
 
   <main id="main">
-    <!-- WELCOME STRIP -->
-    <section class="home-welcome-strip" aria-label="Welcome to LabContext">
+    <!-- WELCOME STRIP (full width, no fluff wording) -->
+    <section class="home-welcome" aria-label="Welcome message">
       <div class="container">
-        <div class="home-welcome-strip-box">
-          <p class="home-welcome-strip-text">
+        <div class="home-welcome-box">
+          <p class="home-welcome-text">
             <strong>Welcome to LabContext.</strong>
             LabContext focuses on explaining what laboratory results mean, why laboratory systems behave the way they do, and how concepts connect across departments. Emphasis is placed on understanding and interpretation instead of procedures or memorization-based instruction. Content is designed to be accessible, clearly cross-referenced, and reliable as a long-term reference for students, educators, laboratory professionals, and the public.
           </p>
@@ -28,114 +28,172 @@
     </section>
 
     <!-- DASHBOARD -->
-    <section class="home-dashboard" aria-label="Homepage dashboard">
+    <section class="home-dash" aria-label="Homepage dashboard">
       <div class="container">
-        <div class="dash-grid">
-          <!-- LEFT: navigation tiles -->
-          <section class="dash-left" aria-label="Explore">
-            <div class="dash-head">
-              <h1 class="dash-title">Explore</h1>
-              <p class="dash-subtitle">Choose a path, or search directly.</p>
-            </div>
+        <div class="home-grid">
+          <!-- LEFT: Quick Finder + Explore -->
+          <section class="home-left" aria-label="Quick finder and navigation">
+            <!-- Quick Finder (interactive) -->
+            <div class="panel panel-accent">
+              <div class="panel-head">
+                <h1 class="panel-title">Quick Finder</h1>
+                <p class="panel-subtitle">Search, or tap a topic to jump into the site.</p>
+              </div>
 
-            <div class="dash-tiles" role="list">
-              <a class="dash-tile" href="in-context/" role="listitem">
-                <div class="dash-tile-title">In Context</div>
-                <div class="dash-tile-desc">Articles, PSAs, and public-facing explanations.</div>
-              </a>
-
-              <a class="dash-tile" href="education/" role="listitem">
-                <div class="dash-tile-title">Education</div>
-                <div class="dash-tile-desc">Concepts, mechanisms, and interpretation logic.</div>
-              </a>
-
-              <a class="dash-tile" href="infographics/" role="listitem">
-                <div class="dash-tile-title">Infographics</div>
-                <div class="dash-tile-desc">Visual summaries and printable resources.</div>
-              </a>
-
-              <a class="dash-tile" href="about/" role="listitem">
-                <div class="dash-tile-title">About</div>
-                <div class="dash-tile-desc">Purpose, scope, disclaimers, and contact.</div>
-              </a>
-
-              <a class="dash-tile dash-tile-wide" href="search/" role="listitem">
-                <div class="dash-tile-title">Search</div>
-                <div class="dash-tile-desc">Search across titles, summaries, tags, and sections.</div>
-              </a>
-            </div>
-          </section>
-
-          <!-- RIGHT: search + monthly spotlight + notices -->
-          <aside class="dash-right" aria-label="Spotlights and tools">
-            <div class="dash-panel">
-              <div class="dash-panel-title">Quick search</div>
-              <p class="dash-panel-subtitle">Type a keyword and jump straight to results.</p>
-
-              <form id="home-search" class="dash-search" role="search" aria-label="Homepage search">
+              <form id="home-search" class="home-search" role="search" aria-label="Homepage search">
                 <label class="sr-only" for="home-search-input">Search LabContext</label>
                 <input
                   id="home-search-input"
-                  class="input dash-search-input"
+                  class="input home-search-input"
                   type="search"
                   placeholder="Try: hemolysis, reference range, turnaround time…"
                   autocomplete="off"
                 />
-                <button class="button dash-search-btn" type="submit">Search</button>
+                <button class="button home-search-btn" type="submit">Search</button>
               </form>
 
-              <div class="dash-mini">
-                <span class="dash-mini-label">Popular:</span>
-                <span class="dash-mini-items">Hemolysis · Turnaround time · Reference range · Recollection</span>
+              <div class="home-chips" aria-label="Popular topics">
+                <button class="chip" type="button" data-q="Hemolysis">Hemolysis</button>
+                <button class="chip" type="button" data-q="Turnaround time">Turnaround time</button>
+                <button class="chip" type="button" data-q="Reference range">Reference range</button>
+                <button class="chip" type="button" data-q="Recollection">Recollection</button>
+                <button class="chip" type="button" data-q="Specimen quality">Specimen quality</button>
+                <button class="chip" type="button" data-q="Pre-analytics">Pre-analytics</button>
+              </div>
+
+              <details class="home-details">
+                <summary class="home-summary">What does the search include?</summary>
+                <div class="home-details-body">
+                  Search looks across titles, summaries, tags, and sections. If you don’t get what you want,
+                  try a shorter keyword (example: “heme” or “range”).
+                </div>
+              </details>
+            </div>
+
+            <!-- “What are you trying to do?” (interactive recommender) -->
+            <div class="panel">
+              <div class="panel-head">
+                <h2 class="panel-title">What are you trying to do?</h2>
+                <p class="panel-subtitle">Pick one. The page will suggest a best starting point.</p>
+              </div>
+
+              <div class="intent-grid" role="list">
+                <button class="intent" type="button" data-intent="meaning" role="listitem">
+                  <span class="intent-title">Understand what a result means</span>
+                  <span class="intent-desc">Interpretation and “why this happens.”</span>
+                </button>
+
+                <button class="intent" type="button" data-intent="concept" role="listitem">
+                  <span class="intent-title">Learn the underlying concept</span>
+                  <span class="intent-desc">Mechanisms and cross-department links.</span>
+                </button>
+
+                <button class="intent" type="button" data-intent="visual" role="listitem">
+                  <span class="intent-title">Get a visual explanation</span>
+                  <span class="intent-desc">Infographics and quick reference.</span>
+                </button>
+
+                <button class="intent" type="button" data-intent="update" role="listitem">
+                  <span class="intent-title">See what’s new this month</span>
+                  <span class="intent-desc">Monthly issue + announcements.</span>
+                </button>
+              </div>
+
+              <div id="intent-result" class="intent-result" aria-live="polite">
+                <div class="intent-result-title">Suggestion will appear here.</div>
+                <div class="intent-result-desc">Choose an option above.</div>
               </div>
             </div>
 
-            <div class="dash-panel dash-panel-accent" aria-label="Monthly newsletter spotlight">
-              <div class="dash-panel-title">Monthly newsletter</div>
-              <p class="dash-panel-subtitle">
-                One monthly update highlighting new content, clarifications, and announcements.
-              </p>
-
-              <div id="monthly-issue-card" class="monthly-issue-card" aria-live="polite">
-                <div class="muted tiny">Loading latest issue…</div>
+            <!-- Explore tiles -->
+            <div class="panel">
+              <div class="panel-head">
+                <h2 class="panel-title">Explore</h2>
+                <p class="panel-subtitle">Browse by section.</p>
               </div>
 
-              <div class="dash-panel-actions">
+              <div class="tiles" role="list">
+                <a class="tile" href="in-context/" role="listitem">
+                  <div class="tile-title">In Context</div>
+                  <div class="tile-desc">PSAs, interpretation support, history, and public-facing explanations.</div>
+                </a>
+
+                <a class="tile" href="education/" role="listitem">
+                  <div class="tile-title">Education</div>
+                  <div class="tile-desc">Concepts, mechanisms, and mental models used in lab thinking.</div>
+                </a>
+
+                <a class="tile" href="infographics/" role="listitem">
+                  <div class="tile-title">Infographics</div>
+                  <div class="tile-desc">Visual summaries and printable reference material.</div>
+                </a>
+
+                <a class="tile" href="about/" role="listitem">
+                  <div class="tile-title">About</div>
+                  <div class="tile-desc">Purpose, scope, disclaimers, and contact.</div>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- RIGHT: Monthly spotlight + Latest + “Featured” (interactive blocks) -->
+          <aside class="home-right" aria-label="Spotlights and latest content">
+            <!-- Monthly newsletter / issue column piece -->
+            <div class="panel panel-spotlight" aria-label="Monthly column">
+              <div class="panel-head">
+                <h2 class="panel-title">Monthly</h2>
+                <p class="panel-subtitle">
+                  One monthly update highlighting what’s new, what’s clarified, and what matters.
+                </p>
+              </div>
+
+              <div id="home-monthly" class="monthly-wrap" aria-live="polite">
+                <div class="muted tiny">Loading monthly issue…</div>
+              </div>
+
+              <details class="home-details">
+                <summary class="home-summary">What’s included?</summary>
+                <div class="home-details-body">
+                  A short overview, links to new content, and any special notices.
+                  Frequency is monthly (no rapid posting cadence).
+                </div>
+              </details>
+
+              <div class="spotlight-actions">
                 <a class="button button-ghost" href="in-context/monthly/">View monthly issues</a>
                 <a class="button button-ghost" href="newsletter/">Newsletter details</a>
               </div>
             </div>
 
-            <div class="dash-panel" aria-label="Notices">
-              <div class="dash-panel-title">Notices</div>
-              <p class="dash-panel-subtitle">
-                Site updates and special announcements will appear here.
-              </p>
+            <!-- Featured (rotates from library) -->
+            <div class="panel" aria-label="Featured">
+              <div class="panel-head">
+                <h2 class="panel-title">Featured</h2>
+                <p class="panel-subtitle">A highlighted topic from In Context.</p>
+              </div>
 
-              <div class="notice-list">
-                <div class="notice-item">
-                  <div class="notice-title">No notices right now.</div>
-                  <div class="notice-desc">When something is time-sensitive or important, it will be listed here.</div>
+              <div id="home-featured" class="featured-wrap" aria-live="polite">
+                <div class="muted tiny">Loading featured…</div>
+              </div>
+            </div>
+
+            <!-- Latest -->
+            <div class="panel" aria-label="Latest in In Context">
+              <div class="panel-head row-between">
+                <div>
+                  <h2 class="panel-title">Latest in In Context</h2>
+                  <p class="panel-subtitle">Most recently updated posts.</p>
                 </div>
+                <a class="panel-link" href="in-context/">View all</a>
+              </div>
+
+              <div id="latest-posts" class="latest-list" aria-live="polite">
+                <noscript>
+                  <p class="muted">Enable JavaScript to see the latest posts list.</p>
+                </noscript>
               </div>
             </div>
           </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- LATEST -->
-    <section class="section" aria-label="Latest in In Context">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Latest in In Context</h2>
-          <a class="section-link" href="in-context/">View all</a>
-        </div>
-
-        <div id="latest-posts" class="posts-grid" aria-live="polite">
-          <noscript>
-            <p class="muted">Enable JavaScript to see the latest posts list. You can still browse all posts in In Context.</p>
-          </noscript>
         </div>
       </div>
     </section>
@@ -146,53 +204,155 @@
 
   <script src="assets/js/main.js"></script>
 
-  <!-- Homepage-only helpers: search + monthly spotlight -->
+  <!-- Homepage-only interactions -->
   <script>
     (function () {
-      // Quick search -> /search/?q=
+      // ---- Search routing ----
       var form = document.getElementById("home-search");
       var input = document.getElementById("home-search-input");
+
+      function goSearch(q) {
+        q = (q || "").trim();
+        if (!q) return;
+        window.location.href = "search/?q=" + encodeURIComponent(q);
+      }
+
       if (form && input) {
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          var q = (input.value || "").trim();
-          if (!q) return;
-          window.location.href = "search/?q=" + encodeURIComponent(q);
+          goSearch(input.value);
         });
       }
 
-      // Monthly spotlight -> pulls latest from /data/in_context_issues.json
-      var mount = document.getElementById("monthly-issue-card");
-      if (!mount) return;
-
-      fetch("data/in_context_issues.json", { cache: "no-store" })
-        .then(function (r) { return r.ok ? r.json() : []; })
-        .then(function (issues) {
-          if (!issues || !issues.length) {
-            mount.innerHTML = '<div class="muted tiny">No monthly issues posted yet.</div>';
-            return;
-          }
-
-          issues.sort(function (a, b) {
-            return String(b.date || "").localeCompare(String(a.date || ""));
-          });
-
-          var latest = issues[0] || {};
-          var title = latest.title || "Latest issue";
-          var summary = latest.summary || "";
-          var link = latest.link || "in-context/monthly/";
-          var date = latest.date ? latest.date : "";
-
-          mount.innerHTML =
-            '<a class="monthly-card" href="' + link + '">' +
-              (date ? '<div class="monthly-meta">' + date + '</div>' : '') +
-              '<div class="monthly-title">' + title + '</div>' +
-              (summary ? '<div class="monthly-summary">' + summary + '</div>' : '') +
-            '</a>';
-        })
-        .catch(function () {
-          mount.innerHTML = '<div class="muted tiny">Monthly issue unavailable right now.</div>';
+      document.querySelectorAll(".home-chips .chip[data-q]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var q = btn.getAttribute("data-q") || "";
+          if (input) input.value = q;
+          goSearch(q);
         });
+      });
+
+      // ---- Intent recommender ----
+      var intentBox = document.getElementById("intent-result");
+
+      var intents = {
+        meaning: {
+          title: "Start in In Context",
+          desc: "Best for interpreting what something means and why it happens. (Then go deeper in Education if needed.)",
+          href: "in-context/",
+          label: "Open In Context"
+        },
+        concept: {
+          title: "Start in Education",
+          desc: "Best for learning the underlying concept and how it connects across departments.",
+          href: "education/",
+          label: "Open Education"
+        },
+        visual: {
+          title: "Start in Infographics",
+          desc: "Best for visual reference and shareable summaries.",
+          href: "infographics/",
+          label: "Open Infographics"
+        },
+        update: {
+          title: "Start with the Monthly issue",
+          desc: "Best for monthly highlights, announcements, and curated updates.",
+          href: "in-context/monthly/",
+          label: "Open Monthly"
+        }
+      };
+
+      function setIntent(key) {
+        var data = intents[key];
+        if (!intentBox || !data) return;
+
+        intentBox.innerHTML =
+          '<div class="intent-result-title">' + data.title + '</div>' +
+          '<div class="intent-result-desc">' + data.desc + '</div>' +
+          '<div class="intent-result-actions">' +
+            '<a class="button button-ghost" href="' + data.href + '">' + data.label + '</a>' +
+          '</div>';
+
+        document.querySelectorAll(".intent").forEach(function (b) {
+          b.classList.toggle("is-selected", b.getAttribute("data-intent") === key);
+        });
+      }
+
+      document.querySelectorAll(".intent").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setIntent(btn.getAttribute("data-intent"));
+        });
+      });
+
+      // ---- Monthly issue spotlight ----
+      var monthlyMount = document.getElementById("home-monthly");
+      if (monthlyMount) {
+        fetch("data/in_context_issues.json", { cache: "no-store" })
+          .then(function (r) { return r.ok ? r.json() : []; })
+          .then(function (issues) {
+            if (!issues || !issues.length) {
+              monthlyMount.innerHTML = '<div class="muted">No monthly issues posted yet.</div>';
+              return;
+            }
+
+            issues.sort(function (a, b) {
+              return String(b.date || "").localeCompare(String(a.date || ""));
+            });
+
+            var latest = issues[0] || {};
+            var title = latest.title || "Latest issue";
+            var summary = latest.summary || "";
+            var link = latest.link || "in-context/monthly/";
+
+            monthlyMount.innerHTML =
+              '<a class="monthly-card" href="' + link + '">' +
+                '<div class="monthly-kicker">Latest issue</div>' +
+                '<div class="monthly-title">' + title + '</div>' +
+                (summary ? '<div class="monthly-summary">' + summary + '</div>' : '') +
+              '</a>';
+          })
+          .catch(function () {
+            monthlyMount.innerHTML = '<div class="muted">Monthly issue unavailable right now.</div>';
+          });
+      }
+
+      // ---- Featured (rotate from library) ----
+      var featuredMount = document.getElementById("home-featured");
+      if (featuredMount) {
+        fetch("data/in_context_library.json", { cache: "no-store" })
+          .then(function (r) { return r.ok ? r.json() : []; })
+          .then(function (library) {
+            if (!library || !library.length) {
+              featuredMount.innerHTML = '<div class="muted">No featured content yet.</div>';
+              return;
+            }
+
+            // Sort newest first
+            var sorted = library.slice().sort(function (a, b) {
+              return String(b.updated || "").localeCompare(String(a.updated || ""));
+            });
+
+            // Pick one deterministically per day (no flashing randomness)
+            var now = new Date();
+            var key = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+            var idx = 0;
+            for (var i = 0; i < key.length; i++) idx = (idx + key.charCodeAt(i)) % sorted.length;
+
+            var item = sorted[idx] || sorted[0] || {};
+            var title = item.title || "Featured";
+            var summary = item.summary || "";
+            var link = item.link || "in-context/";
+
+            featuredMount.innerHTML =
+              '<a class="featured-card" href="' + link + '">' +
+                '<div class="featured-title">' + title + '</div>' +
+                (summary ? '<div class="featured-summary">' + summary + '</div>' : '') +
+              '</a>';
+          })
+          .catch(function () {
+            featuredMount.innerHTML = '<div class="muted">Featured unavailable right now.</div>';
+          });
+      }
     })();
   </script>
 </body>
