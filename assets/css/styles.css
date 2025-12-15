@@ -627,3 +627,70 @@ h1,h2,h3,
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior:auto; }
 }
+/* ==============================
+   Homepage – Quick Finder calm-down
+============================== */
+.page-home .hero{
+  padding: 32px 0 18px 0;
+  background: none;
+}
+
+.page-home .hero-title{
+  font-size: 30px;
+}
+
+.page-home .hero-subtitle{
+  max-width: 60ch;
+}
+
+.page-home .header-search,
+.page-home .controls{
+  margin-top: 12px;
+}
+
+.page-home .chips{
+  margin-top: 10px;
+}
+
+.page-home details{
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+/* ==============================
+   Homepage – Feature Tiles
+============================== */
+.page-home .home-features{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.page-home .feature-tile{
+  padding: 20px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+}
+
+.page-home .feature-tile h3{
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+}
+
+.page-home .feature-tile p{
+  margin-top: 8px;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.page-home .feature-tile a{
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--indigo);
+  font-weight: 600;
+}
+
