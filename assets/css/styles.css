@@ -1193,4 +1193,23 @@ h1,h2,h3,
   background: rgba(255,255,255,1);
   color: #2f2a4a;
 }
+/* ==============================
+   Header banner: remove hard divider line, add soft purple separation
+============================== */
+.site-header{
+  /* keep your purple banner */
+  background: linear-gradient(
+    to bottom,
+    rgba(85,64,121,0.22),
+    rgba(85,64,121,0.14)
+  ) !important;
+
+  /* remove the harsh line */
+  border-bottom: none !important;
+
+  /* replace with a soft purple “lift” */
+  box-shadow:
+    0 10px 22px rgba(18,19,26,0.05),
+    0 2px 0 rgba(85,64,121,0.12) inset !important;
+}
 
