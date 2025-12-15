@@ -907,598 +907,64 @@ h1,h2,h3,
   *{ scroll-behavior:auto; }
 }
 /* ==============================
-   Context of the Week (Homepage)
-============================== */
-.page-home .context-week-grid{
-  display:grid;
-  gap:12px;
-}
-
-.page-home .context-item{
-  display:grid;
-  gap:6px;
-  padding:14px;
-  border-radius:16px;
-  background: rgba(255,255,255,0.78);
-  border: 1px solid rgba(18,19,26,0.08);
-  text-decoration:none;
-}
-
-.page-home .context-item:hover{
-  background: rgba(255,255,255,0.92);
-  border-color: rgba(18,19,26,0.12);
-}
-
-.page-home .context-item-static:hover{
-  background: rgba(255,255,255,0.78);
-  border-color: rgba(18,19,26,0.08);
-}
-
-.page-home .context-kicker{
-  font-size:12px;
-  color: rgba(18,19,26,0.60);
-  letter-spacing:0.08px;
-  font-family: var(--font-serif);
-  font-weight:650;
-  text-transform: uppercase;
-}
-
-.page-home .context-title{
-  font-family: var(--font-serif);
-  font-weight:650;
-  font-size:18px;
-  line-height:1.2;
-  color: var(--text);
-}
-
-.page-home .context-desc{
-  color: var(--muted);
-  font-size:13.5px;
-  max-width:70ch;
-}
-
-.page-home .context-actions{
-  margin-top:8px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.page-home .context-btn{
-  padding:10px 14px;
-  border-radius:14px;
-}
-/* ==============================
-   Homepage grid hard lock
-   (prevents column collapse / drift)
+   HOMEPAGE + HEADER (CLEAN SINGLE SOURCE)
+   - dark background only on .page-home
+   - floating glass cards (no borders)
+   - tall centered homepage masthead
+   - consistent 2-col “info” grids
 ============================== */
 
-.page-home .home-grid{
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr) !important;
-  gap: 18px;
-  align-items: start;
-}
-
-/* Ensure ONLY two direct children participate */
-.page-home .home-grid > .home-left{
-  grid-column: 1 / 2;
-}
-
-.page-home .home-grid > .home-right{
-  grid-column: 2 / 3;
-}
-
-/* Prevent overflow pushing columns apart */
-.page-home .home-left,
-.page-home .home-right{
-  min-width: 0;
-}
-
-/* Mobile collapse */
-@media (max-width: 940px){
-  .page-home .home-grid{
-    grid-template-columns: 1fr !important;
-  }
-
-  .page-home .home-right{
-    grid-column: auto;
-  }
-}
-/* ==============================
-   Homepage: 2-column “info” layout tweaks
-   - Context of the Week: 2 columns, with Advice spanning full width
-   - Panel feature links: 2 columns, with the 3rd item full width
-============================== */
-
-/* Context of the Week: 2-up on desktop */
-.page-home .context-week-grid{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-/* Make the static “Advice” card span across both columns */
-.page-home .context-week-grid .context-item-static{
-  grid-column: 1 / -1;
-}
-
-/* Feature link lists inside the two big tiles: 2 columns on desktop */
-.page-home .feature-links{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-/* If there are 3 links, let the 3rd span full width (looks intentional) */
-
-
-/* Mobile: collapse back to 1 column */
-@media (max-width: 560px){
-  .page-home .context-week-grid{
-    grid-template-columns: 1fr;
-  }
-  .page-home .context-week-grid .context-item-static{
-    grid-column: auto;
-  }
-  .page-home .feature-links{
-    grid-template-columns: 1fr;
-  }
- 
-}
-/* ==============================
-   HEADER: match the purple "Search" button
-============================== */
-
-.site-header{
-  /* Match .button background tone */
-  background: rgba(85,64,121,0.90) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
-  box-shadow: 0 10px 22px rgba(18,19,26,0.18) !important;
-}
-
-/* Brand text becomes light on dark banner */
-.site-header .brand-name{
-  color: rgba(255,255,255,0.98) !important;
-}
-.site-header .brand-tag{
-  color: rgba(255,255,255,0.78) !important;
-}
-
-/* Header logo: use natural colors */
-.site-header .brand-logo{
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Nav links become light + clean hover/active pills */
-.site-header .nav-link{
-  color: rgba(255,255,255,0.88) !important;
-}
-.site-header .nav-link:hover{
-  background: rgba(255,255,255,0.12) !important;
-  color: rgba(255,255,255,0.98) !important;
-}
-.site-header .nav-link.is-active{
-  background: rgba(255,255,255,0.16) !important;
-  color: rgba(255,255,255,0.98) !important;
-}
-
-/* ==============================
-   HOMEPAGE: force 2-column "info" areas
-============================== */
-
-/* Context of the Week cards: 2 columns on desktop */
-.page-home .context-week-grid{
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 12px !important;
-}
-
-/* Feature links inside each tile: 2 columns on desktop */
-.page-home .feature-links{
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 10px !important;
-}
-
-
-/* Mobile collapse */
-@media (max-width: 560px){
-  .page-home .context-week-grid{
-    grid-template-columns: 1fr !important;
-  }
-  .page-home .feature-links{
-    grid-template-columns: 1fr !important;
-  }
-}
-/* ==============================
-   HOMEPAGE: 2-column info layout (NO full-width 3rd item)
-============================== */
-
-/* Context of the Week cards: 2 columns on desktop */
-.page-home .context-week-grid{
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 12px !important;
-}
-
-/* Feature links inside each tile: always 2 columns on desktop */
-.page-home .feature-links{
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 10px !important;
-}
-
-/* Make every feature link behave as a normal grid item */
-.page-home .feature-links .feature-link{
-  grid-column: auto !important;
-}
-
-/* Mobile collapse */
-@media (max-width: 560px){
-  .page-home .context-week-grid{
-    grid-template-columns: 1fr !important;
-  }
-  .page-home .feature-links{
-    grid-template-columns: 1fr !important;
-  }
-}
-/* ==============================
-   FIX: Header centering (remove double container padding)
-============================== */
-.site-header .container.header-inner{
-  /* container already provides max-width + side padding */
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Nudge logo/text alignment (removes the slight baseline shift) */
-.site-header .brand-logo{
-  transform: none !important;
-}
-
-/* ==============================
-   FIX: “2 columns” for feature links (fill by columns)
-   - With 3 items, this places the 3rd in the top-right instead of bottom-left
-============================== */
-.page-home .feature-links{
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  grid-template-rows: repeat(2, auto) !important;
-  grid-auto-flow: column !important;
-  gap: 10px !important;
-}
-
-/* Ensure no leftover spanning rules interfere */
-.page-home .feature-links .feature-link{
-  grid-column: auto !important;
-}
-
-/* Mobile: back to a normal single column flow */
-@media (max-width: 560px){
-  .page-home .feature-links{
-    grid-template-columns: 1fr !important;
-    grid-template-rows: none !important;
-    grid-auto-flow: row !important;
-  }
-}
-/* ==============================
-   HOMEPAGE: 2 equal sections across the page width
-   - widen the container on the homepage
-   - make left/right columns equal (1fr / 1fr)
-============================== */
-
-/* Wider overall page span (homepage only) */
-.page-home .container{
-  max-width: 1280px !important;
-}
-
-/* True 2-section layout (equal widths) */
-.page-home .home-grid{
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-  gap: 22px !important;
-}
-
-/* Keep each side from pushing the other (prevents weird overflow) */
-.page-home .home-left,
-.page-home .home-right{
-  min-width: 0 !important;
-}
-
-/* ==============================
-   HEADER: fix “off centered” caused by container + header-inner padding stacking
-   (your header.html is: <div class="container header-inner"> ... )
-============================== */
+/* ---------------------------------
+   Header centering fix (global)
+   Your header.html uses: <div class="container header-inner">
+   So container already provides max-width + side padding.
+---------------------------------- */
 .site-header .header-inner{
-  /* container already adds side padding, so remove the extra layer */
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-
-  /* also remove the redundant max-width here so container controls it */
-  max-width: none !important;
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-/* Mobile behavior stays the same */
-@media (max-width: 940px){
-  .page-home .container{
-    max-width: var(--container) !important;
-  }
-  .page-home .home-grid{
-    grid-template-columns: 1fr !important;
-  }
-}
-/* ==============================
-   Modern depth pass (3D + calmer hierarchy)
-   Paste at END of styles.css
-============================== */
-
-:root{
-  /* Depth system */
-  --shadow-1: 0 1px 0 rgba(18,19,26,0.04), 0 10px 24px rgba(18,19,26,0.06);
-  --shadow-2: 0 1px 0 rgba(18,19,26,0.05), 0 16px 40px rgba(18,19,26,0.10);
-  --shadow-3: 0 2px 0 rgba(18,19,26,0.06), 0 22px 60px rgba(18,19,26,0.14);
-
-  /* Modern borders/highlights */
-  --line-strong: rgba(18,19,26,0.12);
-  --surface: rgba(255,255,255,0.92);
-  --surface-2: rgba(255,255,255,0.86);
-  --inset-highlight: inset 0 1px 0 rgba(255,255,255,0.70);
-}
-
-/* Give the whole page a slightly richer “paper” look */
-body{
-  background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(85,64,121,0.12), transparent 55%),
-    radial-gradient(900px 500px at 85% 0%, rgba(106,84,148,0.10), transparent 60%),
-    linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(18,19,26,0.015)),
-    var(--bg);
-}
-
-/* ------------------------------
-   Panels: elevate + layered border
------------------------------- */
-.page-home .panel{
-  background: linear-gradient(to bottom, var(--surface), var(--surface-2));
-  border: 1px solid rgba(18,19,26,0.10);
-  box-shadow: var(--shadow-1);
-  position: relative;
-}
-
-.page-home .panel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  box-shadow: var(--inset-highlight);
-  opacity: 0.9;
-}
-
-/* Accent panels get a soft “tinted surface” instead of flat fill */
-.page-home .panel-accent,
-.page-home .panel.panel-qf{
-  background:
-    radial-gradient(800px 220px at 15% 0%, rgba(85,64,121,0.10), transparent 55%),
-    linear-gradient(to bottom, rgba(237,231,243,0.55), rgba(255,255,255,0.88));
-  border-color: rgba(85,64,121,0.18);
-}
-
-/* Spotlight panels: slightly higher elevation than standard panels */
-.page-home .panel-spotlight{
-  box-shadow: var(--shadow-2);
-}
-
-/* ------------------------------
-   “Card within card” items: modern tile feel
------------------------------- */
-.page-home .feature-link,
-.page-home .context-item,
-.post-card,
-.quiet-card{
-  background: linear-gradient(to bottom, rgba(255,255,255,0.90), rgba(255,255,255,0.78));
-  border: 1px solid rgba(18,19,26,0.10);
-  box-shadow: 0 1px 0 rgba(18,19,26,0.03);
-  position: relative;
-}
-
-.page-home .feature-link::before,
-.page-home .context-item::before,
-.post-card::before,
-.quiet-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
-  opacity: 0.9;
-}
-
-/* Hover = lift + slightly stronger border (modern) */
-.page-home .feature-link:hover,
-.page-home .context-item:hover,
-.post-card:hover,
-.quiet-card:hover{
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-2);
-  border-color: rgba(18,19,26,0.14);
-}
-
-/* Keep static advice tile from “lifting” */
-.page-home .context-item-static:hover{
-  transform: none;
-  box-shadow: 0 1px 0 rgba(18,19,26,0.03);
-}
-
-/* ------------------------------
-   Buttons: make them feel clickable (depth)
------------------------------- */
-.button,
-.page-home .panel-link{
-  box-shadow: 0 10px 18px rgba(85,64,121,0.18);
-}
-
-.button:active,
-.page-home .panel-link:active{
-  transform: translateY(0px);
-  box-shadow: 0 8px 14px rgba(85,64,121,0.16);
-}
-
-/* Ghost buttons also get subtle depth */
-.button-ghost,
-.page-home .context-btn{
-  box-shadow: 0 8px 14px rgba(18,19,26,0.06);
-}
-
-.button-ghost:active,
-.page-home .context-btn:active{
-  transform: translateY(0px);
-  box-shadow: 0 6px 10px rgba(18,19,26,0.05);
-}
-
-/* ------------------------------
-   Inputs + chips: modern softness + focus clarity
------------------------------- */
-.input,
-.select,
-.header-search-input{
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(18,19,26,0.12);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.80);
-}
-
-.input:focus,
-.select:focus,
-.header-search-input:focus{
-  border-color: rgba(85,64,121,0.30);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.85),
-    0 0 0 3px rgba(85,64,121,0.18);
-  outline: none;
-}
-
-/* Chips: more “pill” + tiny depth */
-.chip{
-  background: linear-gradient(to bottom, rgba(85,64,121,0.08), rgba(85,64,121,0.04));
-  border: 1px solid rgba(85,64,121,0.18);
-  box-shadow: 0 6px 12px rgba(18,19,26,0.05);
-}
-
-.chip:hover{
-  background: linear-gradient(to bottom, rgba(85,64,121,0.12), rgba(85,64,121,0.06));
-  transform: translateY(-1px);
-}
-
-/* ------------------------------
-   Header: add a subtle “modern” highlight line
------------------------------- */
-.site-header{
-  position: sticky;
-}
-
-.site-header::after{
-  content:"";
-  display:block;
-  height: 1px;
-  background: rgba(255,255,255,0.14);
-}
-
-/* ------------------------------
-   Reduce “boxy” feel: spacing + rounding consistency
------------------------------- */
-.page-home .panel{
-  border-radius: 20px;
-}
-
-.page-home .feature-link,
-.page-home .context-item,
-.post-card,
-.quiet-card{
-  border-radius: 18px;
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .page-home .feature-link:hover,
-  .page-home .context-item:hover,
-  .post-card:hover,
-  .quiet-card:hover,
-  .chip:hover{
-    transform: none;
-  }
-}
-/* ==============================
-   HOMEPAGE ONLY: tall centered header + dark page background
-   Paste at END of styles.css
-============================== */
-
-/* ---- 1) Homepage dark backdrop (only when <body class="page-home">) ---- */
+/* ---------------------------------
+   Homepage: dark backdrop
+---------------------------------- */
 body.page-home{
   background:
-    radial-gradient(1200px 700px at 25% -10%, rgba(142,118,204,0.22), transparent 55%),
-    radial-gradient(900px 600px at 80% 0%, rgba(85,64,121,0.22), transparent 60%),
-    linear-gradient(to bottom, #0b0b12, #101122);
+    radial-gradient(1200px 700px at 22% -10%, rgba(120,140,255,0.12), transparent 60%),
+    radial-gradient(900px 600px at 82% 0%, rgba(155,120,255,0.10), transparent 62%),
+    linear-gradient(to bottom, #07070d, #0c0c16 40%, #0b0b12);
   color: rgba(255,255,255,0.92);
 }
 
-/* Make muted text readable on dark */
+/* Readability on dark */
 body.page-home .muted,
 body.page-home .panel-subtitle,
 body.page-home .context-desc,
 body.page-home .quiet-card-desc,
 body.page-home .post-summary{
-  color: rgba(255,255,255,0.72) !important;
+  color: rgba(255,255,255,0.68) !important;
 }
 
-/* ---- 2) Homepage panels become “dark glass” surfaces ---- */
-body.page-home .panel{
-  background: linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.06)) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.06),
-    0 18px 50px rgba(0,0,0,0.45) !important;
-  color: rgba(255,255,255,0.92);
+body.page-home .panel-title,
+body.page-home .context-title,
+body.page-home .spotlight-title{
+  color: rgba(255,255,255,0.96) !important;
 }
 
-body.page-home .panel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
-  opacity: 1;
-}
-
-/* Inner tiles/cards on dark */
-body.page-home .feature-link,
-body.page-home .context-item,
-body.page-home .post-card,
-body.page-home .quiet-card{
-  background: linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.07)) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
-  color: rgba(255,255,255,0.92);
-}
-
-body.page-home .feature-link:hover,
-body.page-home .context-item:hover,
-body.page-home .post-card:hover,
-body.page-home .quiet-card:hover{
-  border-color: rgba(255,255,255,0.18) !important;
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.06),
-    0 26px 70px rgba(0,0,0,0.55) !important;
-  transform: translateY(-2px);
-}
-
-/* Kicker labels on dark */
-body.page-home .context-kicker{
-  color: rgba(255,255,255,0.70) !important;
-}
-
-/* ---- 3) Homepage-only: taller, centered, bigger brand/header ---- */
+/* ---------------------------------
+   Homepage masthead: taller + centered
+---------------------------------- */
 body.page-home .site-header{
-  background: linear-gradient(to bottom, rgba(10,10,18,0.80), rgba(10,10,18,0.55)) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
-  box-shadow: 0 18px 60px rgba(0,0,0,0.55) !important;
+  background:
+    radial-gradient(1200px 300px at 50% 0%, rgba(142,118,204,0.18), transparent 60%),
+    linear-gradient(to bottom, rgba(7,7,13,0.92), rgba(12,12,22,0.86));
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
 }
 
 body.page-home .site-header .header-inner{
-  /* Big “hero header” feel */
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1506,7 +972,6 @@ body.page-home .site-header .header-inner{
 
   padding-top: 26px;
   padding-bottom: 18px;
-
   gap: 14px;
 }
 
@@ -1516,342 +981,70 @@ body.page-home .site-header .brand{
 }
 
 body.page-home .site-header .brand-logo{
-  height: 56px; /* bigger logo only on homepage */
+  height: 56px;
   width: auto;
+  transform: none;
 }
 
 body.page-home .site-header .brand-name{
   font-size: 30px;
   letter-spacing: 0.2px;
-  color: rgba(255,255,255,0.98) !important;
+  color: rgba(255,255,255,0.98);
 }
 
 body.page-home .site-header .brand-tag{
   font-size: 14px;
-  color: rgba(255,255,255,0.78) !important;
+  color: rgba(255,255,255,0.78);
 }
 
-/* Nav becomes centered row under the brand */
 body.page-home .site-header .nav{
   justify-content: center;
   gap: 10px;
 }
 
+/* Nav pills = neutral glass (not purple) */
 body.page-home .site-header .nav-link{
-  color: rgba(255,255,255,0.88) !important;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.90);
+  background: rgba(255,255,255,0.08);
+  border: none;
   border-radius: 999px;
   padding: 8px 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 10px 24px rgba(0,0,0,0.38);
+  transition: transform 140ms ease, background 140ms ease;
 }
 
 body.page-home .site-header .nav-link:hover{
-  background: rgba(255,255,255,0.10) !important;
-  color: rgba(255,255,255,0.98) !important;
+  background: rgba(255,255,255,0.12);
   transform: translateY(-1px);
 }
 
 body.page-home .site-header .nav-link.is-active{
-  background: rgba(255,255,255,0.14) !important;
-  border-color: rgba(255,255,255,0.16);
-  color: rgba(255,255,255,0.98) !important;
+  background: rgba(255,255,255,0.14);
 }
 
-/* ---- 4) Inputs/buttons on dark (homepage) ---- */
-body.page-home .input,
-body.page-home .select,
-body.page-home .header-search-input{
-  background: rgba(255,255,255,0.10) !important;
-  border: 1px solid rgba(255,255,255,0.14) !important;
-  color: rgba(255,255,255,0.92) !important;
-}
-
-body.page-home .input::placeholder{
-  color: rgba(255,255,255,0.60);
-}
-
-body.page-home .button,
-body.page-home .panel-link{
-  background: rgba(142,118,204,0.95) !important;
-  border: 1px solid rgba(142,118,204,0.55) !important;
-  color: #0b0b12 !important;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
-}
-
-body.page-home .button-ghost,
-body.page-home .context-btn{
-  background: rgba(255,255,255,0.10) !important;
-  border: 1px solid rgba(255,255,255,0.14) !important;
-  color: rgba(255,255,255,0.92) !important;
-}
-
-/* Mobile: keep the big header but tighten spacing */
-@media (max-width: 560px){
-  body.page-home .site-header .brand-logo{ height: 48px; }
-  body.page-home .site-header .brand-name{ font-size: 26px; }
-  body.page-home .site-header .header-inner{ padding-top: 20px; padding-bottom: 14px; }
-}
-/* ==============================
-   HOMEPAGE REFINEMENT: sharpen dark UI
-   (clarity > blur)
-============================== */
-
-/* ---- Reduce global blur, increase contrast ---- */
-body.page-home .panel,
-body.page-home .feature-link,
-body.page-home .context-item{
-  backdrop-filter: blur(6px) !important;
-}
-
-/* ---- Stronger panel edges (modern glass, not fog) ---- */
-body.page-home .panel{
-  border: 1px solid rgba(255,255,255,0.18) !important;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.08),
-    0 20px 50px rgba(0,0,0,0.55) !important;
-}
-
-/* ---- Inner cards slightly lighter than panels ---- */
-body.page-home .feature-link,
-body.page-home .context-item,
-body.page-home .post-card{
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.14),
-    rgba(255,255,255,0.08)
-  ) !important;
-
-  border: 1px solid rgba(255,255,255,0.20) !important;
-}
-
-/* ---- Hover = lift, not glow ---- */
-body.page-home .feature-link:hover,
-body.page-home .context-item:hover,
-body.page-home .post-card:hover{
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.10),
-    0 30px 80px rgba(0,0,0,0.65) !important;
-}
-
-/* ==============================
-   HEADER: make it a masthead
-============================== */
-
-body.page-home .site-header{
-  background:
-    radial-gradient(1200px 300px at 50% 0%, rgba(142,118,204,0.25), transparent 60%),
-    linear-gradient(to bottom, #07070d, #0c0c16) !important;
-
-  border-bottom: 1px solid rgba(255,255,255,0.16) !important;
-}
-
-/* Separate header from content */
-body.page-home main{
-  margin-top: 14px;
-}
-
-/* Nav pills less glassy, more precise */
-body.page-home .site-header .nav-link{
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(255,255,255,0.16);
-}
-
-body.page-home .site-header .nav-link:hover{
-  background: rgba(255,255,255,0.14) !important;
-}
-
-/* ==============================
-   HIERARCHY: make Quick Finder the anchor
-============================== */
-
-body.page-home .panel-qf{
-  background:
-    radial-gradient(900px 280px at 20% 0%, rgba(142,118,204,0.35), transparent 60%),
-    linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.10)) !important;
-
-  border-color: rgba(180,155,255,0.35) !important;
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.14),
-    0 40px 120px rgba(0,0,0,0.75) !important;
-}
-
-/* Slightly larger title for visual gravity */
-body.page-home .panel-qf .panel-title{
-  font-size: 34px !important;
-}
-
-/* ==============================
-   TEXT CLARITY on dark
-============================== */
-
-body.page-home h1,
-body.page-home h2,
-body.page-home h3{
-  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
-}
-
-body.page-home .panel-title{
-  color: rgba(255,255,255,0.98) !important;
-}
-
-body.page-home .panel-subtitle{
-  color: rgba(255,255,255,0.70) !important;
-}
-/* ==============================
-   HOMEPAGE COLOR CORRECTION
-   Remove silver/grey → indigo glass
-============================== */
-
-/* ---- Define homepage-only indigo glass tones ---- */
-body.page-home{
-  --glass-1: rgba(98, 78, 155, 0.22);
-  --glass-2: rgba(70, 56, 120, 0.38);
-  --glass-3: rgba(54, 44, 96, 0.55);
-
-  --edge-soft: rgba(180, 160, 255, 0.22);
-  --edge-strong: rgba(200, 180, 255, 0.32);
-}
-
-/* ==============================
-   Panels (remove grey, add ink depth)
-============================== */
-body.page-home .panel{
-  background:
-    linear-gradient(
-      to bottom,
-      var(--glass-2),
-      var(--glass-3)
-    ) !important;
-
-  border: 1px solid var(--edge-soft) !important;
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.06),
-    0 28px 90px rgba(0,0,0,0.65) !important;
-}
-
-/* ==============================
-   Inner cards / tiles
-============================== */
-body.page-home .feature-link,
-body.page-home .context-item,
-body.page-home .post-card,
-body.page-home .quiet-card{
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(120,100,200,0.22),
-      rgba(70,56,120,0.40)
-    ) !important;
-
-  border: 1px solid var(--edge-soft) !important;
-}
-
-/* Hover stays deep, not shiny */
-body.page-home .feature-link:hover,
-body.page-home .context-item:hover,
-body.page-home .post-card:hover,
-body.page-home .quiet-card:hover{
-  border-color: var(--edge-strong) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    0 36px 120px rgba(0,0,0,0.75) !important;
-}
-
-/* ==============================
-   Quick Finder = richest surface
-============================== */
-body.page-home .panel-qf{
-  background:
-    radial-gradient(
-      900px 300px at 20% 0%,
-      rgba(170,145,255,0.40),
-      transparent 65%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(110,90,190,0.45),
-      rgba(60,48,110,0.65)
-    ) !important;
-
-  border-color: rgba(210,190,255,0.40) !important;
-}
-
-/* ==============================
-   Header pills (no silver)
-============================== */
-body.page-home .site-header .nav-link{
-  background: rgba(130,110,210,0.22) !important;
-  border: 1px solid rgba(190,170,255,0.28) !important;
-}
-
-body.page-home .site-header .nav-link:hover{
-  background: rgba(150,130,230,0.30) !important;
-}
-
-/* ==============================
-   Inputs & buttons (kill grey fill)
-============================== */
-body.page-home .input,
-body.page-home .header-search-input{
-  background: rgba(110,90,190,0.35) !important;
-  border: 1px solid rgba(190,170,255,0.28) !important;
-  color: rgba(255,255,255,0.95) !important;
-}
-
-body.page-home .input::placeholder{
-  color: rgba(230,220,255,0.65);
-}
-
-/* Chips: indigo pills, not metal */
-body.page-home .chip{
-  background: rgba(130,110,210,0.30) !important;
-  border: 1px solid rgba(200,180,255,0.32) !important;
-  color: rgba(240,235,255,0.95) !important;
-}
-/* ==============================
-   HOMEPAGE: hovering glass (no borders, less purple, lighter)
-   Paste at END of styles.css
-============================== */
-
-body.page-home{
-  /* Cooler, less-purple ambient background */
-  background:
-    radial-gradient(1200px 700px at 22% -10%, rgba(120, 140, 255, 0.12), transparent 60%),
-    radial-gradient(900px 600px at 82% 0%, rgba(155, 120, 255, 0.10), transparent 62%),
-    linear-gradient(to bottom, #07070d, #0c0c16 40%, #0b0b12);
-  color: rgba(255,255,255,0.92);
-}
-
-/* Remove “boxed” feel: reduce density + lighten type */
-body.page-home .panel-subtitle,
-body.page-home .context-desc,
-body.page-home .quiet-card-desc,
-body.page-home .post-summary{
-  color: rgba(255,255,255,0.68) !important;
-}
-
-/* ==============================
-   FLOATING GLASS SURFACES
+/* ---------------------------------
+   Floating glass system (homepage cards)
    - no borders
-   - subtle blur
-   - soft highlight edge (not a border)
-============================== */
-
+   - subtle rim highlight
+   - gentle lift on hover
+---------------------------------- */
 body.page-home .panel,
 body.page-home .feature-link,
 body.page-home .context-item,
 body.page-home .post-card,
 body.page-home .quiet-card{
-  border: none !important;                 /* kill borders */
-  box-shadow: none !important;             /* reset then re-add below */
-  background: rgba(255,255,255,0.08) !important; /* neutral glass */
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  border: none !important;
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   position: relative;
+  box-shadow:
+    0 12px 32px rgba(0,0,0,0.40),
+    0 1px 0 rgba(255,255,255,0.04) !important;
 }
 
-/* Soft “glass rim” highlight (feels like floating edge) */
 body.page-home .panel::before,
 body.page-home .feature-link::before,
 body.page-home .context-item::before,
@@ -1865,18 +1058,9 @@ body.page-home .quiet-card::before{
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.10),
     inset 0 0 0 1px rgba(255,255,255,0.06);
-  opacity: 1;
 }
 
-/* Elevation: lighter, airier (no “heavy slab” shadow) */
-body.page-home .panel{
-  background: rgba(255,255,255,0.07) !important;
-  box-shadow:
-    0 12px 32px rgba(0,0,0,0.40),
-    0 1px 0 rgba(255,255,255,0.04) !important;
-}
-
-/* Inner tiles slightly lighter than the panels */
+/* Inner tiles slightly lighter than panels */
 body.page-home .feature-link,
 body.page-home .context-item,
 body.page-home .post-card,
@@ -1887,19 +1071,17 @@ body.page-home .quiet-card{
     0 1px 0 rgba(255,255,255,0.04) !important;
 }
 
-/* Hover: gentle lift (modern) */
-body.page-home .panel-link:hover,
 body.page-home .feature-link:hover,
 body.page-home .context-item:hover,
 body.page-home .post-card:hover,
 body.page-home .quiet-card:hover{
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow:
     0 18px 44px rgba(0,0,0,0.52),
     0 1px 0 rgba(255,255,255,0.06) !important;
 }
 
-/* Keep static Advice card from lifting */
+/* Keep static Advice tile from lifting */
 body.page-home .context-item-static:hover{
   transform: none;
   box-shadow:
@@ -1907,9 +1089,7 @@ body.page-home .context-item-static:hover{
     0 1px 0 rgba(255,255,255,0.04) !important;
 }
 
-/* ==============================
-   QUICK FINDER: just a touch brighter (not purple)
-============================== */
+/* Quick Finder gets slightly more “anchor” weight (still neutral) */
 body.page-home .panel-qf{
   background: rgba(255,255,255,0.10) !important;
   box-shadow:
@@ -1917,223 +1097,12 @@ body.page-home .panel-qf{
     0 1px 0 rgba(255,255,255,0.06) !important;
 }
 
-/* Tone down headings a hair so panels feel less “loud” */
-body.page-home h1.panel-title{
-  font-size: 30px !important;
-}
-body.page-home .panel-title{
-  color: rgba(255,255,255,0.96) !important;
-}
-
-/* ==============================
-   NAV PILLS: make them glass, not purple
-============================== */
-body.page-home .site-header .nav-link{
-  background: rgba(255,255,255,0.08) !important;
-  border: none !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    0 10px 24px rgba(0,0,0,0.38);
-}
-
-body.page-home .site-header .nav-link:hover{
-  background: rgba(255,255,255,0.12) !important;
-}
-
-body.page-home .site-header .nav-link.is-active{
-  background: rgba(255,255,255,0.14) !important;
-}
-
-/* ==============================
-   INPUTS / CHIPS: neutral glass, no purple fill
-============================== */
-body.page-home .input{
-  background: rgba(255,255,255,0.10) !important;
-  border: none !important;
-  color: rgba(255,255,255,0.92) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 12px 26px rgba(0,0,0,0.34);
-}
-
-body.page-home .input::placeholder{
-  color: rgba(255,255,255,0.62);
-}
-
-body.page-home .chip{
-  background: rgba(255,255,255,0.09) !important;
-  border: none !important;
-  color: rgba(255,255,255,0.88) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 10px 22px rgba(0,0,0,0.32);
-}
-
-body.page-home .chip:hover{
-  background: rgba(255,255,255,0.12) !important;
-  transform: translateY(-1px);
-}
-
-/* Primary button stays purple as the accent (single source of purple) */
+/* ---------------------------------
+   Buttons + inputs on dark (homepage)
+---------------------------------- */
 body.page-home .button,
 body.page-home .panel-link{
-  background: rgba(142,118,204,0.95) !important;
-  border: none !important;
-  color: #0b0b12 !important;
-  box-shadow: 0 18px 44px rgba(0,0,0,0.52);
-}
-
-/* Reduce motion respect */
-@media (prefers-reduced-motion: reduce){
-  body.page-home .panel-link:hover,
-  body.page-home .feature-link:hover,
-  body.page-home .context-item:hover,
-  body.page-home .post-card:hover,
-  body.page-home .quiet-card:hover,
-  body.page-home .chip:hover{
-    transform: none;
-  }
-}
-/* ==============================
-   HOMEPAGE POLISH PASS
-   - premium glass lighting
-   - section title treatment
-   - micro-interactions
-   - less "basic"
-============================== */
-
-body.page-home{
-  --glass: rgba(255,255,255,0.08);
-  --glass-strong: rgba(255,255,255,0.10);
-  --rim: rgba(255,255,255,0.07);
-  --rim-strong: rgba(255,255,255,0.10);
-  --ink: rgba(255,255,255,0.94);
-  --ink-soft: rgba(255,255,255,0.68);
-
-  /* Accent becomes “signal”, not a wash */
-  --signal: rgba(142,118,204,0.95);
-  --signal-soft: rgba(142,118,204,0.35);
-
-  /* Elevation system */
-  --elev-1: 0 12px 30px rgba(0,0,0,0.40);
-  --elev-2: 0 18px 46px rgba(0,0,0,0.55);
-  --elev-3: 0 30px 85px rgba(0,0,0,0.70);
-}
-
-/* ---------- SECTION TITLE COLOR SWAP (your request) ---------- */
-/* Titles become “bright” on dark glass; subtitles stay soft */
-body.page-home .panel-title,
-body.page-home .context-title,
-body.page-home .spotlight-title{
-  color: var(--ink) !important;
-}
-
-body.page-home .panel-subtitle,
-body.page-home .context-desc,
-body.page-home .muted{
-  color: var(--ink-soft) !important;
-}
-
-/* ---------- PANEL LIGHTING (less basic, more premium) ---------- */
-body.page-home .panel{
-  background:
-    radial-gradient(900px 220px at 20% 0%, rgba(255,255,255,0.06), transparent 60%),
-    radial-gradient(700px 200px at 90% 100%, rgba(142,118,204,0.06), transparent 55%),
-    var(--glass) !important;
-
-  border: none !important;
-  box-shadow: var(--elev-1) !important;
-  position: relative;
-  overflow: hidden; /* for lighting sheen */
-}
-
-/* Glass rim + highlight */
-body.page-home .panel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 0 0 1px var(--rim);
-  opacity: 1;
-}
-
-/* Moving “sheen” on hover = premium */
-body.page-home .panel::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:
-    linear-gradient(
-      120deg,
-      transparent 35%,
-      rgba(255,255,255,0.10) 45%,
-      transparent 55%
-    );
-  transform: translateX(-40%) translateY(-10%) rotate(6deg);
-  opacity: 0;
-  pointer-events:none;
-  transition: opacity 180ms ease, transform 600ms ease;
-}
-
-body.page-home .panel:hover::after{
-  opacity: 0.55;
-  transform: translateX(18%) translateY(-6%) rotate(6deg);
-}
-
-/* ---------- INNER TILES: float + rim ---------- */
-body.page-home .feature-link,
-body.page-home .context-item,
-body.page-home .post-card,
-body.page-home .quiet-card{
-  background:
-    radial-gradient(500px 180px at 20% 0%, rgba(255,255,255,0.07), transparent 60%),
-    rgba(255,255,255,0.09) !important;
-
-  border: none !important;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.34) !important;
-  position: relative;
-  overflow: hidden;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-}
-
-body.page-home .feature-link::before,
-body.page-home .context-item::before,
-body.page-home .post-card::before,
-body.page-home .quiet-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 0 0 1px rgba(255,255,255,0.06);
-}
-
-/* Hover = more lift + subtle accent glow (dynamic) */
-body.page-home .feature-link:hover,
-body.page-home .context-item:hover,
-body.page-home .post-card:hover,
-body.page-home .quiet-card:hover{
-  transform: translateY(-3px);
-  box-shadow:
-    var(--elev-2),
-    0 0 0 1px rgba(255,255,255,0.05),
-    0 0 0 6px rgba(142,118,204,0.08) !important;
-  background:
-    radial-gradient(520px 190px at 20% 0%, rgba(255,255,255,0.09), transparent 60%),
-    rgba(255,255,255,0.10) !important;
-}
-
-/* ---------- BUTTONS: feel “clickable”, not flat ---------- */
-body.page-home .button,
-body.page-home .panel-link{
-  background: var(--signal) !important;
+  background: rgba(142,118,204,0.95) !important; /* single “signal” purple */
   border: none !important;
   color: #0b0b12 !important;
   box-shadow: 0 18px 44px rgba(0,0,0,0.52) !important;
@@ -2147,13 +1116,6 @@ body.page-home .panel-link:hover{
   filter: saturate(1.05);
 }
 
-body.page-home .button:active,
-body.page-home .panel-link:active{
-  transform: translateY(0px);
-  box-shadow: 0 16px 38px rgba(0,0,0,0.48) !important;
-}
-
-/* Ghost buttons become glass pills */
 body.page-home .button-ghost,
 body.page-home .context-btn{
   background: rgba(255,255,255,0.10) !important;
@@ -2162,8 +1124,8 @@ body.page-home .context-btn{
   box-shadow: 0 10px 22px rgba(0,0,0,0.34) !important;
 }
 
-/* ---------- INPUTS: modern focus + glow ---------- */
-body.page-home .input{
+body.page-home .input,
+body.page-home .header-search-input{
   background: rgba(255,255,255,0.10) !important;
   border: none !important;
   color: rgba(255,255,255,0.92) !important;
@@ -2173,7 +1135,13 @@ body.page-home .input{
     0 12px 26px rgba(0,0,0,0.34) !important;
 }
 
-body.page-home .input:focus{
+body.page-home .input::placeholder,
+body.page-home .header-search-input::placeholder{
+  color: rgba(255,255,255,0.62);
+}
+
+body.page-home .input:focus,
+body.page-home .header-search-input:focus{
   outline: none !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.12),
@@ -2182,42 +1150,130 @@ body.page-home .input:focus{
     0 16px 38px rgba(0,0,0,0.52) !important;
 }
 
-/* ---------- NAV: slightly more “product” ---------- */
-body.page-home .site-header .nav-link{
-  background: rgba(255,255,255,0.08) !important;
+/* Chips: neutral glass pills */
+body.page-home .chip{
+  background: rgba(255,255,255,0.09) !important;
   border: none !important;
+  color: rgba(255,255,255,0.88) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.10),
-    0 10px 24px rgba(0,0,0,0.38) !important;
-  transition: transform 140ms ease, background 140ms ease;
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 22px rgba(0,0,0,0.32);
 }
-
-body.page-home .site-header .nav-link:hover{
-  transform: translateY(-1px);
+body.page-home .chip:hover{
   background: rgba(255,255,255,0.12) !important;
+  transform: translateY(-1px);
 }
 
-body.page-home .site-header .nav-link.is-active{
-  background: rgba(255,255,255,0.14) !important;
+/* ---------------------------------
+   Context of the Week + Feature Links
+   (re-added clean, no duplicates)
+---------------------------------- */
+
+/* Context cards: 2-up on desktop */
+.page-home .context-week-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
-/* ---------- SPACING: makes everything feel less dense ---------- */
-body.page-home .home-grid{ gap: 22px !important; }
-body.page-home .home-left,
-body.page-home .home-right{ gap: 22px !important; }
-body.page-home .home-row{ gap: 22px !important; }
+/* Advice spans full width */
+.page-home .context-week-grid .context-item-static{
+  grid-column: 1 / -1;
+}
 
-body.page-home .panel{ padding: 22px !important; }
-body.page-home .feature-link,
-body.page-home .context-item{ padding: 16px !important; }
+.page-home .context-item{
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 18px;
+  text-decoration: none;
+}
 
-/* Reduce motion respect */
+.page-home .context-kicker{
+  font-size: 12px;
+  letter-spacing: 0.08px;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.70);
+}
+
+.page-home .context-title{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.page-home .context-desc{
+  font-size: 13.5px;
+  max-width: 70ch;
+}
+
+.page-home .context-actions{
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Feature link lists: 2 columns + “column fill” so 3rd lands top-right */
+.page-home .feature-links{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  gap: 10px;
+}
+
+.page-home .feature-link{
+  display: grid;
+  gap: 0;
+  padding: 16px;
+  border-radius: 18px;
+}
+
+.page-home .feature-link-title{
+  font-weight: 650;
+  letter-spacing: 0.1px;
+}
+
+/* Keep homepage feature blurbs hidden (your preference) */
+.page-home .feature-link-desc{
+  display: none !important;
+}
+
+/* ---------------------------------
+   Mobile adjustments
+---------------------------------- */
+@media (max-width: 560px){
+  body.page-home .site-header .brand-logo{ height: 48px; }
+  body.page-home .site-header .brand-name{ font-size: 26px; }
+  body.page-home .site-header .header-inner{ padding-top: 20px; padding-bottom: 14px; }
+
+  .page-home .context-week-grid{
+    grid-template-columns: 1fr;
+  }
+  .page-home .context-week-grid .context-item-static{
+    grid-column: auto;
+  }
+
+  .page-home .feature-links{
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+}
+
+/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
-  body.page-home .panel::after{ display:none !important; }
+  body.page-home .panel:hover,
   body.page-home .feature-link:hover,
   body.page-home .context-item:hover,
   body.page-home .post-card:hover,
   body.page-home .quiet-card:hover,
+  body.page-home .chip:hover,
   body.page-home .button:hover,
   body.page-home .panel-link:hover,
   body.page-home .site-header .nav-link:hover{
