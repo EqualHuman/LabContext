@@ -1421,3 +1421,173 @@ body{
     transform: none;
   }
 }
+/* ==============================
+   HOMEPAGE ONLY: tall centered header + dark page background
+   Paste at END of styles.css
+============================== */
+
+/* ---- 1) Homepage dark backdrop (only when <body class="page-home">) ---- */
+body.page-home{
+  background:
+    radial-gradient(1200px 700px at 25% -10%, rgba(142,118,204,0.22), transparent 55%),
+    radial-gradient(900px 600px at 80% 0%, rgba(85,64,121,0.22), transparent 60%),
+    linear-gradient(to bottom, #0b0b12, #101122);
+  color: rgba(255,255,255,0.92);
+}
+
+/* Make muted text readable on dark */
+body.page-home .muted,
+body.page-home .panel-subtitle,
+body.page-home .context-desc,
+body.page-home .quiet-card-desc,
+body.page-home .post-summary{
+  color: rgba(255,255,255,0.72) !important;
+}
+
+/* ---- 2) Homepage panels become “dark glass” surfaces ---- */
+body.page-home .panel{
+  background: linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.06)) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06),
+    0 18px 50px rgba(0,0,0,0.45) !important;
+  color: rgba(255,255,255,0.92);
+}
+
+body.page-home .panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+  opacity: 1;
+}
+
+/* Inner tiles/cards on dark */
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card,
+body.page-home .quiet-card{
+  background: linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.07)) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  color: rgba(255,255,255,0.92);
+}
+
+body.page-home .feature-link:hover,
+body.page-home .context-item:hover,
+body.page-home .post-card:hover,
+body.page-home .quiet-card:hover{
+  border-color: rgba(255,255,255,0.18) !important;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.06),
+    0 26px 70px rgba(0,0,0,0.55) !important;
+  transform: translateY(-2px);
+}
+
+/* Kicker labels on dark */
+body.page-home .context-kicker{
+  color: rgba(255,255,255,0.70) !important;
+}
+
+/* ---- 3) Homepage-only: taller, centered, bigger brand/header ---- */
+body.page-home .site-header{
+  background: linear-gradient(to bottom, rgba(10,10,18,0.80), rgba(10,10,18,0.55)) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55) !important;
+}
+
+body.page-home .site-header .header-inner{
+  /* Big “hero header” feel */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding-top: 26px;
+  padding-bottom: 18px;
+
+  gap: 14px;
+}
+
+body.page-home .site-header .brand{
+  min-width: 0;
+  justify-content: center;
+}
+
+body.page-home .site-header .brand-logo{
+  height: 56px; /* bigger logo only on homepage */
+  width: auto;
+}
+
+body.page-home .site-header .brand-name{
+  font-size: 30px;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.98) !important;
+}
+
+body.page-home .site-header .brand-tag{
+  font-size: 14px;
+  color: rgba(255,255,255,0.78) !important;
+}
+
+/* Nav becomes centered row under the brand */
+body.page-home .site-header .nav{
+  justify-content: center;
+  gap: 10px;
+}
+
+body.page-home .site-header .nav-link{
+  color: rgba(255,255,255,0.88) !important;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+body.page-home .site-header .nav-link:hover{
+  background: rgba(255,255,255,0.10) !important;
+  color: rgba(255,255,255,0.98) !important;
+  transform: translateY(-1px);
+}
+
+body.page-home .site-header .nav-link.is-active{
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.98) !important;
+}
+
+/* ---- 4) Inputs/buttons on dark (homepage) ---- */
+body.page-home .input,
+body.page-home .select,
+body.page-home .header-search-input{
+  background: rgba(255,255,255,0.10) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  color: rgba(255,255,255,0.92) !important;
+}
+
+body.page-home .input::placeholder{
+  color: rgba(255,255,255,0.60);
+}
+
+body.page-home .button,
+body.page-home .panel-link{
+  background: rgba(142,118,204,0.95) !important;
+  border: 1px solid rgba(142,118,204,0.55) !important;
+  color: #0b0b12 !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+body.page-home .button-ghost,
+body.page-home .context-btn{
+  background: rgba(255,255,255,0.10) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  color: rgba(255,255,255,0.92) !important;
+}
+
+/* Mobile: keep the big header but tighten spacing */
+@media (max-width: 560px){
+  body.page-home .site-header .brand-logo{ height: 48px; }
+  body.page-home .site-header .brand-name{ font-size: 26px; }
+  body.page-home .site-header .header-inner{ padding-top: 20px; padding-bottom: 14px; }
+}
