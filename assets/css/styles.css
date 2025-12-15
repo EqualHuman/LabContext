@@ -968,3 +968,40 @@ h1,h2,h3,
   padding:10px 14px;
   border-radius:14px;
 }
+/* ==============================
+   Homepage grid hard lock
+   (prevents column collapse / drift)
+============================== */
+
+.page-home .home-grid{
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr) !important;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Ensure ONLY two direct children participate */
+.page-home .home-grid > .home-left{
+  grid-column: 1 / 2;
+}
+
+.page-home .home-grid > .home-right{
+  grid-column: 2 / 3;
+}
+
+/* Prevent overflow pushing columns apart */
+.page-home .home-left,
+.page-home .home-right{
+  min-width: 0;
+}
+
+/* Mobile collapse */
+@media (max-width: 940px){
+  .page-home .home-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-home .home-right{
+    grid-column: auto;
+  }
+}
