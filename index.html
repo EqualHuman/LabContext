@@ -10,64 +10,126 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-   <a class="brand" href="./" aria-label="LabContext home">
-  <span class="brand-mark" aria-hidden="true">
-    <img
-      class="brand-logo"
-      data-src="assets/img/labcontext-logo.svg"
-      alt="LabContext logo"
-    />
-  </span>
-
-  <span class="brand-text">
-    <span class="brand-name">LabContext</span>
-    <span class="brand-tag">clarity for laboratory medicine</span>
-  </span>
-</a>
-
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link is-active" href="in-context/">In Context</a>
-        <a class="nav-link" href="education/">Education</a>
-        <a class="nav-link" href="infographics/">Infographics</a>
-        <a class="nav-link" href="about/">About</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Use shared injected header (keeps nav + header search consistent sitewide) -->
+  <header class="site-header"></header>
 
   <main id="main">
-    <section class="hero">
-      <div class="container">
-        <h1 class="hero-title">A quiet reference library for understanding lab medicine.</h1>
-        <p class="hero-subtitle">
-          Read what’s current in <strong>In Context</strong>, then go deeper in <strong>Education</strong> when you’re ready.
-        </p>
+    <!-- HERO -->
+    <section class="home-hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1 class="hero-title">Clarity for laboratory medicine.</h1>
+          <p class="hero-subtitle">
+            LabContext is a quiet reference library that helps you understand what lab work <em>means</em> —
+            without pressure, urgency, or noise.
+          </p>
 
-        <div class="hero-actions">
-          <a class="button" href="in-context/">Browse In Context</a>
-          <a class="button button-ghost" href="education/">Open Education Library</a>
+          <div class="hero-actions">
+            <a class="button" href="in-context/">Browse In Context</a>
+            <a class="button button-ghost" href="education/">Open Education Library</a>
+          </div>
+
+          <div class="home-badges" aria-label="Site principles">
+            <span class="badge">No logins</span>
+            <span class="badge">No tracking</span>
+            <span class="badge">No scoring</span>
+            <span class="badge">Built for calm</span>
+          </div>
+
+          <div class="hero-note">
+            <span class="hero-note-title">A simple way to use this site:</span>
+            <span class="hero-note-text">Start with a question → read the context → go deeper when you’re ready.</span>
+          </div>
         </div>
 
-        <div class="quiet-links">
-          <a class="quiet-card" href="in-context/">
-            <div class="quiet-card-title">In Context</div>
-            <div class="quiet-card-desc">Fresh articles, PSAs, breakthroughs, and public-facing explanations.</div>
+        <aside class="hero-right" aria-label="Quick tools">
+          <div class="home-panel">
+            <div class="panel-title">Quick search</div>
+            <p class="panel-subtitle">Type a keyword and jump straight to results.</p>
+
+            <form id="home-search" class="home-search" role="search" aria-label="Homepage search">
+              <label class="sr-only" for="home-search-input">Search LabContext</label>
+              <input
+                id="home-search-input"
+                class="input home-search-input"
+                type="search"
+                placeholder="Try: hemolysis, reference range, turnaround time…"
+                autocomplete="off"
+              />
+              <button class="button home-search-btn" type="submit">Search</button>
+            </form>
+
+            <div class="panel-block">
+              <div class="panel-label">Popular starts</div>
+              <div class="chip-links" aria-label="Popular searches">
+                <a class="chip-link" href="search/?q=hemolysis">Hemolysis</a>
+                <a class="chip-link" href="search/?q=turnaround%20time">Turnaround time</a>
+                <a class="chip-link" href="search/?q=reference%20range">Reference range</a>
+                <a class="chip-link" href="search/?q=recollection">Recollection</a>
+              </div>
+            </div>
+
+            <div class="panel-divider" role="separator" aria-hidden="true"></div>
+
+            <div class="panel-block">
+              <div class="panel-label">Start here</div>
+              <div class="start-links">
+                <a class="start-link" href="in-context/">
+                  <span class="start-link-title">In Context</span>
+                  <span class="start-link-desc">Current topics, PSAs, public explanations.</span>
+                </a>
+                <a class="start-link" href="education/">
+                  <span class="start-link-title">Education</span>
+                  <span class="start-link-desc">Evergreen concepts, mechanisms, interpretation logic.</span>
+                </a>
+                <a class="start-link" href="infographics/">
+                  <span class="start-link-title">Infographics</span>
+                  <span class="start-link-desc">Visual summaries (printable PDFs coming soon).</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PRIMARY PATHS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Explore</h2>
+          <a class="section-link" href="search/">Search everything</a>
+        </div>
+
+        <div class="home-tiles" role="list">
+          <a class="home-tile" href="in-context/" role="listitem">
+            <div class="tile-title">In Context</div>
+            <div class="tile-desc">Interpretation, outreach, PSAs, breakthroughs, history — without hype.</div>
+            <div class="tile-meta">Best for: “What does this mean?”</div>
           </a>
 
-          <a class="quiet-card" href="education/">
-            <div class="quiet-card-title">Education</div>
-            <div class="quiet-card-desc">Evergreen concepts, mechanisms, and interpretation logic.</div>
+          <a class="home-tile" href="education/" role="listitem">
+            <div class="tile-title">Education</div>
+            <div class="tile-desc">Mechanisms and mental models that make results feel reasonable.</div>
+            <div class="tile-meta">Best for: “Help me understand the system.”</div>
           </a>
 
-          <a class="quiet-card" href="infographics/">
-            <div class="quiet-card-title">Infographics</div>
-            <div class="quiet-card-desc">Shareable visuals with printable PDF downloads (coming soon).</div>
+          <a class="home-tile" href="infographics/" role="listitem">
+            <div class="tile-title">Infographics</div>
+            <div class="tile-desc">Shareable visual explanations designed to be calm and clear.</div>
+            <div class="tile-meta">Best for: quick reference + teaching.</div>
+          </a>
+
+          <a class="home-tile" href="about/" role="listitem">
+            <div class="tile-title">About</div>
+            <div class="tile-desc">What LabContext is (and isn’t), plus disclaimers and contact.</div>
+            <div class="tile-meta">Best for: policies + intent.</div>
           </a>
         </div>
       </div>
     </section>
 
+    <!-- LATEST -->
     <section class="section">
       <div class="container">
         <div class="section-head">
@@ -75,24 +137,42 @@
           <a class="section-link" href="in-context/">View all</a>
         </div>
 
-        <div id="latest-posts" class="posts-grid" aria-live="polite">
-          <noscript>
-            <p class="muted">Enable JavaScript to see the latest posts list. You can still browse all posts in In Context.</p>
-          </noscript>
+        <div class="latest-wrap">
+          <div id="latest-featured" class="latest-featured" aria-live="polite">
+            <noscript>
+              <div class="muted">Enable JavaScript to see the featured post.</div>
+            </noscript>
+          </div>
+
+          <div id="latest-posts" class="latest-grid" aria-live="polite">
+            <noscript>
+              <p class="muted">Enable JavaScript to see the latest posts list. You can still browse all posts in In Context.</p>
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MONTHLY ISSUE TEASER -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Monthly issue</h2>
+          <a class="section-link" href="in-context/monthly/">Browse issues</a>
+        </div>
+
+        <div id="home-issue" class="home-issue" aria-live="polite">
+          <div class="quiet-card">
+            <div class="quiet-card-title">Loading latest issue…</div>
+            <div class="quiet-card-desc">If this persists, your issues feed may be unavailable.</div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="muted">© <span id="year"></span> LabContext</div>
-      <div class="footer-links">
-        <a href="about/">Disclaimer</a>
-        <a href="about/#contact">Contact</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Use shared injected footer -->
+  <footer class="site-footer"></footer>
 
   <script src="assets/js/main.js"></script>
 </body>
