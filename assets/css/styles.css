@@ -464,4 +464,19 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   display: block;
 }
 
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo {
+  height: 24px;   /* was 28px — slightly smaller feels more editorial */
+  width: auto;
+  display: block;
+}
+.brand-logo {
+  height: 24px;
+  transform: translateY(1px);
+}
+
 
