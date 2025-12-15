@@ -21,6 +21,19 @@
     if (isDeep) return "../";
     return "./";
   }
+  function injectFavicon() {
+  const base = resolveBase();
+
+  if (document.querySelector('link[rel="icon"]')) return;
+
+  const link = document.createElement("link");
+  link.rel = "icon";
+  link.type = "image/svg+xml";
+  link.href = base + "assets/img/favicon.svg";
+
+  document.head.appendChild(link);
+}
+
   async function injectSharedLayout() {
   const base = resolveBase();
 
@@ -306,12 +319,9 @@
 
   // Boot
 // Boot
+// Boot
 Promise.resolve()
-  .then(injectSharedLayout)
-  .then(() => {
-    const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-  })
+  .then(injectFavicon)
   .then(renderHomeLatest)
   .then(renderInContextLibrary)
   .then(renderInContextIssues)
@@ -322,4 +332,5 @@ Promise.resolve()
       if (el) el.innerHTML = '<p class="muted">Content list unavailable right now.</p>';
     });
   });
+
 })();
