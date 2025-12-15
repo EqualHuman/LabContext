@@ -1,4 +1,12 @@
 <div class="container header-inner">
+  <!-- Left side buttons -->
+  <div class="header-side header-left" aria-label="Header left actions">
+    <a class="header-btn header-btn-search" href="#" data-href="search/" aria-label="Search">
+      Search
+    </a>
+  </div>
+
+  <!-- Center brand -->
   <a class="brand" href="#" aria-label="LabContext home" data-href="">
     <span class="brand-mark" aria-hidden="true">
       <img
@@ -14,19 +22,8 @@
     </span>
   </a>
 
-  <form class="header-search" role="search" aria-label="Site search">
-    <label class="sr-only" for="site-search">Search</label>
-    <input
-      id="site-search"
-      class="header-search-input"
-      type="search"
-      placeholder="Search: hemolysis, reference range…"
-      autocomplete="off"
-    />
-    <button class="header-search-btn" type="submit">Search</button>
-  </form>
-
-  <nav class="nav" aria-label="Primary navigation">
+  <!-- Right side nav buttons -->
+  <nav class="nav header-side header-right" aria-label="Primary navigation">
     <a class="nav-link" href="#" data-href="" data-nav="home">Home</a>
     <a class="nav-link" href="#" data-href="in-context/" data-nav="in-context">In Context</a>
     <a class="nav-link" href="#" data-href="education/" data-nav="education">Education</a>
