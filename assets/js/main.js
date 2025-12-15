@@ -4,36 +4,35 @@
   // ------------------------------
   // Base path + shared layout
   // ------------------------------
-function resolveBase() {
-  // Works on GitHub Pages project sites and local dev.
-  // Computes how many folders deep you are, then returns "../" x depth.
+  function resolveBase() {
+    // Works on GitHub Pages project sites and local dev.
+    // Computes how many folders deep you are, then returns "../" x depth.
 
-  const path = window.location.pathname;
+    const path = window.location.pathname;
 
-  // Split into parts, remove empty
-  const parts = path.split("/").filter(Boolean);
+    // Split into parts, remove empty
+    const parts = path.split("/").filter(Boolean);
 
-  // If hosted as a GitHub Pages project site:
-  // e.g. https://user.github.io/LabContext/...
-  // the first part is usually the repo name (LabContext)
-  // We treat that as the site root folder.
-  const repoName = parts[0] || "";
-  const isProjectSite = repoName.toLowerCase() === "labcontext";
+    // If hosted as a GitHub Pages project site:
+    // e.g. https://user.github.io/LabContext/...
+    // the first part is usually the repo name (LabContext)
+    // We treat that as the site root folder.
+    const repoName = parts[0] || "";
+    const isProjectSite = repoName.toLowerCase() === "labcontext";
 
-  // Build a "relative parts" array that starts AFTER the repo folder
-  const relParts = isProjectSite ? parts.slice(1) : parts.slice();
+    // Build a "relative parts" array that starts AFTER the repo folder
+    const relParts = isProjectSite ? parts.slice(1) : parts.slice();
 
-  // If last part is a file (has a dot), don't count it as a folder depth
-  const last = relParts[relParts.length - 1] || "";
-  const endsWithFile = last.includes(".");
+    // If last part is a file (has a dot), don't count it as a folder depth
+    const last = relParts[relParts.length - 1] || "";
+    const endsWithFile = last.includes(".");
 
-  // If URL ends with "/" (directory), last part is already a folder
-  // If URL ends with a file, depth is folders only
-  const depth = endsWithFile ? Math.max(0, relParts.length - 1) : relParts.length;
+    // If URL ends with "/" (directory), last part is already a folder
+    // If URL ends with a file, depth is folders only
+    const depth = endsWithFile ? Math.max(0, relParts.length - 1) : relParts.length;
 
-  return depth === 0 ? "./" : "../".repeat(depth);
-}
-
+    return depth === 0 ? "./" : "../".repeat(depth);
+  }
 
   function injectFavicon(base) {
     if (document.querySelector('link[rel="icon"]')) return;
@@ -57,20 +56,13 @@ function resolveBase() {
     return await res.json();
   }
 
-  function formatDate(iso) {
-    if (!iso) return "";
-    const d = new Date(String(iso) + "T00:00:00");
-    if (Number.isNaN(d.getTime())) return String(iso);
-    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-  }
-
   async function injectSharedLayout(base) {
     // Header
     const header = document.querySelector("header.site-header");
     if (header) {
       try {
         header.innerHTML = await fetchText(base + "assets/partials/header.html");
-      } catch (e) { console.warn(e); }
+      } catch (e) {
         console.warn(e);
       }
     }
@@ -80,7 +72,7 @@ function resolveBase() {
     if (footer) {
       try {
         footer.innerHTML = await fetchText(base + "assets/partials/footer.html");
-      } catch (e) { console.warn(e); }
+      } catch (e) {
         console.warn(e);
       }
     }
@@ -245,101 +237,91 @@ function resolveBase() {
     });
   }
 
-// ------------------------------
-// HOME: Featured (3 Blog items)
-// ------------------------------
-// ------------------------------
-// HOME: Featured (3 Blog items)
-// ------------------------------
-async function renderHomeLatest(base) {
-  const mount = document.getElementById("home-featured");
-  if (!mount) return;
+  // ------------------------------
+  // HOME: Featured (3 items)
+  // ------------------------------
+  async function renderHomeLatest(base) {
+    const mount = document.getElementById("home-featured");
+    if (!mount) return;
 
-  let library = [];
-  try {
-    library = await fetchJson(base + "data/in_context_library.json");
-  } catch (e) {
+    let library = [];
+    try {
+      library = await fetchJson(base + "data/in_context_library.json");
+    } catch (e) {
+      mount.innerHTML = "";
+      renderEmpty(mount, "Featured unavailable right now.");
+      console.warn(e);
+      return;
+    }
+
+    const sorted = (library || [])
+      .slice()
+      .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")))
+      .slice(0, 3);
+
     mount.innerHTML = "";
-    renderEmpty(mount, "Featured unavailable right now.");
-    console.warn(e);
-    return;
+
+    if (!sorted.length) {
+      renderEmpty(mount, "No featured posts yet.");
+      return;
+    }
+
+    sorted.forEach((p) => {
+      mount.appendChild(
+        makeCard({
+          title: p.title,
+          meta: "", // no dates
+          summary: p.summary,
+          tags: p.tags || [],
+          href: p.link || "#",
+        })
+      );
+    });
   }
 
-  const sorted = (library || [])
-    .slice()
-    .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")))
-    .slice(0, 3);
+  // ------------------------------
+  // HOME: latest Monthly Issue teaser
+  // ------------------------------
+  async function renderHomeIssue(base) {
+    const mount = document.getElementById("home-monthly");
+    if (!mount) return;
 
-  mount.innerHTML = "";
+    let issues = [];
+    try {
+      issues = await fetchJson(base + "data/in_context_issues.json");
+    } catch (e) {
+      mount.innerHTML = "";
+      renderEmpty(mount, "Monthly unavailable right now.");
+      console.warn(e);
+      return;
+    }
 
-  if (!sorted.length) {
-    renderEmpty(mount, "No featured posts yet.");
-    return;
+    const sorted = (issues || [])
+      .slice()
+      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+
+    mount.innerHTML = "";
+
+    if (!sorted.length) {
+      const fallback = document.createElement("div");
+      fallback.className = "quiet-card";
+      fallback.innerHTML =
+        '<div class="quiet-card-title">No issues yet.</div><div class="quiet-card-desc">Monthly issues will appear here once published.</div>';
+      mount.appendChild(fallback);
+      return;
+    }
+
+    const issue = sorted[0];
+    const issueCard = makeCard({
+      title: issue.title || "Latest issue",
+      meta: "", // no dates
+      summary: issue.summary || "",
+      tags: issue.themes || [],
+      href: issue.link || "#",
+    });
+    issueCard.classList.add("issue-card");
+    mount.appendChild(issueCard);
   }
-
-  sorted.forEach((p) => {
-    mount.appendChild(
-      makeCard({
-        title: p.title,
-        meta: "", // no dates
-        summary: p.summary,
-        tags: p.tags || [],
-        href: p.link || "#",
-      })
-    );
-  });
-}
-
-
-  sorted.forEach((p) => {
-    mount.appendChild(
-      makeCard({
-        title: p.title,
-        meta: "", // no dates
-        summary: p.summary,
-        tags: p.tags || [],
-        href: p.link || "#",
-      })
-    );
-  });
-}
-
-
-// ------------------------------
-// HOME: latest Monthly Issue teaser
-// ------------------------------
-async function renderHomeIssue(base) {
-  const mount = document.getElementById("home-monthly");
-  if (!mount) return;
-
-  const issues = await fetchJson(base + "data/in_context_issues.json");
-  const sorted = (issues || [])
-    .slice()
-    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-
-  mount.innerHTML = "";
-
-  if (!sorted.length) {
-    const fallback = document.createElement("div");
-    fallback.className = "quiet-card";
-    fallback.innerHTML =
-      '<div class="quiet-card-title">No issues yet.</div><div class="quiet-card-desc">Monthly issues will appear here once published.</div>';
-    mount.appendChild(fallback);
-    return;
-  }
-
-  const issue = sorted[0];
-  const issueCard = makeCard({
-    title: issue.title || "Latest issue",
-    meta: "", // no dates
-    summary: issue.summary || "",
-    tags: issue.themes || [],
-    href: issue.link || "#",
-  });
-  issueCard.classList.add("issue-card");
-  mount.appendChild(issueCard);
-}
-
 
   // ------------------------------
   // IN CONTEXT: Library (search + tag filter)
@@ -486,28 +468,27 @@ async function renderHomeIssue(base) {
       window.history.replaceState({}, "", url.toString());
     }
 
-   function normalize(item) {
-  return {
-    title: item.title || "",
-    summary: item.summary || "",
-    tags: item.tags || item.themes || [],
-    section: item.section || "Blog",
-    date: item.date || item.updated || "",
-    link: item.link || "#",
-  };
-}
+    function normalize(item) {
+      return {
+        title: item.title || "",
+        summary: item.summary || "",
+        tags: item.tags || item.themes || [],
+        section: item.section || "Blog",
+        date: item.date || item.updated || "",
+        link: item.link || "#",
+      };
+    }
 
-const [posts, library, issues] = await Promise.all([
-  fetchJson(base + "data/posts.json").catch(() => []),
-  fetchJson(base + "data/in_context_library.json").catch(() => []),
-  fetchJson(base + "data/in_context_issues.json").catch(() => []),
-]);
+    const [posts, library, issues] = await Promise.all([
+      fetchJson(base + "data/posts.json").catch(() => []),
+      fetchJson(base + "data/in_context_library.json").catch(() => []),
+      fetchJson(base + "data/in_context_issues.json").catch(() => []),
+    ]);
 
-const all = []
-  .concat((posts || []).map((p) => normalize({ ...p, section: p.section || "Blog" })))
-  .concat((library || []).map((p) => normalize({ ...p, section: "Blog" })))
-  .concat((issues || []).map((p) => normalize({ ...p, section: "Blog: Monthly" })));
-
+    const all = []
+      .concat((posts || []).map((p) => normalize({ ...p, section: p.section || "Blog" })))
+      .concat((library || []).map((p) => normalize({ ...p, section: "Blog" })))
+      .concat((issues || []).map((p) => normalize({ ...p, section: "Blog: Monthly" })));
 
     // Populate section filter
     const sectionSet = new Set(all.map((i) => i.section).filter(Boolean));
@@ -612,14 +593,14 @@ const all = []
     .then(() => renderInContextIssues(base))
     .then(() => renderGlobalSearch(base))
     .catch(() => {
-     const ids = [
-  "home-featured",
-  "latest-posts",
-  "home-monthly",
-  "ic-library",
-  "ic-issues",
-  "search-results",
-];
+      const ids = [
+        "home-featured",
+        "latest-posts",
+        "home-monthly",
+        "ic-library",
+        "ic-issues",
+        "search-results",
+      ];
       ids.forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '<p class="muted">Content list unavailable right now.</p>';
