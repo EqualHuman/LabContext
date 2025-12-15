@@ -225,95 +225,98 @@
     });
   }
 
-  // ------------------------------
-  // HOME: featured + latest In Context library items
-  // ------------------------------
-  async function renderHomeLatest(base) {
-    const featuredMount = document.getElementById("latest-featured");
-    const gridMount = document.getElementById("latest-posts");
-    if (!featuredMount && !gridMount) return;
+// ------------------------------
+// HOME: featured + latest Blog library items
+// ------------------------------
+async function renderHomeLatest(base) {
+  const featuredMount = document.getElementById("home-featured");
+  const gridMount = document.getElementById("latest-posts");
+  if (!featuredMount && !gridMount) return;
 
-    const library = await fetchJson(base + "data/in_context_library.json");
+  const library = await fetchJson(base + "data/in_context_library.json");
 
-    const sorted = (library || [])
-      .slice()
-      .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")))
-      .slice(0, 6);
+  const sorted = (library || [])
+    .slice()
+    .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")))
+    .slice(0, 6);
 
-    if (!sorted.length) {
-      if (featuredMount) featuredMount.innerHTML = "";
-      if (gridMount) gridMount.innerHTML = "";
-      if (gridMount) renderEmpty(gridMount, "No posts yet.");
-      return;
-    }
-
-    // Featured
-    if (featuredMount) {
-      featuredMount.innerHTML = "";
-      const p = sorted[0];
-      const featuredCard = makeCard({
-        title: p.title,
-        meta: p.updated ? "Updated " + formatDate(p.updated) : "",
-        summary: p.summary,
-        tags: p.tags || [],
-        href: p.link || "#",
-      });
-      featuredCard.classList.add("post-card-featured");
-      featuredMount.appendChild(featuredCard);
-    }
-
-    // Grid (remaining)
+  if (!sorted.length) {
+    if (featuredMount) featuredMount.innerHTML = "";
     if (gridMount) {
       gridMount.innerHTML = "";
-      const rest = featuredMount ? sorted.slice(1) : sorted.slice(0);
-      rest.forEach((p) => {
-        gridMount.appendChild(
-          makeCard({
-            title: p.title,
-            meta: p.updated ? formatDate(p.updated) : "",
-            summary: p.summary,
-            tags: p.tags || [],
-            href: p.link || "#",
-          })
-        );
-      });
+      renderEmpty(gridMount, "No posts yet.");
     }
+    return;
   }
 
-  // ------------------------------
-  // HOME: latest Monthly Issue teaser
-  // ------------------------------
-  async function renderHomeIssue(base) {
-    const mount = document.getElementById("home-issue");
-    if (!mount) return;
-
-    const issues = await fetchJson(base + "data/in_context_issues.json");
-    const sorted = (issues || [])
-      .slice()
-      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-
-    mount.innerHTML = "";
-
-    if (!sorted.length) {
-      const fallback = document.createElement("div");
-      fallback.className = "quiet-card";
-      fallback.innerHTML =
-        '<div class="quiet-card-title">No issues yet.</div><div class="quiet-card-desc">Monthly issues will appear here once published.</div>';
-      mount.appendChild(fallback);
-      return;
-    }
-
-    const issue = sorted[0];
-    const issueCard = makeCard({
-      title: issue.title || "Latest issue",
-      meta: issue.date ? "Published " + formatDate(issue.date) : "",
-      summary: issue.summary || "",
-      tags: issue.themes || [],
-      href: issue.link || "#",
+  // Featured
+  if (featuredMount) {
+    featuredMount.innerHTML = "";
+    const p = sorted[0];
+    const featuredCard = makeCard({
+      title: p.title,
+      meta: "", // no dates
+      summary: p.summary,
+      tags: p.tags || [],
+      href: p.link || "#",
     });
-    issueCard.classList.add("issue-card");
-    mount.appendChild(issueCard);
+    featuredCard.classList.add("post-card-featured");
+    featuredMount.appendChild(featuredCard);
   }
+
+  // List (remaining)
+  if (gridMount) {
+    gridMount.innerHTML = "";
+    const rest = featuredMount ? sorted.slice(1) : sorted.slice(0);
+    rest.forEach((p) => {
+      gridMount.appendChild(
+        makeCard({
+          title: p.title,
+          meta: "", // no dates
+          summary: p.summary,
+          tags: p.tags || [],
+          href: p.link || "#",
+        })
+      );
+    });
+  }
+}
+
+// ------------------------------
+// HOME: latest Monthly Issue teaser
+// ------------------------------
+async function renderHomeIssue(base) {
+  const mount = document.getElementById("home-monthly");
+  if (!mount) return;
+
+  const issues = await fetchJson(base + "data/in_context_issues.json");
+  const sorted = (issues || [])
+    .slice()
+    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+
+  mount.innerHTML = "";
+
+  if (!sorted.length) {
+    const fallback = document.createElement("div");
+    fallback.className = "quiet-card";
+    fallback.innerHTML =
+      '<div class="quiet-card-title">No issues yet.</div><div class="quiet-card-desc">Monthly issues will appear here once published.</div>';
+    mount.appendChild(fallback);
+    return;
+  }
+
+  const issue = sorted[0];
+  const issueCard = makeCard({
+    title: issue.title || "Latest issue",
+    meta: "", // no dates
+    summary: issue.summary || "",
+    tags: issue.themes || [],
+    href: issue.link || "#",
+  });
+  issueCard.classList.add("issue-card");
+  mount.appendChild(issueCard);
+}
+
 
   // ------------------------------
   // IN CONTEXT: Library (search + tag filter)
@@ -460,27 +463,28 @@
       window.history.replaceState({}, "", url.toString());
     }
 
-    function normalize(item) {
-      return {
-        title: item.title || "",
-        summary: item.summary || "",
-        tags: item.tags || item.themes || [],
-        section: item.section || "In Context",
-        date: item.date || item.updated || "",
-        link: item.link || "#",
-      };
-    }
+   function normalize(item) {
+  return {
+    title: item.title || "",
+    summary: item.summary || "",
+    tags: item.tags || item.themes || [],
+    section: item.section || "Blog",
+    date: item.date || item.updated || "",
+    link: item.link || "#",
+  };
+}
 
-    const [posts, library, issues] = await Promise.all([
-      fetchJson(base + "data/posts.json").catch(() => []),
-      fetchJson(base + "data/in_context_library.json").catch(() => []),
-      fetchJson(base + "data/in_context_issues.json").catch(() => []),
-    ]);
+const [posts, library, issues] = await Promise.all([
+  fetchJson(base + "data/posts.json").catch(() => []),
+  fetchJson(base + "data/in_context_library.json").catch(() => []),
+  fetchJson(base + "data/in_context_issues.json").catch(() => []),
+]);
 
-    const all = []
-      .concat((posts || []).map((p) => normalize({ ...p, section: p.section || "In Context" })))
-      .concat((library || []).map((p) => normalize({ ...p, section: "In Context" })))
-      .concat((issues || []).map((p) => normalize({ ...p, section: "In Context: Monthly" })));
+const all = []
+  .concat((posts || []).map((p) => normalize({ ...p, section: p.section || "Blog" })))
+  .concat((library || []).map((p) => normalize({ ...p, section: "Blog" })))
+  .concat((issues || []).map((p) => normalize({ ...p, section: "Blog: Monthly" })));
+
 
     // Populate section filter
     const sectionSet = new Set(all.map((i) => i.section).filter(Boolean));
@@ -585,14 +589,14 @@
     .then(() => renderInContextIssues(base))
     .then(() => renderGlobalSearch(base))
     .catch(() => {
-      const ids = [
-        "latest-featured",
-        "latest-posts",
-        "home-issue",
-        "ic-library",
-        "ic-issues",
-        "search-results",
-      ];
+     const ids = [
+  "home-featured",
+  "latest-posts",
+  "home-monthly",
+  "ic-library",
+  "ic-issues",
+  "search-results",
+];
       ids.forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '<p class="muted">Content list unavailable right now.</p>';
