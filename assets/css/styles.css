@@ -1032,3 +1032,12 @@ button, input, select, textarea {
     animation: none !important;
   }
 }
+/* Homepage banner logo tuning (SVG) */
+
+.home .home-banner-image{
+  object-fit: contain;
+  padding: 22px;
+  opacity: 0.75;
+  filter: none;
+  transform: none;
+}
