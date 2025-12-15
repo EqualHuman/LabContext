@@ -1148,3 +1148,62 @@ button, input, select, textarea {
     grid-template-columns: 1fr;
   }
 }
+/* ==============================
+   HOMEPAGE INTRO STRIP (small + non-invasive)
+============================== */
+
+.home .home-intro{
+  padding: 10px 0 6px 0;
+}
+
+.home .home-intro-inner{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(18,19,26,0.08);
+}
+
+.home .home-intro-text{
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.home .home-intro-text strong{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.08px;
+  color: var(--text);
+}
+
+.home .home-intro-links{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.home .home-intro-links a{
+  font-family: var(--font-serif);
+  letter-spacing: 0.08px;
+  color: var(--indigo);
+}
+
+.home .home-intro-links a:hover{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Mobile: stack quietly */
+@media (max-width: 640px){
+  .home .home-intro-inner{
+    align-items: flex-start;
+  }
+}
