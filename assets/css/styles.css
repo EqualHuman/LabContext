@@ -1591,3 +1591,109 @@ body.page-home .context-btn{
   body.page-home .site-header .brand-name{ font-size: 26px; }
   body.page-home .site-header .header-inner{ padding-top: 20px; padding-bottom: 14px; }
 }
+/* ==============================
+   HOMEPAGE REFINEMENT: sharpen dark UI
+   (clarity > blur)
+============================== */
+
+/* ---- Reduce global blur, increase contrast ---- */
+body.page-home .panel,
+body.page-home .feature-link,
+body.page-home .context-item{
+  backdrop-filter: blur(6px) !important;
+}
+
+/* ---- Stronger panel edges (modern glass, not fog) ---- */
+body.page-home .panel{
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08),
+    0 20px 50px rgba(0,0,0,0.55) !important;
+}
+
+/* ---- Inner cards slightly lighter than panels ---- */
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card{
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.14),
+    rgba(255,255,255,0.08)
+  ) !important;
+
+  border: 1px solid rgba(255,255,255,0.20) !important;
+}
+
+/* ---- Hover = lift, not glow ---- */
+body.page-home .feature-link:hover,
+body.page-home .context-item:hover,
+body.page-home .post-card:hover{
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.10),
+    0 30px 80px rgba(0,0,0,0.65) !important;
+}
+
+/* ==============================
+   HEADER: make it a masthead
+============================== */
+
+body.page-home .site-header{
+  background:
+    radial-gradient(1200px 300px at 50% 0%, rgba(142,118,204,0.25), transparent 60%),
+    linear-gradient(to bottom, #07070d, #0c0c16) !important;
+
+  border-bottom: 1px solid rgba(255,255,255,0.16) !important;
+}
+
+/* Separate header from content */
+body.page-home main{
+  margin-top: 14px;
+}
+
+/* Nav pills less glassy, more precise */
+body.page-home .site-header .nav-link{
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+body.page-home .site-header .nav-link:hover{
+  background: rgba(255,255,255,0.14) !important;
+}
+
+/* ==============================
+   HIERARCHY: make Quick Finder the anchor
+============================== */
+
+body.page-home .panel-qf{
+  background:
+    radial-gradient(900px 280px at 20% 0%, rgba(142,118,204,0.35), transparent 60%),
+    linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.10)) !important;
+
+  border-color: rgba(180,155,255,0.35) !important;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.14),
+    0 40px 120px rgba(0,0,0,0.75) !important;
+}
+
+/* Slightly larger title for visual gravity */
+body.page-home .panel-qf .panel-title{
+  font-size: 34px !important;
+}
+
+/* ==============================
+   TEXT CLARITY on dark
+============================== */
+
+body.page-home h1,
+body.page-home h2,
+body.page-home h3{
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+
+body.page-home .panel-title{
+  color: rgba(255,255,255,0.98) !important;
+}
+
+body.page-home .panel-subtitle{
+  color: rgba(255,255,255,0.70) !important;
+}
