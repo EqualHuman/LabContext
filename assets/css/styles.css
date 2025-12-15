@@ -1138,3 +1138,41 @@ h1,h2,h3,
     grid-template-columns: 1fr !important;
   }
 }
+/* ==============================
+   FIX: Header centering (remove double container padding)
+============================== */
+.site-header .container.header-inner{
+  /* container already provides max-width + side padding */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Nudge logo/text alignment (removes the slight baseline shift) */
+.site-header .brand-logo{
+  transform: none !important;
+}
+
+/* ==============================
+   FIX: “2 columns” for feature links (fill by columns)
+   - With 3 items, this places the 3rd in the top-right instead of bottom-left
+============================== */
+.page-home .feature-links{
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(2, auto) !important;
+  grid-auto-flow: column !important;
+  gap: 10px !important;
+}
+
+/* Ensure no leftover spanning rules interfere */
+.page-home .feature-links .feature-link{
+  grid-column: auto !important;
+}
+
+/* Mobile: back to a normal single column flow */
+@media (max-width: 560px){
+  .page-home .feature-links{
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+    grid-auto-flow: row !important;
+  }
+}
