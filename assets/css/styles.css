@@ -1008,4 +1008,38 @@ h1,h2,h3,
 .header-search-btn:hover{
   color: #12131a; /* solid text, same as other buttons */
 }
+/* ==============================
+   Monthly Newsletters: signup form styling
+============================== */
+.page-home .newsletter-signup{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.page-home .newsletter-input{
+  width: 100%;
+}
+
+.page-home .newsletter-btn{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.page-home .newsletter-note{
+  grid-column: 1 / -1;
+  margin: 2px 0 0 0;
+}
+
+/* Stack on small screens */
+@media (max-width: 520px){
+  .page-home .newsletter-signup{
+    grid-template-columns: 1fr;
+  }
+  .page-home .newsletter-btn{
+    width: 100%;
+  }
+}
 
