@@ -922,3 +922,33 @@ h1, h2, h3,
   border-color: var(--accent-pink);
   box-shadow: 0 0 0 3px rgba(231,127,178,0.22);
 }
+/* ==============================
+   QUICK FIXES
+   - add comfortable header gutters
+   - soften page background (not stark white)
+============================== */
+
+/* Give the header real left/right breathing room (even if container padding got overridden) */
+.site-header .header-inner{
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+}
+
+/* If the very first item still feels tight, add a little extra nudge */
+.site-header .brand{
+  margin-left: 6px;
+}
+
+/* Not-stark background: warm lavender paper wash (no grey, no black) */
+:root{
+  --page-bg: #f6f1ff;     /* lavender paper */
+  --page-wash: #f3e9ff;   /* soft bloom */
+}
+
+body{
+  background:
+    radial-gradient(1200px 700px at 18% -10%, rgba(90,63,163,0.12), transparent 62%),
+    radial-gradient(900px 600px at 88% 0%, rgba(231,127,178,0.10), transparent 60%),
+    linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.0) 55%),
+    var(--page-bg) !important;
+}
