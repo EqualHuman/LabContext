@@ -8,23 +8,22 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
-<body class="home">
+<body class="page-home">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Shared header injection -->
   <header class="site-header"></header>
 
   <main id="main">
-
-
     <!-- DASHBOARD -->
     <section class="home-dash" aria-label="Homepage dashboard">
       <div class="container">
         <div class="home-grid">
-          <!-- LEFT: Quick Finder + Explore -->
+
+          <!-- LEFT -->
           <section class="home-left" aria-label="Quick finder and navigation">
-            <!-- Quick Finder (interactive) -->
-            <div class="panel panel-accent">
+            <!-- Quick Finder -->
+            <section class="panel panel-accent" aria-label="Quick Finder">
               <div class="panel-head">
                 <h1 class="panel-title">Quick Finder</h1>
                 <p class="panel-subtitle">Search, or tap a topic to jump into the site.</p>
@@ -54,117 +53,100 @@
               <details class="home-details">
                 <summary class="home-summary">What does the search include?</summary>
                 <div class="home-details-body">
-                  Search looks across titles, summaries, tags, and sections. If you don’t get what you want,
-                  try a shorter keyword (example: “heme” or “range”).
+                  LabContext search looks across In Context posts, Education pages, and Infographics (as they’re added).
+                  If you don’t find what you need yet, it may not be published—check back as the library grows.
                 </div>
               </details>
+            </section>
+
+            <!-- Exam Prep + Education Concepts -->
+            <div class="home-row" aria-label="Primary navigation tiles">
+              <section class="panel panel-accent" aria-label="Exam Prep">
+                <div class="panel-head">
+                  <div class="row-between">
+                    <div>
+                      <h2 class="panel-title">Exam Prep</h2>
+                      <p class="panel-subtitle">High-yield review built for calm, consistent progress.</p>
+                    </div>
+                    <a class="panel-link" href="#" data-href="testing/">Testing Hub</a>
+                  </div>
+                </div>
+
+                <div class="feature-links">
+                  <a class="feature-link" href="#" data-href="testing/">
+                    <span class="feature-link-title">BOC Testing Hub</span>
+                    <span class="feature-link-desc">Blueprints, strategy, and “why this answer wins.”</span>
+                  </a>
+
+                  <a class="feature-link" href="#" data-href="testing/practice/">
+                    <span class="feature-link-title">Practice Sets</span>
+                    <span class="feature-link-desc">Pattern-based questions (no pressure, no scoring).</span>
+                  </a>
+
+                  <a class="feature-link" href="#" data-href="testing/checklists/">
+                    <span class="feature-link-title">Quick Checklists</span>
+                    <span class="feature-link-desc">What to know before you move on.</span>
+                  </a>
+                </div>
+              </section>
+
+              <section class="panel" aria-label="Education Concepts">
+                <div class="panel-head">
+                  <div class="row-between">
+                    <div>
+                      <h2 class="panel-title">Education Concepts</h2>
+                      <p class="panel-subtitle">Build the mental models that make the details feel reasonable.</p>
+                    </div>
+                    <a class="panel-link" href="#" data-href="education/">Browse</a>
+                  </div>
+                </div>
+
+                <div class="feature-links">
+                  <a class="feature-link" href="#" data-href="education/mechanisms/">
+                    <span class="feature-link-title">Mechanisms</span>
+                    <span class="feature-link-desc">“Why it happens” explanations across departments.</span>
+                  </a>
+
+                  <a class="feature-link" href="#" data-href="education/concepts/">
+                    <span class="feature-link-title">Concepts by Department</span>
+                    <span class="feature-link-desc">Heme, Chem, Coag, Micro, BB… with cross-links.</span>
+                  </a>
+
+                  <a class="feature-link" href="#" data-href="education/anatomy-physiology/">
+                    <span class="feature-link-title">Anatomy &amp; Physiology</span>
+                    <span class="feature-link-desc">The body-side context that makes labs click.</span>
+                  </a>
+                </div>
+              </section>
             </div>
 
-<section class="panel panel-accent">
-  <div class="panel-head">
-    <div class="row-between">
-      <div>
-        <h2 class="panel-title">Exam Prep</h2>
-        <p class="panel-subtitle">High-yield review built for calm, consistent progress.</p>
-      </div>
-      <a class="panel-link" href="#" data-href="testing/">Testing Hub</a>
-    </div>
-  </div>
+            <!-- Infographic of the Week -->
+            <section class="panel panel-spotlight" aria-label="Infographic of the Week">
+              <div class="panel-head">
+                <div class="row-between">
+                  <div>
+                    <h2 class="panel-title">Infographic of the Week</h2>
+                    <p class="panel-subtitle">One visual explanation—small, useful, and current.</p>
+                  </div>
+                  <a class="panel-link" href="#" data-href="infographics/">All infographics</a>
+                </div>
+              </div>
 
-  <div class="feature-links">
-    <a class="feature-link" href="#" data-href="testing/">
-      <span class="feature-link-title">BOC Testing Hub</span>
-      <span class="feature-link-desc">Blueprints, strategy, and “why this answer wins.”</span>
-    </a>
+              <a class="spotlight-card" href="#" data-href="infographics/">
+                <span class="spotlight-kicker">This week’s visual</span>
+                <span class="spotlight-title">Hemolysis: what it changes (and what it doesn’t)</span>
+                <span class="spotlight-desc">Interference patterns, common myths, and when recollection matters.</span>
+              </a>
+            </section>
+          </section>
 
-    <a class="feature-link" href="#" data-href="testing/practice/">
-      <span class="feature-link-title">Practice Sets</span>
-      <span class="feature-link-desc">Pattern-based questions (no pressure, no scoring).</span>
-    </a>
-
-    <a class="feature-link" href="#" data-href="testing/checklists/">
-      <span class="feature-link-title">Quick Checklists</span>
-      <span class="feature-link-desc">What to know before you move on.</span>
-    </a>
-  </div>
-</section>
-
-<section class="panel">
-  <div class="panel-head">
-    <div class="row-between">
-      <div>
-        <h2 class="panel-title">Education Concepts</h2>
-        <p class="panel-subtitle">Build the mental models that make the details feel reasonable.</p>
-      </div>
-      <a class="panel-link" href="#" data-href="education/">Browse</a>
-    </div>
-  </div>
-
-  <div class="feature-links">
-    <a class="feature-link" href="#" data-href="education/mechanisms/">
-      <span class="feature-link-title">Mechanisms</span>
-      <span class="feature-link-desc">“Why it happens” explanations across departments.</span>
-    </a>
-
-    <a class="feature-link" href="#" data-href="education/concepts/">
-      <span class="feature-link-title">Concepts by Department</span>
-      <span class="feature-link-desc">Heme, Chem, Coag, Micro, BB… with cross-links.</span>
-    </a>
-
-    <a class="feature-link" href="#" data-href="education/anatomy-physiology/">
-      <span class="feature-link-title">Anatomy &amp; Physiology</span>
-      <span class="feature-link-desc">The body-side context that makes labs click.</span>
-    </a>
-  </div>
-</section>
-<section class="home-features container">
-  <div class="feature-tile">
-    <h3>Exam Prep</h3>
-    <p>
-      High-yield review built for calm, consistent progress.
-      Practice patterns, explanations, and checklists — no pressure.
-    </p>
-    <a href="/testing/">Explore Testing Hub →</a>
-  </div>
-
-  <div class="feature-tile">
-    <h3>Education Concepts</h3>
-    <p>
-      Build mental models that make lab details feel reasonable.
-      Mechanisms, departments, and cross-links.
-    </p>
-    <a href="/education/">Browse Concepts →</a>
-  </div>
-</section>
-
-<section class="panel panel-spotlight">
-  <div class="panel-head">
-    <div class="row-between">
-      <div>
-        <h2 class="panel-title">Infographic of the Week</h2>
-        <p class="panel-subtitle">One visual explanation—small, useful, and current.</p>
-      </div>
-      <a class="panel-link" href="#" data-href="infographics/">All infographics</a>
-    </div>
-  </div>
-
-  <a class="spotlight-card" href="#" data-href="infographics/">
-    <span class="spotlight-kicker">This week’s visual</span>
-    <span class="spotlight-title">Hemolysis: what it changes (and what it doesn’t)</span>
-    <span class="spotlight-desc">Interference patterns, common myths, and when recollection matters.</span>
-  </a>
-</section>
-
-
-          <!-- RIGHT: Monthly spotlight + Latest + “Featured” (interactive blocks) -->
+          <!-- RIGHT -->
           <aside class="home-right" aria-label="Spotlights and latest content">
-            <!-- Monthly newsletter / issue column piece -->
-            <div class="panel panel-spotlight" aria-label="Monthly column">
+            <!-- Monthly -->
+            <section class="panel panel-spotlight" aria-label="Monthly column">
               <div class="panel-head">
                 <h2 class="panel-title">Monthly</h2>
-                <p class="panel-subtitle">
-                  One monthly update highlighting what’s new, what’s clarified, and what matters.
-                </p>
+                <p class="panel-subtitle">One monthly update highlighting what’s new, what’s clarified, and what matters.</p>
               </div>
 
               <div id="home-monthly" class="monthly-wrap" aria-live="polite">
@@ -180,13 +162,13 @@
               </details>
 
               <div class="spotlight-actions">
-                <a class="button button-ghost" href="in-context/monthly/">View monthly issues</a>
-                <a class="button button-ghost" href="newsletter/">Newsletter details</a>
+                <a class="button button-ghost" href="#" data-href="in-context/monthly/">View monthly issues</a>
+                <a class="button button-ghost" href="#" data-href="newsletter/">Newsletter details</a>
               </div>
-            </div>
+            </section>
 
-            <!-- Featured (rotates from library) -->
-            <div class="panel" aria-label="Featured">
+            <!-- Featured -->
+            <section class="panel" aria-label="Featured">
               <div class="panel-head">
                 <h2 class="panel-title">Featured</h2>
                 <p class="panel-subtitle">A highlighted topic from In Context.</p>
@@ -195,16 +177,16 @@
               <div id="home-featured" class="featured-wrap" aria-live="polite">
                 <div class="muted tiny">Loading featured…</div>
               </div>
-            </div>
+            </section>
 
             <!-- Latest -->
-            <div class="panel" aria-label="Latest in In Context">
+            <section class="panel" aria-label="Latest in In Context">
               <div class="panel-head row-between">
                 <div>
                   <h2 class="panel-title">Latest in In Context</h2>
                   <p class="panel-subtitle">Most recently updated posts.</p>
                 </div>
-                <a class="panel-link" href="in-context/">View all</a>
+                <a class="panel-link" href="#" data-href="in-context/">View all</a>
               </div>
 
               <div id="latest-posts" class="latest-list" aria-live="polite">
@@ -212,8 +194,9 @@
                   <p class="muted">Enable JavaScript to see the latest posts list.</p>
                 </noscript>
               </div>
-            </div>
+            </section>
           </aside>
+
         </div>
       </div>
     </section>
@@ -224,155 +207,28 @@
 
   <script src="assets/js/main.js"></script>
 
-  <!-- Homepage-only interactions -->
+  <!-- Homepage wiring (search + chips) -->
   <script>
-    (function () {
-      // ---- Search routing ----
-      var form = document.getElementById("home-search");
-      var input = document.getElementById("home-search-input");
-
-      function goSearch(q) {
-        q = (q || "").trim();
-        if (!q) return;
-        window.location.href = "search/?q=" + encodeURIComponent(q);
-      }
-
+    (function(){
+      const base = "./";
+      const form = document.getElementById("home-search");
+      const input = document.getElementById("home-search-input");
       if (form && input) {
-        form.addEventListener("submit", function (e) {
+        form.addEventListener("submit", function(e){
           e.preventDefault();
-          goSearch(input.value);
+          const q = (input.value || "").trim();
+          if (!q) return;
+          window.location.href = base + "search/?q=" + encodeURIComponent(q);
         });
       }
 
-      document.querySelectorAll(".home-chips .chip[data-q]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var q = btn.getAttribute("data-q") || "";
-          if (input) input.value = q;
-          goSearch(q);
-        });
-      });
-
-      // ---- Intent recommender ----
-      var intentBox = document.getElementById("intent-result");
-
-      var intents = {
-        meaning: {
-          title: "Start in In Context",
-          desc: "Best for interpreting what something means and why it happens. (Then go deeper in Education if needed.)",
-          href: "in-context/",
-          label: "Open In Context"
-        },
-        concept: {
-          title: "Start in Education",
-          desc: "Best for learning the underlying concept and how it connects across departments.",
-          href: "education/",
-          label: "Open Education"
-        },
-        visual: {
-          title: "Start in Infographics",
-          desc: "Best for visual reference and shareable summaries.",
-          href: "infographics/",
-          label: "Open Infographics"
-        },
-        update: {
-          title: "Start with the Monthly issue",
-          desc: "Best for monthly highlights, announcements, and curated updates.",
-          href: "in-context/monthly/",
-          label: "Open Monthly"
-        }
-      };
-
-      function setIntent(key) {
-        var data = intents[key];
-        if (!intentBox || !data) return;
-
-        intentBox.innerHTML =
-          '<div class="intent-result-title">' + data.title + '</div>' +
-          '<div class="intent-result-desc">' + data.desc + '</div>' +
-          '<div class="intent-result-actions">' +
-            '<a class="button button-ghost" href="' + data.href + '">' + data.label + '</a>' +
-          '</div>';
-
-        document.querySelectorAll(".intent").forEach(function (b) {
-          b.classList.toggle("is-selected", b.getAttribute("data-intent") === key);
-        });
-      }
-
-      document.querySelectorAll(".intent").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          setIntent(btn.getAttribute("data-intent"));
+      document.querySelectorAll(".home-chips [data-q]").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          const q = (btn.getAttribute("data-q") || "").trim();
+          if (!q) return;
+          window.location.href = base + "search/?q=" + encodeURIComponent(q);
         });
       });
-
-      // ---- Monthly issue spotlight ----
-      var monthlyMount = document.getElementById("home-monthly");
-      if (monthlyMount) {
-        fetch("data/in_context_issues.json", { cache: "no-store" })
-          .then(function (r) { return r.ok ? r.json() : []; })
-          .then(function (issues) {
-            if (!issues || !issues.length) {
-              monthlyMount.innerHTML = '<div class="muted">No monthly issues posted yet.</div>';
-              return;
-            }
-
-            issues.sort(function (a, b) {
-              return String(b.date || "").localeCompare(String(a.date || ""));
-            });
-
-            var latest = issues[0] || {};
-            var title = latest.title || "Latest issue";
-            var summary = latest.summary || "";
-            var link = latest.link || "in-context/monthly/";
-
-            monthlyMount.innerHTML =
-              '<a class="monthly-card" href="' + link + '">' +
-                '<div class="monthly-kicker">Latest issue</div>' +
-                '<div class="monthly-title">' + title + '</div>' +
-                (summary ? '<div class="monthly-summary">' + summary + '</div>' : '') +
-              '</a>';
-          })
-          .catch(function () {
-            monthlyMount.innerHTML = '<div class="muted">Monthly issue unavailable right now.</div>';
-          });
-      }
-
-      // ---- Featured (rotate from library) ----
-      var featuredMount = document.getElementById("home-featured");
-      if (featuredMount) {
-        fetch("data/in_context_library.json", { cache: "no-store" })
-          .then(function (r) { return r.ok ? r.json() : []; })
-          .then(function (library) {
-            if (!library || !library.length) {
-              featuredMount.innerHTML = '<div class="muted">No featured content yet.</div>';
-              return;
-            }
-
-            // Sort newest first
-            var sorted = library.slice().sort(function (a, b) {
-              return String(b.updated || "").localeCompare(String(a.updated || ""));
-            });
-
-            // Pick one deterministically per day (no flashing randomness)
-            var now = new Date();
-            var key = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-            var idx = 0;
-            for (var i = 0; i < key.length; i++) idx = (idx + key.charCodeAt(i)) % sorted.length;
-
-            var item = sorted[idx] || sorted[0] || {};
-            var title = item.title || "Featured";
-            var summary = item.summary || "";
-            var link = item.link || "in-context/";
-
-            featuredMount.innerHTML =
-              '<a class="featured-card" href="' + link + '">' +
-                '<div class="featured-title">' + title + '</div>' +
-                (summary ? '<div class="featured-summary">' + summary + '</div>' : '') +
-              '</a>';
-          })
-          .catch(function () {
-            featuredMount.innerHTML = '<div class="muted">Featured unavailable right now.</div>';
-          });
-      }
     })();
   </script>
 </body>
