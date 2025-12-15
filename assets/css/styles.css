@@ -1809,3 +1809,190 @@ body.page-home .chip{
   border: 1px solid rgba(200,180,255,0.32) !important;
   color: rgba(240,235,255,0.95) !important;
 }
+/* ==============================
+   HOMEPAGE: hovering glass (no borders, less purple, lighter)
+   Paste at END of styles.css
+============================== */
+
+body.page-home{
+  /* Cooler, less-purple ambient background */
+  background:
+    radial-gradient(1200px 700px at 22% -10%, rgba(120, 140, 255, 0.12), transparent 60%),
+    radial-gradient(900px 600px at 82% 0%, rgba(155, 120, 255, 0.10), transparent 62%),
+    linear-gradient(to bottom, #07070d, #0c0c16 40%, #0b0b12);
+  color: rgba(255,255,255,0.92);
+}
+
+/* Remove “boxed” feel: reduce density + lighten type */
+body.page-home .panel-subtitle,
+body.page-home .context-desc,
+body.page-home .quiet-card-desc,
+body.page-home .post-summary{
+  color: rgba(255,255,255,0.68) !important;
+}
+
+/* ==============================
+   FLOATING GLASS SURFACES
+   - no borders
+   - subtle blur
+   - soft highlight edge (not a border)
+============================== */
+
+body.page-home .panel,
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card,
+body.page-home .quiet-card{
+  border: none !important;                 /* kill borders */
+  box-shadow: none !important;             /* reset then re-add below */
+  background: rgba(255,255,255,0.08) !important; /* neutral glass */
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  position: relative;
+}
+
+/* Soft “glass rim” highlight (feels like floating edge) */
+body.page-home .panel::before,
+body.page-home .feature-link::before,
+body.page-home .context-item::before,
+body.page-home .post-card::before,
+body.page-home .quiet-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+  opacity: 1;
+}
+
+/* Elevation: lighter, airier (no “heavy slab” shadow) */
+body.page-home .panel{
+  background: rgba(255,255,255,0.07) !important;
+  box-shadow:
+    0 12px 32px rgba(0,0,0,0.40),
+    0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+/* Inner tiles slightly lighter than the panels */
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card,
+body.page-home .quiet-card{
+  background: rgba(255,255,255,0.09) !important;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.34),
+    0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+/* Hover: gentle lift (modern) */
+body.page-home .panel-link:hover,
+body.page-home .feature-link:hover,
+body.page-home .context-item:hover,
+body.page-home .post-card:hover,
+body.page-home .quiet-card:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px rgba(0,0,0,0.52),
+    0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+/* Keep static Advice card from lifting */
+body.page-home .context-item-static:hover{
+  transform: none;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.34),
+    0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+/* ==============================
+   QUICK FINDER: just a touch brighter (not purple)
+============================== */
+body.page-home .panel-qf{
+  background: rgba(255,255,255,0.10) !important;
+  box-shadow:
+    0 18px 52px rgba(0,0,0,0.55),
+    0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+/* Tone down headings a hair so panels feel less “loud” */
+body.page-home h1.panel-title{
+  font-size: 30px !important;
+}
+body.page-home .panel-title{
+  color: rgba(255,255,255,0.96) !important;
+}
+
+/* ==============================
+   NAV PILLS: make them glass, not purple
+============================== */
+body.page-home .site-header .nav-link{
+  background: rgba(255,255,255,0.08) !important;
+  border: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 10px 24px rgba(0,0,0,0.38);
+}
+
+body.page-home .site-header .nav-link:hover{
+  background: rgba(255,255,255,0.12) !important;
+}
+
+body.page-home .site-header .nav-link.is-active{
+  background: rgba(255,255,255,0.14) !important;
+}
+
+/* ==============================
+   INPUTS / CHIPS: neutral glass, no purple fill
+============================== */
+body.page-home .input{
+  background: rgba(255,255,255,0.10) !important;
+  border: none !important;
+  color: rgba(255,255,255,0.92) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 26px rgba(0,0,0,0.34);
+}
+
+body.page-home .input::placeholder{
+  color: rgba(255,255,255,0.62);
+}
+
+body.page-home .chip{
+  background: rgba(255,255,255,0.09) !important;
+  border: none !important;
+  color: rgba(255,255,255,0.88) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 22px rgba(0,0,0,0.32);
+}
+
+body.page-home .chip:hover{
+  background: rgba(255,255,255,0.12) !important;
+  transform: translateY(-1px);
+}
+
+/* Primary button stays purple as the accent (single source of purple) */
+body.page-home .button,
+body.page-home .panel-link{
+  background: rgba(142,118,204,0.95) !important;
+  border: none !important;
+  color: #0b0b12 !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.52);
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce){
+  body.page-home .panel-link:hover,
+  body.page-home .feature-link:hover,
+  body.page-home .context-item:hover,
+  body.page-home .post-card:hover,
+  body.page-home .quiet-card:hover,
+  body.page-home .chip:hover{
+    transform: none;
+  }
+}
