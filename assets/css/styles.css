@@ -952,3 +952,115 @@ body{
     linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.0) 55%),
     var(--page-bg) !important;
 }
+/* =====================================================
+   GLOBAL COLOR SOFTENING PASS
+   - less purple saturation
+   - warmer paper background
+   - no grey / no black
+===================================================== */
+
+/* --- Adjust core tones (same purple, calmer energy) --- */
+:root{
+  /* Slightly warmer ink (still purple-based) */
+  --ink-main: #241d3a;
+  --ink-muted: #756a92;
+
+  /* Brand purple: same hue, lower saturation */
+  --brand-purple: #5a4a9c;        /* was louder */
+  --brand-purple-soft: #f0ebfb;   /* more cream, less lavender */
+
+  /* Pink stays as accent, slightly softened */
+  --accent-pink: #e17fb0;
+  --accent-pink-soft: #fdeef5;
+
+  /* Background paper (key change) */
+  --page-bg: #fbf9f6;             /* warm cream */
+  --page-wash: #f3edf8;           /* soft blush-lavender */
+}
+
+/* --- Page background: reduce purple fog, add warmth --- */
+body{
+  background:
+    radial-gradient(1200px 700px at 18% -10%, rgba(90,63,163,0.08), transparent 60%),
+    radial-gradient(900px 600px at 88% 0%, rgba(225,127,176,0.08), transparent 60%),
+    linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(255,255,255,0.35)),
+    var(--page-bg) !important;
+}
+
+/* --- Panels: less lavender fill, more neutral light --- */
+.panel{
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #faf8ff
+  ) !important;
+
+  box-shadow:
+    0 8px 28px rgba(90,63,163,0.07) !important;
+}
+
+/* Quick Finder keeps subtle emphasis (but lighter) */
+.panel-qf{
+  background:
+    radial-gradient(
+      600px 200px at 10% 0%,
+      rgba(225,127,176,0.14),
+      transparent 60%
+    ),
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #faf6ff
+    ) !important;
+}
+
+/* --- Reduce purple “wash” on hub cards --- */
+.hub-card{
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #f8f5ff
+    ) !important;
+}
+
+/* --- Pills & chips: calmer pastel, not candy --- */
+.chip{
+  background: #f2edfb !important;
+  color: var(--brand-purple) !important;
+}
+
+.chip:hover{
+  background: #e8e1f8 !important;
+}
+
+/* --- Nav pills: lighter + more paper-like --- */
+.nav-link{
+  background: transparent !important;
+  color: var(--ink-main) !important;
+}
+
+.nav-link:hover,
+.nav-link.is-active{
+  background: var(--brand-purple-soft) !important;
+  color: var(--brand-purple) !important;
+}
+
+/* --- Buttons: keep contrast, reduce saturation --- */
+.button{
+  background: #5a4a9c !important;
+}
+
+.button-ghost{
+  background: var(--accent-pink-soft) !important;
+  color: #7a3356 !important;
+}
+
+/* --- Hero text contrast tuning --- */
+.hero-title{
+  color: var(--ink-main) !important;
+}
+
+.hero-subtitle{
+  color: var(--ink-muted) !important;
+}
