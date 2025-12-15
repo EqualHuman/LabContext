@@ -154,29 +154,42 @@
   </section>
 
   <!-- Monthly -->
-  <section class="panel panel-spotlight" aria-label="Monthly column">
-    <div class="panel-head">
-      <h2 class="panel-title">Monthly</h2>
-      <p class="panel-subtitle">One monthly update highlighting what’s new, what’s clarified, and what matters.</p>
-    </div>
-
-    <div id="home-monthly" class="monthly-wrap" aria-live="polite">
-      <div class="muted tiny">Loading monthly issue…</div>
-    </div>
-
-    <details class="home-details">
-      <summary class="home-summary">What’s included?</summary>
-      <div class="home-details-body">
-        A short overview, links to new content, and any special notices.
-        Frequency is monthly (no rapid posting cadence).
+<section class="panel panel-spotlight" aria-label="Monthly newsletters">
+  <div class="panel-head">
+    <div class="row-between">
+      <div>
+        <h2 class="panel-title">Monthly Newsletters</h2>
+        <p class="panel-subtitle">
+          One monthly update highlighting what’s new, what’s clarified, and what matters.
+        </p>
       </div>
-    </details>
-
-    <div class="spotlight-actions">
-      <a class="button button-ghost" href="#" data-href="in-context/monthly/">View monthly issues</a>
-      <a class="button button-ghost" href="#" data-href="newsletter/">Newsletter details</a>
+      <a class="panel-link" href="#" data-href="in-context/monthly/">Browse</a>
     </div>
-  </section>
+  </div>
+
+  <div id="home-monthly" class="monthly-wrap" aria-live="polite">
+    <div class="muted tiny">Loading latest newsletter…</div>
+  </div>
+
+  <form class="newsletter-signup" id="newsletter-signup" action="#" method="post" aria-label="Newsletter sign-up">
+    <label class="sr-only" for="newsletter-email">Email address</label>
+    <input
+      class="input newsletter-input"
+      id="newsletter-email"
+      name="email"
+      type="email"
+      inputmode="email"
+      autocomplete="email"
+      placeholder="Enter your email"
+      required
+    />
+    <button class="button newsletter-btn" type="submit">Sign up</button>
+    <p class="newsletter-note muted tiny">
+      Monthly only. No spam. Unsubscribe anytime.
+    </p>
+  </form>
+</section>
+
 
   <!-- Latest -->
   <section class="panel" aria-label="Latest in Blog">
@@ -231,5 +244,22 @@
       });
     })();
   </script>
+  <script>
+  (function(){
+    const form = document.getElementById("newsletter-signup");
+    if (!form) return;
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const input = document.getElementById("newsletter-email");
+      const email = (input && input.value || "").trim();
+      if (!email) return;
+
+      alert("Thanks — you’re on the list!");
+      form.reset();
+    });
+  })();
+</script>
+
 </body>
 </html>
