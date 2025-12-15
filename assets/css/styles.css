@@ -1068,22 +1068,6 @@ body{
   overflow: hidden;
 }
 
-/* One consistent “soft wash” at the top of EVERY panel (not sporadic) */
-.home .panel::before{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:56px;
-  background: linear-gradient(
-    to bottom,
-    rgba(237,231,243,0.55),
-    rgba(255,255,255,0)
-  );
-  pointer-events:none;
-}
-
 /* Remove any special-case panel gradients so nothing looks random */
 .home .panel-accent,
 .home .panel-spotlight{
@@ -1211,4 +1195,89 @@ body{
     margin-left: 0;
     margin-right: 0;
   }
+}
+/* ==============================
+   HOMEPAGE PANEL HEADERS — anchored & calm
+============================== */
+
+/* Panels feel more distinct vertically */
+.home .panel{
+  background: rgba(255,255,255,0.90);
+  box-shadow: 0 12px 26px rgba(18,19,26,0.06);
+}
+
+/* Header layout: title + optional link on same baseline */
+.home .panel-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* Header pill becomes smaller + grounded */
+.home .panel-title{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(237,231,243,0.70);
+  border: 1px solid rgba(85,64,121,0.18);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* Subtitle sits UNDER header, left-aligned (much calmer) */
+.home .panel-subtitle{
+  margin-top: 8px;
+  max-width: 60ch;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(18,19,26,0.66);
+}
+
+/* Header links become quiet pills */
+.home .panel-link{
+  font-size: 13.5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(18,19,26,0.10);
+  color: var(--indigo);
+}
+
+.home .panel-link:hover{
+  background: rgba(237,231,243,0.45);
+  border-color: rgba(85,64,121,0.16);
+}
+
+/* Section headers (Latest, Featured, etc.) match panels */
+.home .section-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.home .section-title{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(237,231,243,0.70);
+  border: 1px solid rgba(85,64,121,0.18);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* Restore visual balance between columns */
+.home .home-grid{
+  align-items: start;
+}
+
+/* Slight vertical breathing room between left panels */
+.home .home-left{
+  gap: 20px;
 }
