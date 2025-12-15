@@ -887,4 +887,50 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     width: min(100%, 320px);
   }
 }
+/* ==============================
+   Header layout stabilization
+   Prevent nav wrapping (About dropping)
+============================== */
+
+/* Keep right side aligned and predictable */
+.header-right{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: nowrap; /* IMPORTANT */
+}
+
+/* Keep nav capsule on one line */
+.nav{
+  flex-wrap: nowrap;           /* stop internal wrapping */
+  white-space: nowrap;
+}
+
+/* Slightly reduce nav link width to help fit */
+.nav-link{
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+/* Allow search to shrink first if needed */
+.header-search{
+  flex-shrink: 1;
+}
+
+.header-search-input{
+  width: clamp(160px, 20vw, 220px);
+}
+
+/* Mobile: allow wrap again intentionally */
+@media (max-width: 820px){
+  .header-right{
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav{
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
 
