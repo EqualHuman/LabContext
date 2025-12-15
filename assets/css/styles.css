@@ -1291,3 +1291,40 @@ button, input, select, textarea {
   letter-spacing: 0.06px;
   color: var(--indigo);
 }
+/* ==============================
+   HOMEPAGE NEWSLETTER (quiet inline)
+============================== */
+
+.home .home-newsletter{
+  padding: 6px 0 14px 0;
+}
+
+.home .home-newsletter-text{
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(18,19,26,0.75);
+  background: rgba(237,231,243,0.55);
+  border: 1px solid rgba(85,64,121,0.16);
+  border-radius: 14px;
+}
+
+.home .home-newsletter-text strong{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: var(--indigo);
+}
+
+.home .home-newsletter-text a{
+  margin-left: 6px;
+  color: var(--indigo);
+  font-family: var(--font-serif);
+  letter-spacing: 0.06px;
+}
+
+.home .home-newsletter-text a:hover{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
