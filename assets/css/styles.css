@@ -1233,18 +1233,6 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   border-color: rgba(85,64,121,0.14);
 }
 
-/* Give Search a tiny “tool” feel without a button look */
-.nav-link-search{
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(18,19,26,0.10);
-}
-
-.nav-link-search:hover{
-  background: rgba(255,255,255,0.75);
-  border-color: rgba(18,19,26,0.14);
-}
 
 /* Mobile: stack nav under brand neatly */
 @media (max-width: 940px){
@@ -1277,34 +1265,10 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     gap: 16px;
   }
 
-  /* Keep Search from dropping */
-  .nav-link-search{
-    margin-left: 10px;
-  }
+ 
 }
 
-/* Make Search less "button", more "utility" */
-.nav-link-search{
-  padding: 6px 8px;
-  border-radius: 10px; /* not a pill */
-  background: transparent;
-  border: 1px solid rgba(18,19,26,0.10);
-  color: rgba(18,19,26,0.72);
-}
 
-/* Hover stays subtle */
-.nav-link-search:hover{
-  background: rgba(237,231,243,0.28);
-  border-color: rgba(18,19,26,0.12);
-  color: rgba(18,19,26,0.92);
-}
-
-/* If active, keep it consistent with other active states */
-.nav-link-search.is-active{
-  background: rgba(85,64,121,0.10);
-  border-color: rgba(85,64,121,0.14);
-  color: var(--indigo);
-}
 /* ==============================
    Buttons: quiet, cohesive, editorial
 ============================== */
@@ -1399,28 +1363,7 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   color: var(--indigo);
 }
 
-/* Search should NOT be a different button system */
-.nav-link-search{
-  padding: 6px 10px;
-  border-radius: 10px;
-  background: transparent;
-  border: 1px solid rgba(18,19,26,0.10);
-  color: rgba(18,19,26,0.68);
-}
 
-/* Search hover stays calm */
-.nav-link-search:hover{
-  background: rgba(237,231,243,0.30);
-  border-color: rgba(18,19,26,0.14);
-  color: rgba(18,19,26,0.90);
-}
-
-/* Active Search (on search page) */
-.nav-link-search.is-active{
-  background: rgba(85,64,121,0.12);
-  border-color: rgba(85,64,121,0.20);
-  color: var(--indigo);
-}
 /* ==============================
    Nav active state: soft highlight + editorial underline
    (replaces the old Home divider)
@@ -1471,4 +1414,113 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 }
 .nav-link:hover{
   transform: translateY(-0.5px);
+}
+/* ==============================
+   Nav: fully unified system
+   (Search behaves like a real tab)
+============================== */
+
+.nav{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* All nav links share the same structure */
+.nav-link{
+  position: relative;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0.08px;
+  color: rgba(18,19,26,0.72);
+  line-height: 1.2;
+}
+
+/* Hover = soft editorial wash */
+.nav-link:hover{
+  background: rgba(237,231,243,0.35);
+  color: rgba(18,19,26,0.92);
+}
+
+/* Active = subtle filled tab + underline */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.10);
+  border-color: rgba(85,64,121,0.18);
+  color: var(--indigo);
+}
+
+/* Active indicator underline (for ALL tabs, including Search) */
+.nav-link.is-active::after{
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(85,64,121,0.00),
+    rgba(85,64,121,0.55),
+    rgba(85,64,121,0.00)
+  );
+}
+
+/* Search: same format, just slightly quieter when inactive */
+.nav-link[data-nav="search"]{
+  color: rgba(18,19,26,0.60);
+}
+
+.nav-link[data-nav="search"]:hover{
+  color: rgba(18,19,26,0.85);
+}
+
+/* Ensure no leftover divider or pill artifacts */
+.nav-link::before,
+.nav-link::after{
+  box-sizing: border-box;
+}
+/* ==============================
+   Nav active state — no underline, no halos
+   Calm editorial selection
+============================== */
+
+/* Kill any underline indicator */
+.nav-link::after{
+  content: none !important;
+}
+
+/* Base nav links */
+.nav-link{
+  border: none !important;          /* remove halo borders */
+  background: transparent;
+  font-weight: 600;
+  color: rgba(18,19,26,0.72);
+}
+
+/* Hover stays gentle */
+.nav-link:hover{
+  background: rgba(237,231,243,0.35);
+  color: rgba(18,19,26,0.92);
+}
+
+/* Active = soft fill + slightly stronger weight */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.12); /* tonal highlight only */
+  color: var(--indigo);
+  font-weight: 650;
+}
+
+/* Search behaves exactly the same */
+.nav-link[data-nav="search"]{
+  color: rgba(18,19,26,0.65);
+}
+.nav-link[data-nav="search"].is-active{
+  background: rgba(85,64,121,0.12);
+  color: var(--indigo);
+  font-weight: 650;
 }
