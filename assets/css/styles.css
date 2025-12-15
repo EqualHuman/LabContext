@@ -985,3 +985,109 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   }
 }
 
+/* ==============================
+   Header controls redesign
+   - Stack search + nav
+   - Same width
+   - Slim, matching borders
+   - Less-basic font for button-like UI
+============================== */
+
+:root{
+  /* Shared control sizing + border system */
+  --header-controls-w: clamp(420px, 46vw, 680px);
+  --header-controls-border: 1px solid rgba(85,64,121,0.12);
+}
+
+/* Make the right side stack */
+.header-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end; /* keeps the stack right-aligned */
+  gap:10px;
+  flex-wrap:nowrap;
+}
+
+/* Make search + nav the same length */
+.header-search,
+.nav{
+  width: var(--header-controls-w);
+}
+
+/* Slim, matching borders on both capsules */
+.header-search,
+.nav{
+  border: var(--header-controls-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.75),
+    0 6px 16px rgba(18,19,26,0.04);
+  background: rgba(251,251,253,0.55);
+}
+
+/* Remove the “double border” feel inside the search capsule */
+.header-search{
+  padding:6px;
+  border-radius:16px;
+}
+
+.header-search-input{
+  border: 1px solid rgba(18,19,26,0.08); /* lighter inner border */
+  background: rgba(255,255,255,0.85);
+}
+
+.header-search-btn{
+  border: 1px solid rgba(18,19,26,0.08); /* match input */
+  background: rgba(237,231,243,0.70);
+}
+
+/* Nav capsule */
+.nav{
+  padding:6px;
+  gap:6px;
+  border-radius:16px;
+  flex-wrap:nowrap;
+  white-space:nowrap;
+}
+
+/* Less-basic font for button-like elements */
+.nav-link,
+.header-search-btn,
+.button,
+.button-ghost,
+.subnav-link,
+.chip{
+  font-family: var(--font-serif);
+  letter-spacing: 0.1px;
+}
+
+/* Keep nav links a touch tighter + refined */
+.nav-link{
+  padding:8px 11px;
+  font-size:14px;
+  font-weight:650;
+}
+
+/* Calm active state */
+.nav-link.is-active{
+  border: 1px solid rgba(85,64,121,0.16);
+  background: rgba(85,64,121,0.10);
+}
+
+/* Responsive: allow full width on smaller screens */
+@media (max-width: 940px){
+  .header-right{
+    width:100%;
+    align-items:stretch;
+  }
+
+  .header-search,
+  .nav{
+    width: 100%;
+  }
+
+  .nav{
+    flex-wrap:wrap;
+    white-space:normal;
+    justify-content:flex-end;
+  }
+}
