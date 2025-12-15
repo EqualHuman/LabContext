@@ -226,28 +226,39 @@
   }
 
 // ------------------------------
-// HOME: featured + latest Blog library items
+// HOME: Featured (3 Blog items)
 // ------------------------------
 async function renderHomeLatest(base) {
-  const featuredMount = document.getElementById("home-featured");
-  const gridMount = document.getElementById("latest-posts");
-  if (!featuredMount && !gridMount) return;
+  const mount = document.getElementById("home-featured");
+  if (!mount) return;
 
   const library = await fetchJson(base + "data/in_context_library.json");
 
   const sorted = (library || [])
     .slice()
     .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")))
-    .slice(0, 6);
+    .slice(0, 3);
+
+  mount.innerHTML = "";
 
   if (!sorted.length) {
-    if (featuredMount) featuredMount.innerHTML = "";
-    if (gridMount) {
-      gridMount.innerHTML = "";
-      renderEmpty(gridMount, "No posts yet.");
-    }
+    renderEmpty(mount, "No featured posts yet.");
     return;
   }
+
+  sorted.forEach((p) => {
+    mount.appendChild(
+      makeCard({
+        title: p.title,
+        meta: "", // no dates
+        summary: p.summary,
+        tags: p.tags || [],
+        href: p.link || "#",
+      })
+    );
+  });
+}
+
 
   // Featured
   if (featuredMount) {
