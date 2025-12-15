@@ -906,3 +906,65 @@ h1,h2,h3,
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior:auto; }
 }
+/* ==============================
+   Context of the Week (Homepage)
+============================== */
+.page-home .context-week-grid{
+  display:grid;
+  gap:12px;
+}
+
+.page-home .context-item{
+  display:grid;
+  gap:6px;
+  padding:14px;
+  border-radius:16px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(18,19,26,0.08);
+  text-decoration:none;
+}
+
+.page-home .context-item:hover{
+  background: rgba(255,255,255,0.92);
+  border-color: rgba(18,19,26,0.12);
+}
+
+.page-home .context-item-static:hover{
+  background: rgba(255,255,255,0.78);
+  border-color: rgba(18,19,26,0.08);
+}
+
+.page-home .context-kicker{
+  font-size:12px;
+  color: rgba(18,19,26,0.60);
+  letter-spacing:0.08px;
+  font-family: var(--font-serif);
+  font-weight:650;
+  text-transform: uppercase;
+}
+
+.page-home .context-title{
+  font-family: var(--font-serif);
+  font-weight:650;
+  font-size:18px;
+  line-height:1.2;
+  color: var(--text);
+}
+
+.page-home .context-desc{
+  color: var(--muted);
+  font-size:13.5px;
+  max-width:70ch;
+}
+
+.page-home .context-actions{
+  margin-top:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.page-home .context-btn{
+  padding:10px 14px;
+  border-radius:14px;
+}
