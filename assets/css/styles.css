@@ -977,4 +977,35 @@ h1,h2,h3,
 .post-card .post-title{
   margin-top: 0;
 }
+/* ==============================
+   Header polish: logo scale + search hover consistency
+============================== */
+
+/* Slightly enlarge logo mark */
+.site-header .brand-logo{
+  height: 38px; /* was ~32px */
+}
+
+/* Slightly enlarge site title */
+.site-header .brand-name{
+  font-size: 21px; /* was ~19px */
+  font-weight: 650;
+  letter-spacing: 0.3px;
+}
+
+/* Optional: give tagline a touch more presence without noise */
+.site-header .brand-tag{
+  font-size: 13px;
+}
+
+/* --------------------------------
+   Fix search button hover text color
+---------------------------------- */
+.header-search-btn{
+  color: rgba(18,19,26,0.72); /* match default button text */
+}
+
+.header-search-btn:hover{
+  color: #12131a; /* solid text, same as other buttons */
+}
 
