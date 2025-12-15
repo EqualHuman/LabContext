@@ -1,24 +1,33 @@
-/* LabContext — global styles (cleaned + reorganized)
+/* LabContext — global styles (cleaned + deduped)
    Typography:
-   - Body: Source Sans 3 (modern, readable)
-   - Headings/brand: Source Serif 4 (professional, calm)
+   - Body: Source Sans 3
+   - Headings/brand/ui accents: Source Serif 4
 */
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap");
 
+/* ==============================
+   Tokens
+============================== */
 :root{
-  /* Color system */
+  /* Base */
   --bg: #fbfbfd;
   --card: #ffffff;
   --text: #12131a;
   --muted: #5a6072;
   --line: rgba(18,19,26,0.10);
 
-  /* Brand */
-  --indigo: #2f3a77;
-  --indigo-2: #3c4aa0;
-  --header-tint: rgba(47,58,119,0.06);
+  /* Accent Color System
+     Primary: #554079
+     Soft Accent: #ede7f3
+  */
+  --accent-primary: #554079;
+  --accent-secondary: #ede7f3;
 
-  /* Type */
+  /* Primary UI color hooks */
+  --indigo: var(--accent-primary);
+  --indigo-2: #6a5494;
+
+  /* Typography */
   --font-sans: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   --font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
@@ -29,16 +38,17 @@
   --container: 1040px;
 }
 
-/* ------------------------------
+/* ==============================
    Base / Reset
------------------------------- */
-*{box-sizing:border-box}
-html,body{height:100%}
+============================== */
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
 body{
   margin:0;
   background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(47,58,119,0.10), transparent 50%),
-    radial-gradient(900px 500px at 85% 0%, rgba(60,74,160,0.08), transparent 55%),
+    radial-gradient(1200px 600px at 20% -10%, rgba(85,64,121,0.10), transparent 50%),
+    radial-gradient(900px 500px at 85% 0%, rgba(106,84,148,0.08), transparent 55%),
     var(--bg);
   color:var(--text);
   font-family:var(--font-sans);
@@ -46,18 +56,21 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-a{color:inherit; text-decoration:none}
-a:hover{text-decoration:none}
-strong{font-weight:650}
+a{ color:inherit; text-decoration:none; }
+a:hover{ text-decoration:none; }
+strong{ font-weight:650; }
 
-/* Consistent heading font everywhere */
-h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
+/* Headings use serif for editorial calm */
+h1,h2,h3,
+.hero-title,.page-title,.section-title,
+.brand-name,
+.prose h2{
   font-family:var(--font-serif);
 }
 
-/* ------------------------------
+/* ==============================
    Layout helpers
------------------------------- */
+============================== */
 .container{
   max-width:var(--container);
   margin:0 auto;
@@ -70,9 +83,9 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   gap:14px;
 }
 
-/* ------------------------------
+/* ==============================
    Accessibility
------------------------------- */
+============================== */
 .skip-link{
   position:absolute;
   left:-999px;
@@ -94,16 +107,29 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   z-index:9999;
 }
 
-/* ------------------------------
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* ==============================
    Header / Nav
------------------------------- */
+============================== */
 .site-header{
   position:sticky;
   top:0;
   z-index:50;
   backdrop-filter:saturate(120%) blur(12px);
-  background: linear-gradient(to bottom, rgba(47,58,119,0.10), rgba(251,251,253,0.72));
-  border-bottom:1px solid rgba(47,58,119,0.12);
+  background: linear-gradient(to bottom, rgba(237,231,243,0.70), rgba(251,251,253,0.92));
+  border-bottom: 1px solid rgba(18,19,26,0.10);
+  box-shadow: 0 10px 24px rgba(18,19,26,0.04);
 }
 
 .header-inner{
@@ -112,26 +138,33 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   justify-content:space-between;
   gap:18px;
   padding:14px 0;
+
+  /* keep brand aligned with page titles */
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 22px;
+  padding-right: 22px;
 }
 
+/* Brand */
 .brand{
   display:flex;
   align-items:center;
   gap:12px;
-  min-width:220px;
+  min-width:260px;
 }
 
-/* Brand mark (supports either text “LC” or an <img class="brand-logo">) */
 .brand-mark{
   display:inline-flex;
   align-items:center;
 }
 
 .brand-logo{
-  height:24px;               /* editorial sizing */
+  height:32px;
   width:auto;
   display:block;
-  transform:translateY(1px); /* subtle baseline alignment */
+  transform:translateY(1px);
 }
 
 .brand-text{
@@ -142,43 +175,114 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 }
 
 .brand-name{
-  font-size:18px;
+  font-size:19px;
   font-weight:650;
   letter-spacing:0.2px;
 }
 
 .brand-tag{
-  font-size:12px;
+  font-size:12.5px;
   color:var(--muted);
 }
 
+/* Header right (search + nav) */
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* Search (header) */
+.header-search{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px;
+  border-radius:12px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(18,19,26,0.10);
+}
+
+.header-search-input{
+  width: 220px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(18,19,26,0.10);
+  background: rgba(255,255,255,0.72);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+.header-search-input:focus{
+  outline: 3px solid rgba(85,64,121,0.22);
+  outline-offset: 2px;
+}
+
+.header-search-btn{
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(18,19,26,0.10);
+  background: rgba(237,231,243,0.55);
+  color: rgba(18,19,26,0.72);
+  font-weight:650;
+  cursor:pointer;
+  font-family: var(--font-serif);
+  letter-spacing: 0.08px;
+}
+
+.header-search-btn:hover{
+  background: rgba(237,231,243,0.80);
+  color: rgba(18,19,26,0.92);
+}
+
+/* Nav (quiet editorial tabs) */
 .nav{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:14px;
   flex-wrap:wrap;
   justify-content:flex-end;
 }
 
 .nav-link{
-  padding:10px 12px;
-  border-radius:12px;
-  color:var(--muted);
-}
-.nav-link:hover{
-  background:rgba(18,19,26,0.04);
-  color:var(--text);
-}
-.nav-link.is-active{
-  color:var(--indigo);
-  background:rgba(47,58,119,0.08);
-  border:1px solid rgba(47,58,119,0.14);
+  padding:6px 10px;
+  border-radius:10px;
+  background: transparent;
+  border: none;                 /* no halos */
+  font-family: var(--font-serif);
+  font-weight:600;
+  letter-spacing:0.08px;
+  line-height:1.2;
+  color: rgba(18,19,26,0.72);
+  transition: background 140ms ease, color 140ms ease, transform 140ms ease;
 }
 
-/* ------------------------------
+.nav-link:hover{
+  background: rgba(237,231,243,0.35);
+  color: rgba(18,19,26,0.92);
+  transform: translateY(-0.5px);
+}
+
+.nav-link.is-active{
+  background: rgba(85,64,121,0.12);  /* tonal highlight only */
+  color: var(--indigo);
+  font-weight:650;
+}
+
+/* Ensure NO underline indicator survives anywhere */
+.nav-link::after{ content:none !important; }
+
+/* Normalize Search to match other nav links exactly */
+.nav-link[data-nav="search"],
+.nav-link-search{
+  color: rgba(18,19,26,0.72) !important;
+  font-weight: inherit;
+}
+
+/* ==============================
    Hero
------------------------------- */
-.hero{padding:54px 0 28px 0}
+============================== */
+.hero{ padding:54px 0 28px 0; }
 
 .hero-title{
   margin:0;
@@ -198,38 +302,59 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 .hero-actions{
   margin-top:18px;
   display:flex;
-  gap:12px;
+  gap:14px;
   flex-wrap:wrap;
 }
 
-/* ------------------------------
-   Buttons
------------------------------- */
-.button{
+/* ==============================
+   Buttons (quiet, cohesive)
+============================== */
+.button,
+.button-ghost{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:12px 14px;
+  font-family: var(--font-serif);
+  font-weight:650;
+  letter-spacing:0.08px;
   border-radius:14px;
-  background:var(--indigo);
-  color:white;
-  border:1px solid rgba(47,58,119,0.35);
-  box-shadow:0 8px 18px rgba(47,58,119,0.18);
+  padding:11px 16px;
+  line-height:1.2;
+  box-shadow:none;
+  transition: background 140ms ease, transform 140ms ease;
 }
-.button:hover{background:var(--indigo-2)}
-.button:focus{outline:3px solid rgba(60,74,160,0.28); outline-offset:2px}
+
+.button{
+  background: rgba(85,64,121,0.90);
+  border: 1px solid rgba(85,64,121,0.55);
+  color:#fff;
+}
+
+.button:hover{
+  background: rgba(85,64,121,1);
+  transform: translateY(-1px);
+}
 
 .button-ghost{
-  background:rgba(255,255,255,0.65);
-  color:var(--indigo);
-  border:1px solid rgba(47,58,119,0.18);
-  box-shadow:none;
+  background: rgba(237,231,243,0.55);
+  border: 1px solid rgba(85,64,121,0.22);
+  color: var(--indigo);
 }
-.button-ghost:hover{background:rgba(255,255,255,0.85)}
 
-/* ------------------------------
+.button-ghost:hover{
+  background: rgba(237,231,243,0.80);
+  transform: translateY(-1px);
+}
+
+.button:focus,
+.button-ghost:focus{
+  outline: 3px solid rgba(85,64,121,0.25);
+  outline-offset: 2px;
+}
+
+/* ==============================
    Cards (Quiet links + Post cards)
------------------------------- */
+============================== */
 .quiet-links{
   margin-top:22px;
   display:grid;
@@ -249,8 +374,8 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 
 .quiet-card:hover,
 .post-card:hover{
+  background:rgba(237,231,243,0.35);
   box-shadow:var(--shadow);
-  background:rgba(255,255,255,0.92);
 }
 
 .quiet-card-title{
@@ -264,9 +389,9 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 }
 
 /* Post card internals */
-.post-meta{color:var(--muted); font-size:12px}
-.post-title{margin-top:6px; font-weight:700; letter-spacing:0.1px}
-.post-summary{margin-top:6px; color:var(--muted); font-size:14px; max-width:85ch}
+.post-meta{ color:var(--muted); font-size:12px; }
+.post-title{ margin-top:6px; font-weight:700; letter-spacing:0.1px; }
+.post-summary{ margin-top:6px; color:var(--muted); font-size:14px; max-width:85ch; }
 
 .post-tags{
   margin-top:10px;
@@ -274,19 +399,20 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   gap:8px;
   flex-wrap:wrap;
 }
+
 .tag{
   font-size:12px;
-  color:var(--indigo);
-  background:rgba(47,58,119,0.08);
-  border:1px solid rgba(47,58,119,0.14);
+  color: var(--indigo);
+  background: rgba(237,231,243,0.75);
+  border: 1px solid rgba(85,64,121,0.20);
   padding:6px 8px;
   border-radius:999px;
 }
 
-/* ------------------------------
+/* ==============================
    Sections / Lists
------------------------------- */
-.section{padding:28px 0}
+============================== */
+.section{ padding:28px 0; }
 
 .section-head{
   display:flex;
@@ -303,7 +429,7 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   line-height:1.2;
 }
 
-.section-link{color:var(--indigo); font-size:14px}
+.section-link{ color:var(--indigo); font-size:14px; }
 
 .posts-grid{
   display:grid;
@@ -317,10 +443,10 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   gap:12px;
 }
 
-/* ------------------------------
+/* ==============================
    Page head
------------------------------- */
-.page-head{padding:42px 0 14px 0}
+============================== */
+.page-head{ padding:42px 0 14px 0; }
 
 .page-title{
   margin:0;
@@ -335,9 +461,9 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   max-width:75ch;
 }
 
-/* ------------------------------
+/* ==============================
    Subnav (In Context tabs)
------------------------------- */
+============================== */
 .subnav{
   margin-top:16px;
   display:flex;
@@ -351,20 +477,24 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   color:var(--muted);
   border:1px solid var(--line);
   background:rgba(255,255,255,0.70);
+  font-family: var(--font-serif);
+  letter-spacing: 0.08px;
 }
+
 .subnav-link:hover{
   background:rgba(255,255,255,0.90);
   color:var(--text);
 }
+
 .subnav-link.is-active{
-  color:var(--indigo);
-  background:rgba(47,58,119,0.08);
-  border:1px solid rgba(47,58,119,0.14);
+  color: var(--indigo);
+  background: rgba(237,231,243,0.75);
+  border:1px solid rgba(85,64,121,0.22);
 }
 
-/* ------------------------------
-   Controls / Inputs
------------------------------- */
+/* ==============================
+   Controls / Inputs / Chips
+============================== */
 .controls{
   margin-top:18px;
   display:grid;
@@ -372,8 +502,8 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   gap:12px;
 }
 
-.control{display:flex; flex-direction:column; gap:8px}
-.control-label{font-size:12px; color:var(--muted)}
+.control{ display:flex; flex-direction:column; gap:8px; }
+.control-label{ font-size:12px; color:var(--muted); }
 
 .input,
 .select{
@@ -385,9 +515,10 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   color:var(--text);
   font-family:var(--font-sans);
 }
+
 .input:focus,
 .select:focus{
-  outline:3px solid rgba(60,74,160,0.22);
+  outline:3px solid rgba(85,64,121,0.22);
   outline-offset:2px;
 }
 
@@ -401,31 +532,33 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 
 .chip{
   border-radius:999px;
-  border:1px solid rgba(47,58,119,0.14);
-  background:rgba(47,58,119,0.06);
+  border:1px solid rgba(85,64,121,0.14);
+  background:rgba(85,64,121,0.06);
   color:var(--indigo);
   padding:8px 10px;
   font-size:12px;
   cursor:pointer;
-  font-family:var(--font-sans);
+  font-family: var(--font-serif);
+  letter-spacing: 0.08px;
 }
-.chip:hover{background:rgba(47,58,119,0.10)}
-.chip:focus{outline:3px solid rgba(60,74,160,0.22); outline-offset:2px}
 
-/* ------------------------------
+.chip:hover{ background:rgba(85,64,121,0.10); }
+.chip:focus{ outline:3px solid rgba(85,64,121,0.22); outline-offset:2px; }
+
+/* ==============================
    Prose
------------------------------- */
-.prose{max-width:78ch}
+============================== */
+.prose{ max-width:78ch; }
 .prose h2{
   margin:22px 0 8px 0;
   font-size:20px;
   line-height:1.25;
 }
-.prose ul{color:var(--muted)}
+.prose ul{ color:var(--muted); }
 
-/* ------------------------------
+/* ==============================
    Footer
------------------------------- */
+============================== */
 .site-footer{
   border-top:1px solid var(--line);
   padding:18px 0;
@@ -440,1143 +573,46 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   gap:12px;
 }
 
-.footer-links{display:flex; gap:12px}
-.footer-links a{color:var(--muted)}
-.footer-links a:hover{color:var(--text)}
+.footer-links{ display:flex; gap:12px; }
+.footer-links a{ color:var(--muted); }
+.footer-links a:hover{ color:var(--text); }
 
-/* ------------------------------
+/* ==============================
    Utilities
------------------------------- */
-.muted{color:var(--muted)}
-.tiny{font-size:12px}
+============================== */
+.muted{ color:var(--muted); }
+.tiny{ font-size:12px; }
 
-/* ------------------------------
+/* ==============================
    Responsive
------------------------------- */
+============================== */
 @media (max-width: 940px){
-  .quiet-links{grid-template-columns:1fr}
-  .posts-grid{grid-template-columns:1fr}
-  .controls{grid-template-columns:1fr}
-  .grid-2{grid-template-columns:1fr}
-  .brand{min-width:auto}
-}
-
-/* ------------------------------
-   Reduced motion
------------------------------- */
-@media (prefers-reduced-motion: reduce){
-  *{scroll-behavior:auto}
-}
-/* ==============================
-   LabContext Accent Color System
-   Primary: #554079
-   Soft Accent: #ede7f3
-============================== */
-
-:root{
-  /* Brand accents */
-  --accent-primary: #554079;
-  --accent-primary-soft: rgba(85,64,121,0.12);
-  --accent-secondary: #ede7f3;
-
-  /* Override existing indigo system */
-  --indigo: var(--accent-primary);
-  --indigo-2: #6a5494; /* gentle hover lift */
-}
-
-/* ------------------------------
-   Header Banner Styling
------------------------------- */
-.site-header{
-  background:
-    linear-gradient(
-      to bottom,
-      var(--accent-secondary),
-      rgba(251,251,253,0.85)
-    );
-  border-bottom: 1px solid rgba(85,64,121,0.18);
-}
-
-/* ------------------------------
-   Navigation Active / Hover
------------------------------- */
-.nav-link.is-active{
-  color: var(--accent-primary);
-  background: var(--accent-primary-soft);
-  border: 1px solid rgba(85,64,121,0.22);
-}
-
-.nav-link:hover{
-  background: rgba(237,231,243,0.65);
-}
-
-/* ------------------------------
-   Buttons
------------------------------- */
-.button{
-  background: var(--accent-primary);
-  border: 1px solid rgba(85,64,121,0.35);
-  box-shadow: 0 8px 18px rgba(85,64,121,0.18);
-}
-
-.button:hover{
-  background: #6a5494;
-}
-
-.button-ghost{
-  background: rgba(237,231,243,0.65);
-  color: var(--accent-primary);
-  border: 1px solid rgba(85,64,121,0.18);
-}
-
-/* ------------------------------
-   Cards & Tags
------------------------------- */
-.tag{
-  color: var(--accent-primary);
-  background: rgba(237,231,243,0.75);
-  border: 1px solid rgba(85,64,121,0.20);
-}
-
-.quiet-card:hover,
-.post-card:hover{
-  background: rgba(237,231,243,0.35);
-}
-
-/* ------------------------------
-   Subnav (In Context tabs)
------------------------------- */
-.subnav-link.is-active{
-  color: var(--accent-primary);
-  background: rgba(237,231,243,0.75);
-  border: 1px solid rgba(85,64,121,0.22);
-}
-
-/* ------------------------------
-   Focus States (Accessibility)
------------------------------- */
-.button:focus,
-.input:focus,
-.select:focus,
-.chip:focus{
-  outline: 3px solid rgba(85,64,121,0.28);
-  outline-offset: 2px;
-}
-/* ==============================
-   Header + Hero Button Lift
-   (calm, slightly stronger presence)
-============================== */
-
-/* --- Header: a bit more presence --- */
-.site-header{
-  background:
-    linear-gradient(
-      to bottom,
-      var(--accent-secondary, #ede7f3),
-      rgba(251,251,253,0.88)
-    );
-  border-bottom: 1px solid rgba(85,64,121,0.18);
-  box-shadow: 0 8px 24px rgba(18,19,26,0.06);
-}
-
-.header-inner{
-  padding: 16px 0; /* was 14px */
-}
-
-/* --- Logo: slightly bigger + better balance --- */
-.brand{
-  gap: 14px; /* a touch more breathing room */
-}
-
-.brand-logo{
-  height: 30px; /* was 24px */
-  width: auto;
-  transform: translateY(1px);
-}
-
-.brand-name{
-  font-size: 19px; /* was 18px */
-  letter-spacing: 0.2px;
-}
-
-.brand-tag{
-  font-size: 12.5px; /* subtle lift */
-}
-
-/* --- Nav: slightly more “button-like” but still quiet --- */
-.nav-link{
-  padding: 11px 14px; /* was 10px 12px */
-  border-radius: 14px;
-}
-
-.nav-link:hover{
-  background: rgba(237,231,243,0.65);
-}
-
-/* --- Hero buttons: more intentional + a bit more premium --- */
-.hero-actions{
-  gap: 14px; /* slightly more separation */
-}
-
-.button{
-  padding: 13px 16px;              /* bigger click target */
-  border-radius: 16px;             /* slightly softer */
-  font-weight: 650;
-  letter-spacing: 0.1px;
-  box-shadow: 0 10px 22px rgba(85,64,121,0.20);
-  transform: translateY(0);
-  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
-}
-
-.button:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(85,64,121,0.22);
-}
-
-.button-ghost{
-  padding: 13px 16px;
-  border-radius: 16px;
-  font-weight: 650;
-  background: rgba(237,231,243,0.72);
-  border: 1px solid rgba(85,64,121,0.20);
-  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
-}
-
-.button-ghost:hover{
-  background: rgba(237,231,243,0.92);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(18,19,26,0.08);
-}
-
-/* --- Mobile: keep header from feeling cramped --- */
-@media (max-width: 940px){
-  .brand-logo{ height: 28px; }
-  .nav-link{ padding: 10px 12px; }
-}
-/* ==============================
-   Make the RIGHT side (nav) feel as good as the LEFT
-   - tighter spacing
-   - grouped "capsule" background
-   - calmer, clearer active state
-============================== */
-
-.header-inner{
-  align-items:center;
-}
-
-/* Group the nav so it doesn't look like floating text */
-.nav{
-  gap:6px;                               /* tighter than before */
-  padding:6px;
-  border-radius:16px;
-  background: rgba(237,231,243,0.55);    /* #ede7f3 wash */
-  border: 1px solid rgba(85,64,121,0.14);
-  box-shadow: 0 6px 18px rgba(18,19,26,0.05);
-}
-
-/* Make links feel intentional (not airy) */
-.nav-link{
-  padding:10px 12px;
-  border-radius:14px;
-  color: rgba(18,19,26,0.70);
-  font-weight:600;
-}
-
-/* Hover: quiet lift */
-.nav-link:hover{
-  background: rgba(237,231,243,0.85);
-  color: rgba(18,19,26,0.88);
-}
-
-/* Active: clearly selected, still subtle */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.12);
-  border: 1px solid rgba(85,64,121,0.22);
-  color: #554079;
-}
-
-/* Optional: keep the capsule from feeling huge on small screens */
-@media (max-width: 940px){
-  .nav{
-    padding:4px;
-    border-radius:14px;
-  }
-  .nav-link{
-    padding:9px 10px;
-  }
-}
-/* ==============================
-   Header refinement: integrate right-side nav capsule
-   (closer, calmer, more intentional)
-============================== */
-
-/* Give the header a tiny bit more structure */
-.site-header{
-  background:
-    linear-gradient(to bottom, rgba(237,231,243,0.92), rgba(251,251,253,0.90));
-  border-bottom: 1px solid rgba(85,64,121,0.16);
-  box-shadow: 0 10px 30px rgba(18,19,26,0.06);
-}
-
-/* Align brand + nav better and reduce "floating" feeling */
-.header-inner{
-  align-items:center;
-  padding: 18px 0;
-}
-
-/* ---- Right side capsule: make it feel inset + anchored ---- */
-.nav{
-  gap: 6px;
-  padding: 8px;
-  border-radius: 18px;
-
-  /* anchored/inset feel */
-  background: rgba(251,251,253,0.55);
-  border: 1px solid rgba(85,64,121,0.16);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.75),
-    0 8px 18px rgba(18,19,26,0.05);
-
-  /* pulls it off the very top edge visually */
-  transform: translateY(2px);
-}
-
-/* Links: calmer + more editorial */
-.nav-link{
-  padding: 10px 13px;
-  border-radius: 14px;
-  font-weight: 600;
-  color: rgba(18,19,26,0.72);
-  letter-spacing: 0.1px;
-}
-
-/* Hover: subtle, not loud */
-.nav-link:hover{
-  background: rgba(237,231,243,0.70);
-  color: rgba(18,19,26,0.90);
-}
-
-/* Active: clear, but quiet */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.12);
-  border: 1px solid rgba(85,64,121,0.22);
-  color: #554079;
-}
-
-/* Make the logo/brand feel a touch more "primary" next to the nav */
-.brand-logo{
-  height: 32px;
-}
-.brand-name{
-  font-size: 19px;
-}
-.brand-tag{
-  font-size: 12.5px;
-}
-
-/* Mobile: keep capsule neat */
-@media (max-width: 940px){
-  .header-inner{ padding: 14px 0; }
-  .nav{ padding: 6px; border-radius: 16px; transform:none; }
-  .nav-link{ padding: 9px 11px; }
-  .brand-logo{ height: 28px; }
-}
-
-/* ==============================
-   Header Search (quiet + minimal)
-============================== */
-
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
-}
-
-.header-search{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:6px;
-  border-radius:16px;
-  background: rgba(251,251,253,0.55);
-  border: 1px solid rgba(85,64,121,0.16);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
-}
-
-.header-search-input{
-  width: 220px;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(18,19,26,0.10);
-  background: rgba(255,255,255,0.88);
-  color: var(--text);
-  font-family: var(--font-sans);
-}
-
-.header-search-input:focus{
-  outline: 3px solid rgba(85,64,121,0.22);
-  outline-offset: 2px;
-}
-
-.header-search-btn{
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(85,64,121,0.20);
-  background: rgba(237,231,243,0.75);
-  color: #554079;
-  font-weight: 650;
-  cursor: pointer;
-  font-family: var(--font-sans);
-}
-
-.header-search-btn:hover{
-  background: rgba(237,231,243,0.92);
-}
-
-@media (max-width: 940px){
-  .header-right{
-    width:100%;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-  }
-  .header-search-input{
-    width: min(100%, 320px);
-  }
-}
-/* ==============================
-   Header layout stabilization
-   Prevent nav wrapping (About dropping)
-============================== */
-
-/* Keep right side aligned and predictable */
-.header-right{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: nowrap; /* IMPORTANT */
-}
-
-/* Keep nav capsule on one line */
-.nav{
-  flex-wrap: nowrap;           /* stop internal wrapping */
-  white-space: nowrap;
-}
-
-/* Slightly reduce nav link width to help fit */
-.nav-link{
-  padding: 8px 10px;
-  font-size: 14px;
-}
-
-/* Allow search to shrink first if needed */
-.header-search{
-  flex-shrink: 1;
-}
-
-.header-search-input{
-  width: clamp(160px, 20vw, 220px);
-}
-
-/* Mobile: allow wrap again intentionally */
-@media (max-width: 820px){
-  .header-right{
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .nav{
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-}
-/* ==============================
-   Header polish: tighter height + unified controls
-============================== */
-
-/* Slightly reduce header height */
-.header-inner{
-  padding: 14px 0; /* was larger */
-}
-
-/* Make search + nav feel like one grouped unit */
-.header-right{
-  gap: 10px; /* slightly tighter */
-}
-
-/* Soften capsules a touch */
-.header-search,
-.nav{
-  border-radius: 16px;
-}
-
-/* Reduce search padding a hair */
-.header-search{
-  padding: 5px;
-}
-
-/* Slightly smaller search input/button */
-.header-search-input{
-  padding: 9px 11px;
-}
-
-.header-search-btn{
-  padding: 9px 11px;
-}
-
-/* Keep nav links visually balanced */
-.nav-link{
-  padding: 8px 11px;
-}
-
-/* Optional: align capsule baselines */
-.header-search,
-.nav{
-  transform: translateY(1px);
-}
-
-@media (max-width: 820px){
-  .header-search,
-  .nav{
-    transform: none;
-  }
-}
-
-/* ==============================
-   Header controls redesign
-   - Stack search + nav
-   - Same width
-   - Slim, matching borders
-   - Less-basic font for button-like UI
-============================== */
-
-:root{
-  /* Shared control sizing + border system */
-  --header-controls-w: clamp(420px, 46vw, 680px);
-  --header-controls-border: 1px solid rgba(85,64,121,0.12);
-}
-
-/* Make the right side stack */
-.header-right{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end; /* keeps the stack right-aligned */
-  gap:10px;
-  flex-wrap:nowrap;
-}
-
-/* Make search + nav the same length */
-.header-search,
-.nav{
-  width: var(--header-controls-w);
-}
-
-/* Slim, matching borders on both capsules */
-.header-search,
-.nav{
-  border: var(--header-controls-border);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.75),
-    0 6px 16px rgba(18,19,26,0.04);
-  background: rgba(251,251,253,0.55);
-}
-
-/* Remove the “double border” feel inside the search capsule */
-.header-search{
-  padding:6px;
-  border-radius:16px;
-}
-
-.header-search-input{
-  border: 1px solid rgba(18,19,26,0.08); /* lighter inner border */
-  background: rgba(255,255,255,0.85);
-}
-
-.header-search-btn{
-  border: 1px solid rgba(18,19,26,0.08); /* match input */
-  background: rgba(237,231,243,0.70);
-}
-
-/* Nav capsule */
-.nav{
-  padding:6px;
-  gap:6px;
-  border-radius:16px;
-  flex-wrap:nowrap;
-  white-space:nowrap;
-}
-
-/* Less-basic font for button-like elements */
-.nav-link,
-.header-search-btn,
-.button,
-.button-ghost,
-.subnav-link,
-.chip{
-  font-family: var(--font-serif);
-  letter-spacing: 0.1px;
-}
-
-/* Keep nav links a touch tighter + refined */
-.nav-link{
-  padding:8px 11px;
-  font-size:14px;
-  font-weight:650;
-}
-
-/* Calm active state */
-.nav-link.is-active{
-  border: 1px solid rgba(85,64,121,0.16);
-  background: rgba(85,64,121,0.10);
-}
-
-/* Responsive: allow full width on smaller screens */
-@media (max-width: 940px){
-  .header-right{
-    width:100%;
-    align-items:stretch;
-  }
-
-  .header-search,
-  .nav{
-    width: 100%;
-  }
-
-  .nav{
-    flex-wrap:wrap;
-    white-space:normal;
-    justify-content:flex-end;
-  }
-}
-/* ==============================
-   Header controls (slim + quiet)
-   Overrides the bulky stacked panels
-============================== */
-
-:root{
-  --header-controls-w: clamp(360px, 42vw, 560px);
-  --header-controls-border: 1px solid rgba(18,19,26,0.10);
-}
-
-/* Keep stack, but tighten */
-.header-right{
-  gap: 8px;
-}
-
-/* Same width, but not huge */
-.header-search,
-.nav{
-  width: var(--header-controls-w);
-  background: rgba(255,255,255,0.52);   /* lighter = less “panel” */
-  border: var(--header-controls-border);
-  box-shadow: none;                      /* removes bulky elevation */
-  border-radius: 14px;
-}
-
-/* Reduce capsule padding */
-.header-search{
-  padding: 4px;
-}
-
-.nav{
-  padding: 4px;
-  gap: 6px;
-}
-
-/* Make internals slimmer + consistent */
-.header-search-input,
-.header-search-btn{
-  border: 1px solid rgba(18,19,26,0.10);
-  border-radius: 12px;
-  padding: 8px 10px;
-  box-shadow: none;
-}
-
-.header-search-input{
-  background: rgba(255,255,255,0.72);
-}
-
-.header-search-btn{
-  background: rgba(237,231,243,0.55);
-}
-
-/* Less-basic font for controls (but not heavy) */
-.nav-link,
-.header-search-btn,
-.button,
-.button-ghost,
-.subnav-link,
-.chip{
-  font-family: var(--font-serif);
-  letter-spacing: 0.08px;
-}
-
-/* Nav links: smaller + cleaner */
-.nav-link{
-  padding: 7px 10px;
-  font-size: 13.5px;
-  font-weight: 650;
-}
-
-/* Active stays quiet */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.10);
-  border: 1px solid rgba(85,64,121,0.16);
-  box-shadow: none;
-}
-
-/* Mobile: full width is fine, but keep it slim */
-@media (max-width: 940px){
-  .header-right{
-    align-items: stretch;
-  }
-  .header-search,
-  .nav{
-    width: 100%;
-  }
-}
-/* ==============================
-   Header overhaul (editorial, quiet, non-bulky)
-   - brand left
-   - simple nav right
-   - no capsules / no stacked panels
-============================== */
-
-/* Header surface: keep your calm tint but make it lighter */
-.site-header{
-  background: linear-gradient(to bottom, rgba(237,231,243,0.70), rgba(251,251,253,0.92));
-  border-bottom: 1px solid rgba(18,19,26,0.10);
-  box-shadow: 0 10px 24px rgba(18,19,26,0.04);
-}
-
-/* Layout */
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding: 14px 0;
-}
-
-/* Brand stays as the hero */
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-width: 260px;
-}
-
-.brand-logo{
-  height: 32px;
-  width: auto;
-  display:block;
-}
-
-.brand-name{
-  font-size: 19px;
-  font-weight: 650;
-  letter-spacing: 0.2px;
-}
-
-.brand-tag{
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
-/* Nav becomes quiet editorial links (no capsule) */
-.nav{
-  display:flex;
-  align-items:center;
-  gap: 14px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-/* Link styling: simple + calm */
-.nav-link{
-  padding: 6px 2px;           /* minimal chrome */
-  border-radius: 10px;
-  color: rgba(18,19,26,0.72);
-  font-weight: 600;
-  font-family: var(--font-serif); /* “less basic” control font */
-  letter-spacing: 0.08px;
-  line-height: 1.2;
-  border: 1px solid transparent;
-}
-
-/* Hover: subtle underline feel */
-.nav-link:hover{
-  color: rgba(18,19,26,0.92);
-  background: rgba(237,231,243,0.35);
-  border-color: rgba(18,19,26,0.06);
-}
-
-/* Active: small, quiet “selected” */
-.nav-link.is-active{
-  color: var(--indigo);
-  background: rgba(85,64,121,0.10);
-  border-color: rgba(85,64,121,0.14);
-}
-
-
-/* Mobile: stack nav under brand neatly */
-@media (max-width: 940px){
+  .quiet-links{ grid-template-columns:1fr; }
+  .posts-grid{ grid-template-columns:1fr; }
+  .controls{ grid-template-columns:1fr; }
+  .grid-2{ grid-template-columns:1fr; }
+
+  .brand{ min-width:auto; }
   .header-inner{
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     padding: 12px 0;
   }
-
-  .nav{
+  .header-right{
     width: 100%;
-    gap: 12px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header-search-input{
+    width: min(100%, 320px);
   }
 }
-/* ==============================
-   Header: force single-row nav on desktop + calm Search
-============================== */
-
-/* Desktop: keep everything on ONE line */
-@media (min-width: 941px){
-  .header-inner{
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .nav{
-    flex-wrap: nowrap;      /* stop wrapping */
-    white-space: nowrap;
-    gap: 16px;
-  }
-
- 
-}
-
 
 /* ==============================
-   Buttons: quiet, cohesive, editorial
+   Reduced motion
 ============================== */
-
-/* Shared button foundation */
-.button,
-.button-ghost{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  border-radius: 14px;
-  padding: 11px 16px;
-  line-height: 1.2;
-  box-shadow: none; /* remove app-style lift */
-  transition:
-    background 140ms ease,
-    border-color 140ms ease,
-    color 140ms ease,
-    transform 140ms ease;
-}
-
-/* Primary action (Browse In Context) */
-.button{
-  background: rgba(85,64,121,0.90);
-  border: 1px solid rgba(85,64,121,0.55);
-  color: #fff;
-}
-
-.button:hover{
-  background: rgba(85,64,121,1);
-  transform: translateY(-1px); /* subtle, not chunky */
-}
-
-/* Secondary action (Open Education Library) */
-.button-ghost{
-  background: rgba(237,231,243,0.55);
-  border: 1px solid rgba(85,64,121,0.22);
-  color: var(--indigo);
-}
-
-.button-ghost:hover{
-  background: rgba(237,231,243,0.80);
-  transform: translateY(-1px);
-}
-
-/* Focus states stay calm + accessible */
-.button:focus,
-.button-ghost:focus{
-  outline: 3px solid rgba(85,64,121,0.25);
-  outline-offset: 2px;
-}
-
-/* Make hero buttons feel aligned with header/nav */
-.hero-actions{
-  gap: 14px;
-}
-
-/* Mobile: slightly tighter */
-@media (max-width: 940px){
-  .button,
-  .button-ghost{
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-}
-/* ==============================
-   Nav + header buttons: unified quiet system
-============================== */
-
-/* Base nav links — text-first */
-.nav-link{
-  font-family: var(--font-serif);
-  font-weight: 600;
-  letter-spacing: 0.08px;
-  padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: rgba(18,19,26,0.72);
-}
-
-/* Hover: gentle presence, no “button” feel */
-.nav-link:hover{
-  background: rgba(237,231,243,0.35);
-  color: rgba(18,19,26,0.92);
-}
-
-/* Active: softly filled tab */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.12);
-  border-color: rgba(85,64,121,0.20);
-  color: var(--indigo);
-}
-
-
-/* ==============================
-   Nav active state: soft highlight + editorial underline
-   (replaces the old Home divider)
-============================== */
-
-/* Ensure no leftover divider anywhere */
-.nav-link[data-nav="home"]::after{ content: none !important; }
-
-/* Base nav links stay quiet */
-.nav-link{
-  position: relative;
-  border: 1px solid transparent;
-}
-
-/* Hover: gentle wash */
-.nav-link:hover{
-  background: rgba(237,231,243,0.32);
-}
-
-/* Active: soft fill + slim border */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.10);
-  border-color: rgba(85,64,121,0.18);
-}
-
-/* The interesting part: a calm underline “ink stroke” */
-.nav-link.is-active::after{
-  content: "";
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 5px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    rgba(85,64,121,0.00),
-    rgba(85,64,121,0.55),
-    rgba(85,64,121,0.00)
-  );
-  transform: scaleX(0.92);
-  opacity: 0.95;
-}
-
-/* Optional: tiny “settle” motion on hover (still low-stim) */
-.nav-link{
-  transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
-}
-.nav-link:hover{
-  transform: translateY(-0.5px);
-}
-/* ==============================
-   Nav: fully unified system
-   (Search behaves like a real tab)
-============================== */
-
-.nav{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* All nav links share the same structure */
-.nav-link{
-  position: relative;
-  padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
-  font-family: var(--font-serif);
-  font-weight: 600;
-  letter-spacing: 0.08px;
-  color: rgba(18,19,26,0.72);
-  line-height: 1.2;
-}
-
-/* Hover = soft editorial wash */
-.nav-link:hover{
-  background: rgba(237,231,243,0.35);
-  color: rgba(18,19,26,0.92);
-}
-
-/* Active = subtle filled tab + underline */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.10);
-  border-color: rgba(85,64,121,0.18);
-  color: var(--indigo);
-}
-
-/* Active indicator underline (for ALL tabs, including Search) */
-.nav-link.is-active::after{
-  content: "";
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 5px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    rgba(85,64,121,0.00),
-    rgba(85,64,121,0.55),
-    rgba(85,64,121,0.00)
-  );
-}
-
-/* Search: same format, just slightly quieter when inactive */
-.nav-link[data-nav="search"]{
-  color: rgba(18,19,26,0.60);
-}
-
-.nav-link[data-nav="search"]:hover{
-  color: rgba(18,19,26,0.85);
-}
-
-/* Ensure no leftover divider or pill artifacts */
-.nav-link::before,
-.nav-link::after{
-  box-sizing: border-box;
-}
-/* ==============================
-   Nav active state — no underline, no halos
-   Calm editorial selection
-============================== */
-
-/* Kill any underline indicator */
-.nav-link::after{
-  content: none !important;
-}
-
-/* Base nav links */
-.nav-link{
-  border: none !important;          /* remove halo borders */
-  background: transparent;
-  font-weight: 600;
-  color: rgba(18,19,26,0.72);
-}
-
-/* Hover stays gentle */
-.nav-link:hover{
-  background: rgba(237,231,243,0.35);
-  color: rgba(18,19,26,0.92);
-}
-
-/* Active = soft fill + slightly stronger weight */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.12); /* tonal highlight only */
-  color: var(--indigo);
-  font-weight: 650;
-}
-
-/* Search behaves exactly the same */
-.nav-link[data-nav="search"]{
-  color: rgba(18,19,26,0.65);
-}
-.nav-link[data-nav="search"].is-active{
-  background: rgba(85,64,121,0.12);
-  color: var(--indigo);
-  font-weight: 650;
-}
-/* ==============================
-   Align header brand with page titles
-   (match content column exactly)
-============================== */
-
-/* Ensure header content uses the same inset as main content */
-.site-header .header-inner{
-  padding-left: 22px;
-  padding-right: 22px;
-}
-
-/* Prevent logo from creeping left on large screens */
-.site-header .brand{
-  margin-left: 0;
-}
-
-/* Match container max width exactly */
-.site-header .header-inner{
-  max-width: var(--container);
-  margin-left: auto;
-  margin-right: auto;
-}
-/* ==============================
-   Make Search look identical to other nav links
-============================== */
-
-/* Remove any special Search styling */
-.nav-link-search,
-.nav-link[data-nav="search"]{
-  padding: inherit;
-  border: none !important;
-  background: transparent !important;
-  border-radius: inherit;
-  box-shadow: none !important;
-  color: rgba(18,19,26,0.72) !important;
-  font-weight: inherit;
-}
-
-/* Hover/active behave exactly like other links */
-.nav-link[data-nav="search"]:hover{
-  background: rgba(237,231,243,0.35) !important;
-  color: rgba(18,19,26,0.92) !important;
-}
-
-.nav-link[data-nav="search"].is-active{
-  background: rgba(85,64,121,0.12) !important;
-  color: var(--indigo) !important;
-  font-weight: 650 !important;
-}
-/* ==============================
-   Normalize Search nav color
-============================== */
-
-.nav-link[data-nav="search"]{
-  color: rgba(18,19,26,0.72) !important;
+@media (prefers-reduced-motion: reduce){
+  *{ scroll-behavior:auto; }
 }
