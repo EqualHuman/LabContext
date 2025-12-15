@@ -176,15 +176,15 @@
       .slice(0, 6);
 
     sorted.forEach((p) => {
-      mount.appendChild(
+        mount.appendChild(
         card({
           title: p.title,
-          meta: "Updated " + formatDate(p.updated),
           summary: p.summary,
           tags: p.tags || [],
           href: p.link || "#",
         })
       );
+
     });
   }
 
@@ -243,17 +243,6 @@
         return;
       }
 
-      sorted.forEach((p) => {
-        mount.appendChild(
-          card({
-            title: p.title,
-            meta: "Updated " + formatDate(p.updated),
-            summary: p.summary,
-            tags: p.tags || [],
-            href: p.link || "#",
-          })
-        );
-      });
     }
 
     searchEl.addEventListener("input", run);
@@ -320,13 +309,14 @@
         mount.appendChild(
           card({
             title: p.title,
-            meta: formatDate(p.date),
             summary: p.summary,
             tags: p.themes || [],
             href: p.link || "#",
           })
         );
       });
+
+
     }
 
     searchEl.addEventListener("input", run);
@@ -455,15 +445,15 @@
         .sort(sortByDateDesc)
         .slice(0, 50)
         .forEach((p) => {
-          mount.appendChild(
+                   mount.appendChild(
             card({
               title: p.title,
-              meta: (p.section ? p.section + " • " : "") + (p.date ? "Updated " + formatDate(String(p.date).slice(0, 10)) : ""),
               summary: p.summary,
               tags: p.tags || [],
               href: p.link || "#",
             })
           );
+
         });
     }
 
