@@ -1118,4 +1118,79 @@ h1,h2,h3,
   background: rgba(85,64,121,0.20);
   color: #2f2a4a;
 }
+/* ==============================
+   Header banner (top strip) emphasis
+============================== */
+
+/* Give the header a clear purple banner */
+.site-header{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(85,64,121,0.22),
+      rgba(85,64,121,0.14)
+    );
+  border-bottom: 1px solid rgba(85,64,121,0.35);
+}
+
+/* Slightly increase vertical presence so it reads as a banner */
+.site-header .header-inner{
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/* Ensure logo + text never get lost */
+.site-header .brand-name{
+  color: #1b1d2a; /* very dark, high contrast */
+}
+
+.site-header .brand-tag{
+  color: rgba(18,19,26,0.70);
+}
+
+/* --------------------------------
+   Navigation buttons on purple
+---------------------------------- */
+.nav-link{
+  color: rgba(18,19,26,0.80);
+}
+
+/* Hover */
+.nav-link:hover{
+  background: rgba(255,255,255,0.55);
+  color: #12131a;
+}
+
+/* Active / pressed (important change) */
+.nav-link.is-active{
+  background: rgba(255,255,255,0.75);
+  color: #2f2a4a;
+  font-weight: 650;
+}
+
+/* Remove any outline/halo artifacts */
+.nav-link:focus,
+.nav-link:active{
+  outline: none;
+  box-shadow: none;
+}
+
+/* --------------------------------
+   Header search button on banner
+---------------------------------- */
+.header-search-btn{
+  background: rgba(255,255,255,0.60);
+  border-color: rgba(85,64,121,0.30);
+  color: rgba(18,19,26,0.80);
+}
+
+.header-search-btn:hover{
+  background: rgba(255,255,255,0.85);
+  color: #12131a;
+}
+
+.header-search-btn:active{
+  background: rgba(255,255,255,1);
+  color: #2f2a4a;
+}
 
