@@ -1524,3 +1524,52 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   color: var(--indigo);
   font-weight: 650;
 }
+/* ==============================
+   Align header brand with page titles
+   (match content column exactly)
+============================== */
+
+/* Ensure header content uses the same inset as main content */
+.site-header .header-inner{
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+/* Prevent logo from creeping left on large screens */
+.site-header .brand{
+  margin-left: 0;
+}
+
+/* Match container max width exactly */
+.site-header .header-inner{
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+}
+/* ==============================
+   Make Search look identical to other nav links
+============================== */
+
+/* Remove any special Search styling */
+.nav-link-search,
+.nav-link[data-nav="search"]{
+  padding: inherit;
+  border: none !important;
+  background: transparent !important;
+  border-radius: inherit;
+  box-shadow: none !important;
+  color: rgba(18,19,26,0.72) !important;
+  font-weight: inherit;
+}
+
+/* Hover/active behave exactly like other links */
+.nav-link[data-nav="search"]:hover{
+  background: rgba(237,231,243,0.35) !important;
+  color: rgba(18,19,26,0.92) !important;
+}
+
+.nav-link[data-nav="search"].is-active{
+  background: rgba(85,64,121,0.12) !important;
+  color: var(--indigo) !important;
+  font-weight: 650 !important;
+}
