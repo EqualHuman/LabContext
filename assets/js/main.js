@@ -70,7 +70,9 @@ function resolveBase() {
     if (header) {
       try {
         header.innerHTML = await fetchText(base + "assets/partials/header.html");
-      } catch (_) {}
+      } catch (e) {
+        console.warn(e);
+      }
     }
 
     // Footer
@@ -78,7 +80,9 @@ function resolveBase() {
     if (footer) {
       try {
         footer.innerHTML = await fetchText(base + "assets/partials/footer.html");
-      } catch (_) {}
+      } catch (e) {
+        console.warn(e);
+      }
     }
 
     // Fix injected relative links
