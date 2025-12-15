@@ -1281,3 +1281,56 @@ body{
 .home .home-left{
   gap: 20px;
 }
+/* ==============================
+   HOMEPAGE PANEL HIERARCHY REFINEMENT
+   Clearer headers, calmer flow
+============================== */
+
+/* Stronger internal spacing so panels don’t blend together */
+.home .panel{
+  padding-top: 18px;
+}
+
+/* Header reads as a header, not a floating badge */
+.home .panel-title{
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+/* Subtle underline separator instead of vertical bar */
+.home .panel-head{
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(18,19,26,0.08);
+}
+
+/* Subtitle stays clearly attached to the header */
+.home .panel-subtitle{
+  margin-top: 6px;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(18,19,26,0.65);
+}
+
+/* Panel links feel like utilities, not competing headers */
+.home .panel-link{
+  background: rgba(237,231,243,0.55);
+  border: 1px solid rgba(85,64,121,0.16);
+  font-size: 13px;
+}
+
+/* Space feature blocks so content breathes */
+.home .feature-links{
+  gap: 12px;
+}
+
+/* Make section breaks more obvious in left column */
+.home .home-left > .panel + .panel{
+  margin-top: 4px;
+}
