@@ -781,3 +781,37 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   .nav-link{ padding: 9px 11px; }
   .brand-logo{ height: 28px; }
 }
+/* ==============================
+   Home nav anchor refinement
+============================== */
+
+/* Give Home a slightly calmer, grounding presence */
+.nav-link[data-nav="home"]{
+  font-weight: 650;
+  color: #554079;
+}
+
+/* When Home is active */
+.nav-link[data-nav="home"].is-active{
+  background: rgba(85,64,121,0.14);
+  border: 1px solid rgba(85,64,121,0.28);
+}
+
+/* Optional: tiny visual separation so Home reads as the anchor */
+.nav-link[data-nav="home"]::after{
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+  margin-left: 10px;
+  background: rgba(85,64,121,0.22);
+  vertical-align: middle;
+}
+
+/* Remove divider on small screens */
+@media (max-width: 940px){
+  .nav-link[data-nav="home"]::after{
+    display: none;
+  }
+}
+
