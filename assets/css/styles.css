@@ -1,3 +1,6 @@
+Replace **everything** in `assets/css/styles.css` with the single cleaned file below (this removes the repeated/older “homepage banner / welcome tile / intro strip / newsletter” blocks and keeps only the final homepage dashboard + header emphasis, consistent with the calm LabContext direction ).
+
+```css
 /* LabContext — global styles (cleaned + deduped)
    Typography:
    - Body: Source Sans 3
@@ -59,6 +62,12 @@ body{
 a{ color:inherit; text-decoration:none; }
 a:hover{ text-decoration:none; }
 strong{ font-weight:650; }
+
+/* Force form controls to inherit the site typography */
+button, input, select, textarea{
+  font: inherit;
+  letter-spacing: inherit;
+}
 
 /* Headings use serif for editorial calm */
 h1,h2,h3,
@@ -185,7 +194,7 @@ h1,h2,h3,
   color:var(--muted);
 }
 
-/* Header right (search + nav) */
+/* Optional header right (if/when you add search next to nav) */
 .header-right{
   display:flex;
   align-items:center;
@@ -224,10 +233,14 @@ h1,h2,h3,
   border:1px solid rgba(18,19,26,0.10);
   background: rgba(237,231,243,0.55);
   color: rgba(18,19,26,0.72);
-  font-weight:650;
   cursor:pointer;
+
+  /* match nav tone */
   font-family: var(--font-serif);
+  font-weight: 600;
   letter-spacing: 0.08px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .header-search-btn:hover{
@@ -272,11 +285,12 @@ h1,h2,h3,
 /* Ensure NO underline indicator survives anywhere */
 .nav-link::after{ content:none !important; }
 
-/* Normalize Search to match other nav links exactly */
+/* Normalize Search nav link to match others exactly */
 .nav-link[data-nav="search"],
 .nav-link-search{
+  font-family: var(--font-serif) !important;
+  font-weight: 600 !important;
   color: rgba(18,19,26,0.72) !important;
-  font-weight: inherit;
 }
 
 /* ==============================
@@ -378,10 +392,7 @@ h1,h2,h3,
   box-shadow:var(--shadow);
 }
 
-.quiet-card-title{
-  font-weight:650;
-  letter-spacing:0.1px;
-}
+.quiet-card-title{ font-weight:650; letter-spacing:0.1px; }
 .quiet-card-desc{
   margin-top:6px;
   color:var(--muted);
@@ -584,753 +595,7 @@ h1,h2,h3,
 .tiny{ font-size:12px; }
 
 /* ==============================
-   Responsive
-============================== */
-@media (max-width: 940px){
-  .quiet-links{ grid-template-columns:1fr; }
-  .posts-grid{ grid-template-columns:1fr; }
-  .controls{ grid-template-columns:1fr; }
-  .grid-2{ grid-template-columns:1fr; }
-
-  .brand{ min-width:auto; }
-  .header-inner{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 12px 0;
-  }
-  .header-right{
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .header-search-input{
-    width: min(100%, 320px);
-  }
-}
-
-/* ==============================
-   Reduced motion
-============================== */
-@media (prefers-reduced-motion: reduce){
-  *{ scroll-behavior:auto; }
-}
-/* ==============================
-   Normalize Search font to match nav
-   (buttons/inputs sometimes don't inherit font)
-============================== */
-
-/* Force form controls to inherit the site typography */
-button, input, select, textarea {
-  font: inherit;
-  letter-spacing: inherit;
-}
-
-/* If Search is a button (header search), make it match nav tabs exactly */
-.header-search-btn{
-  font-family: var(--font-serif) !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.08px !important;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* If Search is a nav item (link/tab), remove any special-case styling */
-.nav-link[data-nav="search"],
-.nav-link-search{
-  font-family: var(--font-serif) !important;
-  font-weight: 600 !important;
-  color: rgba(18,19,26,0.72) !important;
-}
-/* ==============================
-   HOMEPAGE REVAMP (additions)
-   Paste at end of styles.css
-============================== */
-
-.home-hero{
-  padding: 56px 0 22px 0;
-}
-
-.hero-grid{
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 18px;
-  align-items: start;
-}
-
-.hero-left .hero-title{
-  margin: 0;
-}
-
-.hero-left .hero-subtitle{
-  margin-top: 14px;
-  max-width: 70ch;
-}
-
-.home-badges{
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.badge{
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  color: rgba(18,19,26,0.74);
-  background: rgba(237,231,243,0.55);
-  border: 1px solid rgba(85,64,121,0.14);
-}
-
-.hero-note{
-  margin-top: 16px;
-  padding: 12px 14px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.70);
-  border: 1px solid var(--line);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
-}
-
-.hero-note-title{
-  display: block;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  margin-bottom: 2px;
-}
-
-.hero-note-text{
-  display: block;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.home-panel{
-  padding: 16px;
-  border-radius: calc(var(--radius) + 2px);
-  background: rgba(255,255,255,0.82);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-}
-
-.panel-title{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  font-size: 16px;
-}
-
-.panel-subtitle{
-  margin: 6px 0 0 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.home-search{
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
-  align-items: center;
-}
-
-.home-search-input{
-  width: 100%;
-}
-
-.home-search-btn{
-  padding: 12px 14px;
-  border-radius: 14px;
-}
-
-.panel-block{
-  margin-top: 14px;
-}
-
-.panel-label{
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-.panel-divider{
-  margin: 14px 0;
-  height: 1px;
-  background: rgba(18,19,26,0.08);
-}
-
-.chip-links{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.chip-link{
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-family: var(--font-serif);
-  letter-spacing: 0.08px;
-  color: var(--indigo);
-  background: rgba(85,64,121,0.06);
-  border: 1px solid rgba(85,64,121,0.14);
-}
-
-.chip-link:hover{
-  background: rgba(85,64,121,0.10);
-}
-
-.start-links{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.start-link{
-  display: block;
-  padding: 12px 12px;
-  border-radius: 16px;
-  background: rgba(251,251,253,0.70);
-  border: 1px solid rgba(18,19,26,0.10);
-}
-
-.start-link:hover{
-  background: rgba(237,231,243,0.35);
-}
-
-.start-link-title{
-  display: block;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-}
-
-.start-link-desc{
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13.5px;
-}
-
-.home-tiles{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.home-tile{
-  display: block;
-  padding: 16px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.84);
-  border: 1px solid var(--line);
-  box-shadow: 0 1px 0 rgba(18,19,26,0.04);
-}
-
-.home-tile:hover{
-  background: rgba(237,231,243,0.35);
-  box-shadow: var(--shadow);
-}
-
-.tile-title{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-}
-
-.tile-desc{
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.tile-meta{
-  margin-top: 10px;
-  font-size: 12px;
-  color: rgba(18,19,26,0.72);
-}
-
-.latest-wrap{
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 14px;
-  align-items: start;
-}
-
-.latest-featured{
-  min-height: 1px;
-}
-
-.latest-grid{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.post-card-featured{
-  padding: 18px;
-  border-radius: calc(var(--radius) + 2px);
-  background: rgba(255,255,255,0.90);
-}
-
-.post-card-featured .post-title{
-  font-size: 18px;
-  line-height: 1.25;
-}
-
-.post-card-featured .post-summary{
-  font-size: 14.5px;
-}
-
-.issue-card{
-  padding: 18px;
-}
-
-@media (max-width: 940px){
-  .hero-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .home-tiles{
-    grid-template-columns: 1fr;
-  }
-
-  .latest-wrap{
-    grid-template-columns: 1fr;
-  }
-
-  .home-search{
-    grid-template-columns: 1fr;
-  }
-
-  .home-search-btn{
-    width: 100%;
-  }
-}
-/* ==============================
-   HOMEPAGE TOP VISUAL (between header + content)
-   Paste at end of styles.css
-============================== */
-
-.home .home-banner{
-  padding: 22px 0 6px 0;
-  position: relative;
-}
-
-.home .home-banner-inner{
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 16px;
-  align-items: center;
-  padding: 16px 18px;
-  border-radius: calc(var(--radius) + 2px);
-  border: 1px solid rgba(18,19,26,0.10);
-  background:
-    radial-gradient(700px 220px at 18% 20%, rgba(85,64,121,0.12), transparent 60%),
-    radial-gradient(520px 220px at 86% 30%, rgba(106,84,148,0.10), transparent 62%),
-    rgba(255,255,255,0.70);
-  box-shadow: 0 10px 28px rgba(18,19,26,0.06);
-  overflow: hidden;
-}
-
-.home .home-banner-copy{
-  min-width: 0;
-}
-
-.home .home-banner-kicker{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  font-size: 15px;
-}
-
-.home .home-banner-line{
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  max-width: 62ch;
-}
-
-.home .home-banner-art{
-  position: relative;
-  height: 140px;
-  border-radius: 18px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(251,251,253,0.70);
-  overflow: hidden;
-}
-
-.home .home-banner-image{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.42;
-  filter: saturate(0.95) contrast(1.02);
-  transform: scale(1.05);
-}
-
-.home .home-banner-glow{
-  position: absolute;
-  inset: -40px;
-  background:
-    radial-gradient(220px 180px at 30% 45%, rgba(85,64,121,0.20), transparent 60%),
-    radial-gradient(260px 200px at 75% 55%, rgba(106,84,148,0.16), transparent 62%);
-  filter: blur(2px);
-  animation: homeGlowDrift 18s ease-in-out infinite;
-  opacity: 0.85;
-}
-
-.home .home-banner-dots{
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 18px 18px, rgba(18,19,26,0.10) 1px, transparent 2px);
-  background-size: 28px 28px;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-  animation: homeDotsFloat 22s linear infinite;
-}
-
-@keyframes homeGlowDrift{
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-10px, 6px, 0) scale(1.03); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
-}
-
-@keyframes homeDotsFloat{
-  0%   { background-position: 0 0; }
-  100% { background-position: 0 56px; }
-}
-
-/* tighten hero spacing on homepage only (so the banner feels “attached”) */
-.home .hero{
-  padding-top: 34px;
-}
-
-/* responsive */
-@media (max-width: 940px){
-  .home .home-banner-inner{
-    grid-template-columns: 1fr;
-  }
-  .home .home-banner-art{
-    height: 160px;
-  }
-}
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .home .home-banner-glow,
-  .home .home-banner-dots{
-    animation: none !important;
-  }
-}
-/* Homepage banner logo tuning (SVG) */
-
-.home .home-banner-image{
-  object-fit: contain;
-  padding: 22px;
-  opacity: 0.75;
-  filter: none;
-  transform: none;
-}
-/* ==============================
-   HOMEPAGE WELCOME TILE (replaces image banner art)
-   Paste at end of styles.css
-============================== */
-
-.home .home-banner{
-  padding: 22px 0 6px 0;
-}
-
-.home .home-banner-inner{
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 16px;
-  align-items: center;
-  padding: 16px 18px;
-  border-radius: calc(var(--radius) + 2px);
-  border: 1px solid rgba(18,19,26,0.10);
-  background:
-    radial-gradient(700px 220px at 18% 20%, rgba(85,64,121,0.12), transparent 60%),
-    radial-gradient(520px 220px at 86% 30%, rgba(106,84,148,0.10), transparent 62%),
-    rgba(255,255,255,0.70);
-  box-shadow: 0 10px 28px rgba(18,19,26,0.06);
-  overflow: hidden;
-}
-
-.home .home-banner-kicker{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  font-size: 15px;
-}
-
-.home .home-banner-line{
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  max-width: 62ch;
-}
-
-/* Welcome tile */
-.home .welcome-tile{
-  padding: 14px 14px;
-  border-radius: 18px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(255,255,255,0.82);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
-}
-
-.home .welcome-title{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  font-size: 16px;
-  margin: 0;
-}
-
-.home .welcome-text{
-  margin: 6px 0 0 0;
-  color: var(--muted);
-  font-size: 13.5px;
-  line-height: 1.45;
-}
-
-.home .welcome-list{
-  margin-top: 12px;
-  display: grid;
-  gap: 10px;
-}
-
-.home .welcome-item{
-  display: block;
-  padding: 11px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(18,19,26,0.10);
-  background: rgba(251,251,253,0.72);
-}
-
-.home .welcome-item:hover{
-  background: rgba(237,231,243,0.35);
-}
-
-.home .welcome-item-title{
-  display: block;
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  color: var(--text);
-}
-
-.home .welcome-item-desc{
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* If any old banner art styles exist, make sure they don't take space */
-.home .home-banner-art{
-  display: none !important;
-}
-
-/* responsive */
-@media (max-width: 940px){
-  .home .home-banner-inner{
-    grid-template-columns: 1fr;
-  }
-}
-/* ==============================
-   HOMEPAGE INTRO STRIP (small + non-invasive)
-============================== */
-
-.home .home-intro{
-  padding: 10px 0 6px 0;
-}
-
-.home .home-intro-inner{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(18,19,26,0.08);
-}
-
-.home .home-intro-text{
-  margin: 0;
-  font-size: 13.5px;
-  color: var(--muted);
-  max-width: 70ch;
-}
-
-.home .home-intro-text strong{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  color: var(--text);
-}
-
-.home .home-intro-links{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-.home .home-intro-links a{
-  font-family: var(--font-serif);
-  letter-spacing: 0.08px;
-  color: var(--indigo);
-}
-
-.home .home-intro-links a:hover{
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* Mobile: stack quietly */
-@media (max-width: 640px){
-  .home .home-intro-inner{
-    align-items: flex-start;
-  }
-}
-/* ==============================
-   HOMEPAGE WELCOME MESSAGE (minimal)
-============================== */
-
-.home .home-welcome{
-  padding: 10px 0 4px 0;
-}
-
-.home .home-welcome-text{
-  margin: 0;
-  font-size: 13.5px;
-  line-height: 1.45;
-  color: var(--muted);
-  max-width: 75ch;
-}
-
-.home .home-welcome-text strong{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: var(--text);
-}
-/* ==============================
-   HOMEPAGE WELCOME BOX (quiet, minimal)
-============================== */
-
-.home .home-welcome{
-  padding: 14px 0 6px 0;
-}
-
-.home .home-welcome-box{
-  max-width: 78ch;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.65);
-  border: 1px solid rgba(18,19,26,0.08);
-}
-
-.home .home-welcome-title{
-  margin: 0 0 8px 0;
-  font-size: 18px;
-  font-weight: 650;
-  letter-spacing: -0.2px;
-}
-
-.home .home-welcome-box p{
-  margin: 0 0 10px 0;
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--muted);
-}
-
-.home .home-welcome-box p:last-child{
-  margin-bottom: 0;
-}
-/* ==============================
-   HOMEPAGE WELCOME STRIP (accented, shallow)
-============================== */
-
-.home .home-welcome{
-  padding: 12px 0 10px 0;
-}
-
-.home .home-welcome-box{
-  max-width: 100%;
-  padding: 12px 18px;
-  border-radius: 16px;
-  background: rgba(237,231,243,0.65); /* same family as button accent */
-  border: 1px solid rgba(85,64,121,0.18);
-}
-
-.home .home-welcome-text{
-  margin: 0;
-  font-size: 14.5px;
-  line-height: 1.5;
-  color: rgba(18,19,26,0.75);
-}
-
-.home .home-welcome-text strong{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: var(--indigo);
-}
-/* ==============================
-   HOMEPAGE NEWSLETTER (quiet inline)
-============================== */
-
-.home .home-newsletter{
-  padding: 6px 0 14px 0;
-}
-
-.home .home-newsletter-text{
-  margin: 0;
-  padding: 10px 14px;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: rgba(18,19,26,0.75);
-  background: rgba(237,231,243,0.55);
-  border: 1px solid rgba(85,64,121,0.16);
-  border-radius: 14px;
-}
-
-.home .home-newsletter-text strong{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.06px;
-  color: var(--indigo);
-}
-
-.home .home-newsletter-text a{
-  margin-left: 6px;
-  color: var(--indigo);
-  font-family: var(--font-serif);
-  letter-spacing: 0.06px;
-}
-
-.home .home-newsletter-text a:hover{
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-/* ==============================
    HOMEPAGE DASHBOARD (interactive, not flashy)
-   Paste at end of styles.css
 ============================== */
 
 /* Welcome strip */
@@ -1584,27 +849,14 @@ button, input, select, textarea {
 .home .latest-list .post-title{ font-size: 15px; }
 .home .latest-list .post-summary{ font-size: 13.5px; }
 
-/* Mobile */
-@media (max-width: 940px){
-  .home .home-grid{ grid-template-columns: 1fr; }
-  .home .tiles{ grid-template-columns: 1fr; }
-  .home .intent-grid{ grid-template-columns: 1fr; }
-  .home .home-search{ grid-template-columns: 1fr; }
-  .home .home-search-btn{ width: 100%; }
-}
 /* ==============================
    HOMEPAGE SECTION HEADER EMPHASIS
-   Improves scannability without flash
 ============================== */
-
-/* Panel headers (Quick Finder, Monthly, Featured, etc.) */
 .home .panel-head{
   position: relative;
   padding-left: 14px;
   margin-bottom: 14px;
 }
-
-/* Vertical accent rule */
 .home .panel-head::before{
   content: "";
   position: absolute;
@@ -1613,29 +865,23 @@ button, input, select, textarea {
   bottom: 2px;
   width: 3px;
   border-radius: 2px;
-  background: rgba(85,64,121,0.55); /* accent-primary, softened */
+  background: rgba(85,64,121,0.55);
 }
-
-/* Make titles more assertive */
 .home .panel-title{
-  font-size: 21px;                 /* slightly larger */
-  font-weight: 700;               /* clearer hierarchy */
+  font-size: 21px;
+  font-weight: 700;
   letter-spacing: -0.15px;
 }
-
-/* Subtitles stay quiet but clearer */
 .home .panel-subtitle{
   margin-top: 4px;
   font-size: 14px;
   color: rgba(18,19,26,0.68);
 }
 
-/* Section headers (e.g. Latest in In Context) */
 .home .section-head{
   padding-left: 14px;
   position: relative;
 }
-
 .home .section-head::before{
   content: "";
   position: absolute;
@@ -1646,14 +892,53 @@ button, input, select, textarea {
   border-radius: 2px;
   background: rgba(85,64,121,0.45);
 }
-
 .home .section-title{
   font-size: 23px;
   font-weight: 700;
   letter-spacing: -0.2px;
 }
+.home .panel + .panel{ margin-top: 2px; }
 
-/* Ensure panels visually separate from each other */
-.home .panel + .panel{
-  margin-top: 2px;
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 940px){
+  .quiet-links{ grid-template-columns:1fr; }
+  .posts-grid{ grid-template-columns:1fr; }
+  .controls{ grid-template-columns:1fr; }
+  .grid-2{ grid-template-columns:1fr; }
+
+  .brand{ min-width:auto; }
+  .header-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+  }
+  .header-right{
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header-search-input{
+    width: min(100%, 320px);
+  }
+
+  /* homepage dashboard */
+  .home .home-grid{ grid-template-columns: 1fr; }
+  .home .tiles{ grid-template-columns: 1fr; }
+  .home .intent-grid{ grid-template-columns: 1fr; }
+  .home .home-search{ grid-template-columns: 1fr; }
+  .home .home-search-btn{ width: 100%; }
 }
+
+/* ==============================
+   Reduced motion
+============================== */
+@media (prefers-reduced-motion: reduce){
+  *{ scroll-behavior:auto; }
+}
+```
+
+If you’d rather **not** replace the whole file: tell me and I’ll give you an exact “delete from line X to line Y” plan based on your current `styles.css` on disk (what you pasted had a lot of legacy homepage blocks layered on top).
