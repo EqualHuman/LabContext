@@ -1697,3 +1697,115 @@ body.page-home .panel-title{
 body.page-home .panel-subtitle{
   color: rgba(255,255,255,0.70) !important;
 }
+/* ==============================
+   HOMEPAGE COLOR CORRECTION
+   Remove silver/grey → indigo glass
+============================== */
+
+/* ---- Define homepage-only indigo glass tones ---- */
+body.page-home{
+  --glass-1: rgba(98, 78, 155, 0.22);
+  --glass-2: rgba(70, 56, 120, 0.38);
+  --glass-3: rgba(54, 44, 96, 0.55);
+
+  --edge-soft: rgba(180, 160, 255, 0.22);
+  --edge-strong: rgba(200, 180, 255, 0.32);
+}
+
+/* ==============================
+   Panels (remove grey, add ink depth)
+============================== */
+body.page-home .panel{
+  background:
+    linear-gradient(
+      to bottom,
+      var(--glass-2),
+      var(--glass-3)
+    ) !important;
+
+  border: 1px solid var(--edge-soft) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 28px 90px rgba(0,0,0,0.65) !important;
+}
+
+/* ==============================
+   Inner cards / tiles
+============================== */
+body.page-home .feature-link,
+body.page-home .context-item,
+body.page-home .post-card,
+body.page-home .quiet-card{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(120,100,200,0.22),
+      rgba(70,56,120,0.40)
+    ) !important;
+
+  border: 1px solid var(--edge-soft) !important;
+}
+
+/* Hover stays deep, not shiny */
+body.page-home .feature-link:hover,
+body.page-home .context-item:hover,
+body.page-home .post-card:hover,
+body.page-home .quiet-card:hover{
+  border-color: var(--edge-strong) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 36px 120px rgba(0,0,0,0.75) !important;
+}
+
+/* ==============================
+   Quick Finder = richest surface
+============================== */
+body.page-home .panel-qf{
+  background:
+    radial-gradient(
+      900px 300px at 20% 0%,
+      rgba(170,145,255,0.40),
+      transparent 65%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(110,90,190,0.45),
+      rgba(60,48,110,0.65)
+    ) !important;
+
+  border-color: rgba(210,190,255,0.40) !important;
+}
+
+/* ==============================
+   Header pills (no silver)
+============================== */
+body.page-home .site-header .nav-link{
+  background: rgba(130,110,210,0.22) !important;
+  border: 1px solid rgba(190,170,255,0.28) !important;
+}
+
+body.page-home .site-header .nav-link:hover{
+  background: rgba(150,130,230,0.30) !important;
+}
+
+/* ==============================
+   Inputs & buttons (kill grey fill)
+============================== */
+body.page-home .input,
+body.page-home .header-search-input{
+  background: rgba(110,90,190,0.35) !important;
+  border: 1px solid rgba(190,170,255,0.28) !important;
+  color: rgba(255,255,255,0.95) !important;
+}
+
+body.page-home .input::placeholder{
+  color: rgba(230,220,255,0.65);
+}
+
+/* Chips: indigo pills, not metal */
+body.page-home .chip{
+  background: rgba(130,110,210,0.30) !important;
+  border: 1px solid rgba(200,180,255,0.32) !important;
+  color: rgba(240,235,255,0.95) !important;
+}
