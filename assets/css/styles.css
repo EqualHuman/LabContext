@@ -1452,3 +1452,133 @@ body{
     grid-template-columns: 1fr;
   }
 }
+/* ==============================
+   HOMEPAGE COLUMN FIX — true module layout
+============================== */
+
+/* Force the dashboard area to respect container width */
+.home .home-dash{
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+/* HARD LOCK: two equal columns */
+.home .home-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Prevent either column from collapsing */
+.home .home-left,
+.home .home-right{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+}
+
+/* If the right column has fewer panels, keep it visually present */
+.home .home-right::before{
+  content: "";
+  display: block;
+  height: 0;
+}
+
+/* Panels stay modular, flat, and consistent */
+.home .panel{
+  background: #ffffff;
+  border: 1px solid rgba(18,19,26,0.10);
+  box-shadow: 0 8px 20px rgba(18,19,26,0.04);
+}
+
+/* Kill any remaining decorative artifacts */
+.home .panel::before,
+.home .panel::after,
+.home .panel-accent::before,
+.home .panel-accent::after,
+.home .panel-spotlight::before,
+.home .panel-spotlight::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* Ensure nothing inside panels stretches the column oddly */
+.home .panel *{
+  max-width: 100%;
+}
+
+/* Mobile: intentional stack */
+@media (max-width: 940px){
+  .home .home-grid{
+    grid-template-columns: 1fr;
+  }
+}
+/* ==============================
+   HOMEPAGE COLUMN FIX — true module layout
+============================== */
+
+/* Force the dashboard area to respect container width */
+.home .home-dash{
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+/* HARD LOCK: two equal columns */
+.home .home-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Prevent either column from collapsing */
+.home .home-left,
+.home .home-right{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+}
+
+/* If the right column has fewer panels, keep it visually present */
+.home .home-right::before{
+  content: "";
+  display: block;
+  height: 0;
+}
+
+/* Panels stay modular, flat, and consistent */
+.home .panel{
+  background: #ffffff;
+  border: 1px solid rgba(18,19,26,0.10);
+  box-shadow: 0 8px 20px rgba(18,19,26,0.04);
+}
+
+/* Kill any remaining decorative artifacts */
+.home .panel::before,
+.home .panel::after,
+.home .panel-accent::before,
+.home .panel-accent::after,
+.home .panel-spotlight::before,
+.home .panel-spotlight::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* Ensure nothing inside panels stretches the column oddly */
+.home .panel *{
+  max-width: 100%;
+}
+
+/* Mobile: intentional stack */
+@media (max-width: 940px){
+  .home .home-grid{
+    grid-template-columns: 1fr;
+  }
+}
