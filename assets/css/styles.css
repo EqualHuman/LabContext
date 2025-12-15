@@ -1212,4 +1212,39 @@ h1,h2,h3,
     0 10px 22px rgba(18,19,26,0.05),
     0 2px 0 rgba(85,64,121,0.12) inset !important;
 }
+/* ==============================
+   Final Header Banner: NO frosted glass, calm purple banner
+============================== */
+.site-header{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(85,64,121,0.22),
+    rgba(85,64,121,0.14)
+  ) !important;
+
+  border-bottom: none !important;
+
+  /* soft separation (no dark line) */
+  box-shadow: 0 10px 22px rgba(18,19,26,0.05) !important;
+}
+/* ==============================
+   Homepage: keep tile titles single-line (desktop), wrap on mobile
+============================== */
+.page-home .home-row .panel-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Allow wrapping on smaller screens so nothing gets cut off */
+@media (max-width: 560px){
+  .page-home .home-row .panel-title{
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
 
