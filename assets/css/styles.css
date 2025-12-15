@@ -705,3 +705,79 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     padding:9px 10px;
   }
 }
+/* ==============================
+   Header refinement: integrate right-side nav capsule
+   (closer, calmer, more intentional)
+============================== */
+
+/* Give the header a tiny bit more structure */
+.site-header{
+  background:
+    linear-gradient(to bottom, rgba(237,231,243,0.92), rgba(251,251,253,0.90));
+  border-bottom: 1px solid rgba(85,64,121,0.16);
+  box-shadow: 0 10px 30px rgba(18,19,26,0.06);
+}
+
+/* Align brand + nav better and reduce "floating" feeling */
+.header-inner{
+  align-items:center;
+  padding: 18px 0;
+}
+
+/* ---- Right side capsule: make it feel inset + anchored ---- */
+.nav{
+  gap: 6px;
+  padding: 8px;
+  border-radius: 18px;
+
+  /* anchored/inset feel */
+  background: rgba(251,251,253,0.55);
+  border: 1px solid rgba(85,64,121,0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.75),
+    0 8px 18px rgba(18,19,26,0.05);
+
+  /* pulls it off the very top edge visually */
+  transform: translateY(2px);
+}
+
+/* Links: calmer + more editorial */
+.nav-link{
+  padding: 10px 13px;
+  border-radius: 14px;
+  font-weight: 600;
+  color: rgba(18,19,26,0.72);
+  letter-spacing: 0.1px;
+}
+
+/* Hover: subtle, not loud */
+.nav-link:hover{
+  background: rgba(237,231,243,0.70);
+  color: rgba(18,19,26,0.90);
+}
+
+/* Active: clear, but quiet */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.12);
+  border: 1px solid rgba(85,64,121,0.22);
+  color: #554079;
+}
+
+/* Make the logo/brand feel a touch more "primary" next to the nav */
+.brand-logo{
+  height: 32px;
+}
+.brand-name{
+  font-size: 19px;
+}
+.brand-tag{
+  font-size: 12.5px;
+}
+
+/* Mobile: keep capsule neat */
+@media (max-width: 940px){
+  .header-inner{ padding: 14px 0; }
+  .nav{ padding: 6px; border-radius: 16px; transform:none; }
+  .nav-link{ padding: 9px 11px; }
+  .brand-logo{ height: 28px; }
+}
