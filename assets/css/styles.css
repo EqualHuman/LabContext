@@ -1292,3 +1292,113 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     gap: 12px;
   }
 }
+/* ==============================
+   Header: force single-row nav on desktop + calm Search
+============================== */
+
+/* Desktop: keep everything on ONE line */
+@media (min-width: 941px){
+  .header-inner{
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav{
+    flex-wrap: nowrap;      /* stop wrapping */
+    white-space: nowrap;
+    gap: 16px;
+  }
+
+  /* Keep Search from dropping */
+  .nav-link-search{
+    margin-left: 10px;
+  }
+}
+
+/* Make Search less "button", more "utility" */
+.nav-link-search{
+  padding: 6px 8px;
+  border-radius: 10px; /* not a pill */
+  background: transparent;
+  border: 1px solid rgba(18,19,26,0.10);
+  color: rgba(18,19,26,0.72);
+}
+
+/* Hover stays subtle */
+.nav-link-search:hover{
+  background: rgba(237,231,243,0.28);
+  border-color: rgba(18,19,26,0.12);
+  color: rgba(18,19,26,0.92);
+}
+
+/* If active, keep it consistent with other active states */
+.nav-link-search.is-active{
+  background: rgba(85,64,121,0.10);
+  border-color: rgba(85,64,121,0.14);
+  color: var(--indigo);
+}
+/* ==============================
+   Buttons: quiet, cohesive, editorial
+============================== */
+
+/* Shared button foundation */
+.button,
+.button-ghost{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.08px;
+  border-radius: 14px;
+  padding: 11px 16px;
+  line-height: 1.2;
+  box-shadow: none; /* remove app-style lift */
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+/* Primary action (Browse In Context) */
+.button{
+  background: rgba(85,64,121,0.90);
+  border: 1px solid rgba(85,64,121,0.55);
+  color: #fff;
+}
+
+.button:hover{
+  background: rgba(85,64,121,1);
+  transform: translateY(-1px); /* subtle, not chunky */
+}
+
+/* Secondary action (Open Education Library) */
+.button-ghost{
+  background: rgba(237,231,243,0.55);
+  border: 1px solid rgba(85,64,121,0.22);
+  color: var(--indigo);
+}
+
+.button-ghost:hover{
+  background: rgba(237,231,243,0.80);
+  transform: translateY(-1px);
+}
+
+/* Focus states stay calm + accessible */
+.button:focus,
+.button-ghost:focus{
+  outline: 3px solid rgba(85,64,121,0.25);
+  outline-offset: 2px;
+}
+
+/* Make hero buttons feel aligned with header/nav */
+.hero-actions{
+  gap: 14px;
+}
+
+/* Mobile: slightly tighter */
+@media (max-width: 940px){
+  .button,
+  .button-ghost{
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
