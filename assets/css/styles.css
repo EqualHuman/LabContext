@@ -781,39 +781,7 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   .nav-link{ padding: 9px 11px; }
   .brand-logo{ height: 28px; }
 }
-/* ==============================
-   Home nav anchor refinement
-============================== */
 
-/* Give Home a slightly calmer, grounding presence */
-.nav-link[data-nav="home"]{
-  font-weight: 650;
-  color: #554079;
-}
-
-/* When Home is active */
-.nav-link[data-nav="home"].is-active{
-  background: rgba(85,64,121,0.14);
-  border: 1px solid rgba(85,64,121,0.28);
-}
-
-/* Optional: tiny visual separation so Home reads as the anchor */
-.nav-link[data-nav="home"]::after{
-  content: "";
-  display: inline-block;
-  width: 1px;
-  height: 18px;
-  margin-left: 10px;
-  background: rgba(85,64,121,0.22);
-  vertical-align: middle;
-}
-
-/* Remove divider on small screens */
-@media (max-width: 940px){
-  .nav-link[data-nav="home"]::after{
-    display: none;
-  }
-}
 /* ==============================
    Header Search (quiet + minimal)
 ============================== */
@@ -1452,4 +1420,55 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   background: rgba(85,64,121,0.12);
   border-color: rgba(85,64,121,0.20);
   color: var(--indigo);
+}
+/* ==============================
+   Nav active state: soft highlight + editorial underline
+   (replaces the old Home divider)
+============================== */
+
+/* Ensure no leftover divider anywhere */
+.nav-link[data-nav="home"]::after{ content: none !important; }
+
+/* Base nav links stay quiet */
+.nav-link{
+  position: relative;
+  border: 1px solid transparent;
+}
+
+/* Hover: gentle wash */
+.nav-link:hover{
+  background: rgba(237,231,243,0.32);
+}
+
+/* Active: soft fill + slim border */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.10);
+  border-color: rgba(85,64,121,0.18);
+}
+
+/* The interesting part: a calm underline “ink stroke” */
+.nav-link.is-active::after{
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(85,64,121,0.00),
+    rgba(85,64,121,0.55),
+    rgba(85,64,121,0.00)
+  );
+  transform: scaleX(0.92);
+  opacity: 0.95;
+}
+
+/* Optional: tiny “settle” motion on hover (still low-stim) */
+.nav-link{
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+.nav-link:hover{
+  transform: translateY(-0.5px);
 }
