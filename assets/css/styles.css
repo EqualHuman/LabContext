@@ -1176,3 +1176,48 @@ h1,h2,h3,
     grid-auto-flow: row !important;
   }
 }
+/* ==============================
+   HOMEPAGE: 2 equal sections across the page width
+   - widen the container on the homepage
+   - make left/right columns equal (1fr / 1fr)
+============================== */
+
+/* Wider overall page span (homepage only) */
+.page-home .container{
+  max-width: 1280px !important;
+}
+
+/* True 2-section layout (equal widths) */
+.page-home .home-grid{
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 22px !important;
+}
+
+/* Keep each side from pushing the other (prevents weird overflow) */
+.page-home .home-left,
+.page-home .home-right{
+  min-width: 0 !important;
+}
+
+/* ==============================
+   HEADER: fix “off centered” caused by container + header-inner padding stacking
+   (your header.html is: <div class="container header-inner"> ... )
+============================== */
+.site-header .header-inner{
+  /* container already adds side padding, so remove the extra layer */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  /* also remove the redundant max-width here so container controls it */
+  max-width: none !important;
+}
+
+/* Mobile behavior stays the same */
+@media (max-width: 940px){
+  .page-home .container{
+    max-width: var(--container) !important;
+  }
+  .page-home .home-grid{
+    grid-template-columns: 1fr !important;
+  }
+}
