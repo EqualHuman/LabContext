@@ -693,4 +693,225 @@ h1,h2,h3,
   color: var(--indigo);
   font-weight: 600;
 }
+/* ==============================
+   Homepage Dashboard (Panels + Grid)
+============================== */
+.page-home .home-dash{
+  padding: 30px 0 40px 0;
+}
+
+.page-home .home-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.page-home .home-left,
+.page-home .home-right{
+  display: grid;
+  gap: 18px;
+}
+
+/* Pair tiles: Exam Prep + Education */
+.page-home .home-row{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Panels */
+.page-home .panel{
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.86);
+  border: 1px solid var(--line);
+  padding: 18px;
+  box-shadow: 0 1px 0 rgba(18,19,26,0.04);
+}
+
+.page-home .panel-accent{
+  background: rgba(237,231,243,0.28);
+  border-color: rgba(85,64,121,0.18);
+}
+
+.page-home .panel-spotlight{
+  background: rgba(255,255,255,0.86);
+}
+
+.page-home .panel-head{
+  margin-bottom: 12px;
+}
+
+.page-home .panel-title{
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: -0.2px;
+  line-height: 1.15;
+  font-size: 22px;
+}
+
+.page-home h1.panel-title{
+  font-size: 32px;
+  letter-spacing: -0.4px;
+}
+
+.page-home .panel-subtitle{
+  margin: 8px 0 0 0;
+  color: var(--muted);
+  max-width: 68ch;
+  font-size: 14.5px;
+}
+
+.page-home .row-between{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.page-home .panel-link{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: var(--indigo);
+  white-space: nowrap;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(237,231,243,0.45);
+  border: 1px solid rgba(85,64,121,0.16);
+}
+
+.page-home .panel-link:hover{
+  background: rgba(237,231,243,0.70);
+}
+
+/* Search */
+.page-home .home-search{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.page-home .home-search-input{
+  width: 100%;
+}
+
+.page-home .home-search-btn{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Chips */
+.page-home .home-chips{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Details */
+.page-home .home-details{
+  margin-top: 10px;
+}
+
+.page-home .home-summary{
+  cursor: pointer;
+  color: rgba(18,19,26,0.78);
+  font-size: 14px;
+}
+
+.page-home .home-details-body{
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 70ch;
+}
+
+/* Feature links inside panels */
+.page-home .feature-links{
+  display: grid;
+  gap: 10px;
+}
+
+.page-home .feature-link{
+  display: grid;
+  gap: 2px;
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(18,19,26,0.08);
+}
+
+.page-home .feature-link:hover{
+  background: rgba(255,255,255,0.92);
+  border-color: rgba(18,19,26,0.12);
+}
+
+.page-home .feature-link-title{
+  font-weight: 650;
+  letter-spacing: 0.1px;
+}
+
+.page-home .feature-link-desc{
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+/* Spotlight card */
+.page-home .spotlight-card{
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(237,231,243,0.35);
+  border: 1px solid rgba(85,64,121,0.18);
+}
+
+.page-home .spotlight-kicker{
+  font-size: 12px;
+  color: rgba(18,19,26,0.60);
+  letter-spacing: 0.08px;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+.page-home .spotlight-title{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.page-home .spotlight-desc{
+  color: var(--muted);
+  font-size: 13.5px;
+  max-width: 70ch;
+}
+
+/* Monthly buttons row */
+.page-home .spotlight-actions{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Latest list container (uses existing post-card styles) */
+.page-home .latest-list{
+  display: grid;
+  gap: 12px;
+}
+
+/* Responsive */
+@media (max-width: 940px){
+  .page-home .home-grid{
+    grid-template-columns: 1fr;
+  }
+  .page-home .home-row{
+    grid-template-columns: 1fr;
+  }
+}
 
