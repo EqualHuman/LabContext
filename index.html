@@ -23,7 +23,7 @@
           <!-- LEFT -->
           <section class="home-left" aria-label="Quick finder and navigation">
             <!-- Quick Finder -->
-            <section class="panel panel-accent" aria-label="Quick Finder">
+<section class="panel panel-accent panel-qf" aria-label="Quick Finder">
               <div class="panel-head">
                 <h1 class="panel-title">Quick Finder</h1>
                 <p class="panel-subtitle">Search, or tap a topic to jump into the site.</p>
@@ -53,8 +53,7 @@
               <details class="home-details">
                 <summary class="home-summary">What does the search include?</summary>
                 <div class="home-details-body">
-                  LabContext search looks across In Context posts, Education pages, and Infographics (as they’re added).
-                  If you don’t find what you need yet, it may not be published—check back as the library grows.
+                LabContext search looks across Blog posts, Education pages, and Infographics (as they’re added).
                 </div>
               </details>
             </section>
@@ -140,62 +139,63 @@
             </section>
           </section>
 
-          <!-- RIGHT -->
-          <aside class="home-right" aria-label="Spotlights and latest content">
-            <!-- Monthly -->
-            <section class="panel panel-spotlight" aria-label="Monthly column">
-              <div class="panel-head">
-                <h2 class="panel-title">Monthly</h2>
-                <p class="panel-subtitle">One monthly update highlighting what’s new, what’s clarified, and what matters.</p>
-              </div>
+<!-- RIGHT -->
+<aside class="home-right" aria-label="Spotlights and latest content">
+  <!-- Featured -->
+  <section class="panel" aria-label="Featured">
+    <div class="panel-head">
+      <h2 class="panel-title">Featured</h2>
+      <p class="panel-subtitle">A highlighted topic from the Blog.</p>
+    </div>
 
-              <div id="home-monthly" class="monthly-wrap" aria-live="polite">
-                <div class="muted tiny">Loading monthly issue…</div>
-              </div>
+    <div id="home-featured" class="featured-wrap" aria-live="polite">
+      <div class="muted tiny">Loading featured…</div>
+    </div>
+  </section>
 
-              <details class="home-details">
-                <summary class="home-summary">What’s included?</summary>
-                <div class="home-details-body">
-                  A short overview, links to new content, and any special notices.
-                  Frequency is monthly (no rapid posting cadence).
-                </div>
-              </details>
+  <!-- Monthly -->
+  <section class="panel panel-spotlight" aria-label="Monthly column">
+    <div class="panel-head">
+      <h2 class="panel-title">Monthly</h2>
+      <p class="panel-subtitle">One monthly update highlighting what’s new, what’s clarified, and what matters.</p>
+    </div>
 
-              <div class="spotlight-actions">
-                <a class="button button-ghost" href="#" data-href="in-context/monthly/">View monthly issues</a>
-                <a class="button button-ghost" href="#" data-href="newsletter/">Newsletter details</a>
-              </div>
-            </section>
+    <div id="home-monthly" class="monthly-wrap" aria-live="polite">
+      <div class="muted tiny">Loading monthly issue…</div>
+    </div>
 
-            <!-- Featured -->
-            <section class="panel" aria-label="Featured">
-              <div class="panel-head">
-                <h2 class="panel-title">Featured</h2>
-                <p class="panel-subtitle">A highlighted topic from In Context.</p>
-              </div>
+    <details class="home-details">
+      <summary class="home-summary">What’s included?</summary>
+      <div class="home-details-body">
+        A short overview, links to new content, and any special notices.
+        Frequency is monthly (no rapid posting cadence).
+      </div>
+    </details>
 
-              <div id="home-featured" class="featured-wrap" aria-live="polite">
-                <div class="muted tiny">Loading featured…</div>
-              </div>
-            </section>
+    <div class="spotlight-actions">
+      <a class="button button-ghost" href="#" data-href="in-context/monthly/">View monthly issues</a>
+      <a class="button button-ghost" href="#" data-href="newsletter/">Newsletter details</a>
+    </div>
+  </section>
 
-            <!-- Latest -->
-            <section class="panel" aria-label="Latest in In Context">
-              <div class="panel-head row-between">
-                <div>
-                  <h2 class="panel-title">Latest in In Context</h2>
-                  <p class="panel-subtitle">Most recently updated posts.</p>
-                </div>
-                <a class="panel-link" href="#" data-href="in-context/">View all</a>
-              </div>
+  <!-- Latest -->
+  <section class="panel" aria-label="Latest in Blog">
+    <div class="panel-head row-between">
+      <div>
+        <h2 class="panel-title">Latest in Blog</h2>
+        <p class="panel-subtitle">Most recently updated posts.</p>
+      </div>
+      <a class="panel-link" href="#" data-href="in-context/">View all</a>
+    </div>
 
-              <div id="latest-posts" class="latest-list" aria-live="polite">
-                <noscript>
-                  <p class="muted">Enable JavaScript to see the latest posts list.</p>
-                </noscript>
-              </div>
-            </section>
-          </aside>
+    <div id="latest-posts" class="latest-list" aria-live="polite">
+      <noscript>
+        <p class="muted">Enable JavaScript to see the latest posts list.</p>
+      </noscript>
+    </div>
+  </section>
+</aside>
+
 
         </div>
       </div>
