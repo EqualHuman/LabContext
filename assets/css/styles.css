@@ -1328,3 +1328,267 @@ button, input, select, textarea {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+/* ==============================
+   HOMEPAGE DASHBOARD (interactive, not flashy)
+   Paste at end of styles.css
+============================== */
+
+/* Welcome strip */
+.home .home-welcome{ padding: 14px 0 10px 0; }
+.home .home-welcome-box{
+  width: 100%;
+  max-width: none;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(237,231,243,0.70);
+  border: 1px solid rgba(85,64,121,0.18);
+  box-shadow: 0 10px 24px rgba(18,19,26,0.04);
+}
+.home .home-welcome-text{
+  margin: 0;
+  color: rgba(18,19,26,0.76);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.home .home-welcome-text strong{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: var(--indigo);
+}
+
+/* Layout */
+.home .home-dash{ padding: 10px 0 24px 0; }
+.home .home-grid{
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 14px;
+  align-items: start;
+}
+.home .home-left,
+.home .home-right{ display: grid; gap: 14px; }
+
+/* Panels */
+.home .panel{
+  padding: 16px;
+  border-radius: calc(var(--radius) + 2px);
+  background: rgba(255,255,255,0.84);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(18,19,26,0.04);
+}
+.home .panel-accent{
+  background:
+    radial-gradient(520px 220px at 18% 20%, rgba(85,64,121,0.12), transparent 60%),
+    rgba(255,255,255,0.84);
+}
+.home .panel-spotlight{
+  background:
+    radial-gradient(520px 220px at 85% 10%, rgba(106,84,148,0.12), transparent 62%),
+    rgba(255,255,255,0.84);
+}
+.home .panel-head{ margin-bottom: 12px; }
+.home .panel-title{
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: -0.2px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.home .panel-subtitle{
+  margin: 6px 0 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.home .row-between{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.home .panel-link{
+  color: var(--indigo);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Quick Finder */
+.home .home-search{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+.home .home-search-btn{ padding: 12px 14px; border-radius: 14px; }
+.home .home-chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.home .home-details{ margin-top: 12px; }
+.home .home-summary{
+  cursor: pointer;
+  font-family: var(--font-serif);
+  letter-spacing: 0.06px;
+  color: rgba(18,19,26,0.76);
+}
+.home .home-details-body{
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Intent buttons */
+.home .intent-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+.home .intent{
+  text-align: left;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(18,19,26,0.10);
+  background: rgba(251,251,253,0.72);
+  cursor: pointer;
+  transition: background 140ms ease, transform 140ms ease;
+}
+.home .intent:hover{
+  background: rgba(237,231,243,0.35);
+  transform: translateY(-0.5px);
+}
+.home .intent.is-selected{
+  background: rgba(237,231,243,0.65);
+  border: 1px solid rgba(85,64,121,0.22);
+}
+.home .intent-title{
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: rgba(18,19,26,0.88);
+}
+.home .intent-desc{
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.home .intent-result{
+  margin-top: 12px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(18,19,26,0.10);
+  background: rgba(255,255,255,0.70);
+}
+.home .intent-result-title{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+}
+.home .intent-result-desc{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.home .intent-result-actions{ margin-top: 10px; }
+
+/* Tiles */
+.home .tiles{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+.home .tile{
+  display: block;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(18,19,26,0.10);
+  background: rgba(255,255,255,0.78);
+  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+.home .tile:hover{
+  background: rgba(237,231,243,0.35);
+  box-shadow: var(--shadow);
+  transform: translateY(-0.5px);
+}
+.home .tile-title{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+}
+.home .tile-desc{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Monthly + Featured cards */
+.home .monthly-card,
+.home .featured-card{
+  display: block;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(18,19,26,0.10);
+  background: rgba(251,251,253,0.72);
+  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+.home .monthly-card:hover,
+.home .featured-card:hover{
+  background: rgba(237,231,243,0.35);
+  box-shadow: var(--shadow);
+  transform: translateY(-0.5px);
+}
+.home .monthly-kicker{
+  font-size: 12px;
+  color: rgba(18,19,26,0.62);
+}
+.home .monthly-title,
+.home .featured-title{
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+}
+.home .monthly-summary,
+.home .featured-summary{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.home .spotlight-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Latest list (denser than cards; still clickable + clear) */
+.home .latest-list{
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+.home .latest-list .post-card{
+  padding: 12px 12px;
+  border-radius: 16px;
+}
+.home .latest-list .post-title{ font-size: 15px; }
+.home .latest-list .post-summary{ font-size: 13.5px; }
+
+/* Mobile */
+@media (max-width: 940px){
+  .home .home-grid{ grid-template-columns: 1fr; }
+  .home .tiles{ grid-template-columns: 1fr; }
+  .home .intent-grid{ grid-template-columns: 1fr; }
+  .home .home-search{ grid-template-columns: 1fr; }
+  .home .home-search-btn{ width: 100%; }
+}
