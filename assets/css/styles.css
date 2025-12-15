@@ -939,6 +939,82 @@ h1,h2,h3,
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior:auto; }
 }
-```
+/* ==============================
+   GRADIENT UNIFICATION (calm, not sporadic)
+   Paste at very end of styles.css
+============================== */
 
-If you’d rather **not** replace the whole file: tell me and I’ll give you an exact “delete from line X to line Y” plan based on your current `styles.css` on disk (what you pasted had a lot of legacy homepage blocks layered on top).
+/* 1) One consistent background wash (site-wide) */
+:root{
+  --wash-1: radial-gradient(1100px 520px at 18% -8%, rgba(85,64,121,0.09), transparent 55%);
+  --wash-2: radial-gradient(900px 520px at 88% 0%, rgba(106,84,148,0.07), transparent 58%);
+  --wash-3: radial-gradient(900px 520px at 45% 110%, rgba(85,64,121,0.05), transparent 62%);
+  --paper-wash: var(--wash-1), var(--wash-2), var(--wash-3), var(--bg);
+
+  /* Subtle “accent strip” used inside panels (instead of full-card gradients) */
+  --panel-strip: linear-gradient(90deg, rgba(85,64,121,0.10), rgba(85,64,121,0.00));
+}
+
+/* Replace the body background with the unified wash */
+body{
+  background: var(--paper-wash);
+}
+
+/* 2) Make panels mostly solid (reduce “random gradient card” feeling) */
+.home .panel,
+.quiet-card,
+.post-card{
+  background: rgba(255,255,255,0.86);
+}
+
+/* 3) Keep “special” panels special… but use a consistent, restrained strip */
+.home .panel-accent,
+.home .panel-spotlight{
+  position: relative;
+  background: rgba(255,255,255,0.86); /* solid base */
+}
+
+/* Accent strip on the left for special panels (quiet + consistent) */
+.home .panel-accent::before,
+.home .panel-spotlight::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 10px;
+  border-radius: 10px;
+  background: var(--panel-strip);
+  pointer-events: none;
+}
+
+/* Optional: tiny top tint so “special” reads as intentional, not random */
+.home .panel-accent::after,
+.home .panel-spotlight::after{
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 0;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(237,231,243,0.55), rgba(237,231,243,0));
+  pointer-events: none;
+}
+
+/* 4) Keep hover consistent (no extra gradient surprises) */
+.home .panel:hover,
+.quiet-card:hover,
+.post-card:hover{
+  background: rgba(237,231,243,0.32);
+}
+
+/* 5) Reduced motion: nothing animated here, but keep safe */
+@media (prefers-reduced-motion: reduce){
+  .home .panel-accent::before,
+  .home .panel-spotlight::before,
+  .home .panel-accent::after,
+  .home .panel-spotlight::after{
+    transition: none !important;
+  }
+}
