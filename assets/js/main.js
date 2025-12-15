@@ -1,51 +1,60 @@
 (function () {
+  "use strict";
+
+  // ------------------------------
+  // Base path + shared layout
+  // ------------------------------
   function resolveBase() {
     const p = window.location.pathname;
+    const isMonthly = p.includes("/in-context/monthly/");
     const isDeep =
       p.includes("/in-context/") ||
       p.includes("/education/") ||
       p.includes("/infographics/") ||
-      p.includes("/about/");
-    const isMonthly = p.includes("/in-context/monthly/");
+      p.includes("/about/") ||
+      p.includes("/search/");
+
     if (isMonthly) return "../../";
     if (isDeep) return "../";
     return "./";
   }
 
-  function injectFavicon() {
-    const base = resolveBase();
-
-    // If a favicon already exists, don't duplicate it
+  function injectFavicon(base) {
     if (document.querySelector('link[rel="icon"]')) return;
 
     const link = document.createElement("link");
     link.rel = "icon";
     link.type = "image/svg+xml";
-
-    // Use your existing SVG name so you don't need a separate favicon.svg file
     link.href = base + "assets/img/labcontext-logo.svg";
-
     document.head.appendChild(link);
   }
 
-  async function injectSharedLayout() {
-    const base = resolveBase();
+  async function fetchText(url) {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("Could not load " + url);
+    return await res.text();
+  }
 
+  async function fetchJson(url) {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("Could not load " + url);
+    return await res.json();
+  }
+
+  async function injectSharedLayout(base) {
     // Header
     const header = document.querySelector("header.site-header");
     if (header) {
       try {
-        const res = await fetch(base + "assets/partials/header.html", { cache: "no-store" });
-        if (res.ok) header.innerHTML = await res.text();
+        header.innerHTML = await fetchText(base + "assets/partials/header.html");
       } catch (_) {}
     }
 
-    // Footer (optional; keep if you have assets/partials/footer.html)
+    // Footer
     const footer = document.querySelector("footer.site-footer");
     if (footer) {
       try {
-        const res = await fetch(base + "assets/partials/footer.html", { cache: "no-store" });
-        if (res.ok) footer.innerHTML = await res.text();
+        footer.innerHTML = await fetchText(base + "assets/partials/footer.html");
       } catch (_) {}
     }
 
@@ -65,63 +74,65 @@
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-      // Active nav
+    // Active nav
+    setActiveNav();
+
+    // Header search → route to /search/?q=
+    wireHeaderSearch(base);
+  }
+
+  function setActiveNav() {
     const path = window.location.pathname;
+
     const is = (segment) =>
       path.includes(`/${segment}/`) ||
       path.endsWith(`/${segment}`) ||
       path.includes(`/${segment}.html`);
 
-    document.querySelectorAll(".nav-link[data-nav]").forEach((a) => a.classList.remove("is-active"));
+    document
+      .querySelectorAll(".nav-link[data-nav]")
+      .forEach((a) => a.classList.remove("is-active"));
 
-    if (is("in-context")) {
-      const a = document.querySelector('.nav-link[data-nav="in-context"]');
+    const set = (key) => {
+      const a = document.querySelector(`.nav-link[data-nav="${key}"]`);
       if (a) a.classList.add("is-active");
-    } else if (is("education")) {
-      const a = document.querySelector('.nav-link[data-nav="education"]');
-      if (a) a.classList.add("is-active");
-    } else if (is("infographics")) {
-      const a = document.querySelector('.nav-link[data-nav="infographics"]');
-      if (a) a.classList.add("is-active");
-    } else if (is("about")) {
-      const a = document.querySelector('.nav-link[data-nav="about"]');
-      if (a) a.classList.add("is-active");
-    } else {
-      const a = document.querySelector('.nav-link[data-nav="home"]');
-      if (a) a.classList.add("is-active");
-    }
+    };
 
-    // Header search → route to /search/?q=
+    if (is("in-context")) set("in-context");
+    else if (is("education")) set("education");
+    else if (is("infographics")) set("infographics");
+    else if (is("about")) set("about");
+    else if (is("search")) set("search");
+    else set("home");
+  }
+
+  function wireHeaderSearch(base) {
     const searchForm = document.querySelector(".header-search");
     const searchInput = document.getElementById("site-search");
-    if (searchForm && searchInput) {
-      searchForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const q = (searchInput.value || "").trim();
-        if (!q) return;
-        window.location.href = base + "search/?q=" + encodeURIComponent(q);
-      });
-    }
+    if (!searchForm || !searchInput) return;
 
+    // Avoid double-binding if header re-injects for any reason
+    if (searchForm.dataset.bound === "1") return;
+    searchForm.dataset.bound = "1";
 
-  function formatDate(iso) {
-    const d = new Date(iso + "T00:00:00");
-    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = (searchInput.value || "").trim();
+      if (!q) return;
+      window.location.href = base + "search/?q=" + encodeURIComponent(q);
+    });
   }
 
-  async function fetchJson(url) {
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error("Could not load " + url);
-    return await res.json();
-  }
-
+  // ------------------------------
+  // Shared UI helpers
+  // ------------------------------
   function uniqueFromKey(items, key) {
     const set = new Set();
     items.forEach((i) => (i[key] || []).forEach((v) => set.add(v)));
     return Array.from(set).sort((a, b) => a.localeCompare(b));
   }
 
-  function card({ title, meta, summary, tags, href }) {
+  function makeCard({ title, meta, summary, tags, href }) {
     const a = document.createElement("a");
     a.className = "post-card";
     a.href = href || "#";
@@ -135,7 +146,7 @@
 
     const t = document.createElement("div");
     t.className = "post-title";
-    t.textContent = title;
+    t.textContent = title || "";
     a.appendChild(t);
 
     if (summary) {
@@ -160,89 +171,120 @@
     return a;
   }
 
-  // HOME: latest library updates
-  async function renderHomeLatest() {
+  function renderEmpty(mount, text) {
+    const empty = document.createElement("div");
+    empty.className = "muted";
+    empty.textContent = text;
+    mount.appendChild(empty);
+  }
+
+  function wireChips(chipsEl, values, onPick) {
+    chipsEl.innerHTML = "";
+    values.slice(0, 10).forEach((v) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip";
+      btn.textContent = v;
+      btn.addEventListener("click", () => onPick(v));
+      chipsEl.appendChild(btn);
+    });
+  }
+
+  function populateSelect(selectEl, values) {
+    values.forEach((v) => {
+      const opt = document.createElement("option");
+      opt.value = v;
+      opt.textContent = v;
+      selectEl.appendChild(opt);
+    });
+  }
+
+  // ------------------------------
+  // HOME: latest In Context library items
+  // ------------------------------
+  async function renderHomeLatest(base) {
     const mount = document.getElementById("latest-posts");
     if (!mount) return;
 
-    const base = resolveBase();
     const library = await fetchJson(base + "data/in_context_library.json");
-
     mount.innerHTML = "";
 
-    const sorted = library
+    const sorted = (library || [])
       .slice()
-      .sort((a, b) => String(b.updated).localeCompare(String(a.updated)))
+      .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")))
       .slice(0, 6);
 
+    if (!sorted.length) {
+      renderEmpty(mount, "No posts yet.");
+      return;
+    }
+
     sorted.forEach((p) => {
-        mount.appendChild(
-        card({
+      mount.appendChild(
+        makeCard({
           title: p.title,
           summary: p.summary,
           tags: p.tags || [],
           href: p.link || "#",
         })
       );
-
     });
   }
 
-  // IN CONTEXT LIBRARY
-  async function renderInContextLibrary() {
+  // ------------------------------
+  // IN CONTEXT: Library (search + tag filter)
+  // ------------------------------
+  async function renderInContextLibrary(base) {
     const mount = document.getElementById("ic-library");
     const searchEl = document.getElementById("ic-search");
     const tagEl = document.getElementById("ic-tag");
     const chipsEl = document.getElementById("ic-tag-chips");
     if (!mount || !searchEl || !tagEl || !chipsEl) return;
 
-    const base = resolveBase();
     const library = await fetchJson(base + "data/in_context_library.json");
+    const tags = uniqueFromKey(library || [], "tags");
 
-    const tags = uniqueFromKey(library, "tags");
-    tags.forEach((t) => {
-      const opt = document.createElement("option");
-      opt.value = t;
-      opt.textContent = t;
-      tagEl.appendChild(opt);
-    });
+    populateSelect(tagEl, tags);
 
-    chipsEl.innerHTML = "";
-    tags.slice(0, 10).forEach((t) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.textContent = t;
-      btn.addEventListener("click", () => {
-        tagEl.value = t;
-        run();
-      });
-      chipsEl.appendChild(btn);
+    wireChips(chipsEl, tags, (t) => {
+      tagEl.value = t;
+      run();
     });
 
     function run() {
       const q = (searchEl.value || "").trim().toLowerCase();
       const tag = tagEl.value || "";
 
-      const filtered = library.filter((p) => {
-        const hay = (p.title + " " + p.summary + " " + (p.tags || []).join(" ")).toLowerCase();
-        const matchesQuery = q === "" || hay.includes(q);
-        const matchesTag = tag === "" || (p.tags || []).includes(tag);
+      const filtered = (library || []).filter((p) => {
+        const hay = (p.title + " " + p.summary + " " + (p.tags || []).join(" "))
+          .toLowerCase()
+          .trim();
+        const matchesQuery = !q || hay.includes(q);
+        const matchesTag = !tag || (p.tags || []).includes(tag);
         return matchesQuery && matchesTag;
       });
 
       mount.innerHTML = "";
 
-      const sorted = filtered.slice().sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
+      const sorted = filtered
+        .slice()
+        .sort((a, b) => String(b.updated || "").localeCompare(String(a.updated || "")));
 
-      if (sorted.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "muted";
-        empty.textContent = "No matches. Try clearing filters.";
-        mount.appendChild(empty);
+      if (!sorted.length) {
+        renderEmpty(mount, "No matches. Try clearing filters.");
         return;
       }
 
+      sorted.forEach((p) => {
+        mount.appendChild(
+          makeCard({
+            title: p.title,
+            summary: p.summary,
+            tags: p.tags || [],
+            href: p.link || "#",
+          })
+        );
+      });
     }
 
     searchEl.addEventListener("input", run);
@@ -250,64 +292,53 @@
     run();
   }
 
-  // MONTHLY ISSUES
-  async function renderInContextIssues() {
+  // ------------------------------
+  // IN CONTEXT: Monthly Issues (search + theme filter)
+  // ------------------------------
+  async function renderInContextIssues(base) {
     const mount = document.getElementById("ic-issues");
     const searchEl = document.getElementById("ic-issue-search");
     const themeEl = document.getElementById("ic-issue-theme");
     const chipsEl = document.getElementById("ic-issue-chips");
     if (!mount || !searchEl || !themeEl || !chipsEl) return;
 
-    const base = resolveBase();
     const issues = await fetchJson(base + "data/in_context_issues.json");
+    const themes = uniqueFromKey(issues || [], "themes");
 
-    const themes = uniqueFromKey(issues, "themes");
-    themes.forEach((t) => {
-      const opt = document.createElement("option");
-      opt.value = t;
-      opt.textContent = t;
-      themeEl.appendChild(opt);
-    });
+    populateSelect(themeEl, themes);
 
-    chipsEl.innerHTML = "";
-    themes.slice(0, 10).forEach((t) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.textContent = t;
-      btn.addEventListener("click", () => {
-        themeEl.value = t;
-        run();
-      });
-      chipsEl.appendChild(btn);
+    wireChips(chipsEl, themes, (t) => {
+      themeEl.value = t;
+      run();
     });
 
     function run() {
       const q = (searchEl.value || "").trim().toLowerCase();
       const theme = themeEl.value || "";
 
-      const filtered = issues.filter((p) => {
-        const hay = (p.title + " " + p.summary + " " + (p.themes || []).join(" ")).toLowerCase();
-        const matchesQuery = q === "" || hay.includes(q);
-        const matchesTheme = theme === "" || (p.themes || []).includes(theme);
+      const filtered = (issues || []).filter((p) => {
+        const hay = (p.title + " " + p.summary + " " + (p.themes || []).join(" "))
+          .toLowerCase()
+          .trim();
+        const matchesQuery = !q || hay.includes(q);
+        const matchesTheme = !theme || (p.themes || []).includes(theme);
         return matchesQuery && matchesTheme;
       });
 
       mount.innerHTML = "";
 
-      const sorted = filtered.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      const sorted = filtered
+        .slice()
+        .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
 
-      if (sorted.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "muted";
-        empty.textContent = "No matches. Try clearing filters.";
-        mount.appendChild(empty);
+      if (!sorted.length) {
+        renderEmpty(mount, "No matches. Try clearing filters.");
         return;
       }
 
       sorted.forEach((p) => {
         mount.appendChild(
-          card({
+          makeCard({
             title: p.title,
             summary: p.summary,
             tags: p.themes || [],
@@ -315,24 +346,23 @@
           })
         );
       });
-
-
     }
 
     searchEl.addEventListener("input", run);
     themeEl.addEventListener("change", run);
     run();
   }
+
+  // ------------------------------
   // GLOBAL SEARCH PAGE
-  async function renderGlobalSearch() {
+  // ------------------------------
+  async function renderGlobalSearch(base) {
     const mount = document.getElementById("search-results");
     const status = document.getElementById("search-status");
     const input = document.getElementById("global-search");
     const sectionEl = document.getElementById("global-section");
     const chipsEl = document.getElementById("global-chips");
     if (!mount || !status || !input || !sectionEl || !chipsEl) return;
-
-    const base = resolveBase();
 
     function getParam(name) {
       const url = new URL(window.location.href);
@@ -363,7 +393,6 @@
       fetchJson(base + "data/in_context_issues.json").catch(() => []),
     ]);
 
-    // Normalize + lightly label sources
     const all = []
       .concat((posts || []).map((p) => normalize({ ...p, section: p.section || "In Context" })))
       .concat((library || []).map((p) => normalize({ ...p, section: "In Context" })))
@@ -388,18 +417,10 @@
       .slice(0, 10)
       .map(([t]) => t);
 
-    chipsEl.innerHTML = "";
-    topTags.forEach((t) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.textContent = t;
-      btn.addEventListener("click", () => {
-        input.value = t;
-        setParam("q", t);
-        run();
-      });
-      chipsEl.appendChild(btn);
+    wireChips(chipsEl, topTags, (t) => {
+      input.value = t;
+      setParam("q", t);
+      run();
     });
 
     // Seed from URL
@@ -407,7 +428,9 @@
     if (initialQ) input.value = initialQ;
 
     function haystack(i) {
-      return (i.title + " " + i.summary + " " + (i.tags || []).join(" ") + " " + i.section).toLowerCase();
+      return (i.title + " " + i.summary + " " + (i.tags || []).join(" ") + " " + i.section)
+        .toLowerCase()
+        .trim();
     }
 
     function sortByDateDesc(a, b) {
@@ -426,17 +449,16 @@
 
       mount.innerHTML = "";
 
-      if (!q && !section) {
-        status.textContent = "Type a keyword to search (or choose a section).";
-      } else {
-        status.textContent = filtered.length + " result" + (filtered.length === 1 ? "" : "s") + (q ? ` for “${q}”` : "");
-      }
+      if (!q && !section) status.textContent = "Type a keyword to search (or choose a section).";
+      else
+        status.textContent =
+          filtered.length +
+          " result" +
+          (filtered.length === 1 ? "" : "s") +
+          (q ? ` for “${q}”` : "");
 
-      if (filtered.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "muted";
-        empty.textContent = "No matches. Try a different keyword or clear filters.";
-        mount.appendChild(empty);
+      if (!filtered.length) {
+        renderEmpty(mount, "No matches. Try a different keyword or clear filters.");
         return;
       }
 
@@ -445,15 +467,14 @@
         .sort(sortByDateDesc)
         .slice(0, 50)
         .forEach((p) => {
-                   mount.appendChild(
-            card({
+          mount.appendChild(
+            makeCard({
               title: p.title,
               summary: p.summary,
               tags: p.tags || [],
               href: p.link || "#",
             })
           );
-
         });
     }
 
@@ -463,20 +484,23 @@
     });
 
     sectionEl.addEventListener("change", run);
-
     run();
   }
 
+  // ------------------------------
   // Boot
+  // ------------------------------
+  const base = resolveBase();
+
   Promise.resolve()
-    .then(injectFavicon)
-    .then(injectSharedLayout)
-      .then(renderHomeLatest)
-    .then(renderInContextLibrary)
-    .then(renderInContextIssues)
-    .then(renderGlobalSearch)
+    .then(() => injectFavicon(base))
+    .then(() => injectSharedLayout(base))
+    .then(() => renderHomeLatest(base))
+    .then(() => renderInContextLibrary(base))
+    .then(() => renderInContextIssues(base))
+    .then(() => renderGlobalSearch(base))
     .catch(() => {
-      const ids = ["latest-posts", "ic-library", "ic-issues"];
+      const ids = ["latest-posts", "ic-library", "ic-issues", "search-results"];
       ids.forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '<p class="muted">Content list unavailable right now.</p>';
