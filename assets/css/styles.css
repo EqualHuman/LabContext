@@ -616,3 +616,30 @@ h1,h2,h3,
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior:auto; }
 }
+/* ==============================
+   Normalize Search font to match nav
+   (buttons/inputs sometimes don't inherit font)
+============================== */
+
+/* Force form controls to inherit the site typography */
+button, input, select, textarea {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+/* If Search is a button (header search), make it match nav tabs exactly */
+.header-search-btn{
+  font-family: var(--font-serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08px !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* If Search is a nav item (link/tab), remove any special-case styling */
+.nav-link[data-nav="search"],
+.nav-link-search{
+  font-family: var(--font-serif) !important;
+  font-weight: 600 !important;
+  color: rgba(18,19,26,0.72) !important;
+}
