@@ -933,4 +933,55 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     justify-content: flex-end;
   }
 }
+/* ==============================
+   Header polish: tighter height + unified controls
+============================== */
+
+/* Slightly reduce header height */
+.header-inner{
+  padding: 14px 0; /* was larger */
+}
+
+/* Make search + nav feel like one grouped unit */
+.header-right{
+  gap: 10px; /* slightly tighter */
+}
+
+/* Soften capsules a touch */
+.header-search,
+.nav{
+  border-radius: 16px;
+}
+
+/* Reduce search padding a hair */
+.header-search{
+  padding: 5px;
+}
+
+/* Slightly smaller search input/button */
+.header-search-input{
+  padding: 9px 11px;
+}
+
+.header-search-btn{
+  padding: 9px 11px;
+}
+
+/* Keep nav links visually balanced */
+.nav-link{
+  padding: 8px 11px;
+}
+
+/* Optional: align capsule baselines */
+.header-search,
+.nav{
+  transform: translateY(1px);
+}
+
+@media (max-width: 820px){
+  .header-search,
+  .nav{
+    transform: none;
+  }
+}
 
