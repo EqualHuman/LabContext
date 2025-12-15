@@ -1334,3 +1334,121 @@ body{
 .home .home-left > .panel + .panel{
   margin-top: 4px;
 }
+/* ==============================
+   HOMEPAGE MODULE RESET (no gradients/strips + fixed columns)
+   Paste at VERY END of styles.css
+============================== */
+
+.home .home-dash{
+  padding: 18px 0 28px 0;
+}
+
+/* FIX COLUMNS: stable two-column layout that won’t “drift” */
+.home .home-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.home .home-left,
+.home .home-right{
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+/* MODULE LOOK: solid panels, no internal gradient/bands */
+.home .panel{
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(18,19,26,0.10);
+  box-shadow: 0 10px 22px rgba(18,19,26,0.04);
+}
+
+/* Kill any “special panel” gradient treatments */
+.home .panel-accent,
+.home .panel-spotlight{
+  background: rgba(255,255,255,0.88) !important;
+}
+
+/* Remove any decorative strip pseudo-elements if they exist */
+.home .panel-accent::before,
+.home .panel-spotlight::before,
+.home .panel::before,
+.home .panel::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* HEADER: simple, clear, not pill/strip based */
+.home .panel-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.home .panel-title{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+
+.home .panel-subtitle{
+  margin: 6px 0 0 0;
+  max-width: 62ch;
+  color: rgba(18,19,26,0.66);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Links as subtle chips (optional, but keeps it “module-y” without bars/strips) */
+.home .panel-link{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(237,231,243,0.45);
+  border: 1px solid rgba(85,64,121,0.14);
+  color: var(--indigo);
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.home .panel-link:hover{
+  background: rgba(237,231,243,0.65);
+  border-color: rgba(85,64,121,0.18);
+}
+
+/* If any header “row-between” grid rules exist, force it back to normal */
+.home .row-between{
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+
+/* Optional: soften the page wash so the modules don’t “run together” */
+body{
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(85,64,121,0.08), transparent 52%),
+    radial-gradient(900px 500px at 85% 0%, rgba(106,84,148,0.06), transparent 58%),
+    var(--bg);
+}
+
+/* Responsive: stack cleanly */
+@media (max-width: 940px){
+  .home .home-grid{
+    grid-template-columns: 1fr;
+  }
+}
