@@ -1005,3 +1005,46 @@ h1,h2,h3,
     grid-column: auto;
   }
 }
+/* ==============================
+   Homepage: 2-column “info” layout tweaks
+   - Context of the Week: 2 columns, with Advice spanning full width
+   - Panel feature links: 2 columns, with the 3rd item full width
+============================== */
+
+/* Context of the Week: 2-up on desktop */
+.page-home .context-week-grid{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Make the static “Advice” card span across both columns */
+.page-home .context-week-grid .context-item-static{
+  grid-column: 1 / -1;
+}
+
+/* Feature link lists inside the two big tiles: 2 columns on desktop */
+.page-home .feature-links{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* If there are 3 links, let the 3rd span full width (looks intentional) */
+.page-home .feature-links .feature-link:nth-child(3){
+  grid-column: 1 / -1;
+}
+
+/* Mobile: collapse back to 1 column */
+@media (max-width: 560px){
+  .page-home .context-week-grid{
+    grid-template-columns: 1fr;
+  }
+  .page-home .context-week-grid .context-item-static{
+    grid-column: auto;
+  }
+  .page-home .feature-links{
+    grid-template-columns: 1fr;
+  }
+  .page-home .feature-links .feature-link:nth-child(3){
+    grid-column: auto;
+  }
+}
