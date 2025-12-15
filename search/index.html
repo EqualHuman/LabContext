@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search · LabContext</title>
+  <meta name="description" content="Search LabContext for keywords across In Context and other library content." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header"></header>
+
+  <main id="main">
+    <section class="page-head">
+      <div class="container">
+        <h1 class="page-title">Search</h1>
+        <p class="page-subtitle">
+          Search titles, summaries, tags, and sections. Try: hemolysis, turnaround time, reference range…
+        </p>
+
+        <div class="controls">
+          <label class="control">
+            <span class="control-label">Search keywords</span>
+            <input id="global-search" class="input" type="search" placeholder="Type a keyword…" autocomplete="off" />
+          </label>
+
+          <label class="control">
+            <span class="control-label">Filter by section</span>
+            <select id="global-section" class="select">
+              <option value="">All</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="global-chips" class="chips" aria-label="Popular tags"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="search-status" class="muted tiny" aria-live="polite"></div>
+        <div id="search-results" class="posts-list" aria-live="polite">
+          <noscript>
+            <p class="muted">Enable JavaScript to use site search.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"></footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
