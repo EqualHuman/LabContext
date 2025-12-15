@@ -16,10 +16,7 @@
   --muted: #5a6072;
   --line: rgba(18,19,26,0.10);
 
-  /* Accent Color System
-     Primary: #554079
-     Soft Accent: #ede7f3
-  */
+  /* Accent Color System */
   --accent-primary: #554079;
   --accent-secondary: #ede7f3;
 
@@ -60,7 +57,7 @@ a{ color:inherit; text-decoration:none; }
 a:hover{ text-decoration:none; }
 strong{ font-weight:650; }
 
-/* Force form controls to inherit site typography (fixes “Search looks different”) */
+/* Force form controls to inherit site typography */
 button, input, select, textarea{
   font: inherit;
   letter-spacing: inherit;
@@ -128,16 +125,26 @@ h1,h2,h3,
 }
 
 /* ==============================
-   Header / Nav
+   Header / Nav (single source of truth)
 ============================== */
 .site-header{
   position:sticky;
   top:0;
   z-index:50;
-  backdrop-filter:saturate(120%) blur(12px);
-  background: linear-gradient(to bottom, rgba(237,231,243,0.70), rgba(251,251,253,0.92));
-  border-bottom: 1px solid rgba(18,19,26,0.10);
-  box-shadow: 0 10px 24px rgba(18,19,26,0.04);
+
+  /* NO frosted glass */
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+
+  /* Solid-feeling purple banner */
+  background: linear-gradient(
+    to bottom,
+    rgba(237,231,243,1),
+    rgba(230,222,242,1)
+  );
+
+  border-bottom:none;
+  box-shadow: 0 10px 22px rgba(18,19,26,0.05);
 }
 
 .header-inner{
@@ -145,7 +152,9 @@ h1,h2,h3,
   align-items:center;
   justify-content:space-between;
   gap:18px;
-  padding:14px 0;
+
+  /* banner spacing */
+  padding:16px 0;
 
   /* keep brand aligned with page titles */
   max-width: var(--container);
@@ -169,7 +178,7 @@ h1,h2,h3,
 }
 
 .brand-logo{
-  height:32px;
+  height:38px;
   width:auto;
   display:block;
   transform:translateY(1px);
@@ -183,14 +192,15 @@ h1,h2,h3,
 }
 
 .brand-name{
-  font-size:19px;
+  font-size:21px;
   font-weight:650;
-  letter-spacing:0.2px;
+  letter-spacing:0.3px;
+  color:#1b1d2a;
 }
 
 .brand-tag{
-  font-size:12.5px;
-  color:var(--muted);
+  font-size:13px;
+  color: rgba(18,19,26,0.70);
 }
 
 /* Header right (search + nav) */
@@ -207,7 +217,7 @@ h1,h2,h3,
   gap:8px;
   padding:4px;
   border-radius:12px;
-  background: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.60);
   border: 1px solid rgba(18,19,26,0.10);
 }
 
@@ -216,7 +226,7 @@ h1,h2,h3,
   padding:8px 10px;
   border-radius:10px;
   border:1px solid rgba(18,19,26,0.10);
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.82);
   color: var(--text);
   font-family: var(--font-sans);
 }
@@ -229,23 +239,27 @@ h1,h2,h3,
 .header-search-btn{
   padding:8px 10px;
   border-radius:10px;
-  border:1px solid rgba(18,19,26,0.10);
-  background: rgba(237,231,243,0.55);
-  color: rgba(18,19,26,0.72);
+  border:1px solid rgba(85,64,121,0.22);
+  background: rgba(255,255,255,0.60);
+  color: rgba(18,19,26,0.80);
   cursor:pointer;
 
-  /* match nav vibe */
   font-family: var(--font-serif);
-  font-weight:600;
+  font-weight:650;
   letter-spacing:0.08px;
 }
 
 .header-search-btn:hover{
-  background: rgba(237,231,243,0.80);
-  color: rgba(18,19,26,0.92);
+  background: rgba(255,255,255,0.88);
+  color: #12131a;
 }
 
-/* Nav (quiet editorial tabs) */
+.header-search-btn:active{
+  background: rgba(255,255,255,1);
+  color: #2f2a4a;
+}
+
+/* Nav */
 .nav{
   display:flex;
   align-items:center;
@@ -258,33 +272,38 @@ h1,h2,h3,
   padding:6px 10px;
   border-radius:10px;
   background: transparent;
-  border: none; /* no halos */
+  border: none;
   font-family: var(--font-serif);
-  font-weight:600;
+  font-weight:650;
   letter-spacing:0.08px;
   line-height:1.2;
-  color: rgba(18,19,26,0.72);
+  color: rgba(18,19,26,0.80);
   transition: background 140ms ease, color 140ms ease, transform 140ms ease;
 }
 
 .nav-link:hover{
-  background: rgba(237,231,243,0.35);
-  color: rgba(18,19,26,0.92);
+  background: rgba(255,255,255,0.55);
+  color: #12131a;
   transform: translateY(-0.5px);
 }
 
 .nav-link.is-active{
-  background: rgba(85,64,121,0.12); /* tonal highlight only */
-  color: var(--indigo);
+  background: rgba(255,255,255,0.75);
+  color: #2f2a4a;
   font-weight:650;
 }
 
 /* Ensure NO underline indicator survives anywhere */
 .nav-link::after{ content:none !important; }
 
+.nav-link:focus,
+.nav-link:active{
+  outline:none;
+  box-shadow:none;
+}
+
 /* ==============================
-   HERO (Homepage section)
-   If you want this homepage-only, see section 2 below.
+   HERO (sitewide default)
 ============================== */
 .hero{ padding:54px 0 28px 0; }
 
@@ -358,7 +377,6 @@ h1,h2,h3,
 
 /* ==============================
    Cards (Quiet links + Post cards)
-   If you want these homepage-only, see section 2 below.
 ============================== */
 .quiet-links{
   margin-top:22px;
@@ -395,8 +413,8 @@ h1,h2,h3,
 }
 
 /* Post card internals */
-.post-meta{ color:var(--muted); font-size:12px; }
-.post-title{ margin-top:6px; font-weight:700; letter-spacing:0.1px; }
+.post-meta{ display:none !important; } /* no dates */
+.post-title{ margin-top:0; font-weight:700; letter-spacing:0.1px; }
 .post-summary{ margin-top:6px; color:var(--muted); font-size:14px; max-width:85ch; }
 
 .post-tags{
@@ -468,7 +486,7 @@ h1,h2,h3,
 }
 
 /* ==============================
-   Subnav (In Context tabs)
+   Subnav
 ============================== */
 .subnav{
   margin-top:16px;
@@ -545,6 +563,7 @@ h1,h2,h3,
   font-size:12px;
   cursor:pointer;
   font-family: var(--font-serif);
+  font-weight:650;
   letter-spacing: 0.08px;
 }
 
@@ -592,110 +611,13 @@ h1,h2,h3,
 .tiny{ font-size:12px; }
 
 /* ==============================
-   Responsive
-============================== */
-@media (max-width: 940px){
-  .quiet-links{ grid-template-columns:1fr; }
-  .posts-grid{ grid-template-columns:1fr; }
-  .controls{ grid-template-columns:1fr; }
-  .grid-2{ grid-template-columns:1fr; }
-
-  .brand{ min-width:auto; }
-
-  .header-inner{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 12px 0;
-  }
-
-  .header-right{
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .header-search-input{
-    width: min(100%, 320px);
-  }
-}
-
-/* ==============================
-   Reduced motion
-============================== */
-@media (prefers-reduced-motion: reduce){
-  *{ scroll-behavior:auto; }
-}
-/* ==============================
-   Homepage – Quick Finder calm-down
+   Homepage Dashboard (only)
 ============================== */
 .page-home .hero{
   padding: 32px 0 18px 0;
   background: none;
 }
 
-.page-home .hero-title{
-  font-size: 30px;
-}
-
-.page-home .hero-subtitle{
-  max-width: 60ch;
-}
-
-.page-home .header-search,
-.page-home .controls{
-  margin-top: 12px;
-}
-
-.page-home .chips{
-  margin-top: 10px;
-}
-
-.page-home details{
-  margin-top: 8px;
-  font-size: 14px;
-  color: var(--muted);
-}
-/* ==============================
-   Homepage – Feature Tiles
-============================== */
-.page-home .home-features{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 32px;
-}
-
-.page-home .feature-tile{
-  padding: 20px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.85);
-  border: 1px solid var(--line);
-}
-
-.page-home .feature-tile h3{
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: 20px;
-}
-
-.page-home .feature-tile p{
-  margin-top: 8px;
-  color: var(--muted);
-  max-width: 60ch;
-}
-
-.page-home .feature-tile a{
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 14px;
-  color: var(--indigo);
-  font-weight: 600;
-}
-/* ==============================
-   Homepage Dashboard (Panels + Grid)
-============================== */
 .page-home .home-dash{
   padding: 30px 0 40px 0;
 }
@@ -713,7 +635,6 @@ h1,h2,h3,
   gap: 18px;
 }
 
-/* Pair tiles: Exam Prep + Education */
 .page-home .home-row{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -736,6 +657,12 @@ h1,h2,h3,
 
 .page-home .panel-spotlight{
   background: rgba(255,255,255,0.86);
+}
+
+/* Quick Finder stays tinted */
+.page-home .panel.panel-qf{
+  background: rgba(237,231,243,0.28);
+  border-color: rgba(85,64,121,0.18);
 }
 
 .page-home .panel-head{
@@ -763,30 +690,54 @@ h1,h2,h3,
   font-size: 14.5px;
 }
 
-.page-home .row-between{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
+/* Stacked/centered tile heads (your current direction) */
+.page-home .panel-head.panel-head-stack{
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
+.page-home .panel-head.panel-head-stack .panel-subtitle{
+  margin: 0;
+  text-align: center;
+}
+
+.page-home .panel-head.panel-head-stack .panel-link{
+  margin-top: 2px;
+}
+
+/* Keep tile titles single line on desktop */
+.page-home .home-row .panel-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Panel link */
 .page-home .panel-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  line-height: 1.2;
   font-family: var(--font-serif);
   font-weight: 650;
-  letter-spacing: 0.06px;
+  letter-spacing: 0.08px;
+  border-radius: 14px;
+  background: rgba(237,231,243,0.55);
+  border: 1px solid rgba(85,64,121,0.22);
   color: var(--indigo);
-  white-space: nowrap;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: rgba(237,231,243,0.45);
-  border: 1px solid rgba(85,64,121,0.16);
+  text-decoration: none;
 }
 
 .page-home .panel-link:hover{
-  background: rgba(237,231,243,0.70);
+  background: rgba(237,231,243,0.80);
+  transform: translateY(-1px);
 }
 
-/* Search */
+/* Search (home quick finder) */
 .page-home .home-search{
   display: grid;
   grid-template-columns: 1fr auto;
@@ -794,39 +745,11 @@ h1,h2,h3,
   margin-top: 10px;
 }
 
-.page-home .home-search-input{
-  width: 100%;
-}
-
-.page-home .home-search-btn{
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-/* Chips */
 .page-home .home-chips{
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-}
-
-/* Details */
-.page-home .home-details{
-  margin-top: 10px;
-}
-
-.page-home .home-summary{
-  cursor: pointer;
-  color: rgba(18,19,26,0.78);
-  font-size: 14px;
-}
-
-.page-home .home-details-body{
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  max-width: 70ch;
 }
 
 /* Feature links inside panels */
@@ -837,7 +760,7 @@ h1,h2,h3,
 
 .page-home .feature-link{
   display: grid;
-  gap: 2px;
+  gap: 0;
   padding: 12px 12px;
   border-radius: 14px;
   background: rgba(255,255,255,0.78);
@@ -854,9 +777,9 @@ h1,h2,h3,
   letter-spacing: 0.1px;
 }
 
+/* Hide subsection blurbs on homepage */
 .page-home .feature-link-desc{
-  color: var(--muted);
-  font-size: 13.5px;
+  display:none !important;
 }
 
 /* Spotlight card */
@@ -865,8 +788,8 @@ h1,h2,h3,
   gap: 6px;
   padding: 14px;
   border-radius: 16px;
-  background: rgba(237,231,243,0.35);
-  border: 1px solid rgba(85,64,121,0.18);
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(18,19,26,0.08);
 }
 
 .page-home .spotlight-kicker{
@@ -891,126 +814,13 @@ h1,h2,h3,
   max-width: 70ch;
 }
 
-/* Monthly buttons row */
-.page-home .spotlight-actions{
-  margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Latest list container (uses existing post-card styles) */
-.page-home .latest-list{
+/* Featured list/grid container */
+.page-home .featured-grid{
   display: grid;
   gap: 12px;
 }
 
-/* Responsive */
-@media (max-width: 940px){
-  .page-home .home-grid{
-    grid-template-columns: 1fr;
-  }
-  .page-home .home-row{
-    grid-template-columns: 1fr;
-  }
-}
-/* ==============================
-   Homepage polish: unified panel backgrounds + standardized buttons + hide dates
-============================== */
-
-/* Make all homepage panels share the same background */
-.page-home .panel,
-.page-home .panel-accent,
-.page-home .panel-spotlight{
-  background: rgba(255,255,255,0.86);
-  border-color: var(--line);
-}
-
-/* Keep Quick Finder tinted (requires .panel-qf on the Quick Finder panel) */
-.page-home .panel.panel-qf{
-  background: rgba(237,231,243,0.28);
-  border-color: rgba(85,64,121,0.18);
-}
-
-/* Make the spotlight card match the other tiles (less “random gradient” feeling) */
-.page-home .spotlight-card{
-  background: rgba(255,255,255,0.78);
-  border-color: rgba(18,19,26,0.08);
-}
-
-/* Standardize all button-like UI: buttons + homepage panel links + header search button */
-.button,
-.button-ghost,
-.page-home .panel-link,
-.header-search-btn{
-  font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: 0.08px;
-  border-radius: 14px;
-  border-width: 1px;
-}
-
-/* Make panel-link behave like a ghost button */
-.page-home .panel-link{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 11px 16px;
-  line-height: 1.2;
-  background: rgba(237,231,243,0.55);
-  border: 1px solid rgba(85,64,121,0.22);
-  color: var(--indigo);
-  text-decoration: none;
-}
-
-.page-home .panel-link:hover{
-  background: rgba(237,231,243,0.80);
-  transform: translateY(-1px);
-}
-
-/* Hide dates/meta lines on cards sitewide */
-.post-meta{
-  display: none !important;
-}
-
-/* Remove the extra gap when meta is hidden */
-.post-card .post-title{
-  margin-top: 0;
-}
-/* ==============================
-   Header polish: logo scale + search hover consistency
-============================== */
-
-/* Slightly enlarge logo mark */
-.site-header .brand-logo{
-  height: 38px; /* was ~32px */
-}
-
-/* Slightly enlarge site title */
-.site-header .brand-name{
-  font-size: 21px; /* was ~19px */
-  font-weight: 650;
-  letter-spacing: 0.3px;
-}
-
-/* Optional: give tagline a touch more presence without noise */
-.site-header .brand-tag{
-  font-size: 13px;
-}
-
-/* --------------------------------
-   Fix search button hover text color
----------------------------------- */
-.header-search-btn{
-  color: rgba(18,19,26,0.72); /* match default button text */
-}
-
-.header-search-btn:hover{
-  color: #12131a; /* solid text, same as other buttons */
-}
-/* ==============================
-   Monthly Newsletters: signup form styling
-============================== */
+/* Newsletter signup */
 .page-home .newsletter-signup{
   margin-top: 14px;
   display: grid;
@@ -1033,7 +843,54 @@ h1,h2,h3,
   margin: 2px 0 0 0;
 }
 
-/* Stack on small screens */
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 940px){
+  .quiet-links{ grid-template-columns:1fr; }
+  .posts-grid{ grid-template-columns:1fr; }
+  .controls{ grid-template-columns:1fr; }
+  .grid-2{ grid-template-columns:1fr; }
+
+  .brand{ min-width:auto; }
+
+  .header-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .header-right{
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-search-input{
+    width: min(100%, 320px);
+  }
+
+  .page-home .home-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .page-home .home-row{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tile title wrapping on smaller screens */
+@media (max-width: 560px){
+  .page-home .home-row .panel-title{
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
+/* Newsletter form stack */
 @media (max-width: 520px){
   .page-home .newsletter-signup{
     grid-template-columns: 1fr;
@@ -1042,285 +899,10 @@ h1,h2,h3,
     width: 100%;
   }
 }
+
 /* ==============================
-   Header emphasis: indigo wash + adjusted active states
+   Reduced motion
 ============================== */
-
-/* Header background: soft indigo presence */
-.site-header{
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(85,64,121,0.14),
-      rgba(85,64,121,0.08)
-    ),
-    rgba(251,251,253,0.96);
-  border-bottom: 1px solid rgba(85,64,121,0.22);
+@media (prefers-reduced-motion: reduce){
+  *{ scroll-behavior:auto; }
 }
-
-/* Keep logo + brand text crisp and readable */
-.site-header .brand-name{
-  color: #1b1d2a; /* darker than body text for contrast */
-}
-
-.site-header .brand-tag{
-  color: rgba(18,19,26,0.65);
-}
-
-.site-header .brand-logo{
-  filter: none; /* ensure no dimming on purple */
-}
-
-/* --------------------------------
-   Nav buttons: default + hover
----------------------------------- */
-.nav-link{
-  color: rgba(18,19,26,0.75);
-}
-
-.nav-link:hover{
-  background: rgba(237,231,243,0.55);
-  color: #12131a;
-}
-
-/* --------------------------------
-   Active / pressed state (important)
----------------------------------- */
-.nav-link.is-active{
-  background: rgba(85,64,121,0.22);
-  color: #2f2a4a;
-  font-weight: 650;
-}
-
-/* Remove any leftover outline/halo effects */
-.nav-link:focus,
-.nav-link:active{
-  outline: none;
-  box-shadow: none;
-}
-
-/* --------------------------------
-   Header search button alignment
----------------------------------- */
-.header-search-btn{
-  background: rgba(237,231,243,0.65);
-  border-color: rgba(85,64,121,0.25);
-  color: rgba(18,19,26,0.78);
-}
-
-.header-search-btn:hover{
-  background: rgba(237,231,243,0.85);
-  color: #12131a;
-}
-
-/* Pressed state */
-.header-search-btn:active{
-  background: rgba(85,64,121,0.20);
-  color: #2f2a4a;
-}
-/* ==============================
-   Header banner (top strip) emphasis
-============================== */
-
-/* Give the header a clear purple banner */
-.site-header{
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(85,64,121,0.22),
-      rgba(85,64,121,0.14)
-    );
-  border-bottom: 1px solid rgba(85,64,121,0.35);
-}
-
-/* Slightly increase vertical presence so it reads as a banner */
-.site-header .header-inner{
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-/* Ensure logo + text never get lost */
-.site-header .brand-name{
-  color: #1b1d2a; /* very dark, high contrast */
-}
-
-.site-header .brand-tag{
-  color: rgba(18,19,26,0.70);
-}
-
-/* --------------------------------
-   Navigation buttons on purple
----------------------------------- */
-.nav-link{
-  color: rgba(18,19,26,0.80);
-}
-
-/* Hover */
-.nav-link:hover{
-  background: rgba(255,255,255,0.55);
-  color: #12131a;
-}
-
-/* Active / pressed (important change) */
-.nav-link.is-active{
-  background: rgba(255,255,255,0.75);
-  color: #2f2a4a;
-  font-weight: 650;
-}
-
-/* Remove any outline/halo artifacts */
-.nav-link:focus,
-.nav-link:active{
-  outline: none;
-  box-shadow: none;
-}
-
-/* --------------------------------
-   Header search button on banner
----------------------------------- */
-.header-search-btn{
-  background: rgba(255,255,255,0.60);
-  border-color: rgba(85,64,121,0.30);
-  color: rgba(18,19,26,0.80);
-}
-
-.header-search-btn:hover{
-  background: rgba(255,255,255,0.85);
-  color: #12131a;
-}
-
-.header-search-btn:active{
-  background: rgba(255,255,255,1);
-  color: #2f2a4a;
-}
-/* ==============================
-   Header banner: remove hard divider line, add soft purple separation
-============================== */
-.site-header{
-  /* keep your purple banner */
-  background: linear-gradient(
-    to bottom,
-    rgba(85,64,121,0.22),
-    rgba(85,64,121,0.14)
-  ) !important;
-
-  /* remove the harsh line */
-  border-bottom: none !important;
-
-  /* replace with a soft purple “lift” */
-  box-shadow:
-    0 10px 22px rgba(18,19,26,0.05),
-    0 2px 0 rgba(85,64,121,0.12) inset !important;
-}
-/* ==============================
-   Final Header Banner: NO frosted glass, calm purple banner
-============================== */
-.site-header{
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(85,64,121,0.22),
-    rgba(85,64,121,0.14)
-  ) !important;
-
-  border-bottom: none !important;
-
-  /* soft separation (no dark line) */
-  box-shadow: 0 10px 22px rgba(18,19,26,0.05) !important;
-}
-/* ==============================
-   Homepage: keep tile titles single-line (desktop), wrap on mobile
-============================== */
-.page-home .home-row .panel-title{
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Allow wrapping on smaller screens so nothing gets cut off */
-@media (max-width: 560px){
-  .page-home .home-row .panel-title{
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-  }
-}
-/* ==============================
-   Homepage polish: centered panel heads + hide subsection blurbs + featured 3-up
-============================== */
-
-/* --- Header banner: no frosted, no see-through content behind --- */
-.site-header{
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-
-  /* solid-feeling purple banner (no transparency showing page content) */
-  background: linear-gradient(
-    to bottom,
-    rgba(237,231,243,1),
-    rgba(230,222,242,1)
-  ) !important;
-
-  border-bottom: none !important;
-  box-shadow: 0 10px 22px rgba(18,19,26,0.05) !important;
-}
-
-/* --- Panel heads: stack, center subtitle + button under title --- */
-.page-home .panel-head.panel-head-stack{
-  text-align: center;
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.page-home .panel-head.panel-head-stack .panel-subtitle{
-  margin: 0;
-  text-align: center;
-}
-
-/* Put the Explore button under title/subtitle and centered */
-.page-home .panel-head.panel-head-stack .panel-link{
-  margin-top: 2px;
-}
-
-/* Stop title wrapping in these tiles (desktop) */
-.page-home .home-row .panel-title{
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 560px){
-  .page-home .home-row .panel-title{
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-  }
-}
-
-/* --- Subsection cards: remove the little descriptive lines (keep titles) --- */
-.page-home .feature-link-desc{
-  display: none !important;
-}
-
-/* Slightly tighten feature-link spacing since desc is hidden */
-.page-home .feature-link{
-  gap: 0;
-}
-
-/* --- Featured: 3 articles grid --- */
-.page-home .featured-grid{
-  display: grid;
-  gap: 12px;
-}
-
-/* Keep it single-column for calm scanning (recommended) */
-@media (min-width: 760px){
-  .page-home .featured-grid{
-    grid-template-columns: 1fr;
-  }
-}
-
