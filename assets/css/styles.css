@@ -1158,3 +1158,129 @@ body{
   color: var(--brand-purple) !important;
   border: none !important;
 }
+/* =====================================================
+   ACCENT SYSTEM SHIFT
+   Logo Purple + Calm Blue (no pink, no grey)
+===================================================== */
+
+:root{
+  /* Background (warm, neutral, not white) */
+  --page-bg: #faf9f6;
+  --page-wash: #eef2fb;
+
+  /* Ink */
+  --ink-main: #1f2438;     /* soft ink, not black */
+  --ink-muted: #667099;   /* muted blue-ink */
+
+  /* Brand purple (logo-aligned) */
+  --brand-purple: #5a4a9c;
+  --brand-purple-soft: #ede9fb;
+
+  /* NEW blue accent (clarity / function) */
+  --accent-blue: #3f6fb6;
+  --accent-blue-soft: #e8effb;
+}
+
+/* ---------- Page background: remove lavender fog ---------- */
+body{
+  background:
+    radial-gradient(1200px 700px at 20% -10%, rgba(63,111,182,0.06), transparent 60%),
+    radial-gradient(900px 600px at 85% 0%, rgba(90,74,156,0.08), transparent 60%),
+    linear-gradient(to bottom, rgba(255,255,255,0.85), rgba(255,255,255,0.45)),
+    var(--page-bg) !important;
+}
+
+/* ---------- Headings stay purple (brand) ---------- */
+.hero-title,
+.panel-title,
+.section-title,
+.brand-name{
+  color: var(--brand-purple) !important;
+}
+
+/* ---------- Muted text leans blue, not purple ---------- */
+.hero-subtitle,
+.panel-subtitle,
+.context-desc,
+.muted{
+  color: var(--ink-muted) !important;
+}
+
+/* ---------- Primary buttons: brand purple ---------- */
+.button{
+  background: var(--brand-purple) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* ---------- Secondary buttons: calm blue ---------- */
+.button-ghost{
+  background: var(--accent-blue-soft) !important;
+  color: var(--accent-blue) !important;
+  border: none !important;
+}
+
+.button-ghost:hover{
+  background: #dde8fb !important;
+}
+
+/* ---------- Header search button = BLUE (function) ---------- */
+.header-search-btn{
+  background: var(--accent-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 26px rgba(63,111,182,0.25) !important;
+}
+
+/* ---------- Chips / pills = blue clarity ---------- */
+.chip{
+  background: var(--accent-blue-soft) !important;
+  color: var(--accent-blue) !important;
+  border: none !important;
+}
+
+.chip:hover{
+  background: #dce6fa !important;
+}
+
+/* ---------- Nav active/hover = subtle purple wash ---------- */
+.nav-link:hover,
+.nav-link.is-active{
+  background: var(--brand-purple-soft) !important;
+  color: var(--brand-purple) !important;
+}
+
+/* ---------- Panels: neutral light, no color wash ---------- */
+.panel{
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #fafbff
+  ) !important;
+
+  box-shadow:
+    0 8px 28px rgba(63,111,182,0.08) !important;
+}
+
+/* ---------- Quick Finder: slight blue emphasis ---------- */
+.panel-qf{
+  background:
+    radial-gradient(
+      700px 220px at 10% 0%,
+      rgba(63,111,182,0.12),
+      transparent 60%
+    ),
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #f6f9ff
+    ) !important;
+}
+
+/* ---------- Tags / badges ---------- */
+.tag,
+.hub-badge,
+.hub-badge-pink{
+  background: rgba(63,111,182,0.12) !important;
+  color: var(--accent-blue) !important;
+  border: none !important;
+}
