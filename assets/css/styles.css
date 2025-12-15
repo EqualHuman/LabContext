@@ -95,15 +95,14 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 }
 
 /* ------------------------------
-   Header / Nav (adds a subtle purple tint)
+   Header / Nav
 ------------------------------ */
 .site-header{
   position:sticky;
   top:0;
   z-index:50;
   backdrop-filter:saturate(120%) blur(12px);
-  background:
-    linear-gradient(to bottom, rgba(47,58,119,0.10), rgba(251,251,253,0.72));
+  background: linear-gradient(to bottom, rgba(47,58,119,0.10), rgba(251,251,253,0.72));
   border-bottom:1px solid rgba(47,58,119,0.12);
 }
 
@@ -122,14 +121,32 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   min-width:220px;
 }
 
+/* Brand mark (supports either text “LC” or an <img class="brand-logo">) */
+.brand-mark{
+  display:inline-flex;
+  align-items:center;
+}
 
+.brand-logo{
+  height:24px;               /* editorial sizing */
+  width:auto;
+  display:block;
+  transform:translateY(1px); /* subtle baseline alignment */
+}
 
-.brand-text{display:flex; flex-direction:column; line-height: 1.1; gap:2px}
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+  gap:2px;
+}
+
 .brand-name{
   font-size:18px;
   font-weight:650;
   letter-spacing:0.2px;
 }
+
 .brand-tag{
   font-size:12px;
   color:var(--muted);
@@ -257,7 +274,6 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   gap:8px;
   flex-wrap:wrap;
 }
-
 .tag{
   font-size:12px;
   color:var(--indigo);
@@ -359,7 +375,8 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 .control{display:flex; flex-direction:column; gap:8px}
 .control-label{font-size:12px; color:var(--muted)}
 
-.input, .select{
+.input,
+.select{
   width:100%;
   padding:12px 12px;
   border-radius:14px;
@@ -368,7 +385,8 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   color:var(--text);
   font-family:var(--font-sans);
 }
-.input:focus, .select:focus{
+.input:focus,
+.select:focus{
   outline:3px solid rgba(60,74,160,0.22);
   outline-offset:2px;
 }
@@ -398,13 +416,11 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
    Prose
 ------------------------------ */
 .prose{max-width:78ch}
-
 .prose h2{
   margin:22px 0 8px 0;
   font-size:20px;
   line-height:1.25;
 }
-
 .prose ul{color:var(--muted)}
 
 /* ------------------------------
@@ -451,32 +467,3 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto}
 }
-/* --- Brand logo: hard constraints --- */
-
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-}
-
-.brand-logo {
-  height: 28px;
-  width: auto;
-  display: block;
-}
-
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-}
-
-.brand-logo {
-  height: 24px;   /* was 28px — slightly smaller feels more editorial */
-  width: auto;
-  display: block;
-}
-.brand-logo {
-  height: 24px;
-  transform: translateY(1px);
-}
-
-
