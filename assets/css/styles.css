@@ -467,3 +467,98 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto}
 }
+/* ==============================
+   LabContext Accent Color System
+   Primary: #554079
+   Soft Accent: #ede7f3
+============================== */
+
+:root{
+  /* Brand accents */
+  --accent-primary: #554079;
+  --accent-primary-soft: rgba(85,64,121,0.12);
+  --accent-secondary: #ede7f3;
+
+  /* Override existing indigo system */
+  --indigo: var(--accent-primary);
+  --indigo-2: #6a5494; /* gentle hover lift */
+}
+
+/* ------------------------------
+   Header Banner Styling
+------------------------------ */
+.site-header{
+  background:
+    linear-gradient(
+      to bottom,
+      var(--accent-secondary),
+      rgba(251,251,253,0.85)
+    );
+  border-bottom: 1px solid rgba(85,64,121,0.18);
+}
+
+/* ------------------------------
+   Navigation Active / Hover
+------------------------------ */
+.nav-link.is-active{
+  color: var(--accent-primary);
+  background: var(--accent-primary-soft);
+  border: 1px solid rgba(85,64,121,0.22);
+}
+
+.nav-link:hover{
+  background: rgba(237,231,243,0.65);
+}
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+.button{
+  background: var(--accent-primary);
+  border: 1px solid rgba(85,64,121,0.35);
+  box-shadow: 0 8px 18px rgba(85,64,121,0.18);
+}
+
+.button:hover{
+  background: #6a5494;
+}
+
+.button-ghost{
+  background: rgba(237,231,243,0.65);
+  color: var(--accent-primary);
+  border: 1px solid rgba(85,64,121,0.18);
+}
+
+/* ------------------------------
+   Cards & Tags
+------------------------------ */
+.tag{
+  color: var(--accent-primary);
+  background: rgba(237,231,243,0.75);
+  border: 1px solid rgba(85,64,121,0.20);
+}
+
+.quiet-card:hover,
+.post-card:hover{
+  background: rgba(237,231,243,0.35);
+}
+
+/* ------------------------------
+   Subnav (In Context tabs)
+------------------------------ */
+.subnav-link.is-active{
+  color: var(--accent-primary);
+  background: rgba(237,231,243,0.75);
+  border: 1px solid rgba(85,64,121,0.22);
+}
+
+/* ------------------------------
+   Focus States (Accessibility)
+------------------------------ */
+.button:focus,
+.input:focus,
+.select:focus,
+.chip:focus{
+  outline: 3px solid rgba(85,64,121,0.28);
+  outline-offset: 2px;
+}
