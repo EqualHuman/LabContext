@@ -914,4 +914,67 @@ h1,h2,h3,
     grid-template-columns: 1fr;
   }
 }
+/* ==============================
+   Homepage polish: unified panel backgrounds + standardized buttons + hide dates
+============================== */
+
+/* Make all homepage panels share the same background */
+.page-home .panel,
+.page-home .panel-accent,
+.page-home .panel-spotlight{
+  background: rgba(255,255,255,0.86);
+  border-color: var(--line);
+}
+
+/* Keep Quick Finder tinted (requires .panel-qf on the Quick Finder panel) */
+.page-home .panel.panel-qf{
+  background: rgba(237,231,243,0.28);
+  border-color: rgba(85,64,121,0.18);
+}
+
+/* Make the spotlight card match the other tiles (less “random gradient” feeling) */
+.page-home .spotlight-card{
+  background: rgba(255,255,255,0.78);
+  border-color: rgba(18,19,26,0.08);
+}
+
+/* Standardize all button-like UI: buttons + homepage panel links + header search button */
+.button,
+.button-ghost,
+.page-home .panel-link,
+.header-search-btn{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.08px;
+  border-radius: 14px;
+  border-width: 1px;
+}
+
+/* Make panel-link behave like a ghost button */
+.page-home .panel-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  line-height: 1.2;
+  background: rgba(237,231,243,0.55);
+  border: 1px solid rgba(85,64,121,0.22);
+  color: var(--indigo);
+  text-decoration: none;
+}
+
+.page-home .panel-link:hover{
+  background: rgba(237,231,243,0.80);
+  transform: translateY(-1px);
+}
+
+/* Hide dates/meta lines on cards sitewide */
+.post-meta{
+  display: none !important;
+}
+
+/* Remove the extra gap when meta is hidden */
+.post-card .post-title{
+  margin-top: 0;
+}
 
