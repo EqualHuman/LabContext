@@ -1091,3 +1091,90 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     justify-content:flex-end;
   }
 }
+/* ==============================
+   Header controls (slim + quiet)
+   Overrides the bulky stacked panels
+============================== */
+
+:root{
+  --header-controls-w: clamp(360px, 42vw, 560px);
+  --header-controls-border: 1px solid rgba(18,19,26,0.10);
+}
+
+/* Keep stack, but tighten */
+.header-right{
+  gap: 8px;
+}
+
+/* Same width, but not huge */
+.header-search,
+.nav{
+  width: var(--header-controls-w);
+  background: rgba(255,255,255,0.52);   /* lighter = less “panel” */
+  border: var(--header-controls-border);
+  box-shadow: none;                      /* removes bulky elevation */
+  border-radius: 14px;
+}
+
+/* Reduce capsule padding */
+.header-search{
+  padding: 4px;
+}
+
+.nav{
+  padding: 4px;
+  gap: 6px;
+}
+
+/* Make internals slimmer + consistent */
+.header-search-input,
+.header-search-btn{
+  border: 1px solid rgba(18,19,26,0.10);
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: none;
+}
+
+.header-search-input{
+  background: rgba(255,255,255,0.72);
+}
+
+.header-search-btn{
+  background: rgba(237,231,243,0.55);
+}
+
+/* Less-basic font for controls (but not heavy) */
+.nav-link,
+.header-search-btn,
+.button,
+.button-ghost,
+.subnav-link,
+.chip{
+  font-family: var(--font-serif);
+  letter-spacing: 0.08px;
+}
+
+/* Nav links: smaller + cleaner */
+.nav-link{
+  padding: 7px 10px;
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+/* Active stays quiet */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.10);
+  border: 1px solid rgba(85,64,121,0.16);
+  box-shadow: none;
+}
+
+/* Mobile: full width is fine, but keep it slim */
+@media (max-width: 940px){
+  .header-right{
+    align-items: stretch;
+  }
+  .header-search,
+  .nav{
+    width: 100%;
+  }
+}
