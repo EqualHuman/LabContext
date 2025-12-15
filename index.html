@@ -60,71 +60,82 @@
               </details>
             </div>
 
-            <!-- “What are you trying to do?” (interactive recommender) -->
-            <div class="panel">
-              <div class="panel-head">
-                <h2 class="panel-title">What are you trying to do?</h2>
-                <p class="panel-subtitle">Pick one. The page will suggest a best starting point.</p>
-              </div>
+<section class="panel panel-accent">
+  <div class="panel-head">
+    <div class="row-between">
+      <div>
+        <h2 class="panel-title">Exam Prep</h2>
+        <p class="panel-subtitle">High-yield review built for calm, consistent progress.</p>
+      </div>
+      <a class="panel-link" href="#" data-href="testing/">Testing Hub</a>
+    </div>
+  </div>
 
-              <div class="intent-grid" role="list">
-                <button class="intent" type="button" data-intent="meaning" role="listitem">
-                  <span class="intent-title">Understand what a result means</span>
-                  <span class="intent-desc">Interpretation and “why this happens.”</span>
-                </button>
+  <div class="feature-links">
+    <a class="feature-link" href="#" data-href="testing/">
+      <span class="feature-link-title">BOC Testing Hub</span>
+      <span class="feature-link-desc">Blueprints, strategy, and “why this answer wins.”</span>
+    </a>
 
-                <button class="intent" type="button" data-intent="concept" role="listitem">
-                  <span class="intent-title">Learn the underlying concept</span>
-                  <span class="intent-desc">Mechanisms and cross-department links.</span>
-                </button>
+    <a class="feature-link" href="#" data-href="testing/practice/">
+      <span class="feature-link-title">Practice Sets</span>
+      <span class="feature-link-desc">Pattern-based questions (no pressure, no scoring).</span>
+    </a>
 
-                <button class="intent" type="button" data-intent="visual" role="listitem">
-                  <span class="intent-title">Get a visual explanation</span>
-                  <span class="intent-desc">Infographics and quick reference.</span>
-                </button>
+    <a class="feature-link" href="#" data-href="testing/checklists/">
+      <span class="feature-link-title">Quick Checklists</span>
+      <span class="feature-link-desc">What to know before you move on.</span>
+    </a>
+  </div>
+</section>
 
-                <button class="intent" type="button" data-intent="update" role="listitem">
-                  <span class="intent-title">See what’s new this month</span>
-                  <span class="intent-desc">Monthly issue + announcements.</span>
-                </button>
-              </div>
+<section class="panel">
+  <div class="panel-head">
+    <div class="row-between">
+      <div>
+        <h2 class="panel-title">Education Concepts</h2>
+        <p class="panel-subtitle">Build the mental models that make the details feel reasonable.</p>
+      </div>
+      <a class="panel-link" href="#" data-href="education/">Browse</a>
+    </div>
+  </div>
 
-              <div id="intent-result" class="intent-result" aria-live="polite">
-                <div class="intent-result-title">Suggestion will appear here.</div>
-                <div class="intent-result-desc">Choose an option above.</div>
-              </div>
-            </div>
+  <div class="feature-links">
+    <a class="feature-link" href="#" data-href="education/mechanisms/">
+      <span class="feature-link-title">Mechanisms</span>
+      <span class="feature-link-desc">“Why it happens” explanations across departments.</span>
+    </a>
 
-            <!-- Explore tiles -->
-            <div class="panel">
-              <div class="panel-head">
-                <h2 class="panel-title">Explore</h2>
-                <p class="panel-subtitle">Browse by section.</p>
-              </div>
+    <a class="feature-link" href="#" data-href="education/concepts/">
+      <span class="feature-link-title">Concepts by Department</span>
+      <span class="feature-link-desc">Heme, Chem, Coag, Micro, BB… with cross-links.</span>
+    </a>
 
-              <div class="tiles" role="list">
-                <a class="tile" href="in-context/" role="listitem">
-                  <div class="tile-title">In Context</div>
-                  <div class="tile-desc">PSAs, interpretation support, history, and public-facing explanations.</div>
-                </a>
+    <a class="feature-link" href="#" data-href="education/anatomy-physiology/">
+      <span class="feature-link-title">Anatomy &amp; Physiology</span>
+      <span class="feature-link-desc">The body-side context that makes labs click.</span>
+    </a>
+  </div>
+</section>
 
-                <a class="tile" href="education/" role="listitem">
-                  <div class="tile-title">Education</div>
-                  <div class="tile-desc">Concepts, mechanisms, and mental models used in lab thinking.</div>
-                </a>
+<section class="panel panel-spotlight">
+  <div class="panel-head">
+    <div class="row-between">
+      <div>
+        <h2 class="panel-title">Infographic of the Week</h2>
+        <p class="panel-subtitle">One visual explanation—small, useful, and current.</p>
+      </div>
+      <a class="panel-link" href="#" data-href="infographics/">All infographics</a>
+    </div>
+  </div>
 
-                <a class="tile" href="infographics/" role="listitem">
-                  <div class="tile-title">Infographics</div>
-                  <div class="tile-desc">Visual summaries and printable reference material.</div>
-                </a>
+  <a class="spotlight-card" href="#" data-href="infographics/">
+    <span class="spotlight-kicker">This week’s visual</span>
+    <span class="spotlight-title">Hemolysis: what it changes (and what it doesn’t)</span>
+    <span class="spotlight-desc">Interference patterns, common myths, and when recollection matters.</span>
+  </a>
+</section>
 
-                <a class="tile" href="about/" role="listitem">
-                  <div class="tile-title">About</div>
-                  <div class="tile-desc">Purpose, scope, disclaimers, and contact.</div>
-                </a>
-              </div>
-            </div>
-          </section>
 
           <!-- RIGHT: Monthly spotlight + Latest + “Featured” (interactive blocks) -->
           <aside class="home-right" aria-label="Spotlights and latest content">
