@@ -1573,3 +1573,10 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   color: var(--indigo) !important;
   font-weight: 650 !important;
 }
+/* ==============================
+   Normalize Search nav color
+============================== */
+
+.nav-link[data-nav="search"]{
+  color: rgba(18,19,26,0.72) !important;
+}
