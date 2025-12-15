@@ -1402,3 +1402,54 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     font-size: 14px;
   }
 }
+/* ==============================
+   Nav + header buttons: unified quiet system
+============================== */
+
+/* Base nav links — text-first */
+.nav-link{
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0.08px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(18,19,26,0.72);
+}
+
+/* Hover: gentle presence, no “button” feel */
+.nav-link:hover{
+  background: rgba(237,231,243,0.35);
+  color: rgba(18,19,26,0.92);
+}
+
+/* Active: softly filled tab */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.12);
+  border-color: rgba(85,64,121,0.20);
+  color: var(--indigo);
+}
+
+/* Search should NOT be a different button system */
+.nav-link-search{
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(18,19,26,0.10);
+  color: rgba(18,19,26,0.68);
+}
+
+/* Search hover stays calm */
+.nav-link-search:hover{
+  background: rgba(237,231,243,0.30);
+  border-color: rgba(18,19,26,0.14);
+  color: rgba(18,19,26,0.90);
+}
+
+/* Active Search (on search page) */
+.nav-link-search.is-active{
+  background: rgba(85,64,121,0.12);
+  border-color: rgba(85,64,121,0.20);
+  color: var(--indigo);
+}
