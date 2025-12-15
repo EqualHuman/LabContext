@@ -4,20 +4,36 @@
   // ------------------------------
   // Base path + shared layout
   // ------------------------------
-  function resolveBase() {
-    const p = window.location.pathname;
-    const isMonthly = p.includes("/in-context/monthly/");
-    const isDeep =
-      p.includes("/in-context/") ||
-      p.includes("/education/") ||
-      p.includes("/infographics/") ||
-      p.includes("/about/") ||
-      p.includes("/search/");
+function resolveBase() {
+  // Works on GitHub Pages project sites and local dev.
+  // Computes how many folders deep you are, then returns "../" x depth.
 
-    if (isMonthly) return "../../";
-    if (isDeep) return "../";
-    return "./";
-  }
+  const path = window.location.pathname;
+
+  // Split into parts, remove empty
+  const parts = path.split("/").filter(Boolean);
+
+  // If hosted as a GitHub Pages project site:
+  // e.g. https://user.github.io/LabContext/...
+  // the first part is usually the repo name (LabContext)
+  // We treat that as the site root folder.
+  const repoName = parts[0] || "";
+  const isProjectSite = repoName.toLowerCase() === "labcontext";
+
+  // Build a "relative parts" array that starts AFTER the repo folder
+  const relParts = isProjectSite ? parts.slice(1) : parts.slice();
+
+  // If last part is a file (has a dot), don't count it as a folder depth
+  const last = relParts[relParts.length - 1] || "";
+  const endsWithFile = last.includes(".");
+
+  // If URL ends with "/" (directory), last part is already a folder
+  // If URL ends with a file, depth is folders only
+  const depth = endsWithFile ? Math.max(0, relParts.length - 1) : relParts.length;
+
+  return depth === 0 ? "./" : "../".repeat(depth);
+}
+
 
   function injectFavicon(base) {
     if (document.querySelector('link[rel="icon"]')) return;
