@@ -653,3 +653,55 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   .brand-logo{ height: 28px; }
   .nav-link{ padding: 10px 12px; }
 }
+/* ==============================
+   Make the RIGHT side (nav) feel as good as the LEFT
+   - tighter spacing
+   - grouped "capsule" background
+   - calmer, clearer active state
+============================== */
+
+.header-inner{
+  align-items:center;
+}
+
+/* Group the nav so it doesn't look like floating text */
+.nav{
+  gap:6px;                               /* tighter than before */
+  padding:6px;
+  border-radius:16px;
+  background: rgba(237,231,243,0.55);    /* #ede7f3 wash */
+  border: 1px solid rgba(85,64,121,0.14);
+  box-shadow: 0 6px 18px rgba(18,19,26,0.05);
+}
+
+/* Make links feel intentional (not airy) */
+.nav-link{
+  padding:10px 12px;
+  border-radius:14px;
+  color: rgba(18,19,26,0.70);
+  font-weight:600;
+}
+
+/* Hover: quiet lift */
+.nav-link:hover{
+  background: rgba(237,231,243,0.85);
+  color: rgba(18,19,26,0.88);
+}
+
+/* Active: clearly selected, still subtle */
+.nav-link.is-active{
+  background: rgba(85,64,121,0.12);
+  border: 1px solid rgba(85,64,121,0.22);
+  color: #554079;
+}
+
+/* Optional: keep the capsule from feeling huge on small screens */
+@media (max-width: 940px){
+  .nav{
+    padding:4px;
+    border-radius:14px;
+  }
+  .nav-link{
+    padding:9px 10px;
+  }
+}
