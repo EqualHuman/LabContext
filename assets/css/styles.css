@@ -1178,3 +1178,117 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
     width: 100%;
   }
 }
+/* ==============================
+   Header overhaul (editorial, quiet, non-bulky)
+   - brand left
+   - simple nav right
+   - no capsules / no stacked panels
+============================== */
+
+/* Header surface: keep your calm tint but make it lighter */
+.site-header{
+  background: linear-gradient(to bottom, rgba(237,231,243,0.70), rgba(251,251,253,0.92));
+  border-bottom: 1px solid rgba(18,19,26,0.10);
+  box-shadow: 0 10px 24px rgba(18,19,26,0.04);
+}
+
+/* Layout */
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding: 14px 0;
+}
+
+/* Brand stays as the hero */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width: 260px;
+}
+
+.brand-logo{
+  height: 32px;
+  width: auto;
+  display:block;
+}
+
+.brand-name{
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.brand-tag{
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* Nav becomes quiet editorial links (no capsule) */
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Link styling: simple + calm */
+.nav-link{
+  padding: 6px 2px;           /* minimal chrome */
+  border-radius: 10px;
+  color: rgba(18,19,26,0.72);
+  font-weight: 600;
+  font-family: var(--font-serif); /* “less basic” control font */
+  letter-spacing: 0.08px;
+  line-height: 1.2;
+  border: 1px solid transparent;
+}
+
+/* Hover: subtle underline feel */
+.nav-link:hover{
+  color: rgba(18,19,26,0.92);
+  background: rgba(237,231,243,0.35);
+  border-color: rgba(18,19,26,0.06);
+}
+
+/* Active: small, quiet “selected” */
+.nav-link.is-active{
+  color: var(--indigo);
+  background: rgba(85,64,121,0.10);
+  border-color: rgba(85,64,121,0.14);
+}
+
+/* Give Search a tiny “tool” feel without a button look */
+.nav-link-search{
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(18,19,26,0.10);
+}
+
+.nav-link-search:hover{
+  background: rgba(255,255,255,0.75);
+  border-color: rgba(18,19,26,0.14);
+}
+
+/* Mobile: stack nav under brand neatly */
+@media (max-width: 940px){
+  .header-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .nav{
+    width: 100%;
+    gap: 12px;
+  }
+}
