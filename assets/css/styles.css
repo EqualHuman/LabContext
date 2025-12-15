@@ -849,55 +849,6 @@ h1,h2,h3,
 .home .latest-list .post-title{ font-size: 15px; }
 .home .latest-list .post-summary{ font-size: 13.5px; }
 
-/* ==============================
-   HOMEPAGE SECTION HEADER EMPHASIS
-============================== */
-.home .panel-head{
-  position: relative;
-  padding-left: 14px;
-  margin-bottom: 14px;
-}
-.home .panel-head::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  bottom: 2px;
-  width: 3px;
-  border-radius: 2px;
-  background: rgba(85,64,121,0.55);
-}
-.home .panel-title{
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.15px;
-}
-.home .panel-subtitle{
-  margin-top: 4px;
-  font-size: 14px;
-  color: rgba(18,19,26,0.68);
-}
-
-.home .section-head{
-  padding-left: 14px;
-  position: relative;
-}
-.home .section-head::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 3px;
-  border-radius: 2px;
-  background: rgba(85,64,121,0.45);
-}
-.home .section-title{
-  font-size: 23px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-}
-.home .panel + .panel{ margin-top: 2px; }
 
 /* ==============================
    Responsive
@@ -1097,4 +1048,167 @@ body{
   color: var(--muted);
   font-size: 14px;
   line-height: 1.55;
+}
+/* ==============================
+   HOMEPAGE HEADERS: centered + clearer (no vertical bars)
+   + consistent, non-splotchy gradients
+============================== */
+
+/* Make homepage panels feel separated (without getting louder) */
+.home .home-left,
+.home .home-right{
+  gap: 18px;
+}
+
+.home .panel{
+  position: relative;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(18,19,26,0.11);
+  box-shadow: 0 10px 24px rgba(18,19,26,0.05);
+  overflow: hidden;
+}
+
+/* One consistent “soft wash” at the top of EVERY panel (not sporadic) */
+.home .panel::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:56px;
+  background: linear-gradient(
+    to bottom,
+    rgba(237,231,243,0.55),
+    rgba(255,255,255,0)
+  );
+  pointer-events:none;
+}
+
+/* Remove any special-case panel gradients so nothing looks random */
+.home .panel-accent,
+.home .panel-spotlight{
+  background: rgba(255,255,255,0.88) !important;
+}
+
+/* Panel header layout: center title, keep optional link on right */
+.home .panel-head{
+  padding-left: 0;
+  margin-bottom: 14px;
+}
+
+.home .row-between{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Title becomes a centered “pill label” */
+.home .panel-title{
+  grid-column: 2;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(237,231,243,0.75);
+  border: 1px solid rgba(85,64,121,0.18);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+  line-height: 1.2;
+}
+
+/* Optional header link stays right, quieter */
+.home .panel-link{
+  grid-column: 3;
+  justify-self: end;
+  font-size: 13.5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(18,19,26,0.08);
+  color: var(--indigo);
+}
+
+.home .panel-link:hover{
+  background: rgba(237,231,243,0.45);
+  border-color: rgba(85,64,121,0.16);
+}
+
+/* Subtitle reads as part of the header, centered and contained */
+.home .panel-subtitle{
+  margin: 10px auto 0 auto;
+  max-width: 70ch;
+  text-align: center;
+  color: rgba(18,19,26,0.66);
+  font-size: 14px;
+}
+
+/* Section headers (e.g., Latest…) get the same centered pill treatment */
+.home .section-head{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding-left: 0;
+  margin-bottom: 12px;
+}
+
+.home .section-title{
+  grid-column: 2;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(237,231,243,0.75);
+  border: 1px solid rgba(85,64,121,0.18);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.home .section-link{
+  grid-column: 3;
+  justify-self: end;
+  font-size: 13.5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(18,19,26,0.08);
+}
+
+.home .section-link:hover{
+  background: rgba(237,231,243,0.45);
+  border-color: rgba(85,64,121,0.16);
+}
+
+/* Mobile: allow the “View all” chip to drop under the centered title */
+@media (max-width: 640px){
+  .home .row-between,
+  .home .section-head{
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .home .panel-title,
+  .home .section-title{
+    grid-column: auto;
+    justify-self: start;
+  }
+
+  .home .panel-link,
+  .home .section-link{
+    grid-column: auto;
+    justify-self: start;
+  }
+
+  .home .panel-subtitle{
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
