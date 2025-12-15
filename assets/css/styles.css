@@ -1029,9 +1029,7 @@ h1,h2,h3,
 }
 
 /* If there are 3 links, let the 3rd span full width (looks intentional) */
-.page-home .feature-links .feature-link:nth-child(3){
-  grid-column: 1 / -1;
-}
+
 
 /* Mobile: collapse back to 1 column */
 @media (max-width: 560px){
@@ -1044,9 +1042,7 @@ h1,h2,h3,
   .page-home .feature-links{
     grid-template-columns: 1fr;
   }
-  .page-home .feature-links .feature-link:nth-child(3){
-    grid-column: auto;
-  }
+ 
 }
 /* ==============================
    HEADER: match the purple "Search" button
@@ -1067,10 +1063,10 @@ h1,h2,h3,
   color: rgba(255,255,255,0.78) !important;
 }
 
-/* If your logo looks too dark on the purple, flip it light */
+/* Header logo: use natural colors */
 .site-header .brand-logo{
-  filter: brightness(0) invert(1);
-  opacity: 0.95;
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 /* Nav links become light + clean hover/active pills */
@@ -1102,10 +1098,6 @@ h1,h2,h3,
   gap: 10px !important;
 }
 
-/* Optional: if you want 3 items to look intentional, make the 3rd span full width */
-.page-home .feature-links .feature-link:nth-child(3){
-  grid-column: 1 / -1;
-}
 
 /* Mobile collapse */
 @media (max-width: 560px){
@@ -1115,7 +1107,34 @@ h1,h2,h3,
   .page-home .feature-links{
     grid-template-columns: 1fr !important;
   }
-  .page-home .feature-links .feature-link:nth-child(3){
-    grid-column: auto;
+}
+/* ==============================
+   HOMEPAGE: 2-column info layout (NO full-width 3rd item)
+============================== */
+
+/* Context of the Week cards: 2 columns on desktop */
+.page-home .context-week-grid{
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+/* Feature links inside each tile: always 2 columns on desktop */
+.page-home .feature-links{
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+/* Make every feature link behave as a normal grid item */
+.page-home .feature-links .feature-link{
+  grid-column: auto !important;
+}
+
+/* Mobile collapse */
+@media (max-width: 560px){
+  .page-home .context-week-grid{
+    grid-template-columns: 1fr !important;
+  }
+  .page-home .feature-links{
+    grid-template-columns: 1fr !important;
   }
 }
