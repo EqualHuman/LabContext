@@ -1064,3 +1064,97 @@ body{
 .hero-subtitle{
   color: var(--ink-muted) !important;
 }
+/* =====================================================
+   DE-PINK PASS (no pink, less “girly”)
+   Paste at END of styles.css
+   - keeps purple as brand anchor
+   - replaces pink with warm parchment + soft lilac
+   - no grey / no black / no harsh lines
+===================================================== */
+
+/* ---- Color system: remove ALL pink accents ---- */
+:root{
+  /* Warm paper background (not stark white) */
+  --page-bg: #fbf8f2;
+  --page-wash: #f2edf9;
+
+  /* Ink (soft, not black) */
+  --ink-main: #241d3a;
+  --ink-muted: #6e648c;
+
+  /* Brand purple stays */
+  --brand-purple: #5a4a9c;
+  --brand-purple-soft: #efeaff;
+
+  /* Replace “accent pink” with warm sand */
+  --accent: #b79b63;          /* warm gold-sand */
+  --accent-soft: #f3ead8;     /* warm parchment */
+}
+
+/* ---- Background: remove rosy glow ---- */
+body{
+  background:
+    radial-gradient(1200px 700px at 18% -10%, rgba(90,74,156,0.08), transparent 60%),
+    radial-gradient(900px 650px at 85% 0%, rgba(183,155,99,0.10), transparent 62%),
+    linear-gradient(to bottom, rgba(255,255,255,0.80), rgba(255,255,255,0.35)),
+    var(--page-bg) !important;
+}
+
+/* ---- Header search button: kill pink, use brand purple ---- */
+.header-search-btn{
+  background: var(--brand-purple) !important;
+  color: #ffffff !important;
+  box-shadow: 0 14px 34px rgba(90,74,156,0.18) !important;
+}
+
+/* ---- Primary + ghost buttons: purple + parchment ---- */
+.button{
+  background: var(--brand-purple) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.button-ghost{
+  background: var(--accent-soft) !important;
+  color: #4b3a20 !important;
+  border: none !important;
+}
+
+/* ---- Chips/pills: soft lilac (no pink tint) ---- */
+.chip{
+  background: var(--brand-purple-soft) !important;
+  color: var(--brand-purple) !important;
+  border: none !important;
+}
+
+.chip:hover{
+  background: #e6ddff !important;
+}
+
+/* ---- Nav pills: purple-soft only ---- */
+.nav-link:hover,
+.nav-link.is-active{
+  background: var(--brand-purple-soft) !important;
+  color: var(--brand-purple) !important;
+}
+
+/* ---- Quick Finder: remove any blush, keep neutral warmth ---- */
+.panel-qf{
+  background:
+    radial-gradient(700px 220px at 10% 0%, rgba(90,74,156,0.10), transparent 60%),
+    radial-gradient(700px 220px at 90% 100%, rgba(183,155,99,0.10), transparent 60%),
+    linear-gradient(to bottom, #ffffff, #faf6ff) !important;
+}
+
+/* ---- Badges: remove pink badge styling if present ---- */
+.hub-badge-pink{
+  background: rgba(90,74,156,0.16) !important;
+  color: var(--brand-purple) !important;
+}
+
+/* ---- Tags: neutral lilac ---- */
+.tag{
+  background: rgba(90,74,156,0.12) !important;
+  color: var(--brand-purple) !important;
+  border: none !important;
+}
