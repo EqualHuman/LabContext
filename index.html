@@ -4,124 +4,196 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LabContext</title>
-  <meta name="description" content="LabContext is a calm, open-access clarification resource for laboratory medicine." />
+  <meta name="description" content="LabContext focuses on explaining what laboratory results mean, why laboratory systems behave the way they do, and how concepts connect across departments." />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
+
 <body class="home">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Use shared injected header (keeps nav + header search consistent sitewide) -->
+  <!-- Shared header injection (matches other pages) -->
   <header class="site-header"></header>
 
-
-<section class="home-welcome" aria-label="Welcome to LabContext">
-  <div class="container">
-   <div class="home-welcome-box">
-  <p class="home-welcome-text">
-    <strong>Welcome to LabContext</strong>
-    <p>LabContext focuses on explaining what laboratory results mean, why laboratory systems behave the way they do, and how concepts connect across departments. Emphasis is placed on understanding and interpretation instead of procedures or memorization-based instruction. Content is designed to be accessible, clearly cross-referenced, and reliable as a long-term reference for students, educators, laboratory professionals, and the public.
-  </p>
-   </p>
-</div>
-
-  </div>
-</section>
-
-<section class="home-newsletter" aria-label="Monthly newsletter">
-  <div class="container">
-    <p class="home-newsletter-text">
-      <strong>Monthly newsletter.</strong>
-      A brief update highlighting new content, clarifications, and what’s worth paying attention to.
-      <a href="newsletter/">View details</a>
-    </p>
-  </div>
-</section>
-
-
   <main id="main">
-   
-
-    <!-- PRIMARY PATHS -->
-    <section class="section">
+    <!-- WELCOME STRIP -->
+    <section class="home-welcome-strip" aria-label="Welcome to LabContext">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Explore</h2>
-          <a class="section-link" href="search/">Search everything</a>
+        <div class="home-welcome-strip-box">
+          <p class="home-welcome-strip-text">
+            <strong>Welcome to LabContext.</strong>
+            LabContext focuses on explaining what laboratory results mean, why laboratory systems behave the way they do, and how concepts connect across departments. Emphasis is placed on understanding and interpretation instead of procedures or memorization-based instruction. Content is designed to be accessible, clearly cross-referenced, and reliable as a long-term reference for students, educators, laboratory professionals, and the public.
+          </p>
         </div>
+      </div>
+    </section>
 
-        <div class="home-tiles" role="list">
-          <a class="home-tile" href="in-context/" role="listitem">
-            <div class="tile-title">Blog</div>
-            <div class="tile-desc">Interpretation, outreach, PSAs, breakthroughs, history — without hype.</div>
-            <div class="tile-meta">Best for: “What does this mean?”</div>
-          </a>
+    <!-- DASHBOARD -->
+    <section class="home-dashboard" aria-label="Homepage dashboard">
+      <div class="container">
+        <div class="dash-grid">
+          <!-- LEFT: navigation tiles -->
+          <section class="dash-left" aria-label="Explore">
+            <div class="dash-head">
+              <h1 class="dash-title">Explore</h1>
+              <p class="dash-subtitle">Choose a path, or search directly.</p>
+            </div>
 
-          <a class="home-tile" href="education/" role="listitem">
-            <div class="tile-title">Education</div>
-            <div class="tile-desc">Mechanisms and mental models that make results feel reasonable.</div>
-            <div class="tile-meta">Best for: “Help me understand the system.”</div>
-          </a>
+            <div class="dash-tiles" role="list">
+              <a class="dash-tile" href="in-context/" role="listitem">
+                <div class="dash-tile-title">In Context</div>
+                <div class="dash-tile-desc">Articles, PSAs, and public-facing explanations.</div>
+              </a>
 
-          <a class="home-tile" href="infographics/" role="listitem">
-            <div class="tile-title">Infographics</div>
-            <div class="tile-desc">Shareable visual explanations designed to be calm and clear.</div>
-            <div class="tile-meta">Best for: quick reference + teaching.</div>
-          </a>
+              <a class="dash-tile" href="education/" role="listitem">
+                <div class="dash-tile-title">Education</div>
+                <div class="dash-tile-desc">Concepts, mechanisms, and interpretation logic.</div>
+              </a>
 
-          <a class="home-tile" href="about/" role="listitem">
-            <div class="tile-title">About</div>
-            <div class="tile-desc">What LabContext is (and isn’t), plus disclaimers and contact.</div>
-            <div class="tile-meta">Best for: policies + intent.</div>
-          </a>
+              <a class="dash-tile" href="infographics/" role="listitem">
+                <div class="dash-tile-title">Infographics</div>
+                <div class="dash-tile-desc">Visual summaries and printable resources.</div>
+              </a>
+
+              <a class="dash-tile" href="about/" role="listitem">
+                <div class="dash-tile-title">About</div>
+                <div class="dash-tile-desc">Purpose, scope, disclaimers, and contact.</div>
+              </a>
+
+              <a class="dash-tile dash-tile-wide" href="search/" role="listitem">
+                <div class="dash-tile-title">Search</div>
+                <div class="dash-tile-desc">Search across titles, summaries, tags, and sections.</div>
+              </a>
+            </div>
+          </section>
+
+          <!-- RIGHT: search + monthly spotlight + notices -->
+          <aside class="dash-right" aria-label="Spotlights and tools">
+            <div class="dash-panel">
+              <div class="dash-panel-title">Quick search</div>
+              <p class="dash-panel-subtitle">Type a keyword and jump straight to results.</p>
+
+              <form id="home-search" class="dash-search" role="search" aria-label="Homepage search">
+                <label class="sr-only" for="home-search-input">Search LabContext</label>
+                <input
+                  id="home-search-input"
+                  class="input dash-search-input"
+                  type="search"
+                  placeholder="Try: hemolysis, reference range, turnaround time…"
+                  autocomplete="off"
+                />
+                <button class="button dash-search-btn" type="submit">Search</button>
+              </form>
+
+              <div class="dash-mini">
+                <span class="dash-mini-label">Popular:</span>
+                <span class="dash-mini-items">Hemolysis · Turnaround time · Reference range · Recollection</span>
+              </div>
+            </div>
+
+            <div class="dash-panel dash-panel-accent" aria-label="Monthly newsletter spotlight">
+              <div class="dash-panel-title">Monthly newsletter</div>
+              <p class="dash-panel-subtitle">
+                One monthly update highlighting new content, clarifications, and announcements.
+              </p>
+
+              <div id="monthly-issue-card" class="monthly-issue-card" aria-live="polite">
+                <div class="muted tiny">Loading latest issue…</div>
+              </div>
+
+              <div class="dash-panel-actions">
+                <a class="button button-ghost" href="in-context/monthly/">View monthly issues</a>
+                <a class="button button-ghost" href="newsletter/">Newsletter details</a>
+              </div>
+            </div>
+
+            <div class="dash-panel" aria-label="Notices">
+              <div class="dash-panel-title">Notices</div>
+              <p class="dash-panel-subtitle">
+                Site updates and special announcements will appear here.
+              </p>
+
+              <div class="notice-list">
+                <div class="notice-item">
+                  <div class="notice-title">No notices right now.</div>
+                  <div class="notice-desc">When something is time-sensitive or important, it will be listed here.</div>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
     <!-- LATEST -->
-    <section class="section">
+    <section class="section" aria-label="Latest in In Context">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Latest Blog Updates</h2>
+          <h2 class="section-title">Latest in In Context</h2>
           <a class="section-link" href="in-context/">View all</a>
         </div>
 
-        <div class="latest-wrap">
-          <div id="latest-featured" class="latest-featured" aria-live="polite">
-            <noscript>
-              <div class="muted">Enable JavaScript to see the featured post.</div>
-            </noscript>
-          </div>
-
-          <div id="latest-posts" class="latest-grid" aria-live="polite">
-            <noscript>
-              <p class="muted">Enable JavaScript to see the latest posts list. You can still browse all blog posts.</p>
-            </noscript>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MONTHLY ISSUE TEASER -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Monthly issue</h2>
-          <a class="section-link" href="in-context/monthly/">Browse issues</a>
-        </div>
-
-        <div id="home-issue" class="home-issue" aria-live="polite">
-          <div class="quiet-card">
-            <div class="quiet-card-title">Loading latest issue…</div>
-            <div class="quiet-card-desc">If this persists, your issues feed may be unavailable.</div>
-          </div>
+        <div id="latest-posts" class="posts-grid" aria-live="polite">
+          <noscript>
+            <p class="muted">Enable JavaScript to see the latest posts list. You can still browse all posts in In Context.</p>
+          </noscript>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Use shared injected footer -->
+  <!-- Shared footer injection -->
   <footer class="site-footer"></footer>
 
   <script src="assets/js/main.js"></script>
+
+  <!-- Homepage-only helpers: search + monthly spotlight -->
+  <script>
+    (function () {
+      // Quick search -> /search/?q=
+      var form = document.getElementById("home-search");
+      var input = document.getElementById("home-search-input");
+      if (form && input) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var q = (input.value || "").trim();
+          if (!q) return;
+          window.location.href = "search/?q=" + encodeURIComponent(q);
+        });
+      }
+
+      // Monthly spotlight -> pulls latest from /data/in_context_issues.json
+      var mount = document.getElementById("monthly-issue-card");
+      if (!mount) return;
+
+      fetch("data/in_context_issues.json", { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (issues) {
+          if (!issues || !issues.length) {
+            mount.innerHTML = '<div class="muted tiny">No monthly issues posted yet.</div>';
+            return;
+          }
+
+          issues.sort(function (a, b) {
+            return String(b.date || "").localeCompare(String(a.date || ""));
+          });
+
+          var latest = issues[0] || {};
+          var title = latest.title || "Latest issue";
+          var summary = latest.summary || "";
+          var link = latest.link || "in-context/monthly/";
+          var date = latest.date ? latest.date : "";
+
+          mount.innerHTML =
+            '<a class="monthly-card" href="' + link + '">' +
+              (date ? '<div class="monthly-meta">' + date + '</div>' : '') +
+              '<div class="monthly-title">' + title + '</div>' +
+              (summary ? '<div class="monthly-summary">' + summary + '</div>' : '') +
+            '</a>';
+        })
+        .catch(function () {
+          mount.innerHTML = '<div class="muted tiny">Monthly issue unavailable right now.</div>';
+        });
+    })();
+  </script>
 </body>
 </html>
