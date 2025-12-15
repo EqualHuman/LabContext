@@ -1018,3 +1018,83 @@ body{
     transition: none !important;
   }
 }
+/* ==============================
+   HOMEPAGE: Exam Prep + Concepts + Infographic spotlight
+   Paste at end of styles.css
+============================== */
+
+.home .feature-links{
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.home .feature-link{
+  display: block;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(18,19,26,0.10);
+  background: rgba(251,251,253,0.74);
+  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.home .feature-link:hover{
+  background: rgba(237,231,243,0.35);
+  box-shadow: var(--shadow);
+  transform: translateY(-0.5px);
+}
+
+.home .feature-link-title{
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: rgba(18,19,26,0.90);
+}
+
+.home .feature-link-desc{
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+/* Infographic spotlight card */
+.home .spotlight-card{
+  display: block;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(18,19,26,0.10);
+  background: rgba(255,255,255,0.80);
+  transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.home .spotlight-card:hover{
+  background: rgba(237,231,243,0.35);
+  box-shadow: var(--shadow);
+  transform: translateY(-0.5px);
+}
+
+.home .spotlight-kicker{
+  display: block;
+  font-size: 12px;
+  color: rgba(18,19,26,0.62);
+}
+
+.home .spotlight-title{
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: rgba(18,19,26,0.92);
+}
+
+.home .spotlight-desc{
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
