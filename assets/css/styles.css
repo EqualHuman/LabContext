@@ -562,3 +562,94 @@ h1,h2,h3,.hero-title,.page-title,.section-title,.brand-name,.prose h2{
   outline: 3px solid rgba(85,64,121,0.28);
   outline-offset: 2px;
 }
+/* ==============================
+   Header + Hero Button Lift
+   (calm, slightly stronger presence)
+============================== */
+
+/* --- Header: a bit more presence --- */
+.site-header{
+  background:
+    linear-gradient(
+      to bottom,
+      var(--accent-secondary, #ede7f3),
+      rgba(251,251,253,0.88)
+    );
+  border-bottom: 1px solid rgba(85,64,121,0.18);
+  box-shadow: 0 8px 24px rgba(18,19,26,0.06);
+}
+
+.header-inner{
+  padding: 16px 0; /* was 14px */
+}
+
+/* --- Logo: slightly bigger + better balance --- */
+.brand{
+  gap: 14px; /* a touch more breathing room */
+}
+
+.brand-logo{
+  height: 30px; /* was 24px */
+  width: auto;
+  transform: translateY(1px);
+}
+
+.brand-name{
+  font-size: 19px; /* was 18px */
+  letter-spacing: 0.2px;
+}
+
+.brand-tag{
+  font-size: 12.5px; /* subtle lift */
+}
+
+/* --- Nav: slightly more “button-like” but still quiet --- */
+.nav-link{
+  padding: 11px 14px; /* was 10px 12px */
+  border-radius: 14px;
+}
+
+.nav-link:hover{
+  background: rgba(237,231,243,0.65);
+}
+
+/* --- Hero buttons: more intentional + a bit more premium --- */
+.hero-actions{
+  gap: 14px; /* slightly more separation */
+}
+
+.button{
+  padding: 13px 16px;              /* bigger click target */
+  border-radius: 16px;             /* slightly softer */
+  font-weight: 650;
+  letter-spacing: 0.1px;
+  box-shadow: 0 10px 22px rgba(85,64,121,0.20);
+  transform: translateY(0);
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+.button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(85,64,121,0.22);
+}
+
+.button-ghost{
+  padding: 13px 16px;
+  border-radius: 16px;
+  font-weight: 650;
+  background: rgba(237,231,243,0.72);
+  border: 1px solid rgba(85,64,121,0.20);
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
+}
+
+.button-ghost:hover{
+  background: rgba(237,231,243,0.92);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(18,19,26,0.08);
+}
+
+/* --- Mobile: keep header from feeling cramped --- */
+@media (max-width: 940px){
+  .brand-logo{ height: 28px; }
+  .nav-link{ padding: 10px 12px; }
+}
