@@ -65,7 +65,7 @@
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-    // Active nav
+      // Active nav
     const path = window.location.pathname;
     const is = (segment) =>
       path.includes(`/${segment}/`) ||
@@ -86,8 +86,23 @@
     } else if (is("about")) {
       const a = document.querySelector('.nav-link[data-nav="about"]');
       if (a) a.classList.add("is-active");
+    } else {
+      const a = document.querySelector('.nav-link[data-nav="home"]');
+      if (a) a.classList.add("is-active");
     }
-  }
+
+    // Header search → route to /search/?q=
+    const searchForm = document.querySelector(".header-search");
+    const searchInput = document.getElementById("site-search");
+    if (searchForm && searchInput) {
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const q = (searchInput.value || "").trim();
+        if (!q) return;
+        window.location.href = base + "search/?q=" + encodeURIComponent(q);
+      });
+    }
+
 
   function formatDate(iso) {
     const d = new Date(iso + "T00:00:00");
@@ -318,14 +333,158 @@
     themeEl.addEventListener("change", run);
     run();
   }
+  // GLOBAL SEARCH PAGE
+  async function renderGlobalSearch() {
+    const mount = document.getElementById("search-results");
+    const status = document.getElementById("search-status");
+    const input = document.getElementById("global-search");
+    const sectionEl = document.getElementById("global-section");
+    const chipsEl = document.getElementById("global-chips");
+    if (!mount || !status || !input || !sectionEl || !chipsEl) return;
+
+    const base = resolveBase();
+
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name) || "";
+    }
+
+    function setParam(name, value) {
+      const url = new URL(window.location.href);
+      if (!value) url.searchParams.delete(name);
+      else url.searchParams.set(name, value);
+      window.history.replaceState({}, "", url.toString());
+    }
+
+    function normalize(item) {
+      return {
+        title: item.title || "",
+        summary: item.summary || "",
+        tags: item.tags || item.themes || [],
+        section: item.section || "In Context",
+        date: item.date || item.updated || "",
+        link: item.link || "#",
+      };
+    }
+
+    const [posts, library, issues] = await Promise.all([
+      fetchJson(base + "data/posts.json").catch(() => []),
+      fetchJson(base + "data/in_context_library.json").catch(() => []),
+      fetchJson(base + "data/in_context_issues.json").catch(() => []),
+    ]);
+
+    // Normalize + lightly label sources
+    const all = []
+      .concat((posts || []).map((p) => normalize({ ...p, section: p.section || "In Context" })))
+      .concat((library || []).map((p) => normalize({ ...p, section: "In Context" })))
+      .concat((issues || []).map((p) => normalize({ ...p, section: "In Context: Monthly" })));
+
+    // Populate section filter
+    const sectionSet = new Set(all.map((i) => i.section).filter(Boolean));
+    Array.from(sectionSet)
+      .sort((a, b) => a.localeCompare(b))
+      .forEach((s) => {
+        const opt = document.createElement("option");
+        opt.value = s;
+        opt.textContent = s;
+        sectionEl.appendChild(opt);
+      });
+
+    // Chips: most common tags (simple frequency)
+    const freq = new Map();
+    all.forEach((i) => (i.tags || []).forEach((t) => freq.set(t, (freq.get(t) || 0) + 1)));
+    const topTags = Array.from(freq.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([t]) => t);
+
+    chipsEl.innerHTML = "";
+    topTags.forEach((t) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip";
+      btn.textContent = t;
+      btn.addEventListener("click", () => {
+        input.value = t;
+        setParam("q", t);
+        run();
+      });
+      chipsEl.appendChild(btn);
+    });
+
+    // Seed from URL
+    const initialQ = getParam("q");
+    if (initialQ) input.value = initialQ;
+
+    function haystack(i) {
+      return (i.title + " " + i.summary + " " + (i.tags || []).join(" ") + " " + i.section).toLowerCase();
+    }
+
+    function sortByDateDesc(a, b) {
+      return String(b.date || "").localeCompare(String(a.date || ""));
+    }
+
+    function run() {
+      const q = (input.value || "").trim().toLowerCase();
+      const section = sectionEl.value || "";
+
+      const filtered = all.filter((i) => {
+        const matchesQ = !q || haystack(i).includes(q);
+        const matchesSection = !section || i.section === section;
+        return matchesQ && matchesSection;
+      });
+
+      mount.innerHTML = "";
+
+      if (!q && !section) {
+        status.textContent = "Type a keyword to search (or choose a section).";
+      } else {
+        status.textContent = filtered.length + " result" + (filtered.length === 1 ? "" : "s") + (q ? ` for “${q}”` : "");
+      }
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "muted";
+        empty.textContent = "No matches. Try a different keyword or clear filters.";
+        mount.appendChild(empty);
+        return;
+      }
+
+      filtered
+        .slice()
+        .sort(sortByDateDesc)
+        .slice(0, 50)
+        .forEach((p) => {
+          mount.appendChild(
+            card({
+              title: p.title,
+              meta: (p.section ? p.section + " • " : "") + (p.date ? "Updated " + formatDate(String(p.date).slice(0, 10)) : ""),
+              summary: p.summary,
+              tags: p.tags || [],
+              href: p.link || "#",
+            })
+          );
+        });
+    }
+
+    input.addEventListener("input", () => {
+      setParam("q", input.value.trim());
+      run();
+    });
+
+    sectionEl.addEventListener("change", run);
+
+    run();
+  }
 
   // Boot
   Promise.resolve()
     .then(injectFavicon)
     .then(injectSharedLayout)
-    .then(renderHomeLatest)
+      .then(renderHomeLatest)
     .then(renderInContextLibrary)
     .then(renderInContextIssues)
+    .then(renderGlobalSearch)
     .catch(() => {
       const ids = ["latest-posts", "ic-library", "ic-issues"];
       ids.forEach((id) => {
