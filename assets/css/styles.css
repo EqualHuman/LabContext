@@ -1262,3 +1262,32 @@ button, input, select, textarea {
 .home .home-welcome-box p:last-child{
   margin-bottom: 0;
 }
+/* ==============================
+   HOMEPAGE WELCOME STRIP (accented, shallow)
+============================== */
+
+.home .home-welcome{
+  padding: 12px 0 10px 0;
+}
+
+.home .home-welcome-box{
+  max-width: 100%;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: rgba(237,231,243,0.65); /* same family as button accent */
+  border: 1px solid rgba(85,64,121,0.18);
+}
+
+.home .home-welcome-text{
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: rgba(18,19,26,0.75);
+}
+
+.home .home-welcome-text strong{
+  font-family: var(--font-serif);
+  font-weight: 650;
+  letter-spacing: 0.06px;
+  color: var(--indigo);
+}
