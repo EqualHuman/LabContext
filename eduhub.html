@@ -727,6 +727,147 @@ header, main, footer{
   position: relative;
   z-index: 1;
 }
+/* ===== Laboratory Orientation module (public, distinct from departments) ===== */
+
+.orientation-module{
+  margin-top: 8px;
+}
+
+.orientation-card{
+  border: 1px solid rgba(201,202,219,0.80);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.92), rgba(250,250,252,0.92));
+  box-shadow: 0 10px 26px rgba(20,21,26,0.08);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.orientation-kicker{
+  display: inline-block;
+  font-size: 12.5px;
+  color: var(--indigo-deep);
+  background: rgba(230,231,240,0.75);
+  border: 1px solid rgba(201,202,219,0.85);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+
+.orientation-title{
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--indigo-deep);
+}
+
+.orientation-copy{
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14.5px;
+  max-width: 72ch;
+}
+
+.orientation-boundary{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(230,231,240,0.55);
+  border: 1px solid rgba(201,202,219,0.85);
+  color: var(--indigo-deep);
+  font-size: 13px;
+}
+
+.orientation-actions{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.orientation-btn{
+  display: inline-block;
+  background: rgba(75,74,115,0.10);
+  border: 1px solid rgba(75,74,115,0.28);
+  color: var(--indigo-deep);
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.orientation-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(75,74,115,0.14);
+  border-color: rgba(75,74,115,0.40);
+  box-shadow: 0 12px 22px rgba(20,21,26,0.10);
+  text-decoration: none;
+}
+
+.orientation-link{
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(80,84,100,0.35);
+  padding-bottom: 2px;
+}
+.orientation-link:hover{
+  color: var(--indigo-deep);
+  border-bottom-color: rgba(75,74,115,0.45);
+  text-decoration: none;
+}
+
+/* Right side mini-map */
+.mini-map{
+  border: 1px solid rgba(201,202,219,0.75);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.78);
+  padding: 12px;
+}
+
+.mini-map-title{
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--indigo-deep);
+  font-size: 14.5px;
+  margin-bottom: 10px;
+}
+
+.mini-map-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.mini-pill{
+  font-size: 12.5px;
+  color: var(--muted);
+  background: linear-gradient(180deg, rgba(250,250,252,1), rgba(250,250,252,0.70));
+  border: 1px solid rgba(201,202,219,0.80);
+  border-radius: 999px;
+  padding: 7px 10px;
+}
+
+/* Responsive */
+@media (max-width: 920px){
+  .orientation-card{
+    grid-template-columns: 1fr;
+  }
+  .mini-map-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 740px){
+  .mini-map-grid{
+    grid-template-columns: 1fr;
+  }
+}
 
 
   </style>
@@ -837,6 +978,49 @@ header, main, footer{
     </div>
   </div>
 </div>
+<section id="orientation" class="orientation-module">
+  <div class="section-head">
+    <h3>Laboratory Orientation</h3>
+    <p>A public, complete orientation layer that explains what the clinical laboratory is as a system—without teaching procedures or department science.</p>
+  </div>
+
+  <div class="orientation-card" role="region" aria-label="Laboratory Orientation (Public)">
+    <div class="orientation-left">
+      <div class="orientation-kicker">Public module • Complete • No prerequisites</div>
+      <h4 class="orientation-title">Start here if you want context before departments</h4>
+      <p class="orientation-copy">
+        This section explains how results come into existence, why interpretation is constrained, and why certainty is limited.
+        It introduces LabContext’s interpretive method and stops intentionally before instruction.
+      </p>
+
+      <div class="orientation-boundary">
+        <strong>Scope boundary:</strong>
+        Explains systems, not procedures. Introduces thinking, not mastery. Depth exists elsewhere on purpose.
+      </div>
+
+      <div class="orientation-actions">
+        <a class="orientation-btn" href="orientation/index.html">Enter Laboratory Orientation</a>
+        <a class="orientation-link" href="orientation/index.html#map">See the 8-page map</a>
+      </div>
+    </div>
+
+    <div class="orientation-right" aria-hidden="true">
+      <div class="mini-map">
+        <div class="mini-map-title">Eight public pages (orientation loop)</div>
+        <div class="mini-map-grid">
+          <div class="mini-pill">What the lab does</div>
+          <div class="mini-pill">How results are created</div>
+          <div class="mini-pill">How to read results</div>
+          <div class="mini-pill">Why ranges vary</div>
+          <div class="mini-pill">Why flags exist</div>
+          <div class="mini-pill">Automation limits</div>
+          <div class="mini-pill">Tradeoffs</div>
+          <div class="mini-pill">How the lab is organized</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     </section>
     <!-- Departments -->
