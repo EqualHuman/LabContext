@@ -374,6 +374,210 @@
       .brand .sub{ display:none; }
       .searchbar .hint{ display:none; }
     }
+    /* ===== LabContext EduHub: add quiet visual interest (CSS-only) ===== */
+
+/* Slightly richer surface + micro-contrast */
+:root{
+  --paper-1: rgba(75, 74, 115, 0.035);
+  --paper-2: rgba(201, 202, 219, 0.22);
+  --line-soft: rgba(201, 202, 219, 0.55);
+  --glow: rgba(75, 74, 115, 0.14);
+  --glow-2: rgba(75, 74, 115, 0.08);
+}
+
+/* Background texture (paper + faint technical grid), still low-stim */
+body{
+  background:
+    radial-gradient(900px 480px at 18% 8%, var(--paper-1), transparent 55%),
+    radial-gradient(820px 520px at 86% 18%, var(--paper-1), transparent 60%),
+    linear-gradient(180deg, var(--bg-quiet), var(--bg) 36%);
+  position: relative;
+}
+
+/* Subtle grid overlay */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(to right, rgba(201,202,219,0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201,202,219,0.12) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(1100px 700px at 30% 15%, black 45%, transparent 70%);
+}
+
+/* Keep content above overlay */
+header, main, footer{ position: relative; z-index: 1; }
+
+/* Hero glow accent behind the hero text */
+.hero{ position: relative; }
+.hero::before{
+  content:"";
+  position:absolute;
+  left: -120px;
+  top: -60px;
+  width: 520px;
+  height: 520px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, var(--glow), transparent 62%);
+  filter: blur(2px);
+  pointer-events:none;
+  z-index: 0;
+}
+.hero > *{ position: relative; z-index: 1; }
+
+/* Header/nav: add subtle active cue and better hover */
+.navlinks a{
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.navlinks a:hover{
+  transform: translateY(-1px);
+}
+.navlinks a:focus-visible{
+  outline: 3px solid rgba(75,74,115,0.22);
+  outline-offset: 2px;
+}
+
+/* Section headers: add a quiet divider line that feels intentional */
+.section-head{
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.section-head h3{
+  position: relative;
+  padding-left: 14px;
+}
+.section-head h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(75,74,115,0.35);
+  box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
+}
+
+/* Cards: increase “designed” feel with hover + accent edge */
+.card, .map, .path, .hero-card{
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  border-color: rgba(201,202,219,0.75);
+}
+.card:hover, .path:hover, .map:hover, .hero-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(20,21,26,0.10);
+  border-color: rgba(75,74,115,0.35);
+}
+
+/* Add a subtle left accent “spine” to main cards on hover */
+.card{
+  position: relative;
+  overflow: hidden;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(75,74,115,0.20), rgba(75,74,115,0.05));
+  transition: width 180ms ease;
+}
+.card:hover::before{
+  width: 6px;
+}
+
+/* Pills: slightly more tactile + tiny icon marker */
+.pill{
+  position: relative;
+  padding-left: 30px;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  border-color: rgba(201,202,219,0.75);
+}
+.pill::before{
+  content:"";
+  position:absolute;
+  left: 12px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: rgba(75,74,115,0.28);
+  box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
+}
+.pill:hover{
+  transform: translateY(-1px);
+  border-color: rgba(75,74,115,0.35);
+  background: rgba(230,231,240,0.45);
+}
+
+/* Tags/chips: unify feel + subtle gradient */
+.tag, .chip{
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+.tag{
+  background: linear-gradient(180deg, rgba(250,250,252,1), rgba(250,250,252,0.68));
+}
+.tag:hover, .chip:hover{
+  transform: translateY(-1px);
+  border-color: rgba(75,74,115,0.32);
+  background: rgba(230,231,240,0.55);
+}
+
+/* Map zones: make them feel like “panels” not just boxes */
+.zone{
+  background:
+    linear-gradient(180deg, rgba(230,231,240,0.85), rgba(230,231,240,0.55));
+  border-color: rgba(201,202,219,0.78);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+.zone:hover{
+  transform: translateY(-2px);
+  border-color: rgba(75,74,115,0.35);
+}
+
+/* Search: add icon + slightly richer focus state */
+.searchbar{
+  position: relative;
+  border-color: rgba(201,202,219,0.85);
+  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+}
+.searchbar::before{
+  content:"⌕";
+  position:absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(80,84,100,0.65);
+  font-size: 16px;
+}
+.searchbar input{
+  padding-left: 28px;
+}
+.searchbar:focus-within{
+  border-color: rgba(75,74,115,0.45);
+  box-shadow: 0 16px 34px rgba(20,21,26,0.10);
+}
+
+/* Footer: slight contrast block so the page ends with intention */
+footer{
+  background:
+    linear-gradient(180deg, rgba(250,250,252,0.65), rgba(255,255,255,1));
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce){
+  .card, .map, .path, .hero-card, .pill, .tag, .chip, .zone, .navlinks a{
+    transition: none !important;
+  }
+}
+
   </style>
 </head>
 
