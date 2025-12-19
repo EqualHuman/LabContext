@@ -645,6 +645,97 @@ footer{
     grid-template-columns: 1fr;
   }
 }
+/* ===== Concept map preview: compact explanatory legend (no links) ===== */
+
+.map-compact{
+  padding: 12px;
+  box-shadow: none;
+  background: rgba(255,255,255,0.72);
+}
+
+.map-grid-compact{
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.zone-compact{
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(230,231,240,0.65), rgba(250,250,252,0.55));
+}
+
+.zone-compact strong{
+  font-size: 12.5px;
+  letter-spacing: 0.2px;
+  margin-bottom: 6px;
+}
+
+.zone-list{
+  margin: 0;
+  padding-left: 16px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.zone-list li{
+  margin: 6px 0;
+}
+
+/* tighten the whole section a bit */
+#concepts{
+  padding-top: 10px;
+}
+
+/* Responsive: 2x2 grid on medium, 1 column on small */
+@media (max-width: 920px){
+  .map-grid-compact{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 740px){
+  .map-grid-compact{
+    grid-template-columns: 1fr;
+  }
+}
+/* ===== Microscope field background ===== */
+
+body{
+  background:
+    linear-gradient(180deg, var(--bg-quiet), var(--bg) 42%);
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(75,74,115,0.08) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 25%, rgba(201,202,219,0.10) 0.5px, transparent 1px),
+    radial-gradient(circle at 40% 60%, rgba(75,74,115,0.06) 0.5px, transparent 1px);
+
+  background-size: 80px 80px;
+  opacity: 0.45;
+
+  mask-image: linear-gradient(to bottom, black 50%, transparent 90%);
+}
+
+header, main, footer{
+  position: relative;
+  z-index: 1;
+}
+.hero{
+  background:
+    linear-gradient(
+      to right,
+      rgba(75,74,115,0.06),
+      transparent 40%
+    );
+  border-radius: 28px;
+}
 
   </style>
 </head>
@@ -708,7 +799,54 @@ footer{
         </aside>
       </div>
     </section>
+    <!-- Concept Map Preview -->
+    <section id="concepts">
+      <div class="section-head">
+        <h3>Concept map preview</h3>
+        <p>Multiple entry points into the same system. These are navigation zones, not a sequence.</p>
+      </div>
 
+     <div class="map map-compact" aria-label="Four section overview">
+  <div class="map-grid map-grid-compact">
+    <div class="zone zone-compact">
+      <strong>Foundations</strong>
+      <ul class="zone-list">
+        <li>What the system is measuring</li>
+        <li>Production and turnover logic</li>
+        <li>Pools, compartments, timing</li>
+      </ul>
+    </div>
+
+    <div class="zone zone-compact">
+      <strong>Constraints</strong>
+      <ul class="zone-list">
+        <li>Why numbers can be correct but misleading</li>
+        <li>Measurement assumptions and breakdown</li>
+        <li>Dilution, concentration, context</li>
+      </ul>
+    </div>
+
+    <div class="zone zone-compact">
+      <strong>Patterns</strong>
+      <ul class="zone-list">
+        <li>Patterns as behaviors, not diagnoses</li>
+        <li>Concordance vs conflict</li>
+        <li>Persistence over snapshots</li>
+      </ul>
+    </div>
+
+    <div class="zone zone-compact">
+      <strong>Interfaces</strong>
+      <ul class="zone-list">
+        <li>When interpretation collapses in isolation</li>
+        <li>Shared signals across departments</li>
+        <li>Pre-analytic and analytic boundaries</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </section>
     <!-- Departments -->
     <section id="departments">
       <div class="section-head">
@@ -876,91 +1014,7 @@ footer{
 
     </section>
 
-    <!-- Concept Map Preview -->
-    <section id="concepts">
-      <div class="section-head">
-        <h3>Concept map preview</h3>
-        <p>Multiple entry points into the same system. These are navigation zones, not a sequence.</p>
-      </div>
 
-      <div class="map">
-        <div class="map-grid">
-          <div class="zone">
-            <strong>Foundational mechanisms</strong>
-            <a href="#">What the system is measuring</a>
-            <a href="#">Production and turnover logic</a>
-            <a href="#">Pools, compartments, and timing</a>
-          </div>
-
-          <div class="zone">
-            <strong>System constraints</strong>
-            <a href="#">Why numbers can be correct but misleading</a>
-            <a href="#">Measurement assumptions and breakdown</a>
-            <a href="#">Dilution, concentration, and context</a>
-          </div>
-
-          <div class="zone">
-            <strong>Recurring patterns</strong>
-            <a href="#">Patterns as behaviors, not diagnoses</a>
-            <a href="#">Concordance vs conflict</a>
-            <a href="#">Persistence over snapshots</a>
-          </div>
-
-          <div class="zone">
-            <strong>Cross-department interfaces</strong>
-            <a href="#">When interpretation collapses in isolation</a>
-            <a href="#">Shared signals across departments</a>
-            <a href="#">Pre-analytic and analytic boundaries</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- “I’m confused about…” -->
-    <section id="confusion">
-      <div class="section-head">
-        <h3>Start with confusion</h3>
-        <p>Common entry prompts that lead to concept pages (not diagnoses and not “what to do next”).</p>
-      </div>
-
-      <div class="grid">
-        <article class="card col-6">
-          <h4>“Everything looks normal, but this still feels wrong.”</h4>
-          <p>Reserve masking, compartment mismatch, timing, and concentration effects.</p>
-          <div class="meta">
-            <span class="tag">Constraints</span>
-            <span class="tag">Hard concepts</span>
-          </div>
-        </article>
-
-        <article class="card col-6">
-          <h4>“The numbers changed, but nothing actually happened.”</h4>
-          <p>Plasma volume shifts, marginal pools, and transient distribution changes.</p>
-          <div class="meta">
-            <span class="tag">System behavior</span>
-            <span class="tag">Interpretation</span>
-          </div>
-        </article>
-
-        <article class="card col-6">
-          <h4>“The pattern doesn’t fit a clean category.”</h4>
-          <p>Mixed constraints, competing mechanisms, and index compression.</p>
-          <div class="meta">
-            <span class="tag">Patterns</span>
-            <span class="tag">Mechanisms</span>
-          </div>
-        </article>
-
-        <article class="card col-6">
-          <h4>“Automation looks confident, but I don’t trust it.”</h4>
-          <p>Assumption-driven classification and quiet failure modes.</p>
-          <div class="meta">
-            <span class="tag">Analyzer assumptions</span>
-            <span class="tag">Tradeoffs</span>
-          </div>
-        </article>
-      </div>
-    </section>
 
     <!-- Pathways -->
     <section id="pathways">
