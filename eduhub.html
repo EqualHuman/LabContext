@@ -577,6 +577,74 @@ footer{
     transition: none !important;
   }
 }
+/* ===== Department cards as 4 navigation lanes (Foundations / Constraints / Patterns / Interfaces) ===== */
+
+.dept-card{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.dept-head h4{
+  margin: 0 0 6px;
+}
+
+.dept-head p{
+  margin: 0;
+}
+
+.dept-nav{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.lane{
+  display:block;
+  border: 1px solid rgba(201,202,219,0.85);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: #fff;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.lane:hover{
+  transform: translateY(-1px);
+  border-color: rgba(75,74,115,0.40);
+  box-shadow: 0 10px 20px rgba(20,21,26,0.08);
+  text-decoration: none;
+}
+
+.lane:focus-visible{
+  outline: 3px solid rgba(75,74,115,0.22);
+  outline-offset: 2px;
+}
+
+.lane-label{
+  display:block;
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--indigo-deep);
+  font-size: 15px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.lane-note{
+  display:block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+@media (max-width: 740px){
+  .dept-nav{
+    grid-template-columns: 1fr;
+  }
+}
 
   </style>
 </head>
@@ -648,62 +716,164 @@ footer{
         <p>Department landing pages are for orientation: scope, structure, and maps—not dense teaching.</p>
       </div>
 
-      <div class="grid">
-        <article class="card col-4">
-          <h4>Hematology</h4>
-          <p>What the CBC is measuring, why patterns recur, and where interpretation breaks.</p>
-          <div class="meta">
-            <span class="tag">Foundational mechanisms</span>
-            <span class="tag">Constraints</span>
-            <span class="tag">Patterns</span>
-          </div>
-        </article>
+    <div class="grid dept-grid">
+  <article class="card col-4 dept-card">
+    <div class="dept-head">
+      <h4>Hematology</h4>
+      <p>What the CBC is measuring, why patterns recur, and where interpretation breaks.</p>
+    </div>
 
-        <article class="card col-4">
-          <h4>Clinical Chemistry</h4>
-          <p>Measurement logic, interference, reference intervals, and result framing.</p>
-          <div class="meta">
-            <span class="tag">Assay logic</span>
-            <span class="tag">System limits</span>
-          </div>
-        </article>
+    <div class="dept-nav" aria-label="Hematology navigation lanes">
+      <a class="lane" href="hematology/foundations.html">
+        <span class="lane-label">Foundations</span>
+        <span class="lane-note">Core mechanisms</span>
+      </a>
+      <a class="lane" href="hematology/constraints.html">
+        <span class="lane-label">Constraints</span>
+        <span class="lane-note">Why results mislead</span>
+      </a>
+      <a class="lane" href="hematology/patterns.html">
+        <span class="lane-label">Patterns</span>
+        <span class="lane-note">Recurring behaviors</span>
+      </a>
+      <a class="lane" href="hematology/interfaces.html">
+        <span class="lane-label">Interfaces</span>
+        <span class="lane-note">Cross-department links</span>
+      </a>
+    </div>
+  </article>
 
-        <article class="card col-4">
-          <h4>Coagulation</h4>
-          <p>Why hemostasis behaves like a system—and why “normal” can mislead.</p>
-          <div class="meta">
-            <span class="tag">Constraints</span>
-            <span class="tag">Pattern behavior</span>
-          </div>
-        </article>
+  <article class="card col-4 dept-card">
+    <div class="dept-head">
+      <h4>Clinical Chemistry</h4>
+      <p>Measurement logic, interference, reference intervals, and result framing.</p>
+    </div>
 
-        <article class="card col-4">
-          <h4>Microbiology</h4>
-          <p>Signal vs noise, time, growth constraints, and what “negative” can mean.</p>
-          <div class="meta">
-            <span class="tag">Time-aware</span>
-            <span class="tag">System logic</span>
-          </div>
-        </article>
+    <div class="dept-nav" aria-label="Clinical Chemistry navigation lanes">
+      <a class="lane" href="chemistry/foundations.html">
+        <span class="lane-label">Foundations</span>
+        <span class="lane-note">What’s measured</span>
+      </a>
+      <a class="lane" href="chemistry/constraints.html">
+        <span class="lane-label">Constraints</span>
+        <span class="lane-note">Interference & limits</span>
+      </a>
+      <a class="lane" href="chemistry/patterns.html">
+        <span class="lane-label">Patterns</span>
+        <span class="lane-note">Recurring behaviors</span>
+      </a>
+      <a class="lane" href="chemistry/interfaces.html">
+        <span class="lane-label">Interfaces</span>
+        <span class="lane-note">Cross-dept signals</span>
+      </a>
+    </div>
+  </article>
 
-        <article class="card col-4">
-          <h4>Transfusion Medicine</h4>
-          <p>Compatibility as a system of constraints, history, and risk tradeoffs.</p>
-          <div class="meta">
-            <span class="tag">Interfaces</span>
-            <span class="tag">Constraints</span>
-          </div>
-        </article>
+  <article class="card col-4 dept-card">
+    <div class="dept-head">
+      <h4>Coagulation</h4>
+      <p>Why hemostasis behaves like a system—and why “normal” can mislead.</p>
+    </div>
 
-        <article class="card col-4">
-          <h4>Pre-Analytics & Quality</h4>
-          <p>Where samples change the story: artifacts, handling constraints, reliability.</p>
-          <div class="meta">
-            <span class="tag">Reliability</span>
-            <span class="tag">Error patterns</span>
-          </div>
-        </article>
-      </div>
+    <div class="dept-nav" aria-label="Coagulation navigation lanes">
+      <a class="lane" href="coagulation/foundations.html">
+        <span class="lane-label">Foundations</span>
+        <span class="lane-note">System model</span>
+      </a>
+      <a class="lane" href="coagulation/constraints.html">
+        <span class="lane-label">Constraints</span>
+        <span class="lane-note">Tradeoffs & traps</span>
+      </a>
+      <a class="lane" href="coagulation/patterns.html">
+        <span class="lane-label">Patterns</span>
+        <span class="lane-note">Common behaviors</span>
+      </a>
+      <a class="lane" href="coagulation/interfaces.html">
+        <span class="lane-label">Interfaces</span>
+        <span class="lane-note">Heme/Chem links</span>
+      </a>
+    </div>
+  </article>
+
+  <article class="card col-4 dept-card">
+    <div class="dept-head">
+      <h4>Microbiology</h4>
+      <p>Signal vs noise, time, growth constraints, and what “negative” can mean.</p>
+    </div>
+
+    <div class="dept-nav" aria-label="Microbiology navigation lanes">
+      <a class="lane" href="microbiology/foundations.html">
+        <span class="lane-label">Foundations</span>
+        <span class="lane-note">What evidence is</span>
+      </a>
+      <a class="lane" href="microbiology/constraints.html">
+        <span class="lane-label">Constraints</span>
+        <span class="lane-note">Time & sensitivity</span>
+      </a>
+      <a class="lane" href="microbiology/patterns.html">
+        <span class="lane-label">Patterns</span>
+        <span class="lane-note">Recurring behaviors</span>
+      </a>
+      <a class="lane" href="microbiology/interfaces.html">
+        <span class="lane-label">Interfaces</span>
+        <span class="lane-note">Cross-dept signals</span>
+      </a>
+    </div>
+  </article>
+
+  <article class="card col-4 dept-card">
+    <div class="dept-head">
+      <h4>Transfusion Medicine</h4>
+      <p>Compatibility as a system of constraints, history, and risk tradeoffs.</p>
+    </div>
+
+    <div class="dept-nav" aria-label="Transfusion Medicine navigation lanes">
+      <a class="lane" href="transfusion/foundations.html">
+        <span class="lane-label">Foundations</span>
+        <span class="lane-note">System model</span>
+      </a>
+      <a class="lane" href="transfusion/constraints.html">
+        <span class="lane-label">Constraints</span>
+        <span class="lane-note">Risk tradeoffs</span>
+      </a>
+      <a class="lane" href="transfusion/patterns.html">
+        <span class="lane-label">Patterns</span>
+        <span class="lane-note">Recurring behaviors</span>
+      </a>
+      <a class="lane" href="transfusion/interfaces.html">
+        <span class="lane-label">Interfaces</span>
+        <span class="lane-note">Cross-dept links</span>
+      </a>
+    </div>
+  </article>
+
+  <article class="card col-4 dept-card">
+    <div class="dept-head">
+      <h4>Pre-Analytics &amp; Quality</h4>
+      <p>Where samples change the story: artifacts, handling constraints, reliability.</p>
+    </div>
+
+    <div class="dept-nav" aria-label="Pre-Analytics and Quality navigation lanes">
+      <a class="lane" href="preanalytics/foundations.html">
+        <span class="lane-label">Foundations</span>
+        <span class="lane-note">What changes data</span>
+      </a>
+      <a class="lane" href="preanalytics/constraints.html">
+        <span class="lane-label">Constraints</span>
+        <span class="lane-note">Failure modes</span>
+      </a>
+      <a class="lane" href="preanalytics/patterns.html">
+        <span class="lane-label">Patterns</span>
+        <span class="lane-note">Error patterns</span>
+      </a>
+      <a class="lane" href="preanalytics/interfaces.html">
+        <span class="lane-label">Interfaces</span>
+        <span class="lane-note">All departments</span>
+      </a>
+    </div>
+  </article>
+</div>
+
     </section>
 
     <!-- Concept Map Preview -->
