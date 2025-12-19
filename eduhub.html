@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LabContext — Education Hub</title>
+
+  <!-- Fonts: Source Serif 4 (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Canonical palette */
+      --indigo:#4B4A73;
+      --indigo-deep:#3A395C;
+      --indigo-soft:#E6E7F0;
+      --lavender-gray:#C9CADB;
+
+      --text:#14151A;
+      --muted:#505464;
+      --bg:#FFFFFF;
+      --bg-quiet:#FAFAFC;
+
+      --radius:18px;
+      --shadow: 0 8px 24px rgba(20, 21, 26, 0.08);
+      --border: 1px solid var(--lavender-gray);
+
+      --serif: "Source Serif 4", ui-serif, Georgia, serif;
+      --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background: linear-gradient(180deg, var(--bg-quiet), var(--bg) 34%);
+      line-height:1.6;
+    }
+
+    a{ color:var(--indigo-deep); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .container{
+      max-width:1100px;
+      padding: 0 22px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,202,219,0.65);
+      z-index: 10;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap: 10px;
+      min-width: 240px;
+    }
+    .brand .name{
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      color: var(--indigo-deep);
+      font-size: 20px;
+    }
+    .brand .sub{
+      font-size: 13px;
+      color: var(--muted);
+      border-left: 1px solid rgba(201,202,219,0.9);
+      padding-left: 10px;
+    }
+    .navlinks{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+    .navlinks a{
+      font-size: 14px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .navlinks a:hover{
+      background: var(--indigo-soft);
+      color: var(--indigo-deep);
+      text-decoration:none;
+    }
+
+    /* Hero */
+    .hero{
+      padding: 46px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .hero h1{
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(32px, 3.2vw, 42px);
+      line-height: 1.15;
+      margin: 0 0 10px;
+      color: var(--indigo-deep);
+    }
+    .hero p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 58ch;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .pill{
+      border: var(--border);
+      background:#fff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .hero-card{
+      border: var(--border);
+      background:#fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .hero-card h2{
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 18px;
+      margin: 0 0 10px;
+      color: var(--indigo-deep);
+    }
+    .quiet-list{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .boundary{
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--indigo-soft);
+      border: var(--border);
+      color: var(--indigo-deep);
+      font-size: 13px;
+    }
+
+    /* Search */
+    .searchbar{
+      margin: 12px 0 28px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      border: var(--border);
+      background:#fff;
+      border-radius: 16px;
+      padding: 12px 12px;
+    }
+    .searchbar input{
+      width:100%;
+      border:none;
+      outline:none;
+      font-size: 15px;
+      font-family: var(--sans);
+      color: var(--text);
+    }
+    .searchbar .hint{
+      font-size: 12px;
+      color: var(--muted);
+      padding-left: 8px;
+      border-left: 1px solid rgba(201,202,219,0.8);
+      white-space: nowrap;
+    }
+
+    /* Sections */
+    section{
+      padding: 18px 0 0;
+    }
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      gap: 18px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+    .section-head h3{
+      margin:0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--indigo-deep);
+    }
+    .section-head p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 62ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border: var(--border);
+      background:#fff;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(20,21,26,0.06);
+      padding: 14px;
+    }
+    .card h4{
+      margin:0 0 6px;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--indigo-deep);
+    }
+    .card p{
+      margin:0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--bg-quiet);
+      border: 1px solid rgba(201,202,219,0.75);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    /* Layout helpers */
+    .col-6{ grid-column: span 6; }
+    .col-4{ grid-column: span 4; }
+    .col-8{ grid-column: span 8; }
+    .col-12{ grid-column: span 12; }
+
+    /* Concept map */
+    .map{
+      background: #fff;
+      border: var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .map-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .zone{
+      border-radius: 16px;
+      border: var(--border);
+      padding: 12px;
+      background: var(--indigo-soft);
+    }
+    .zone strong{
+      display:block;
+      font-size: 13px;
+      color: var(--indigo-deep);
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
+    .zone a{
+      display:block;
+      padding: 6px 0;
+      font-size: 14px;
+      color: var(--indigo-deep);
+      text-decoration:none;
+    }
+    .zone a:hover{ text-decoration:underline; }
+
+    /* Pathways */
+    .path{
+      background:#fff;
+      border: var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .path .row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .chip{
+      border: 1px solid rgba(201,202,219,0.9);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer{
+      padding: 42px 0 54px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(201,202,219,0.75);
+      background: #fff;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items:start;
+    }
+    .footnote{
+      color: var(--muted);
+      font-size: 13px;
+      margin: 10px 0 0;
+      max-width: 80ch;
+    }
+    .small-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      justify-content:flex-end;
+    }
+    .small-links a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+    .small-links a:hover{
+      background: var(--indigo-soft);
+      color: var(--indigo-deep);
+      text-decoration:none;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .map-grid{ grid-template-columns: 1fr; }
+      .footer-grid{ grid-template-columns: 1fr; }
+      .small-links{ justify-content:flex-start; }
+    }
+    @media (max-width: 740px){
+      .col-6,.col-4,.col-8{ grid-column: span 12; }
+      .brand{ min-width:auto; }
+      .brand .sub{ display:none; }
+      .searchbar .hint{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <div class="name">LabContext</div>
+          <div class="sub">Education Hub</div>
+        </div>
+
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#departments">Departments</a>
+          <a href="#concepts">Concept Map</a>
+          <a href="#pathways">Pathways</a>
+          <a href="#membership">Access</a>
+          <a href="#about">About</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div>
+          <h1>Education Hub</h1>
+          <p>
+            A stable reference library for understanding how laboratory systems behave—
+            organized around mechanisms, constraints, patterns, and cross-department logic.
+          </p>
+
+          <div class="pill-row" aria-label="Core statements">
+            <div class="pill">Start anywhere</div>
+            <div class="pill">No progress tracking</div>
+            <div class="pill">Built for rereading</div>
+            <div class="pill">Concept-first</div>
+          </div>
+
+          <div class="searchbar" role="search" aria-label="Search the hub">
+            <input type="search" placeholder="Search concepts (e.g., “RDW”, “hemolysis”, “reference ranges”)">
+            <div class="hint">Search can be added later</div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="How to use this library">
+          <h2>How to use this section</h2>
+          <ul class="quiet-list">
+            <li>You do not need to read in order.</li>
+            <li>Start with what feels unclear.</li>
+            <li>Use cross-links to build a mental model.</li>
+            <li>Leave, return, and reread without pressure.</li>
+          </ul>
+
+          <div class="boundary">
+            <strong>Concept boundary:</strong>
+            LabContext explains systems. It does not teach procedures, validate competency, or score learning.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Departments -->
+    <section id="departments">
+      <div class="section-head">
+        <h3>Browse by department</h3>
+        <p>Department landing pages are for orientation: scope, structure, and maps—not dense teaching.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card col-4">
+          <h4>Hematology</h4>
+          <p>What the CBC is measuring, why patterns recur, and where interpretation breaks.</p>
+          <div class="meta">
+            <span class="tag">Foundational mechanisms</span>
+            <span class="tag">Constraints</span>
+            <span class="tag">Patterns</span>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <h4>Clinical Chemistry</h4>
+          <p>Measurement logic, interference, reference intervals, and result framing.</p>
+          <div class="meta">
+            <span class="tag">Assay logic</span>
+            <span class="tag">System limits</span>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <h4>Coagulation</h4>
+          <p>Why hemostasis behaves like a system—and why “normal” can mislead.</p>
+          <div class="meta">
+            <span class="tag">Constraints</span>
+            <span class="tag">Pattern behavior</span>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <h4>Microbiology</h4>
+          <p>Signal vs noise, time, growth constraints, and what “negative” can mean.</p>
+          <div class="meta">
+            <span class="tag">Time-aware</span>
+            <span class="tag">System logic</span>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <h4>Transfusion Medicine</h4>
+          <p>Compatibility as a system of constraints, history, and risk tradeoffs.</p>
+          <div class="meta">
+            <span class="tag">Interfaces</span>
+            <span class="tag">Constraints</span>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <h4>Pre-Analytics & Quality</h4>
+          <p>Where samples change the story: artifacts, handling constraints, reliability.</p>
+          <div class="meta">
+            <span class="tag">Reliability</span>
+            <span class="tag">Error patterns</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Concept Map Preview -->
+    <section id="concepts">
+      <div class="section-head">
+        <h3>Concept map preview</h3>
+        <p>Multiple entry points into the same system. These are navigation zones, not a sequence.</p>
+      </div>
+
+      <div class="map">
+        <div class="map-grid">
+          <div class="zone">
+            <strong>Foundational mechanisms</strong>
+            <a href="#">What the system is measuring</a>
+            <a href="#">Production and turnover logic</a>
+            <a href="#">Pools, compartments, and timing</a>
+          </div>
+
+          <div class="zone">
+            <strong>System constraints</strong>
+            <a href="#">Why numbers can be correct but misleading</a>
+            <a href="#">Measurement assumptions and breakdown</a>
+            <a href="#">Dilution, concentration, and context</a>
+          </div>
+
+          <div class="zone">
+            <strong>Recurring patterns</strong>
+            <a href="#">Patterns as behaviors, not diagnoses</a>
+            <a href="#">Concordance vs conflict</a>
+            <a href="#">Persistence over snapshots</a>
+          </div>
+
+          <div class="zone">
+            <strong>Cross-department interfaces</strong>
+            <a href="#">When interpretation collapses in isolation</a>
+            <a href="#">Shared signals across departments</a>
+            <a href="#">Pre-analytic and analytic boundaries</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- “I’m confused about…” -->
+    <section id="confusion">
+      <div class="section-head">
+        <h3>Start with confusion</h3>
+        <p>Common entry prompts that lead to concept pages (not diagnoses and not “what to do next”).</p>
+      </div>
+
+      <div class="grid">
+        <article class="card col-6">
+          <h4>“Everything looks normal, but this still feels wrong.”</h4>
+          <p>Reserve masking, compartment mismatch, timing, and concentration effects.</p>
+          <div class="meta">
+            <span class="tag">Constraints</span>
+            <span class="tag">Hard concepts</span>
+          </div>
+        </article>
+
+        <article class="card col-6">
+          <h4>“The numbers changed, but nothing actually happened.”</h4>
+          <p>Plasma volume shifts, marginal pools, and transient distribution changes.</p>
+          <div class="meta">
+            <span class="tag">System behavior</span>
+            <span class="tag">Interpretation</span>
+          </div>
+        </article>
+
+        <article class="card col-6">
+          <h4>“The pattern doesn’t fit a clean category.”</h4>
+          <p>Mixed constraints, competing mechanisms, and index compression.</p>
+          <div class="meta">
+            <span class="tag">Patterns</span>
+            <span class="tag">Mechanisms</span>
+          </div>
+        </article>
+
+        <article class="card col-6">
+          <h4>“Automation looks confident, but I don’t trust it.”</h4>
+          <p>Assumption-driven classification and quiet failure modes.</p>
+          <div class="meta">
+            <span class="tag">Analyzer assumptions</span>
+            <span class="tag">Tradeoffs</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Pathways -->
+    <section id="pathways">
+      <div class="section-head">
+        <h3>Featured pathways</h3>
+        <p>Curated clusters for rereading. Suggestions, not steps.</p>
+      </div>
+
+      <div class="grid">
+        <div class="path col-6">
+          <h4 style="margin:0; font-family:var(--serif); font-weight:500; color:var(--indigo-deep);">CBC as a system snapshot</h4>
+          <p style="margin:6px 0 0; color:var(--muted); font-size:14px;">Build the model behind what’s measured and what’s missing.</p>
+          <div class="row">
+            <span class="chip">Compartment logic</span>
+            <span class="chip">Turnover timing</span>
+            <span class="chip">Reserve masking</span>
+            <span class="chip">Pattern coherence</span>
+          </div>
+        </div>
+
+        <div class="path col-6">
+          <h4 style="margin:0; font-family:var(--serif); font-weight:500; color:var(--indigo-deep);">Why interpretation fails quietly</h4>
+          <p style="margin:6px 0 0; color:var(--muted); font-size:14px;">Understand constraints before chasing explanations.</p>
+          <div class="row">
+            <span class="chip">Assumption dependence</span>
+            <span class="chip">Extreme value behavior</span>
+            <span class="chip">Tradeoffs</span>
+            <span class="chip">Context drift</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Access -->
+    <section id="membership">
+      <div class="section-head">
+        <h3>Access model</h3>
+        <p>Designed to keep the Education Hub quiet. Monetization (if present) lives elsewhere.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card col-8">
+          <h4>Public access</h4>
+          <p>Department landing pages, topic indexes, outlines, and framing content that shows structure and scope.</p>
+          <div class="meta">
+            <span class="tag">Orientation</span>
+            <span class="tag">Maps</span>
+            <span class="tag">Scope clarity</span>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <h4>Member access</h4>
+          <p>Full concept pages, diagrams, deep dives, and cross-linked reference pathways.</p>
+          <div class="meta">
+            <span class="tag">Full library</span>
+            <span class="tag">Diagrams</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-head">
+        <h3>What LabContext is</h3>
+        <p>LabContext explains laboratory medicine—between memorization and lived understanding.</p>
+      </div>
+
+      <div class="card col-12">
+        <p style="margin:0; color:var(--muted); font-size:15px; max-width: 90ch;">
+          LabContext is interpretive, not evaluative. It exists to make hidden logic visible:
+          why systems behave the way they do, why patterns recur, and why those patterns change when constraints shift.
+          It does not teach procedures, provide validation protocols, or perform competency training.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand">
+            <div class="name">LabContext</div>
+            <div class="sub">A clarification authority</div>
+          </div>
+          <p class="footnote">
+            Calm is instructional infrastructure. The Education Hub is built for rereading, not completion.
+          </p>
+        </div>
+
+        <div class="small-links" aria-label="Footer links">
+          <a href="#top">Back to top</a>
+          <a href="#">Blog</a>
+          <a href="#">Materials & Resources</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
