@@ -982,6 +982,180 @@
     grid-template-columns: 1fr;
   }
 }
+/* ===== Promo CTAs: pin both buttons to the bottom ===== */
+.promo-card{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.promo-card .dept-footer{
+  margin-top: auto;
+}
+
+.promo-card .promo-body h4{
+  margin: 0 0 8px;
+}
+
+.promo-card .promo-body p{
+  margin: 0;
+}
+
+.kicker-membership{
+  background: rgba(75,74,115,0.10);
+  border-color: rgba(75,74,115,0.22);
+}
+
+/* ===== Structure Snapshot (public-friendly, calm, interactive) ===== */
+.structure-snapshot{
+  margin: 12px 0 14px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.90);
+  box-shadow: 0 10px 26px rgba(20,21,26,0.06);
+  overflow: hidden;
+}
+
+.ss-row{
+  display: grid;
+  grid-template-columns: 1fr 44px 1.6fr 44px 1fr;
+  align-items: stretch;
+  padding: 14px;
+  gap: 0;
+}
+
+.ss-card{
+  border-radius: 16px;
+  border: 1px solid rgba(201,202,219,0.85);
+  background: rgba(250,250,252,0.96);
+  padding: 12px 12px;
+}
+
+.ss-card-wide{
+  background: rgba(255,255,255,0.96);
+}
+
+.ss-kicker{
+  display: inline-block;
+  width: fit-content;
+  font-size: 12px;
+  color: var(--indigo-deep);
+  background: rgba(230,231,240,0.75);
+  border: 1px solid rgba(201,202,219,0.85);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+
+.ss-title{
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--indigo-deep);
+  letter-spacing: 0.2px;
+}
+
+.ss-text{
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.ss-divider{
+  position: relative;
+}
+
+.ss-divider::before{
+  content:"";
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(201,202,219,0.75);
+  border-radius: 999px;
+}
+
+.ss-divider::after{
+  content:"";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%,-50%);
+  border-radius: 999px;
+  background: rgba(75,74,115,0.22);
+  box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
+}
+
+/* Lens buttons (click to preview) */
+.ss-lenses{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ss-lensbtn{
+  appearance: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 14px;
+  border: 1px solid rgba(201,202,219,0.85);
+  background: rgba(250,250,252,0.98);
+  padding: 10px 10px;
+  display: grid;
+  gap: 4px;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.ss-lensbtn strong{
+  color: var(--indigo-deep);
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+
+.ss-lensbtn span{
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.ss-lensbtn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(75,74,115,0.35);
+  background: rgba(230,231,240,0.35);
+  box-shadow: 0 10px 22px rgba(20,21,26,0.06);
+}
+
+.ss-lensbtn.is-active{
+  border-color: rgba(75,74,115,0.45);
+  background: rgba(75,74,115,0.08);
+  box-shadow: 0 10px 22px rgba(20,21,26,0.06);
+}
+
+.ss-lensbtn:focus-visible{
+  outline: 3px solid rgba(75,74,115,0.22);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 920px){
+  .ss-row{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .ss-divider{
+    display: none;
+  }
+  .ss-lenses{
+    grid-template-columns: 1fr;
+  }
+}
 
 
 
@@ -1046,90 +1220,68 @@
 <section id="concepts">
   <div class="section-head">
     <h3>How the hub is structured</h3>
-    <p>This public page shows what the membership contains: department hubs, scope, and how concepts connect.</p>
+    <p><p>A concept library organized by department. Each department hub uses the same four lenses so the structure stays consistent across the site.</p>
+</p>
   </div>
 
   <!-- Tiers / structure map -->
   <div class="grid showcase-structure">
     <div class="col-12">
-      <div class="hub-structure" aria-label="Education Hub structure overview">
-  <div class="hub-structure-head">
-    <h4 class="hub-structure-title">Education Hub structure</h4>
-    <p class="hub-structure-desc">
-      The Education Hub is organized by department. Each department has a public landing page with a preview of what’s included.
-      Membership expands each department into a full concept library organized under four lenses.
-    </p>
-  </div>
-
-  <div class="hub-structure-visual" role="group" aria-label="Structure diagram">
-    <div class="hs-col hs-col-left">
-      <div class="hs-card">
-        <div class="hs-label">Education Hub</div>
-        <div class="hs-title">Department sections</div>
-        <div class="hs-text">Each department is its own hub.</div>
-      </div>
-
-      <div class="hs-mini">
-        <div class="hs-dot" aria-hidden="true"></div>
-        <div class="hs-mini-text">
-          <strong>Public landing pages</strong>
-          <span>Preview the scope and included topics for each department (listed below on this page).</span>
-        </div>
+     <div class="structure-snapshot" aria-label="Education Hub structure snapshot">
+  <div class="ss-row" role="group" aria-label="Hub structure overview">
+    <div class="ss-card">
+      <div class="ss-kicker">Education Hub</div>
+      <div class="ss-title">Department hubs</div>
+      <div class="ss-text">
+        The library is grouped by department. Each department has a public landing page that previews what’s included.
       </div>
     </div>
 
-    <div class="hs-connector" aria-hidden="true"></div>
+    <div class="ss-divider" aria-hidden="true"></div>
 
-    <div class="hs-col hs-col-mid">
-      <div class="hs-card hs-card-lenses">
-        <div class="hs-label">Inside each department</div>
-        <div class="hs-title">Four lenses</div>
-        <div class="hs-text">Concepts are grouped the same way across all departments.</div>
+    <div class="ss-card ss-card-wide">
+      <div class="ss-kicker">Inside each department</div>
+      <div class="ss-title">Four lenses</div>
+      <div class="ss-text">
+        Concepts are filed under the same four lenses in every department. Click a lens to preview what it contains.
+      </div>
 
-        <div class="hs-lenses" aria-label="Four lenses list">
-          <div class="hs-lens">
-            <strong>Foundations</strong>
-            <span>Core building blocks and baseline mechanics.</span>
-          </div>
-          <div class="hs-lens">
-            <strong>Constraints</strong>
-            <span>Limits, assumptions, and where interpretation can break.</span>
-          </div>
-          <div class="hs-lens">
-            <strong>Patterns</strong>
-            <span>Recurring behaviors that show up across results.</span>
-          </div>
-          <div class="hs-lens">
-            <strong>Interfaces</strong>
-            <span>Where departments connect and signals overlap.</span>
-          </div>
-        </div>
+      <div class="ss-lenses" role="group" aria-label="Four lenses">
+        <button class="ss-lensbtn is-active" type="button" data-fw="foundations" aria-pressed="true">
+          <strong>Foundations</strong>
+          <span>Core concepts and baseline mechanics.</span>
+        </button>
+
+        <button class="ss-lensbtn" type="button" data-fw="constraints" aria-pressed="false">
+          <strong>Constraints</strong>
+          <span>Limits, assumptions, and where interpretation can fail.</span>
+        </button>
+
+        <button class="ss-lensbtn" type="button" data-fw="patterns" aria-pressed="false">
+          <strong>Patterns</strong>
+          <span>Recurring behaviors that show up across results.</span>
+        </button>
+
+        <button class="ss-lensbtn" type="button" data-fw="interfaces" aria-pressed="false">
+          <strong>Interfaces</strong>
+          <span>Where departments connect and signals overlap.</span>
+        </button>
       </div>
     </div>
 
-    <div class="hs-connector" aria-hidden="true"></div>
+    <div class="ss-divider" aria-hidden="true"></div>
 
-    <div class="hs-col hs-col-right">
-      <div class="hs-card">
-        <div class="hs-label">Membership content</div>
-        <div class="hs-title">Modules</div>
-        <div class="hs-text">
-          Each lens contains modules focused on specific concept topics, supported by diagrams and cross-links.
-        </div>
-      </div>
-
-      <div class="hs-mini">
-        <div class="hs-dot" aria-hidden="true"></div>
-        <div class="hs-mini-text">
-          <strong>Consistent structure</strong>
-          <span>The same four lenses repeat across departments so the library stays navigable and comparable.</span>
-        </div>
+    <div class="ss-card">
+      <div class="ss-kicker">Membership</div>
+      <div class="ss-title">Modules</div>
+      <div class="ss-text">
+        Each lens contains modules focused on specific concept topics, supported by diagrams and cross-links.
       </div>
     </div>
   </div>
 </div>
 
-    <div class="framework" aria-label="Four section overview">
+<div class="framework" aria-label="Four lenses overview">
   <div class="framework-nav" role="tablist" aria-label="Framework lenses">
     <button class="fw-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="fw-foundations" data-fw="foundations">
       Foundations
@@ -1148,41 +1300,44 @@
   <div class="framework-panelwrap">
     <div class="fw-panel is-active" id="fw-foundations" role="tabpanel" aria-label="Foundations">
       <strong>Foundations</strong>
-      <ul class="zone-list">
-  <li>Core concepts that define what the department is measuring</li>
-  <li>Baseline system mechanics and timing</li>
-  <li>Key terms and reference models used throughout the hub</li>
+     <ul class="zone-list">
+  <li>What the department is measuring</li>
+  <li>The baseline system logic that makes results behave the way they do</li>
+  <li>Terms and mental models used throughout the section</li>
 </ul>
+
 
     </div>
 
     <div class="fw-panel" id="fw-constraints" role="tabpanel" aria-label="Constraints">
       <strong>Constraints</strong>
-      <ul class="zone-list">
-  <li>Assumptions and limitations that shape results</li>
-  <li>Common sources of distortion and mismatch</li>
-  <li>Where “correct” numbers can still mislead</li>
+    <ul class="zone-list">
+  <li>Assumptions that results quietly depend on</li>
+  <li>Common reasons a result can be “correct” but still misleading</li>
+  <li>Where interpretation breaks without context</li>
 </ul>
-
     </div>
 
     <div class="fw-panel" id="fw-patterns" role="tabpanel" aria-label="Patterns">
       <strong>Patterns</strong>
-     <ul class="zone-list">
-  <li>Recurring result behaviors seen in real workflows</li>
-  <li>Relationships between related markers and signals</li>
-  <li>What changes over time vs one-time snapshots</li>
+ <ul class="zone-list">
+  <li>Recurring result behaviors that appear in real life</li>
+  <li>Which signals tend to move together (and which don’t)</li>
+  <li>Persistence over snapshots</li>
 </ul>
+
+
 
     </div>
 
     <div class="fw-panel" id="fw-interfaces" role="tabpanel" aria-label="Interfaces">
       <strong>Interfaces</strong>
-     <ul class="zone-list">
-  <li>Shared signals that appear across departments</li>
-  <li>Interpretation boundaries (pre-analytic → analytic → reporting)</li>
-  <li>Where cross-linking prevents isolated conclusions</li>
+ <ul class="zone-list">
+  <li>Cross-department connections that prevent siloed interpretation</li>
+  <li>Shared signals across systems</li>
+  <li>Boundaries between pre-analytic, analytic, and reporting logic</li>
 </ul>
+
 
     </div>
   </div>
@@ -1221,6 +1376,8 @@
   <div class="dept-footer">
     <a class="dept-cta primary" href="membership.html">View membership details</a>
   </div>
+</div>
+
 </div>
 
         </div>
@@ -1468,11 +1625,21 @@
       </div>
     </div>
   </footer>
-    <script>
+<script>
   (function(){
     const tabs = Array.from(document.querySelectorAll(".fw-tab"));
     const panels = Array.from(document.querySelectorAll(".fw-panel"));
+    const lensBtns = Array.from(document.querySelectorAll(".ss-lensbtn"));
+
     if(!tabs.length || !panels.length) return;
+
+    function setLensButtonState(key){
+      lensBtns.forEach(b => {
+        const on = b.dataset.fw === key;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
 
     function activate(key){
       tabs.forEach(t => {
@@ -1480,22 +1647,27 @@
         t.classList.toggle("is-active", on);
         t.setAttribute("aria-selected", on ? "true" : "false");
       });
+
       panels.forEach(p => {
         const on = p.id === ("fw-" + key);
         p.classList.toggle("is-active", on);
       });
+
+      setLensButtonState(key);
     }
 
     tabs.forEach(t => {
       t.addEventListener("click", () => activate(t.dataset.fw));
       t.addEventListener("keydown", (e) => {
         const i = tabs.indexOf(t);
+
         if(e.key === "ArrowRight" || e.key === "ArrowDown"){
           e.preventDefault();
           const next = tabs[(i + 1) % tabs.length];
           next.focus();
           activate(next.dataset.fw);
         }
+
         if(e.key === "ArrowLeft" || e.key === "ArrowUp"){
           e.preventDefault();
           const prev = tabs[(i - 1 + tabs.length) % tabs.length];
@@ -1505,9 +1677,31 @@
       });
     });
 
+    lensBtns.forEach(b => {
+      b.addEventListener("click", () => activate(b.dataset.fw));
+      b.addEventListener("keydown", (e) => {
+        const i = lensBtns.indexOf(b);
+
+        if(e.key === "ArrowRight" || e.key === "ArrowDown"){
+          e.preventDefault();
+          const next = lensBtns[(i + 1) % lensBtns.length];
+          next.focus();
+          activate(next.dataset.fw);
+        }
+
+        if(e.key === "ArrowLeft" || e.key === "ArrowUp"){
+          e.preventDefault();
+          const prev = lensBtns[(i - 1 + lensBtns.length) % lensBtns.length];
+          prev.focus();
+          activate(prev.dataset.fw);
+        }
+      });
+    });
+
     activate("foundations");
   })();
 </script>
+
 
 </body>
 </html>
