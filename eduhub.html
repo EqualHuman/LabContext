@@ -683,146 +683,89 @@
     grid-template-columns: 1fr;
   }
 }
-
-
-    /* ===== Make the 2x2 framework more “map-like”, denser, and less flat ===== */
-
-/* Overall panel: add subtle depth and a framework backdrop */
-.map-wide{
-  position: relative;
-  padding: 12px;
-  border-color: rgba(201,202,219,0.95);
+/* ===== Framework selector (replaces the 2x2 tiles) ===== */
+.framework{
+  border: var(--border);
+  border-radius: var(--radius);
   background: rgba(255,255,255,0.86);
   box-shadow: 0 10px 26px rgba(20,21,26,0.06);
   overflow: hidden;
 }
 
-/* faint connector grid behind tiles */
-.map-wide::before{
-  content:"";
-  position:absolute;
-  inset: 0;
-  pointer-events:none;
-  opacity: 0.55;
-  background:
-    linear-gradient(to right, rgba(201,202,219,0.10) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(201,202,219,0.10) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(circle at 50% 35%, black 0%, black 55%, transparent 85%);
+.framework-nav{
+  display: flex;
+  gap: 8px;
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(201,202,219,0.65);
+  background: rgba(250,250,252,0.95);
+  flex-wrap: wrap;
 }
 
-/* tighter grid so it doesn’t feel like a giant block */
-.map-grid-2x2{
-  position: relative;
-  z-index: 1;
-  gap: 10px;
+.fw-tab{
+  appearance: none;
+  border: 1px solid rgba(201,202,219,0.85);
+  background: rgba(255,255,255,0.95);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: 500 13px/1 var(--sans);
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
 
-/* each tile becomes a “module” with rail + header band */
-.map-grid-2x2 .zone{
-  position: relative;
-  padding: 10px 12px 10px 12px;
+.fw-tab:hover{
+  transform: translateY(-1px);
+  border-color: rgba(75,74,115,0.35);
+  background: rgba(230,231,240,0.45);
+  color: var(--indigo-deep);
+}
+
+.fw-tab.is-active{
+  color: var(--indigo-deep);
+  border-color: rgba(75,74,115,0.45);
+  background: rgba(75,74,115,0.10);
+}
+
+.fw-tab:focus-visible{
+  outline: 3px solid rgba(75,74,115,0.22);
+  outline-offset: 2px;
+}
+
+.framework-panelwrap{
+  padding: 12px 12px;
+}
+
+.fw-panel{
+  display: none;
+  border-radius: 16px;
+  border: 1px solid rgba(201,202,219,0.80);
   background: rgba(250,250,252,0.96);
-  border-color: rgba(201,202,219,0.92);
-  box-shadow: 0 10px 22px rgba(20,21,26,0.05);
-  overflow: hidden;
+  padding: 12px 14px;
 }
 
-/* header band (no new colors—uses existing indigo as a tint) */
-.map-grid-2x2 .zone::before{
-  content:"";
-  position:absolute;
-  left: 0;
-  top: 0;
-  height: 34px;
-  width: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(75,74,115,0.10),
-    rgba(75,74,115,0.03)
-  );
-  border-bottom: 1px solid rgba(201,202,219,0.60);
-}
-
-/* left rail so it reads as a “category block” */
-.map-grid-2x2 .zone::after{
-  content:"";
-  position:absolute;
-  left: 0;
-  top: 0;
-  width: 6px;
-  height: 100%;
-  background: rgba(75,74,115,0.28);
-}
-
-/* title: sits in the header band */
-.map-grid-2x2 .zone strong{
-  position: relative;
-  z-index: 1;
+.fw-panel.is-active{
   display: block;
-  padding-left: 6px;
-  padding-top: 6px;
-  margin-bottom: 8px;
+}
+
+.fw-panel strong{
+  display:block;
   font-size: 13px;
+  color: var(--indigo-deep);
+  margin-bottom: 8px;
   letter-spacing: 0.2px;
 }
 
-/* list: remove default bullets and tighten spacing */
-.map-grid-2x2 .zone-list{
-  position: relative;
-  z-index: 1;
-  list-style: none;
-  padding-left: 0;
+/* reuse your list class but tighten it for compactness */
+.fw-panel .zone-list{
   margin: 0;
-  line-height: 1.35;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
-/* custom bullets: small “node” + stem so it looks like a breakdown */
-.map-grid-2x2 .zone-list li{
-  position: relative;
-  padding-left: 16px;
+.fw-panel .zone-list li{
   margin: 6px 0;
 }
-
-.map-grid-2x2 .zone-list li::before{
-  content:"";
-  position:absolute;
-  left: 0;
-  top: 0.58em;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: rgba(75,74,115,0.30);
-  box-shadow: 0 0 0 3px rgba(75,74,115,0.08);
-}
-
-.map-grid-2x2 .zone-list li::after{
-  content:"";
-  position:absolute;
-  left: 3px;
-  top: 0.95em;
-  width: 1px;
-  height: 14px;
-  background: rgba(201,202,219,0.75);
-}
-
-/* last item shouldn’t have a long stem */
-.map-grid-2x2 .zone-list li:last-child::after{
-  height: 6px;
-}
-
-/* hover: subtle lift so it doesn’t feel dead */
-.map-grid-2x2 .zone:hover{
-  transform: translateY(-2px);
-  border-color: rgba(75,74,115,0.40);
-}
-
-/* keep it compact on smaller screens */
-@media (max-width: 920px){
-  .map-wide{ padding: 10px; }
-  .map-grid-2x2{ gap: 10px; }
-}
-
 
 
 
@@ -893,46 +836,60 @@
   <!-- Tiers / structure map -->
   <div class="grid showcase-structure">
     <div class="col-12">
-      <div class="map map-wide" aria-label="Four section overview">
-        <div class="map-grid map-grid-2x2">
-          <div class="zone">
-            <strong>Foundations</strong>
-            <ul class="zone-list">
-              <li>What the system is measuring</li>
-              <li>Production and turnover logic</li>
-              <li>Pools, compartments, timing</li>
-            </ul>
-          </div>
+    <div class="framework" aria-label="Four section overview">
+  <div class="framework-nav" role="tablist" aria-label="Framework lenses">
+    <button class="fw-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="fw-foundations" data-fw="foundations">
+      Foundations
+    </button>
+    <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-constraints" data-fw="constraints">
+      Constraints
+    </button>
+    <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-patterns" data-fw="patterns">
+      Patterns
+    </button>
+    <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-interfaces" data-fw="interfaces">
+      Interfaces
+    </button>
+  </div>
 
-          <div class="zone">
-            <strong>Constraints</strong>
-            <ul class="zone-list">
-              <li>Why numbers can be correct but misleading</li>
-              <li>Measurement assumptions and breakdown</li>
-              <li>Dilution, concentration, context</li>
-            </ul>
-          </div>
-
-          <div class="zone">
-            <strong>Patterns</strong>
-            <ul class="zone-list">
-              <li>Patterns as behaviors, not diagnoses</li>
-              <li>Concordance vs conflict</li>
-              <li>Persistence over snapshots</li>
-            </ul>
-          </div>
-
-          <div class="zone">
-            <strong>Interfaces</strong>
-            <ul class="zone-list">
-              <li>When interpretation collapses in isolation</li>
-              <li>Shared signals across departments</li>
-              <li>Pre-analytic and analytic boundaries</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  <div class="framework-panelwrap">
+    <div class="fw-panel is-active" id="fw-foundations" role="tabpanel" aria-label="Foundations">
+      <strong>Foundations</strong>
+      <ul class="zone-list">
+        <li>What the system is measuring</li>
+        <li>Production and turnover logic</li>
+        <li>Pools, compartments, timing</li>
+      </ul>
     </div>
+
+    <div class="fw-panel" id="fw-constraints" role="tabpanel" aria-label="Constraints">
+      <strong>Constraints</strong>
+      <ul class="zone-list">
+        <li>Why numbers can be correct but misleading</li>
+        <li>Measurement assumptions and breakdown</li>
+        <li>Dilution, concentration, context</li>
+      </ul>
+    </div>
+
+    <div class="fw-panel" id="fw-patterns" role="tabpanel" aria-label="Patterns">
+      <strong>Patterns</strong>
+      <ul class="zone-list">
+        <li>Patterns as behaviors, not diagnoses</li>
+        <li>Concordance vs conflict</li>
+        <li>Persistence over snapshots</li>
+      </ul>
+    </div>
+
+    <div class="fw-panel" id="fw-interfaces" role="tabpanel" aria-label="Interfaces">
+      <strong>Interfaces</strong>
+      <ul class="zone-list">
+        <li>When interpretation collapses in isolation</li>
+        <li>Shared signals across departments</li>
+        <li>Pre-analytic and analytic boundaries</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
     <!-- CTAs row: Lab Orientation (left) + Membership (right, wider) -->
     <div class="col-12">
@@ -1207,5 +1164,46 @@
       </div>
     </div>
   </footer>
+    <script>
+  (function(){
+    const tabs = Array.from(document.querySelectorAll(".fw-tab"));
+    const panels = Array.from(document.querySelectorAll(".fw-panel"));
+    if(!tabs.length || !panels.length) return;
+
+    function activate(key){
+      tabs.forEach(t => {
+        const on = t.dataset.fw === key;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      panels.forEach(p => {
+        const on = p.id === ("fw-" + key);
+        p.classList.toggle("is-active", on);
+      });
+    }
+
+    tabs.forEach(t => {
+      t.addEventListener("click", () => activate(t.dataset.fw));
+      t.addEventListener("keydown", (e) => {
+        const i = tabs.indexOf(t);
+        if(e.key === "ArrowRight" || e.key === "ArrowDown"){
+          e.preventDefault();
+          const next = tabs[(i + 1) % tabs.length];
+          next.focus();
+          activate(next.dataset.fw);
+        }
+        if(e.key === "ArrowLeft" || e.key === "ArrowUp"){
+          e.preventDefault();
+          const prev = tabs[(i - 1 + tabs.length) % tabs.length];
+          prev.focus();
+          activate(prev.dataset.fw);
+        }
+      });
+    });
+
+    activate("foundations");
+  })();
+</script>
+
 </body>
 </html>
