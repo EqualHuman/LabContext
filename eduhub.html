@@ -593,6 +593,33 @@
         transition: none !important;
       }
     }
+    /* ===== Restructured "How the hub is structured" layout ===== */
+.showcase-structure{
+  align-items: start;
+}
+
+/* Right column: make the stack feel intentionally grouped */
+.stack-tight{
+  gap: 12px; /* tighter than default 14px for a single "module" */
+}
+
+/* Ensure stacked promo cards never inherit grid behaviors */
+.promo-card{
+  width: 100%;
+}
+
+/* Membership card: slightly more “anchored” without adding noise */
+.membership-card{
+  background: rgba(255,255,255,0.94);
+  border-color: rgba(201,202,219,0.85);
+}
+
+/* Button in membership card: full-width and consistent */
+.membership-card .dept-cta.primary{
+  max-width: none;
+  width: 100%;
+}
+
   </style>
 </head>
 
@@ -651,80 +678,87 @@
     </section>
 
     <!-- Structure + Showcase -->
-    <section id="concepts">
-      <div class="section-head">
-        <h3>How the hub is structured</h3>
-        <p>This public page shows what the membership contains: department hubs, scope, and how concepts connect.</p>
+   <!-- Structure + Showcase -->
+<section id="concepts">
+  <div class="section-head">
+    <h3>How the hub is structured</h3>
+    <p>This public page shows what the membership contains: department hubs, scope, and how concepts connect.</p>
+  </div>
+
+  <div class="grid showcase-grid showcase-structure">
+    <!-- Left: structure map -->
+    <div class="col-8">
+      <div class="map" aria-label="Four section overview">
+        <div class="map-grid">
+          <div class="zone">
+            <strong>Foundations</strong>
+            <ul class="zone-list">
+              <li>What the system is measuring</li>
+              <li>Production and turnover logic</li>
+              <li>Pools, compartments, timing</li>
+            </ul>
+          </div>
+
+          <div class="zone">
+            <strong>Constraints</strong>
+            <ul class="zone-list">
+              <li>Why numbers can be correct but misleading</li>
+              <li>Measurement assumptions and breakdown</li>
+              <li>Dilution, concentration, context</li>
+            </ul>
+          </div>
+
+          <div class="zone">
+            <strong>Patterns</strong>
+            <ul class="zone-list">
+              <li>Patterns as behaviors, not diagnoses</li>
+              <li>Concordance vs conflict</li>
+              <li>Persistence over snapshots</li>
+            </ul>
+          </div>
+
+          <div class="zone">
+            <strong>Interfaces</strong>
+            <ul class="zone-list">
+              <li>When interpretation collapses in isolation</li>
+              <li>Shared signals across departments</li>
+              <li>Pre-analytic and analytic boundaries</li>
+            </ul>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="grid showcase-grid">
-        <div class="col-8">
-          <div class="map" aria-label="Four section overview">
-            <div class="map-grid">
-              <div class="zone">
-                <strong>Foundations</strong>
-                <ul class="zone-list">
-                  <li>What the system is measuring</li>
-                  <li>Production and turnover logic</li>
-                  <li>Pools, compartments, timing</li>
-                </ul>
-              </div>
+    <!-- Right: preview + membership stack -->
+    <div class="col-4">
+      <div class="stack stack-tight" aria-label="Preview and membership">
+        <div class="card promo-card">
+          <span class="kicker">Free preview</span>
+          <h4>Lab Orientation</h4>
+          <p>
+            A free example of how department hubs work: what happens in the lab, how results are created,
+            and why interpretation is constrained.
+          </p>
 
-              <div class="zone">
-                <strong>Constraints</strong>
-                <ul class="zone-list">
-                  <li>Why numbers can be correct but misleading</li>
-                  <li>Measurement assumptions and breakdown</li>
-                  <li>Dilution, concentration, context</li>
-                </ul>
-              </div>
-
-              <div class="zone">
-                <strong>Patterns</strong>
-                <ul class="zone-list">
-                  <li>Patterns as behaviors, not diagnoses</li>
-                  <li>Concordance vs conflict</li>
-                  <li>Persistence over snapshots</li>
-                </ul>
-              </div>
-
-              <div class="zone">
-                <strong>Interfaces</strong>
-                <ul class="zone-list">
-                  <li>When interpretation collapses in isolation</li>
-                  <li>Shared signals across departments</li>
-                  <li>Pre-analytic and analytic boundaries</li>
-                </ul>
-              </div>
-            </div>
+          <div class="dept-footer" style="padding-top:0;">
+            <div class="dept-access">Membership not required</div>
+            <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
           </div>
         </div>
 
-        <div class="col-4">
-          <div class="stack">
-            <div class="card">
-              <span class="kicker">Free preview</span>
-              <h4>Lab Orientation</h4>
-              <p>
-                A free example of how department hubs work: what happens in the lab, how results are created,
-                and why interpretation is constrained.
-              </p>
-              <div class="dept-footer" style="padding-top:0;">
-                <div class="dept-access">Membership not required</div>
-                <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
-              </div>
-            </div>
-
-                <!-- Dept section membership CTA -->
-      <div class="card col-12" style="margin-top:14px;">
-        <span class="kicker" style="background: rgba(75,74,115,0.10); border-color: rgba(75,74,115,0.22);">Membership</span>
-        <h4 style="margin-bottom:8px;">Want the full library inside these hubs?</h4>
-        <p style="margin-bottom:12px;">
-          Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
-        </p>
-        <a class="dept-cta primary" href="membership.html" style="max-width: 320px;">View membership details</a>
+        <div class="card promo-card membership-card">
+          <span class="kicker" style="background: rgba(75,74,115,0.10); border-color: rgba(75,74,115,0.22);">Membership</span>
+          <h4 style="margin-bottom:8px;">Want the full library inside these hubs?</h4>
+          <p style="margin-bottom:12px;">
+            Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
+          </p>
+          <a class="dept-cta primary" href="membership.html">View membership details</a>
+        </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
           </div>
         </div>
       </div>
