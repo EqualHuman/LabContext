@@ -901,6 +901,195 @@ header, main, footer{
   font-size: 11.5px;
   padding: 5px 9px;
 }
+/* ===== Membership highlight (primary conversion block) ===== */
+
+.member-highlight{
+  margin-top: 10px;
+}
+
+.member-card{
+  border: 1px solid rgba(75,74,115,0.26);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(250,250,252,0.94));
+  box-shadow: 0 18px 40px rgba(20,21,26,0.12);
+  padding: 16px;
+  display:grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 14px;
+  align-items:start;
+}
+
+.member-kicker{
+  display:inline-block;
+  font-size: 12.5px;
+  color: var(--indigo-deep);
+  background: rgba(75,74,115,0.10);
+  border: 1px solid rgba(75,74,115,0.20);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+
+.member-title{
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--indigo-deep);
+}
+
+.member-copy{
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14.5px;
+  max-width: 78ch;
+}
+
+.member-list{
+  display:grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.member-item{
+  border: 1px solid rgba(201,202,219,0.78);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.88);
+}
+
+.member-item-title{
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--indigo-deep);
+  margin-bottom: 4px;
+}
+
+.member-item-desc{
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.member-actions{
+  margin-top: 12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  align-items:center;
+}
+
+.member-btn{
+  display:inline-block;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(75,74,115,0.34);
+  background: rgba(75,74,115,0.16);
+  color: var(--indigo-deep);
+  font-size: 14px;
+  text-decoration:none;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.member-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(75,74,115,0.20);
+  border-color: rgba(75,74,115,0.48);
+  box-shadow: 0 14px 26px rgba(20,21,26,0.12);
+  text-decoration:none;
+}
+
+.member-link{
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(80,84,100,0.35);
+  padding-bottom: 2px;
+}
+.member-link:hover{
+  color: var(--indigo-deep);
+  border-bottom-color: rgba(75,74,115,0.45);
+  text-decoration:none;
+}
+
+.member-boundary{
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(230,231,240,0.45);
+  border: 1px solid rgba(201,202,219,0.70);
+  color: var(--indigo-deep);
+  font-size: 13px;
+}
+
+/* Right side compare */
+.member-compare{
+  border: 1px solid rgba(201,202,219,0.78);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.82);
+  padding: 12px;
+}
+
+.compare-title{
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--indigo-deep);
+  font-size: 14.5px;
+  margin-bottom: 10px;
+}
+
+.compare-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.compare-col{
+  border: 1px solid rgba(201,202,219,0.72);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(250,250,252,1), rgba(250,250,252,0.70));
+}
+
+.compare-label{
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--indigo-deep);
+  margin-bottom: 8px;
+}
+
+.compare-list{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.compare-list li{
+  margin: 6px 0;
+}
+
+.compare-note{
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 920px){
+  .member-card{
+    grid-template-columns: 1fr;
+  }
+  .compare-row{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 740px){
+  .compare-row{
+    grid-template-columns: 1fr;
+  }
+}
 
 
   </style>
@@ -917,6 +1106,7 @@ header, main, footer{
 
         <nav class="navlinks" aria-label="Primary">
           <a href="#departments">Departments</a>
+          <a href="#membership">Membership</a>
           <a href="#concepts">Concept Map</a>
           <a href="#pathways">Pathways</a>
           <a href="#membership">Access</a>
@@ -1056,6 +1246,79 @@ header, main, footer{
 </section>
 
     </section>
+<section id="membership" class="member-highlight">
+  <div class="section-head">
+    <h3>Membership</h3>
+    <p>Full concept pages, diagrams, and cross-linked reference maps—built for rereading, not completion.</p>
+  </div>
+
+  <div class="member-card" role="region" aria-label="Membership highlight">
+    <div class="member-left">
+      <div class="member-kicker">Member library</div>
+      <h4 class="member-title">Unlock the complete Education Hub</h4>
+      <p class="member-copy">
+        The public hub provides orientation and department maps. Membership adds the full library:
+        deep concept pages, low-stimulation diagrams, and cross-links that connect departments.
+      </p>
+
+      <div class="member-list">
+        <div class="member-item">
+          <div class="member-item-title">Full concept pages</div>
+          <div class="member-item-desc">Explanations focused on system behavior and interpretation boundaries.</div>
+        </div>
+        <div class="member-item">
+          <div class="member-item-title">Diagrams and maps</div>
+          <div class="member-item-desc">Clean visuals designed to clarify mechanisms, constraints, and patterns.</div>
+        </div>
+        <div class="member-item">
+          <div class="member-item-title">Cross-department linking</div>
+          <div class="member-item-desc">Interfaces that prevent “learning in silos” and help concepts transfer.</div>
+        </div>
+      </div>
+
+      <div class="member-actions">
+        <a class="member-btn" href="membership.html">View membership</a>
+        <a class="member-link" href="membership.html#whats-included">What’s included</a>
+      </div>
+
+      <div class="member-boundary">
+        <strong>Note:</strong> No progress tracking. No grades. This is reference-style depth, not a course.
+      </div>
+    </div>
+
+    <div class="member-right" aria-hidden="true">
+      <div class="member-compare">
+        <div class="compare-title">Free hub vs Member library</div>
+
+        <div class="compare-row">
+          <div class="compare-col">
+            <div class="compare-label">Free hub</div>
+            <ul class="compare-list">
+              <li>Laboratory Orientation (public)</li>
+              <li>Department hubs (maps + boundaries)</li>
+              <li>Scope clarity and terminology</li>
+            </ul>
+          </div>
+
+          <div class="compare-col">
+            <div class="compare-label">Member library</div>
+            <ul class="compare-list">
+              <li>Full concept pages by department</li>
+              <li>Diagrams + deeper explanations</li>
+              <li>Cross-linked reference pathways</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="compare-note">
+          Membership expands depth. The public orientation remains complete on purpose.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
     <!-- Departments -->
     <section id="departments">
       <div class="section-head">
