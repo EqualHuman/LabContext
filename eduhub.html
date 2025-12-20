@@ -823,6 +823,68 @@
   border-color: rgba(75,74,115,0.22);
   color: var(--indigo-deep);
 }
+/* ===== Department group sections ===== */
+.dept-group{
+  margin-top: 18px;
+}
+
+.dept-group-head{
+  display:flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: baseline;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(201,202,219,0.55);
+}
+
+.dept-group-title{
+  margin:0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--indigo-deep);
+  position: relative;
+  padding-left: 14px;
+}
+
+.dept-group-title::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(75,74,115,0.35);
+  box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
+}
+
+.dept-group-desc{
+  margin:0;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 70ch;
+}
+
+/* Keep dept cards consistent; add a “free/primary” CTA option */
+.dept-cta.primary{
+  background: rgba(75,74,115,0.16);
+  border-color: rgba(75,74,115,0.46);
+  color: var(--indigo-deep);
+  font-weight: 500;
+}
+.dept-cta.primary:hover{
+  background: rgba(75,74,115,0.20);
+  border-color: rgba(75,74,115,0.58);
+}
+
+/* Flag chip */
+.dept-chip.flag{
+  background: rgba(75,74,115,0.10);
+  border-color: rgba(75,74,115,0.22);
+  color: var(--indigo-deep);
+}
 
   </style>
 </head>
@@ -940,190 +1002,423 @@
     </section>
 
   
-    <!-- Departments -->
-    <section id="departments">
-      <div class="section-head">
-        <h3>Browse by department</h3>
-<p>These hubs show scope, structure, and maps. Laboratory Orientation is the free example of the full member library style.</p>
-      </div>
-
-      <div class="grid dept-grid">
-        <article class="card col-4 dept-hub">
-  <div class="dept-head">
-    <h4><a class="dept-titlelink" href="orientation/index.html">Laboratory Orientation</a></h4>
-    <p>A public example hub: how lab results are produced, constrained, and meant to be read.</p>
+   <!-- Departments -->
+<section id="departments">
+  <div class="section-head">
+    <h3>Browse by department</h3>
+    <p>Public hubs show scope, structure, and maps. Membership adds full concept pages and diagrams.</p>
   </div>
 
-  <div class="dept-preview">
-    <ul class="dept-preview-list">
-      <li>Public and complete (no prerequisites)</li>
-      <li>Eight pages arranged as an orientation loop</li>
-      <li>Shows the LabContext “system-first” explanation style</li>
-    </ul>
+  <!-- Core Analytical Departments -->
+  <div class="dept-group" aria-label="Core Analytical Departments">
+    <div class="dept-group-head">
+      <h4 class="dept-group-title">Core Analytical Departments</h4>
+      <p class="dept-group-desc">Defined by distinct measurement logics and interpretation patterns.</p>
+    </div>
+
+    <div class="grid dept-grid">
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="orientation/index.html">Lab Orientation</a></h4>
+          <p>Free orientation hub: what happens in the lab, how results are created, and why interpretation is constrained.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Public and complete (no prerequisites)</li>
+            <li>Eight pages arranged as an orientation loop</li>
+            <li>Designed as a free example of the full hub style</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip flag">Public</span>
+          <span class="dept-chip">Complete</span>
+          <span class="dept-chip">Free example</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta primary" href="orientation/index.html">Open free Orientation hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/hematology.html">Hematology</a></h4>
+          <p>Cell populations, production, destruction, morphology, and pattern recognition across indices and smears.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Department map</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Concept map</span>
+          <span class="dept-chip">Interpretation</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/hematology.html">Open Hematology hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/coagulation.html">Coagulation / Hemostasis</a></h4>
+          <p>Cascade logic, amplification, inhibition, fragility, and time-dependent system behavior.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>System behavior framing</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">System model</span>
+          <span class="dept-chip">Time-dependent</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/coagulation.html">Open Coagulation hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/chemistry.html">Clinical Chemistry</a></h4>
+          <p>Quantitative analytes, chemical equilibria, enzymatic activity, interference, and matrix effects.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Assay thinking + interference</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Interference</span>
+          <span class="dept-chip">Equilibria</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/chemistry.html">Open Chemistry hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/immunology-serology.html">Immunology / Serology</a></h4>
+          <p>Antigen–antibody interactions, signal generation, cross-reactivity, and immune pattern behavior.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Signal generation + cross-reactivity</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Cross-reactivity</span>
+          <span class="dept-chip">Signal</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/immunology-serology.html">Open Immunology hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/urinalysis-body-fluids.html">Urinalysis &amp; Body Fluids</a></h4>
+          <p>Compartmentalized physiology, concentration logic, and indirect reflection of systemic processes.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Compartment logic + concentration</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Compartments</span>
+          <span class="dept-chip">Concentration</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/urinalysis-body-fluids.html">Open UA/Body Fluids hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/microbiology.html">Microbiology</a></h4>
+          <p>Taxonomy, growth constraints, detection probability, and time-based uncertainty.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Time-aware evidence framing</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Time</span>
+          <span class="dept-chip">Uncertainty</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/microbiology.html">Open Micro hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/transfusion.html">Transfusion Medicine (Blood Bank)</a></h4>
+          <p>Compatibility logic, immunohematology, risk management, and exception-driven reasoning.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Compatibility as constraints</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Safety</span>
+          <span class="dept-chip">Exceptions</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/transfusion.html">Open Transfusion hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/molecular-genetics.html">Molecular Diagnostics &amp; Genetics</a></h4>
+          <p>Information transfer, amplification logic, mutation interpretation, and signal vs noise reasoning.</p>
+        </div>
+
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Signal vs noise framing</li>
+            <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
+          </ul>
+        </div>
+
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Amplification</span>
+          <span class="dept-chip">Interpretation</span>
+        </div>
+
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/molecular-genetics.html">Open Molecular hub</a>
+        </div>
+      </article>
+    </div>
   </div>
 
-  <div class="dept-meta">
-    <span class="dept-chip flag">Public</span>
-    <span class="dept-chip">Complete</span>
-    <span class="dept-chip">Free example</span>
+  <!-- Pre-Analytical and Systems-Focused Departments -->
+  <div class="dept-group" aria-label="Pre-Analytical and Systems-Focused Departments">
+    <div class="dept-group-head">
+      <h4 class="dept-group-title">Pre-Analytical and Systems-Focused</h4>
+      <p class="dept-group-desc">Errors, delays, and distortion often originate outside the assay.</p>
+    </div>
+
+    <div class="grid dept-grid">
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/preanalytical-variables.html">Pre-Analytical Variables &amp; Specimen Integrity</a></h4>
+          <p>Collection, handling, transport, and patient factors as conceptual sources of error and bias.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Artifacts and bias sources</li>
+            <li>Why “good assays” still fail</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Specimen integrity</span>
+          <span class="dept-chip">Bias</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/preanalytical-variables.html">Open Pre-Analytical Variables hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/poct.html">Point-of-Care Testing (POCT)</a></h4>
+          <p>Decentralized testing constraints, environmental variability, and tradeoffs between speed and control.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Environment + operator variability</li>
+            <li>Speed vs control tradeoffs</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Tradeoffs</span>
+          <span class="dept-chip">Variability</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/poct.html">Open POCT hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/operations-workflow.html">Laboratory Operations &amp; Workflow</a></h4>
+          <p>Throughput, batching, prioritization, and system-level constraints that shape result behavior.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Why delays and batching exist</li>
+            <li>Constraints as designed features</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Throughput</span>
+          <span class="dept-chip">Constraints</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/operations-workflow.html">Open Operations hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/quality-safety-reliability.html">Quality, Safety, &amp; Reliability</a></h4>
+          <p>Error taxonomy, safeguards, uncertainty, and why quality systems exist at all.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Safeguards and uncertainty</li>
+            <li>Why flags exist</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Hub</span>
+          <span class="dept-chip">Safeguards</span>
+          <span class="dept-chip">Uncertainty</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/quality-safety-reliability.html">Open Quality hub</a>
+        </div>
+      </article>
+    </div>
   </div>
 
-  <div class="dept-footer">
-    <a class="dept-cta primary" href="orientation/index.html">Open free Orientation hub</a>
+  <!-- Cross-Cutting Foundations -->
+  <div class="dept-group" aria-label="Cross-Cutting Foundations">
+    <div class="dept-group-head">
+      <h4 class="dept-group-title">Cross-Cutting Foundations</h4>
+      <p class="dept-group-desc">Conceptual anchors that prevent fragmentation across departments.</p>
+    </div>
+
+    <div class="grid dept-grid">
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/anatomy-physiology-interpretation.html">Anatomy &amp; Physiology for Laboratory Interpretation</a></h4>
+          <p>Physiology framed specifically around what laboratory data can and cannot reflect.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Lab-facing physiology (not a full A&amp;P course)</li>
+            <li>Interpreting signals under constraint</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Foundation</span>
+          <span class="dept-chip">Physiology</span>
+          <span class="dept-chip">Interpretation</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/anatomy-physiology-interpretation.html">Open A&amp;P foundation hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/measurement-science.html">Measurement Science &amp; Analytical Principles</a></h4>
+          <p>Sensitivity, specificity, precision, accuracy, limits, bias, and uncertainty across all departments.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Uncertainty and limits</li>
+            <li>Why “accurate” still misleads</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Foundation</span>
+          <span class="dept-chip">Uncertainty</span>
+          <span class="dept-chip">Bias</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/measurement-science.html">Open Measurement Science hub</a>
+        </div>
+      </article>
+
+      <article class="card col-4 dept-hub">
+        <div class="dept-head">
+          <h4><a class="dept-titlelink" href="departments/results-reporting.html">Results &amp; Reporting Interpretation</a></h4>
+          <p>Reference ranges, flags, deltas, critical values, and communication limits.</p>
+        </div>
+        <div class="dept-preview">
+          <ul class="dept-preview-list">
+            <li>Scope + boundaries</li>
+            <li>Why ranges vary</li>
+            <li>Flags as uncertainty signals</li>
+          </ul>
+        </div>
+        <div class="dept-meta">
+          <span class="dept-chip">Foundation</span>
+          <span class="dept-chip">Ranges</span>
+          <span class="dept-chip">Communication</span>
+        </div>
+        <div class="dept-footer">
+          <a class="dept-cta" href="departments/results-reporting.html">Open Results &amp; Reporting hub</a>
+        </div>
+      </article>
+    </div>
   </div>
-</article>
+</section>
 
-        <article class="card col-4 dept-hub">
-          <div class="dept-head">
-            <h4><a class="dept-titlelink" href="departments/hematology.html">Hematology</a></h4>
-            <p>What the CBC is measuring, why patterns recur, and where interpretation breaks.</p>
-          </div>
-
-          <div class="dept-preview">
-            <ul class="dept-preview-list">
-              <li>What belongs here (scope + boundaries)</li>
-              <li>Department map (how topics relate)</li>
-              <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
-            </ul>
-          </div>
-
-          <div class="dept-meta">
-            <span class="dept-chip">Free hub</span>
-            <span class="dept-chip">Concept map</span>
-            <span class="dept-chip">Scope clarity</span>
-          </div>
-
-          <div class="dept-footer">
-            <a class="dept-cta" href="departments/hematology.html">Open Hematology hub</a>
-          </div>
-        </article>
-
-        <article class="card col-4 dept-hub">
-          <div class="dept-head">
-            <h4><a class="dept-titlelink" href="departments/chemistry.html">Clinical Chemistry</a></h4>
-            <p>Measurement logic, interference, reference intervals, and result framing.</p>
-          </div>
-
-          <div class="dept-preview">
-            <ul class="dept-preview-list">
-              <li>What belongs here (scope + boundaries)</li>
-              <li>How methods shape meaning (concept level)</li>
-              <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
-            </ul>
-          </div>
-
-          <div class="dept-meta">
-            <span class="dept-chip">Free hub</span>
-            <span class="dept-chip">Assay thinking</span>
-            <span class="dept-chip">Interference</span>
-          </div>
-
-          <div class="dept-footer">
-            <a class="dept-cta" href="departments/chemistry.html">Open Chemistry hub</a>
-          </div>
-        </article>
-
-        <article class="card col-4 dept-hub">
-          <div class="dept-head">
-            <h4><a class="dept-titlelink" href="departments/coagulation.html">Coagulation</a></h4>
-            <p>Why hemostasis behaves like a system—and why “normal” can mislead.</p>
-          </div>
-
-          <div class="dept-preview">
-            <ul class="dept-preview-list">
-              <li>What belongs here (scope + boundaries)</li>
-              <li>System behavior framing (not checklist)</li>
-              <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
-            </ul>
-          </div>
-
-          <div class="dept-meta">
-            <span class="dept-chip">Free hub</span>
-            <span class="dept-chip">System model</span>
-            <span class="dept-chip">Constraints</span>
-          </div>
-
-          <div class="dept-footer">
-            <a class="dept-cta" href="departments/coagulation.html">Open Coagulation hub</a>
-          </div>
-        </article>
-
-        <article class="card col-4 dept-hub">
-          <div class="dept-head">
-            <h4><a class="dept-titlelink" href="departments/microbiology.html">Microbiology</a></h4>
-            <p>Signal vs noise, time, growth constraints, and what “negative” can mean.</p>
-          </div>
-
-          <div class="dept-preview">
-            <ul class="dept-preview-list">
-              <li>What belongs here (scope + boundaries)</li>
-              <li>Evidence + time framing (concept level)</li>
-              <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
-            </ul>
-          </div>
-
-          <div class="dept-meta">
-            <span class="dept-chip">Free hub</span>
-            <span class="dept-chip">Time-aware</span>
-            <span class="dept-chip">Evidence</span>
-          </div>
-
-          <div class="dept-footer">
-            <a class="dept-cta" href="departments/microbiology.html">Open Micro hub</a>
-          </div>
-        </article>
-
-        <article class="card col-4 dept-hub">
-          <div class="dept-head">
-            <h4><a class="dept-titlelink" href="departments/transfusion.html">Transfusion Medicine</a></h4>
-            <p>Compatibility as a system of constraints, history, and risk tradeoffs.</p>
-          </div>
-
-          <div class="dept-preview">
-            <ul class="dept-preview-list">
-              <li>What belongs here (scope + boundaries)</li>
-              <li>Constraints + safety framing (concept level)</li>
-              <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
-            </ul>
-          </div>
-
-          <div class="dept-meta">
-            <span class="dept-chip">Free hub</span>
-            <span class="dept-chip">Safety</span>
-            <span class="dept-chip">Tradeoffs</span>
-          </div>
-
-          <div class="dept-footer">
-            <a class="dept-cta" href="departments/transfusion.html">Open Transfusion hub</a>
-          </div>
-        </article>
-
-        <article class="card col-4 dept-hub">
-          <div class="dept-head">
-            <h4><a class="dept-titlelink" href="departments/preanalytics-quality.html">Pre-Analytics &amp; Quality</a></h4>
-            <p>Where samples change the story: artifacts, handling constraints, reliability.</p>
-          </div>
-
-          <div class="dept-preview">
-            <ul class="dept-preview-list">
-              <li>What belongs here (scope + boundaries)</li>
-              <li>Reliability + safeguards framing (concept level)</li>
-              <li>Preview: Foundations • Constraints • Patterns • Interfaces</li>
-            </ul>
-          </div>
-
-          <div class="dept-meta">
-            <span class="dept-chip">Free hub</span>
-            <span class="dept-chip">Reliability</span>
-            <span class="dept-chip">Safeguards</span>
-          </div>
-
-          <div class="dept-footer">
-            <a class="dept-cta" href="departments/preanalytics-quality.html">Open Pre-Analytics hub</a>
-          </div>
-        </article>
-      </div>
-    </section>
 <!-- Pathways -->
 <section id="pathways">
   <div class="section-head">
