@@ -619,6 +619,70 @@
   max-width: none;
   width: 100%;
 }
+/* ===== Concepts section: new layout ===== */
+.showcase-structure{
+  align-items: start;
+  gap: 14px;
+}
+
+/* Make the tiers area feel like one calm panel */
+.map-wide{
+  padding: 14px;
+  background: rgba(255,255,255,0.86);
+}
+
+/* Desktop: 2x2 tiers instead of 4 across */
+.map-grid-2x2{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Refine tier tiles: less “boxed row”, more breathable */
+.map-grid-2x2 .zone{
+  background: rgba(250,250,252,0.92);
+  border-color: rgba(201,202,219,0.85);
+  padding: 12px 14px;
+}
+
+.map-grid-2x2 .zone strong{
+  font-size: 13px;
+  letter-spacing: 0.2px;
+  margin-bottom: 8px;
+}
+
+/* CTA row spacing under the tiers */
+.promo-row{
+  margin-top: 12px;
+  align-items: stretch;
+}
+
+.promo-card{
+  height: 100%;
+}
+
+.promo-orientation{
+  box-shadow: 0 6px 18px rgba(20,21,26,0.06);
+}
+
+.promo-membership{
+  background: rgba(255,255,255,0.94);
+  border-color: rgba(201,202,219,0.90);
+  box-shadow: 0 10px 26px rgba(20, 21, 26, 0.08);
+}
+
+/* Make membership button feel “library access” and stable */
+.promo-membership .dept-cta.primary{
+  width: 100%;
+  max-width: none;
+}
+
+/* Responsive: keep tiers readable on small screens */
+@media (max-width: 920px){
+  .map-grid-2x2{
+    grid-template-columns: 1fr;
+  }
+}
 
   </style>
 </head>
@@ -633,7 +697,6 @@
         </div>
 
         <nav class="navlinks" aria-label="Primary">
-          <a href="#concepts">Concept Map</a>
           <a href="#membership">Membership</a>
           <a href="#departments">Departments</a>
           <a href="#about">About</a>
@@ -677,7 +740,6 @@
       </div>
     </section>
 
-    <!-- Structure + Showcase -->
    <!-- Structure + Showcase -->
 <section id="concepts">
   <div class="section-head">
@@ -685,11 +747,11 @@
     <p>This public page shows what the membership contains: department hubs, scope, and how concepts connect.</p>
   </div>
 
-  <div class="grid showcase-grid showcase-structure">
-    <!-- Left: structure map -->
-    <div class="col-8">
-      <div class="map" aria-label="Four section overview">
-        <div class="map-grid">
+  <!-- Tiers / structure map -->
+  <div class="grid showcase-structure">
+    <div class="col-12">
+      <div class="map map-wide" aria-label="Four section overview">
+        <div class="map-grid map-grid-2x2">
           <div class="zone">
             <strong>Foundations</strong>
             <ul class="zone-list">
@@ -729,35 +791,40 @@
       </div>
     </div>
 
-    <!-- Right: preview + membership stack -->
-    <div class="col-4">
-      <div class="stack stack-tight" aria-label="Preview and membership">
-        <div class="card promo-card">
-          <span class="kicker">Free preview</span>
-          <h4>Lab Orientation</h4>
-          <p>
-            A free example of how department hubs work: what happens in the lab, how results are created,
-            and why interpretation is constrained.
-          </p>
+    <!-- CTAs row: Lab Orientation (left) + Membership (right, wider) -->
+    <div class="col-12">
+      <div class="grid promo-row" aria-label="Preview and membership">
+        <div class="col-4">
+          <div class="card promo-card promo-orientation">
+            <span class="kicker">Free preview</span>
+            <h4>Lab Orientation</h4>
+            <p>
+              A free example of how department hubs work: what happens in the lab, how results are created,
+              and why interpretation is constrained.
+            </p>
 
-          <div class="dept-footer" style="padding-top:0;">
-            <div class="dept-access">Membership not required</div>
-            <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
+            <div class="dept-footer" style="padding-top:0;">
+              <div class="dept-access">Membership not required</div>
+              <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
+            </div>
           </div>
         </div>
 
-        <div class="card promo-card membership-card">
-          <span class="kicker" style="background: rgba(75,74,115,0.10); border-color: rgba(75,74,115,0.22);">Membership</span>
-          <h4 style="margin-bottom:8px;">Want the full library inside these hubs?</h4>
-          <p style="margin-bottom:12px;">
-            Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
-          </p>
-          <a class="dept-cta primary" href="membership.html">View membership details</a>
+        <div class="col-8">
+          <div class="card promo-card promo-membership">
+            <span class="kicker" style="background: rgba(75,74,115,0.10); border-color: rgba(75,74,115,0.22);">Membership</span>
+            <h4 style="margin-bottom:8px;">Want the full library inside these hubs?</h4>
+            <p style="margin-bottom:12px;">
+              Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
+            </p>
+            <a class="dept-cta primary" href="membership.html">View membership details</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
           </div>
         </div>
