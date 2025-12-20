@@ -1091,58 +1091,6 @@
   background: rgba(75,74,115,0.22);
   box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
 }
-
-/* Lens buttons (click to preview) */
-.ss-lenses{
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.ss-lensbtn{
-  appearance: none;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 14px;
-  border: 1px solid rgba(201,202,219,0.85);
-  background: rgba(250,250,252,0.98);
-  padding: 10px 10px;
-  display: grid;
-  gap: 4px;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-}
-
-.ss-lensbtn strong{
-  color: var(--indigo-deep);
-  font-size: 13px;
-  letter-spacing: 0.2px;
-}
-
-.ss-lensbtn span{
-  color: var(--muted);
-  font-size: 12.5px;
-  line-height: 1.4;
-}
-
-.ss-lensbtn:hover{
-  transform: translateY(-1px);
-  border-color: rgba(75,74,115,0.35);
-  background: rgba(230,231,240,0.35);
-  box-shadow: 0 10px 22px rgba(20,21,26,0.06);
-}
-
-.ss-lensbtn.is-active{
-  border-color: rgba(75,74,115,0.45);
-  background: rgba(75,74,115,0.08);
-  box-shadow: 0 10px 22px rgba(20,21,26,0.06);
-}
-
-.ss-lensbtn:focus-visible{
-  outline: 3px solid rgba(75,74,115,0.22);
-  outline-offset: 2px;
-}
-
 /* Responsive */
 @media (max-width: 920px){
   .ss-row{
@@ -1152,9 +1100,50 @@
   .ss-divider{
     display: none;
   }
-  .ss-lenses{
-    grid-template-columns: 1fr;
-  }
+}
+/* ===== Structure snapshot: lens bridge (non-duplicative) ===== */
+
+.ss-bridge{
+  margin-top: 10px;
+  padding: 12px 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(201,202,219,0.75);
+  background: rgba(250,250,252,0.96);
+  display: grid;
+  gap: 10px;
+}
+
+.ss-bridge-label{
+  font-size: 12.5px;
+  color: var(--indigo-deep);
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+.ss-bridge-track{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ss-bridge-track span{
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+  border: 1px solid rgba(201,202,219,0.85);
+  background: rgba(255,255,255,0.95);
+}
+
+.ss-bridge-note{
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ===== Visual continuity with the tabs below ===== */
+
+.framework{
+  margin-top: 12px;
 }
 
 
@@ -1245,28 +1234,21 @@
       <div class="ss-text">
         Concepts are filed under the same four lenses in every department. Click a lens to preview what it contains.
       </div>
+      <div class="ss-bridge" aria-hidden="true">
+  <div class="ss-bridge-label">All departments use the same four lenses</div>
 
-      <div class="ss-lenses" role="group" aria-label="Four lenses">
-        <button class="ss-lensbtn is-active" type="button" data-fw="foundations" aria-pressed="true">
-          <strong>Foundations</strong>
-          <span>Core concepts and baseline mechanics.</span>
-        </button>
+  <div class="ss-bridge-track">
+    <span>Foundations</span>
+    <span>Constraints</span>
+    <span>Patterns</span>
+    <span>Interfaces</span>
+  </div>
 
-        <button class="ss-lensbtn" type="button" data-fw="constraints" aria-pressed="false">
-          <strong>Constraints</strong>
-          <span>Limits, assumptions, and where interpretation can fail.</span>
-        </button>
+  <div class="ss-bridge-note">
+    These lenses organize every department hub below.
+  </div>
+</div>
 
-        <button class="ss-lensbtn" type="button" data-fw="patterns" aria-pressed="false">
-          <strong>Patterns</strong>
-          <span>Recurring behaviors that show up across results.</span>
-        </button>
-
-        <button class="ss-lensbtn" type="button" data-fw="interfaces" aria-pressed="false">
-          <strong>Interfaces</strong>
-          <span>Where departments connect and signals overlap.</span>
-        </button>
-      </div>
     </div>
 
     <div class="ss-divider" aria-hidden="true"></div>
