@@ -999,6 +999,83 @@
   -webkit-line-clamp: 2;   /* clamp title to 2 lines */
   overflow: hidden;
 }
+/* ===== Department group subheads: stronger hierarchy ===== */
+
+.dept-group{
+  margin-top: 28px;              /* more separation between groups */
+}
+
+.dept-group-head{
+  display:flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: baseline;
+
+  /* Make it feel like a real header, not just another line */
+  padding: 14px 14px;
+  margin-bottom: 14px;
+
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(201,202,219,0.75);
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(20,21,26,0.05);
+}
+
+/* Stronger label styling */
+.dept-group-title{
+  margin:0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;               /* slightly smaller than section-head h3 */
+  color: var(--indigo-deep);
+  letter-spacing: 0.2px;
+
+  /* left accent bar instead of tiny square */
+  padding-left: 14px;
+  position: relative;
+}
+
+.dept-group-title::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top: 0.25em;
+  width: 6px;
+  height: 1.1em;
+  border-radius: 6px;
+  background: rgba(75,74,115,0.55);
+  box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
+}
+
+/* Description becomes a “subtitle” */
+.dept-group-desc{
+  margin:0;
+  color: var(--muted);
+  font-size: 13.5px;
+  max-width: 66ch;
+}
+
+/* Optional: small group badge on the right for scanning */
+.dept-group-badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--indigo-deep);
+  background: rgba(230,231,240,0.70);
+  border: 1px solid rgba(201,202,219,0.80);
+  border-radius: 999px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+/* Responsive: stack title/desc more cleanly */
+@media (max-width: 740px){
+  .dept-group-head{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 
 
   </style>
