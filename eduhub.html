@@ -805,6 +805,25 @@
         transition: none !important;
       }
     }
+    /* ===== Dept card: primary (purple) CTA for free preview / flagship ===== */
+.dept-cta.primary{
+  background: rgba(75,74,115,0.16);
+  border-color: rgba(75,74,115,0.46);
+  color: var(--indigo-deep);
+  font-weight: 500;
+}
+.dept-cta.primary:hover{
+  background: rgba(75,74,115,0.20);
+  border-color: rgba(75,74,115,0.58);
+}
+
+/* Small “flag” chip that reads like a label */
+.dept-chip.flag{
+  background: rgba(75,74,115,0.10);
+  border-color: rgba(75,74,115,0.22);
+  color: var(--indigo-deep);
+}
+
   </style>
 </head>
 
@@ -817,14 +836,15 @@
           <div class="sub">Education Hub</div>
         </div>
 
-       <nav class="navlinks" aria-label="Primary">
+<nav class="navlinks" aria-label="Primary">
   <a href="#concepts">Concept Map</a>
-  <a href="#orientation">Orientation</a>
   <a href="#membership">Membership</a>
   <a href="#departments">Departments</a>
   <a href="#pathways">Curated clusters</a>
   <a href="#about">About</a>
 </nav>
+
+
 
 
       </div>
@@ -919,61 +939,40 @@
       </div>
     </section>
 
-    <!-- Laboratory Orientation -->
-    <section id="orientation">
-      <div class="section-head">
-        <h3>Laboratory Orientation</h3>
-        <p>A public, complete orientation layer that explains what the clinical laboratory is as a system—without teaching procedures or department science.</p>
-      </div>
-
-      <div class="orientation-card" role="region" aria-label="Laboratory Orientation (Public)">
-        <div>
-          <div class="orientation-kicker">Public module • Complete • No prerequisites</div>
-          <h4 class="orientation-title">Start here if you want context before departments</h4>
-          <p class="orientation-copy">
-            This section explains how results come into existence, why interpretation is constrained, and why certainty is limited.
-            It introduces LabContext’s interpretive method and stops intentionally before instruction.
-          </p>
-
-          <div class="orientation-boundary">
-            <strong>Scope boundary:</strong>
-            Explains systems, not procedures. Introduces thinking, not mastery. Depth exists elsewhere on purpose.
-          </div>
-
-          <div class="orientation-actions">
-            <a class="orientation-btn" href="orientation/index.html">Enter Laboratory Orientation</a>
-            <a class="orientation-link" href="orientation/index.html#map">See the 8-page map</a>
-          </div>
-        </div>
-
-        <div aria-hidden="true">
-          <div class="mini-map">
-            <div class="mini-map-title">Eight public pages (orientation loop)</div>
-            <div class="mini-map-grid">
-              <div class="mini-pill">What the lab does</div>
-              <div class="mini-pill">How results are created</div>
-              <div class="mini-pill">How to read results</div>
-              <div class="mini-pill">Why ranges vary</div>
-              <div class="mini-pill">Why flags exist</div>
-              <div class="mini-pill">Automation limits</div>
-              <div class="mini-pill">Tradeoffs</div>
-              <div class="mini-pill">How the lab is organized</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-<!-- Membership -->
-
-
+  
     <!-- Departments -->
     <section id="departments">
       <div class="section-head">
         <h3>Browse by department</h3>
-        <p>Department landing pages are for orientation: scope, structure, and maps—not dense teaching.</p>
+<p>These hubs show scope, structure, and maps. Laboratory Orientation is the free example of the full member library style.</p>
       </div>
 
       <div class="grid dept-grid">
+        <article class="card col-4 dept-hub">
+  <div class="dept-head">
+    <h4><a class="dept-titlelink" href="orientation/index.html">Laboratory Orientation</a></h4>
+    <p>A public example hub: how lab results are produced, constrained, and meant to be read.</p>
+  </div>
+
+  <div class="dept-preview">
+    <ul class="dept-preview-list">
+      <li>Public and complete (no prerequisites)</li>
+      <li>Eight pages arranged as an orientation loop</li>
+      <li>Shows the LabContext “system-first” explanation style</li>
+    </ul>
+  </div>
+
+  <div class="dept-meta">
+    <span class="dept-chip flag">Public</span>
+    <span class="dept-chip">Complete</span>
+    <span class="dept-chip">Free example</span>
+  </div>
+
+  <div class="dept-footer">
+    <a class="dept-cta primary" href="orientation/index.html">Open free Orientation hub</a>
+  </div>
+</article>
+
         <article class="card col-4 dept-hub">
           <div class="dept-head">
             <h4><a class="dept-titlelink" href="departments/hematology.html">Hematology</a></h4>
