@@ -1145,6 +1145,27 @@
 .framework{
   margin-top: 12px;
 }
+/* ===== Fix hero empty right column by using a single-column hero wrapper ===== */
+.hero-single{
+  max-width: 72ch;
+}
+
+/* ===== Structure snapshot: allow an internal aside without weird nesting side effects ===== */
+.ss-aside{
+  margin-top: 12px;
+  box-shadow: none; /* keeps it “diagram calm” inside the snapshot card */
+}
+
+/* If you want the aside to feel less like a standalone card and more like a subpanel */
+.ss-aside{
+  border-color: rgba(201,202,219,0.85);
+  background: rgba(250,250,252,0.96);
+}
+
+/* Optional: tighten the snapshot card vertical rhythm a hair */
+.ss-card .ss-text{
+  margin-bottom: 0;
+}
 
 
 
@@ -1171,34 +1192,33 @@
   </header>
 
   <main class="container">
-    <section class="hero" id="top">
-      <div class="hero-grid">
-        <div>
-          <h1>Education Hub</h1>
-          <p>
-            A stable reference library for understanding how laboratory systems behave—
-            organized around mechanisms, constraints, patterns, and cross-department logic.
-          </p>
+   <section class="hero" id="top">
+  <div class="hero-single">
+    <h1>Education Hub</h1>
+    <p>
+      A stable reference library for understanding how laboratory systems behave—
+      organized around mechanisms, constraints, patterns, and cross-department logic.
+    </p>
 
-          <div class="pill-row" aria-label="Core statements">
-            <div class="pill">Start anywhere</div>
-            <div class="pill">No progress tracking</div>
-            <div class="pill">Built for rereading</div>
-            <div class="pill">Concept-first</div>
-          </div>
-        </div>
+    <div class="pill-row" aria-label="Core statements">
+      <div class="pill">Start anywhere</div>
+      <div class="pill">No progress tracking</div>
+      <div class="pill">Built for rereading</div>
+      <div class="pill">Concept-first</div>
+    </div>
+  </div>
+</section>
 
-       
-      </div>
-    </section>
 
    <!-- Structure + Showcase -->
 <section id="concepts">
-  <div class="section-head">
-    <h3>How the hub is structured</h3>
-    <p><p>A concept library organized by department. Each department hub uses the same four lenses so the structure stays consistent across the site.</p>
-</p>
-  </div>
+<div class="section-head">
+  <h3>How the hub is structured</h3>
+  <p>
+    A concept library organized by department. Each department hub uses the same four lenses so the structure stays consistent across the site.
+  </p>
+</div>
+
 
   <!-- Tiers / structure map -->
   <div class="grid showcase-structure">
@@ -1208,23 +1228,25 @@
     <div class="ss-card">
       <div class="ss-kicker">Education Hub</div>
       <div class="ss-title">Department hubs</div>
-      <div class="ss-text">
-        The library is grouped by department. Each department has a public landing page that previews what’s included.
-         <aside class="hero-card" aria-label="How to use this library">
-          <h2>How to use this library</h2>
-          <ul class="quiet-list">
-            <li>You do not need to read in order.</li>
-            <li>Start with what feels unclear.</li>
-            <li>Use cross-links to build a mental model.</li>
-            <li>Leave, return, and reread without pressure.</li>
-          </ul>
+     <div class="ss-text">
+  The library is grouped by department. Each department has a public landing page that previews what’s included.
+</div>
 
-          <div class="boundary">
-            <strong>Concept boundary:</strong>
-            LabContext explains systems. It does not teach procedures, validate competency, or score learning.
-          </div>
-        </aside>
-      </div>
+<aside class="hero-card ss-aside" aria-label="How to use this library">
+  <h2>How to use this library</h2>
+  <ul class="quiet-list">
+    <li>You do not need to read in order.</li>
+    <li>Start with what feels unclear.</li>
+    <li>Use cross-links to build a mental model.</li>
+    <li>Leave, return, and reread without pressure.</li>
+  </ul>
+
+  <div class="boundary">
+    <strong>Concept boundary:</strong>
+    LabContext explains systems. It does not teach procedures, validate competency, or score learning.
+  </div>
+</aside>
+
     </div>
 
     <div class="ss-divider" aria-hidden="true"></div>
@@ -1596,17 +1618,8 @@
   (function(){
     const tabs = Array.from(document.querySelectorAll(".fw-tab"));
     const panels = Array.from(document.querySelectorAll(".fw-panel"));
-    const lensBtns = Array.from(document.querySelectorAll(".ss-lensbtn"));
 
     if(!tabs.length || !panels.length) return;
-
-    function setLensButtonState(key){
-      lensBtns.forEach(b => {
-        const on = b.dataset.fw === key;
-        b.classList.toggle("is-active", on);
-        b.setAttribute("aria-pressed", on ? "true" : "false");
-      });
-    }
 
     function activate(key){
       tabs.forEach(t => {
@@ -1619,9 +1632,6 @@
         const on = p.id === ("fw-" + key);
         p.classList.toggle("is-active", on);
       });
-
-      setLensButtonState(key);
-    }
 
     tabs.forEach(t => {
       t.addEventListener("click", () => activate(t.dataset.fw));
