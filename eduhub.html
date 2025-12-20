@@ -769,79 +769,6 @@
 
 
 
-    /* ===== Tab panel: “Step cards” presentation ===== */
-.fw-panel{
-  border-radius: 16px;
-  border: 1px solid rgba(201,202,219,0.80);
-  background: rgba(250,250,252,0.96);
-  padding: 12px 14px;
-}
-
-.fw-panel-head{
-  display:flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(201,202,219,0.55);
-}
-
-.fw-panel-meta{
-  font-size: 12.5px;
-  color: var(--muted);
-  border: 1px solid rgba(201,202,219,0.85);
-  background: rgba(255,255,255,0.9);
-  padding: 6px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.fw-steps{
-  display:grid;
-  gap: 10px;
-}
-
-.fw-step{
-  display:grid;
-  grid-template-columns: 44px 1fr;
-  gap: 10px;
-  align-items: start;
-  padding: 10px 10px;
-  border-radius: 14px;
-  border: 1px solid rgba(201,202,219,0.78);
-  background: rgba(255,255,255,0.92);
-  box-shadow: 0 10px 20px rgba(20,21,26,0.04);
-}
-
-.fw-step-index{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height: 34px;
-  border-radius: 12px;
-  border: 1px solid rgba(201,202,219,0.85);
-  background: rgba(230,231,240,0.55);
-  color: var(--indigo-deep);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.6px;
-}
-
-.fw-step-text{
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-/* Slight hover to avoid “dead” panels */
-.fw-step:hover{
-  border-color: rgba(75,74,115,0.35);
-  box-shadow: 0 14px 26px rgba(20,21,26,0.06);
-  transform: translateY(-1px);
-}
-
-
     
   </style>
 </head>
@@ -902,7 +829,7 @@
    <!-- Structure + Showcase -->
 <section id="concepts">
   <div class="section-head">
-    <h3>How each section in the hub is structured</h3>
+    <h3>How the hub is structured</h3>
     <p>This public page shows what the membership contains: department hubs, scope, and how concepts connect.</p>
   </div>
 
@@ -927,104 +854,39 @@
 
   <div class="framework-panelwrap">
     <div class="fw-panel is-active" id="fw-foundations" role="tabpanel" aria-label="Foundations">
-      <div class="fw-panel-head">
-  <strong>Foundations</strong>
-  <span class="fw-panel-meta">3 anchors</span>
-</div>
-
-<div class="fw-steps" role="list">
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">01</div>
-    <div class="fw-step-text">What the system is measuring</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">02</div>
-    <div class="fw-step-text">Production and turnover logic</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">03</div>
-    <div class="fw-step-text">Pools, compartments, timing</div>
-  </div>
-</div>
-
+      <strong>Foundations</strong>
+      <ul class="zone-list">
+        <li>What the system is measuring</li>
+        <li>Production and turnover logic</li>
+        <li>Pools, compartments, timing</li>
+      </ul>
     </div>
 
     <div class="fw-panel" id="fw-constraints" role="tabpanel" aria-label="Constraints">
-    
-      <div class="fw-panel-head">
-  <strong>Constraints</strong>
-  <span class="fw-panel-meta">3 anchors</span>
-</div>
-
-<div class="fw-steps" role="list">
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">01</div>
-    <div class="fw-step-text">Why numbers can be correct but misleading</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">02</div>
-    <div class="fw-step-text">Measurement assumptions and breakdown</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">03</div>
-    <div class="fw-step-text">Dilution, concentration, context</div>
-  </div>
-</div>
-
+      <strong>Constraints</strong>
+      <ul class="zone-list">
+        <li>Why numbers can be correct but misleading</li>
+        <li>Measurement assumptions and breakdown</li>
+        <li>Dilution, concentration, context</li>
+      </ul>
     </div>
 
     <div class="fw-panel" id="fw-patterns" role="tabpanel" aria-label="Patterns">
-   
+      <strong>Patterns</strong>
+      <ul class="zone-list">
+        <li>Patterns as behaviors, not diagnoses</li>
+        <li>Concordance vs conflict</li>
+        <li>Persistence over snapshots</li>
+      </ul>
     </div>
-     <div class="fw-panel-head">
-  <strong>Patterns</strong>
-  <span class="fw-panel-meta">3 anchors</span>
-</div>
 
-<div class="fw-steps" role="list">
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">01</div>
-    <div class="fw-step-text">Patterns as behaviors, not diagnoses</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">02</div>
-    <div class="fw-step-text">Concordance vs conflict</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">03</div>
-    <div class="fw-step-text">Persistence over snapshots</div>
-  </div>
-</div>
     <div class="fw-panel" id="fw-interfaces" role="tabpanel" aria-label="Interfaces">
- 
-      <div class="fw-panel-head">
-  <strong>Interfaces</strong>
-  <span class="fw-panel-meta">3 anchors</span>
-</div>
-
-<div class="fw-steps" role="list">
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">01</div>
-    <div class="fw-step-text">When interpretation collapses in isolation</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">02</div>
-    <div class="fw-step-text">Shared signals across departments</div>
-  </div>
-
-  <div class="fw-step" role="listitem">
-    <div class="fw-step-index">03</div>
-    <div class="fw-step-text">Pre-analytic and analytic boundaries</div>
-  </div>
-</div>
-
+      <strong>Interfaces</strong>
+      <ul class="zone-list">
+        <li>When interpretation collapses in isolation</li>
+        <li>Shared signals across departments</li>
+        <li>Pre-analytic and analytic boundaries</li>
+      </ul>
     </div>
   </div>
 </div>
