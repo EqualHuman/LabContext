@@ -1167,6 +1167,45 @@
   margin-bottom: 0;
 }
 
+/* ===== Structure Snapshot: convert from phantom 3-column to true 2-column ===== */
+.ss-grid{
+  display: grid;
+  grid-template-columns: 1fr 1.25fr; /* left: hub overview, right: membership/lenses */
+  gap: 14px;
+  padding: 14px;
+}
+
+.ss-stack{
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+/* Keep the snapshot wrapper calm and consistent */
+.structure-snapshot{
+  margin: 12px 0 14px;
+}
+
+/* Remove dependence on the old ss-row/ss-divider layout */
+.ss-row,
+.ss-divider{
+  display: none !important;
+}
+
+/* Aside inside snapshot: make it feel like a subpanel (not a floating hero card) */
+.ss-aside{
+  margin-top: 12px;
+  box-shadow: none;
+  border-color: rgba(201,202,219,0.85);
+  background: rgba(250,250,252,0.96);
+}
+
+/* Responsive */
+@media (max-width: 920px){
+  .ss-grid{
+    grid-template-columns: 1fr;
+  }
+}
 
 
     
@@ -1223,113 +1262,108 @@
   <!-- Tiers / structure map -->
   <div class="grid showcase-structure">
     <div class="col-12">
-     <div class="structure-snapshot" aria-label="Education Hub structure snapshot">
-  <div class="ss-row" role="group" aria-label="Hub structure overview">
+<div class="structure-snapshot" aria-label="Education Hub structure snapshot">
+  <div class="ss-grid" role="group" aria-label="Hub structure overview">
+    <!-- LEFT: Department hubs -->
     <div class="ss-card">
       <div class="ss-kicker">Education Hub</div>
       <div class="ss-title">Department hubs</div>
-     <div class="ss-text">
-  The library is grouped by department. Each department has a public landing page that previews what’s included.
-</div>
-
-<aside class="hero-card ss-aside" aria-label="How to use this library">
-  <h2>How to use this library</h2>
-  <ul class="quiet-list">
-    <li>You do not need to read in order.</li>
-    <li>Start with what feels unclear.</li>
-    <li>Use cross-links to build a mental model.</li>
-    <li>Leave, return, and reread without pressure.</li>
-  </ul>
-
-  <div class="boundary">
-    <strong>Concept boundary:</strong>
-    LabContext explains systems. It does not teach procedures, validate competency, or score learning.
-  </div>
-</aside>
-
-    </div>
-
-    <div class="ss-divider" aria-hidden="true"></div>
-
-    <div class="ss-card">
-      <div class="ss-kicker">Membership</div>
-      <div class="ss-title">Modules</div>
       <div class="ss-text">
-        Each lens contains modules focused on specific concept topics, supported by diagrams and cross-links.
+        The library is grouped by department. Each department has a public landing page that previews what’s included.
       </div>
 
-    <div class="ss-card ss-card-wide">
-      <div class="ss-kicker">Inside each department</div>
-      <div class="ss-title">Four lenses</div>
-      <div class="ss-text">
-        Concepts are filed under the same four lenses in every department. Click a lens to preview what it contains.
+      <aside class="hero-card ss-aside" aria-label="How to use this library">
+        <h2>How to use this library</h2>
+        <ul class="quiet-list">
+          <li>You do not need to read in order.</li>
+          <li>Start with what feels unclear.</li>
+          <li>Use cross-links to build a mental model.</li>
+          <li>Leave, return, and reread without pressure.</li>
+        </ul>
+
+        <div class="boundary">
+          <strong>Concept boundary:</strong>
+          LabContext explains systems. It does not teach procedures, validate competency, or score learning.
+        </div>
+      </aside>
+    </div>
+
+    <!-- RIGHT: Membership / inside each department -->
+    <div class="ss-stack">
+      <div class="ss-card">
+        <div class="ss-kicker">Membership</div>
+        <div class="ss-title">Modules</div>
+        <div class="ss-text">
+          Each lens contains modules focused on specific concept topics, supported by diagrams and cross-links.
+        </div>
       </div>
-      <div class="framework" aria-label="Four lenses overview">
-  <div class="framework-nav" role="tablist" aria-label="Framework lenses">
-    <button class="fw-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="fw-foundations" data-fw="foundations">
-      Foundations
-    </button>
-    <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-constraints" data-fw="constraints">
-      Constraints
-    </button>
-    <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-patterns" data-fw="patterns">
-      Patterns
-    </button>
-    <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-interfaces" data-fw="interfaces">
-      Interfaces
-    </button>
-  </div>
 
-  <div class="framework-panelwrap">
-    <div class="fw-panel is-active" id="fw-foundations" role="tabpanel" aria-label="Foundations">
-      <strong>Foundations</strong>
-     <ul class="zone-list">
-  <li>What the department is measuring</li>
-  <li>The baseline system logic that makes results behave the way they do</li>
-  <li>Terms and mental models used throughout the section</li>
-</ul>
+      <div class="ss-card ss-card-wide">
+        <div class="ss-kicker">Inside each department</div>
+        <div class="ss-title">Four lenses</div>
+        <div class="ss-text">
+          Concepts are filed under the same four lenses in every department. Click a lens to preview what it contains.
+        </div>
 
+        <div class="framework" aria-label="Four lenses overview">
+          <div class="framework-nav" role="tablist" aria-label="Framework lenses">
+            <button class="fw-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="fw-foundations" data-fw="foundations">
+              Foundations
+            </button>
+            <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-constraints" data-fw="constraints">
+              Constraints
+            </button>
+            <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-patterns" data-fw="patterns">
+              Patterns
+            </button>
+            <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-interfaces" data-fw="interfaces">
+              Interfaces
+            </button>
+          </div>
 
-    </div>
+          <div class="framework-panelwrap">
+            <div class="fw-panel is-active" id="fw-foundations" role="tabpanel" aria-label="Foundations">
+              <strong>Foundations</strong>
+              <ul class="zone-list">
+                <li>What the department is measuring</li>
+                <li>The baseline system logic that makes results behave the way they do</li>
+                <li>Terms and mental models used throughout the section</li>
+              </ul>
+            </div>
 
-    <div class="fw-panel" id="fw-constraints" role="tabpanel" aria-label="Constraints">
-      <strong>Constraints</strong>
-    <ul class="zone-list">
-  <li>Assumptions that results quietly depend on</li>
-  <li>Common reasons a result can be “correct” but still misleading</li>
-  <li>Where interpretation breaks without context</li>
-</ul>
-    </div>
+            <div class="fw-panel" id="fw-constraints" role="tabpanel" aria-label="Constraints">
+              <strong>Constraints</strong>
+              <ul class="zone-list">
+                <li>Assumptions that results quietly depend on</li>
+                <li>Common reasons a result can be “correct” but still misleading</li>
+                <li>Where interpretation breaks without context</li>
+              </ul>
+            </div>
 
-    <div class="fw-panel" id="fw-patterns" role="tabpanel" aria-label="Patterns">
-      <strong>Patterns</strong>
- <ul class="zone-list">
-  <li>Recurring result behaviors that appear in real life</li>
-  <li>Which signals tend to move together (and which don’t)</li>
-  <li>Persistence over snapshots</li>
-</ul>
+            <div class="fw-panel" id="fw-patterns" role="tabpanel" aria-label="Patterns">
+              <strong>Patterns</strong>
+              <ul class="zone-list">
+                <li>Recurring result behaviors that appear in real life</li>
+                <li>Which signals tend to move together (and which don’t)</li>
+                <li>Persistence over snapshots</li>
+              </ul>
+            </div>
 
-
-
-    </div>
-
-    <div class="fw-panel" id="fw-interfaces" role="tabpanel" aria-label="Interfaces">
-      <strong>Interfaces</strong>
- <ul class="zone-list">
-  <li>Cross-department connections that prevent siloed interpretation</li>
-  <li>Shared signals across systems</li>
-  <li>Boundaries between pre-analytic, analytic, and reporting logic</li>
-</ul>
-
-
-    </div>
-  </div>
+            <div class="fw-panel" id="fw-interfaces" role="tabpanel" aria-label="Interfaces">
+              <strong>Interfaces</strong>
+              <ul class="zone-list">
+                <li>Cross-department connections that prevent siloed interpretation</li>
+                <li>Shared signals across systems</li>
+                <li>Boundaries between pre-analytic, analytic, and reporting logic</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /ss-stack -->
+  </div><!-- /ss-grid -->
 </div>
 
-    </div>
-    </div>
-  </div>
-</div>
 
 
     <!-- CTAs row: Lab Orientation (left) + Membership (right, wider) -->
