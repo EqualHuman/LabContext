@@ -11,36 +11,46 @@
 <link rel="stylesheet" href="styles.css?v=20251221a" />
 
 <style>
+  /* =========================================
+     FORCE UNIFORM CARD-TO-CARD SPACING
+     ========================================= */
+
+  /* ONE spacing value for all card separation */
   :root{
-    --tile-gap: 14px;
+    --card-gap: 14px;
   }
 
-  /* Force consistent spacing between ALL cards inside the tab content area */
+  /* The container defines spacing */
   .tabs .panel,
   .tabs .stack{
     display: flex !important;
     flex-direction: column !important;
-    gap: var(--tile-gap) !important;
-    padding: var(--tile-gap) !important;
-    background: rgba(246,246,251,0.78) !important;
+    gap: var(--card-gap) !important;
   }
 
-  /* Kill margins that can create uneven “buffers” */
+  /* Cards NEVER add spacing */
   .tabs .card{
     margin: 0 !important;
   }
 
-  /* Optional: normalize inner spacing so paragraphs don’t create extra bottom gaps */
-  .tabs .card > *:last-child{
+  /* Kill internal bottom spacing inside cards */
+  .tabs .card p,
+  .tabs .card ul,
+  .tabs .card ol{
     margin-bottom: 0 !important;
   }
-    .dept-grid,
-  .grid,
-  .quick-grid,
-  .lenses-grid{
-    gap: var(--tile-gap) !important;
+
+  /* Headings should not add vertical buffer */
+  .tabs .card h2,
+  .tabs .card h3,
+  .tabs .card h4{
+    margin-bottom: 6px !important;
   }
 
+  /* Grid-based cards must obey the same rhythm */
+  .tabs .grid{
+    gap: var(--card-gap) !important;
+  }
 </style>
 
 </head>
