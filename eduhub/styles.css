@@ -569,3 +569,63 @@ footer{
   .small-links{ justify-content:flex-start; }
   .brand .sub{ display:none; }
 }
+/* =========================
+   EDUHUB — SPACING STANDARD
+   Paste at end of eduhub/styles.css
+   ========================= */
+
+:root{
+  /* One knob to control spacing across tiles/cards */
+  --tile-gap: 14px;
+}
+
+/* Standardize all stack/card spacing */
+.stack{
+  gap: var(--tile-gap);
+}
+.stack-tight{
+  gap: var(--tile-gap);
+}
+
+/* Standardize panel padding so content breathes equally */
+.panel{
+  padding: var(--tile-gap);
+}
+
+/* Standardize grid spacing (department grids, quick grids, lenses, etc.) */
+.grid{
+  gap: var(--tile-gap);
+}
+.quick-grid{
+  gap: var(--tile-gap);
+}
+.lenses-grid{
+  gap: var(--tile-gap);
+}
+
+/* Remove “random” margins that create inconsistent gaps */
+.card{
+  margin: 0;
+}
+
+/* Ensure cards inside any wrapper never add extra bottom spacing */
+.panel .card,
+.stack .card{
+  margin: 0;
+}
+
+/* Standardize spacing between major grouped sections (dept groups, section heads) */
+.dept-group{
+  margin-top: calc(var(--tile-gap) + 6px);
+}
+.dept-group-head{
+  margin-bottom: var(--tile-gap);
+}
+.section-head{
+  margin: calc(var(--tile-gap) + 6px) 0 var(--tile-gap);
+}
+
+/* Optional: if you want the tabs content area to match the same rhythm */
+.tabs{
+  margin-top: calc(var(--tile-gap) + 4px);
+}
