@@ -330,6 +330,40 @@
     .small-links{ justify-content:flex-start; }
     .brand .sub{ display:none; }
   }
+  .visual-card{
+  border: 1px solid rgba(201,202,219,0.72);
+  background: rgba(246,246,251,0.70);
+  border-radius: 16px;
+  padding: 14px;
+  margin-top: 12px;
+}
+
+.visual-title{
+  font-size: 12.5px;
+  color: var(--indigo-deep);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  margin: 0 0 10px;
+}
+
+.visual-note{
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width:740px){
+  .quick-grid{ grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 
@@ -367,6 +401,20 @@
     </div>
   </section>
 
+
+
+  
+  <section aria-label="Education Hub tabs">
+    <div class="tabs">
+      <div class="tabsbar" role="navigation" aria-label="Education Hub sections">
+        <a class="tablink is-active" href="eduhub.html">Overview</a>
+        <a class="tablink" href="eduhub-how.html">How to use</a>
+        <a class="tablink" href="eduhub-structure.html">Structure</a>
+        <a class="tablink" href="eduhub-access.html">Access + Departments</a>
+      </div>
+
+      <div class="panel">
+        
 <section aria-label="Education Hub overview">
   <article class="card">
     <h2>Welcome to the Education Hub</h2>
@@ -433,42 +481,7 @@
     </p>
   </article>
 </section>
-
-  
-  <section aria-label="Education Hub tabs">
-    <div class="tabs">
-      <div class="tabsbar" role="navigation" aria-label="Education Hub sections">
-        <a class="tablink is-active" href="eduhub.html">Overview</a>
-        <a class="tablink" href="eduhub-how.html">How to use</a>
-        <a class="tablink" href="eduhub-structure.html">Structure</a>
-        <a class="tablink" href="eduhub-access.html">Access + Departments</a>
-      </div>
-
-      <div class="panel">
-        <div class="card">
-          <h2>What LabContext is</h2>
-          <p>
-            LabContext explains why results behave the way they do, so interpretation feels stable even when the data is messy.
-            It’s built for rereading and cross-links—more like a reference shelf than a course.
-          </p>
-
-          <div class="callout" aria-label="Concept boundary">
-            <div class="label">Concept boundary</div>
-            <p>
-              LabContext is interpretive, not evaluative. It is not step-by-step procedure training or formal competency assessment.
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>How to browse without getting trapped</h2>
-          <p>Pick one path. Stop when your question is answered. Return later.</p>
-          <ul class="list">
-            <li>If you’re new: start with <a href="orientation/index.html">Lab Orientation</a> (public).</li>
-            <li>If you’re stuck: open a department hub preview (scope + structure).</li>
-            <li>If you’re cross-checking: use the Interfaces lens to connect signals across departments.</li>
-          </ul>
-        </div>
+        
       </div>
     </div>
   </section>
