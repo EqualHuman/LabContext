@@ -949,90 +949,93 @@
       max-width: 1200px; /* was 1100px */
     }
   }
-/* ===== Color cohesion + depth tuning ===== */
-
-/* 1. Make primary cards truly white again */
-.card,
-.hs2-card,
-.hero-card,
-.framework,
-.dept-hub{
-  background: #ffffff;
+/* ===== FORCE VISUAL CHANGE (debug + cohesive palette) ===== */
+:root{
+  --bg: #FFFFFF !important;
+  --bg-quiet: #F6F6FB !important;          /* slightly cooler, less sterile */
+  --muted: #444859 !important;             /* higher contrast, less washed */
+  --border: 1px solid rgba(201,202,219,0.58) !important;
 }
 
-/* 2. Reduce border dominance globally */
+/* Make the grid background less “gray-on-gray” */
+body::before{
+  opacity: 0.38 !important;
+}
+
+/* Make primary surfaces truly white and consistent */
 .card,
+.hub-structure2,
 .hs2-card,
 .framework,
-.dept-hub,
+.fw-panel,
+.dept-group-head{
+  background: #FFFFFF !important;
+}
+
+/* Give the structure container a gentle quiet tint so it separates from the page */
+.hub-structure2{
+  background: rgba(246,246,251,0.78) !important;
+}
+
+/* Reduce “border soup” */
+.card,
+.hub-structure2,
+.hs2-card,
+.framework,
+.fw-panel,
 .hs2-subpanel,
-.hs2-boundary{
-  border-color: rgba(201,202,219,0.65);
+.hs2-boundary,
+.dept-group-head{
+  border-color: rgba(201,202,219,0.55) !important;
 }
 
-/* 3. Reserve soft indigo backgrounds for SUPPORTING elements only */
+/* Make supporting panels feel intentional, not random */
 .hs2-subpanel{
-  background: rgba(250,250,252,0.85);
+  background: rgba(246,246,251,0.70) !important;
 }
 
 .hs2-boundary{
-  background: rgba(230,231,240,0.40);
+  background: rgba(230,231,240,0.42) !important;
 }
 
-/* 4. Pills should feel lighter and less repetitive */
-.pill{
-  background: #ffffff;
-  border-color: rgba(201,202,219,0.75);
-  color: var(--muted);
+/* Kicker pills: less fill, more crisp */
+.kicker,
+.hs2-kicker{
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(201,202,219,0.60) !important;
 }
 
-.pill::before{
-  background: rgba(75,74,115,0.35);
-  box-shadow: 0 0 0 2px rgba(75,74,115,0.12);
-}
-
-/* 5. Strengthen indigo ONLY where hierarchy matters */
-.hero h1,
-.section-head h3,
-.dept-group-title,
-.hs2-title{
-  color: var(--indigo-deep);
-}
-
-/* 6. De-emphasize secondary headings slightly */
-.hs2-subkicker,
-.hs2-boundary-label{
-  color: var(--muted);
-  font-weight: 500;
-}
-
-/* 7. Make framework tabs cleaner and more distinct */
+/* Tabs: clearer active state */
 .fw-tab{
-  background: #ffffff;
-  border-color: rgba(201,202,219,0.70);
+  background: rgba(255,255,255,0.96) !important;
+  border-color: rgba(201,202,219,0.60) !important;
 }
 
 .fw-tab.is-active{
-  background: rgba(75,74,115,0.12);
-  border-color: rgba(75,74,115,0.45);
-  color: var(--indigo-deep);
+  background: rgba(75,74,115,0.16) !important;
+  border-color: rgba(75,74,115,0.55) !important;
+  color: var(--indigo-deep) !important;
 }
 
-/* 8. Reduce visual noise in access pills */
-.hs2-access-pill{
-  background: #ffffff;
+/* CTA buttons: a bit more contrast so they don’t blend into the cards */
+.dept-cta{
+  background: rgba(75,74,115,0.10) !important;
+  border-color: rgba(75,74,115,0.30) !important;
 }
 
-.hs2-access-pill-strong{
-  background: rgba(75,74,115,0.12);
+.dept-cta.primary{
+  background: rgba(75,74,115,0.18) !important;
+  border-color: rgba(75,74,115,0.55) !important;
 }
 
-/* 9. Slightly soften shadows so color does the work, not depth */
+/* Slightly soften shadows so you get calm depth, not gray-on-gray */
 .card,
 .hs2-card,
-.framework{
-  box-shadow: 0 8px 20px rgba(20,21,26,0.06);
+.framework,
+.dept-group-head{
+  box-shadow: 0 10px 24px rgba(20,21,26,0.06) !important;
 }
+
 
 </style>
 
