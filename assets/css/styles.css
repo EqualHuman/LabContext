@@ -772,3 +772,61 @@ footer{
     margin-top: 10px;
   }
 }
+/* =========================================
+   HOME / GLOBAL — BUTTON COLOR NORMALIZER
+   Add right before </style>
+   ========================================= */
+
+/* 1) Lock button-like links so visited state cannot change them */
+a.dept-cta,
+a.dept-cta:visited{
+  color: var(--indigo-deep);
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(201,202,219,0.70);
+}
+
+/* 2) Primary button (ONLY when you add .primary) */
+a.dept-cta.primary,
+a.dept-cta.primary:visited{
+  color: var(--indigo-deep);
+  border-color: rgba(75,74,115,0.55);
+  background: rgba(75,74,115,0.14);
+}
+
+/* 3) Hover state */
+a.dept-cta:hover{
+  color: var(--indigo-deep);
+  text-decoration: none;
+  border-color: rgba(75,74,115,0.35);
+  background: rgba(230,231,240,0.45);
+  transform: translateY(-1px);
+}
+
+/* 4) Focus state (keyboard accessibility) */
+a.dept-cta:focus-visible{
+  outline: 2px solid rgba(75,74,115,0.35);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+/* 5) If any global visited rule exists, neutralize it without breaking normal links */
+a:visited{
+  color: var(--indigo-deep);
+}
+
+/* 6) Tabs: lock visited too (prevents “some tabs look different after click”) */
+a.tablink,
+a.tablink:visited{
+  color: var(--muted);
+  background: rgba(255,255,255,0.96);
+  border-color: rgba(201,202,219,0.60);
+}
+
+a.tablink.is-active,
+a.tablink.is-active:visited,
+a.tablink[aria-current="page"],
+a.tablink[aria-current="page"]:visited{
+  color: var(--indigo-deep);
+  border-color: rgba(75,74,115,0.55);
+  background: rgba(75,74,115,0.16);
+}
