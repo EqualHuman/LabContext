@@ -653,14 +653,6 @@ footer{
   align-items: center;
 }
 
-.home-eyebrow::before{
-  content:"";
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(75,74,115,0.25);
-  box-shadow: 0 0 0 4px rgba(75,74,115,0.08);
-}
 
 .home-hero-grid{
   display:grid;
@@ -761,18 +753,6 @@ footer{
   overflow: hidden;
 }
 
-.home-feature::after{
-  content:"";
-  position:absolute;
-  right: -28px;
-  top: -28px;
-  width: 120px;
-  height: 120px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, rgba(75,74,115,0.18), transparent 60%);
-  opacity: 0.9;
-  pointer-events:none;
-}
 
 .home-entry{
   background: rgba(255,255,255,0.92);
