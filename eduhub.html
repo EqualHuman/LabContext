@@ -905,6 +905,19 @@
       transition: none !important;
     }
   }
+    /* ===== Understandability polish: small helpers for the hub structure block ===== */
+  .hs2-title-note{
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-left: 6px;
+    letter-spacing: 0.2px;
+  }
+
+  .hs2-tight{
+    margin-bottom: 0;
+  }
+
 </style>
 
 </head>
@@ -951,7 +964,7 @@
   <div class="section-head">
     <h3>How the hub is structured</h3>
     <p>
-      A concept library organized by department. Each department uses the same four lenses so the structure stays consistent across the site.
+      A reference library grouped by department. Each department uses the same four lenses, so once you learn the structure, every hub feels familiar.
     </p>
   </div>
 
@@ -961,13 +974,12 @@
       <!-- Column 1 -->
       <div class="hs2-card">
         <div class="hs2-kicker">Education Hub</div>
-        <h4 class="hs2-title">Department hubs</h4>
+        <h4 class="hs2-title">How to use this library</h4>
         <p class="hs2-text">
-          The library is grouped by department. Each department has a public landing page that previews what’s included and how it’s organized.
+          Read like a reference: start where something feels unclear, follow cross-links, and return later without needing a “finish line.”
         </p>
 
-        <div class="hs2-subpanel" aria-label="How to use this library">
-          <div class="hs2-subkicker">How to use this library</div>
+        <div class="hs2-subpanel" aria-label="How to use this library tips">
           <ul class="hs2-list">
             <li>You do not need to read in order.</li>
             <li>Start with what feels unclear.</li>
@@ -976,10 +988,17 @@
           </ul>
         </div>
 
+        <div class="hs2-subpanel" aria-label="What a department hub is">
+          <div class="hs2-subkicker">What a department hub is</div>
+          <p class="hs2-text hs2-tight">
+            Each department has a hub page that previews what’s inside and how it’s organized.
+          </p>
+        </div>
+
         <div class="hs2-boundary" aria-label="Concept boundary">
           <div class="hs2-boundary-label">Concept boundary</div>
           <p class="hs2-boundary-text">
-            LabContext explains systems. It does not teach procedures, validate competency, or score learning.
+            LabContext explains why results behave the way they do. It is not step-by-step procedure training or formal competency assessment.
           </p>
         </div>
       </div>
@@ -987,9 +1006,9 @@
       <!-- Column 2 -->
       <div class="hs2-card">
         <div class="hs2-kicker">Inside each department</div>
-        <h4 class="hs2-title">Four lenses</h4>
+        <h4 class="hs2-title">Four lenses <span class="hs2-title-note">(tabs)</span></h4>
         <p class="hs2-text">
-          Concepts are filed under the same four lenses in every department. Click a lens to preview what it contains.
+          Every department uses the same four lenses. If you open Hematology and Chemistry, you’ll see the same structure—so patterns become easier to recognize across the site.
         </p>
 
         <div class="framework" aria-label="Four lenses overview">
@@ -1013,7 +1032,7 @@
               <strong>Foundations</strong>
               <ul class="zone-list">
                 <li>What the department is measuring</li>
-                <li>The baseline system logic that makes results behave the way they do</li>
+                <li>The baseline logic that makes results behave the way they do</li>
                 <li>Terms and mental models used throughout the section</li>
               </ul>
             </div>
@@ -1050,11 +1069,11 @@
         <div class="hs2-access" aria-label="Access model">
           <div class="hs2-access-row">
             <div class="hs2-access-pill">Public</div>
-            <div class="hs2-access-text">Department landing pages + scope previews</div>
+            <div class="hs2-access-text">Hub previews: scope + structure</div>
           </div>
           <div class="hs2-access-row">
             <div class="hs2-access-pill hs2-access-pill-strong">Membership</div>
-            <div class="hs2-access-text">Full concept pages, diagrams, and cross-links inside each department</div>
+            <div class="hs2-access-text">Full pages: explanations + diagrams + cross-links</div>
           </div>
         </div>
       </div>
@@ -1086,7 +1105,7 @@
         <div class="promo-body">
           <h4>Want the full library inside these hubs?</h4>
           <p>
-            Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
+            Membership unlocks the full pages inside each department—explanations, diagrams, and cross-links built for navigation and rereading.
           </p>
         </div>
 
