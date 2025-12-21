@@ -569,186 +569,68 @@ footer{
   .small-links{ justify-content:flex-start; }
   .brand .sub{ display:none; }
 }
-/* =========================
-   EDUHUB — SPACING STANDARD
-   Paste at end of eduhub/styles.css
-   ========================= */
-
-:root{
-  /* One knob to control spacing across tiles/cards */
-  --tile-gap: 14px;
-}
-
-/* Standardize all stack/card spacing */
-.stack{
-  gap: var(--tile-gap);
-}
-.stack-tight{
-  gap: var(--tile-gap);
-}
-
-/* Standardize panel padding so content breathes equally */
-.panel{
-  padding: var(--tile-gap);
-}
-
-/* Standardize grid spacing (department grids, quick grids, lenses, etc.) */
-.grid{
-  gap: var(--tile-gap);
-}
-.quick-grid{
-  gap: var(--tile-gap);
-}
-.lenses-grid{
-  gap: var(--tile-gap);
-}
-
-/* Remove “random” margins that create inconsistent gaps */
-.card{
-  margin: 0;
-}
-
-/* Ensure cards inside any wrapper never add extra bottom spacing */
-.panel .card,
-.stack .card{
-  margin: 0;
-}
-
-/* Standardize spacing between major grouped sections (dept groups, section heads) */
-.dept-group{
-  margin-top: calc(var(--tile-gap) + 6px);
-}
-.dept-group-head{
-  margin-bottom: var(--tile-gap);
-}
-.section-head{
-  margin: calc(var(--tile-gap) + 6px) 0 var(--tile-gap);
-}
-
-/* Optional: if you want the tabs content area to match the same rhythm */
-.tabs{
-  margin-top: calc(var(--tile-gap) + 4px);
-}
-/* ===============================
-   EDUHUB — UNIFIED SPACING SYSTEM
-   =============================== */
-
-:root{
-  /* Master spacing unit for all tiles, cards, and sections */
-  --space-unit: 16px;
-}
-
-/* --- Core layout containers --- */
-
-.stack{
-  gap: var(--space-unit);
-}
-
-.stack-tight{
-  gap: var(--space-unit);
-}
-
-.grid{
-  gap: var(--space-unit);
-}
-
-.quick-grid{
-  gap: var(--space-unit);
-}
-
-.lenses-grid{
-  gap: var(--space-unit);
-}
-
-/* --- Remove internal margins that fight the rhythm --- */
-
-.card{
-  margin: 0;
-}
-
-.card > *:last-child{
-  margin-bottom: 0;
-}
-
-/* Headings inside cards should not add extra vertical weight */
-.card h2,
-.card h3,
-.card h4{
-  margin-top: 0;
-}
-
-/* --- Tabs content container --- */
-
-.tabs{
-  margin-top: var(--space-unit);
-}
-
-.tabs > .stack,
-.tabs > .panel{
-  padding: var(--space-unit);
-}
-
-/* --- Section & group spacing (Access / Structure pages) --- */
-
-.dept-group{
-  margin-top: calc(var(--space-unit) * 1.25);
-}
-
-.dept-group-head{
-  margin-bottom: var(--space-unit);
-}
-
-.section-head{
-  margin-top: calc(var(--space-unit) * 1.25);
-  margin-bottom: var(--space-unit);
-}
-
-/* --- Footer spacing consistency --- */
-
-footer{
-  margin-top: calc(var(--space-unit) * 1.5);
-}
 /* =========================================
-   EDUHUB — HARD RESET SECTION SPACING
+   EDUHUB — SINGLE SOURCE SPACING (GAP ONLY)
    ========================================= */
 
-/* Master spacing unit */
 :root{
-  --space-unit: 16px;
+  --space: 14px; /* change this one number if you want */
 }
 
-/* 1. REMOVE default section margins inside tabs */
+/* Kill default section spacing (this affects your panel > section layouts) */
 .tabs section{
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
-/* 2. Force consistent spacing BETWEEN cards only */
-.tabs section > article.card{
-  margin-bottom: var(--space-unit);
+/* Make EVERY content wrapper behave like a stack */
+.tabs .stack{
+  gap: var(--space);
 }
 
-/* Remove last-card extra space */
-.tabs section > article.card:last-child{
-  margin-bottom: 0;
-}
-
-/* 3. Normalize stack + panel rhythm */
-.tabs .stack,
 .tabs .panel{
-  padding: var(--space-unit);
+  padding: var(--space);
 }
 
-/* 4. Kill internal element margins that add fake space */
-.card > *{
+/* IMPORTANT: index.html uses .panel > section to hold cards.
+   Turn that section into a stack so spacing is consistent. */
+.tabs .panel > section{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+
+/* Ensure cards never add their own “buffer space” */
+.tabs .card{
+  margin: 0;
+}
+
+/* Normalize inner element margins so text doesn’t create fake gaps */
+.tabs .card > *{
   margin-top: 0;
 }
 
-.card > *:last-child{
+.tabs .card > *:last-child{
   margin-bottom: 0;
 }
 
-/* 5. Ensure grids obey the same vertical rhythm */
-.tabs .grid{
-  gap: var(--space-unit);
+/* Any grids inside cards / access page tiles should match the same spacing token */
+.tabs .grid,
+.tabs .dept-grid,
+.tabs .quick-grid,
+.tabs .lenses-grid{
+  gap: var(--space);
+}
+
+/* Dept groups: keep a consistent rhythm above headings too */
+.dept-group{
+  margin-top: var(--space);
+}
+
+.dept-group-head{
+  margin-bottom: var(--space);
+}
+
+.section-head{
+  margin: var(--space) 0;
 }
