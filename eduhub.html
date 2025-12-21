@@ -76,10 +76,10 @@
   a:hover{ text-decoration:underline; }
 
   .container{
-    max-width:1100px;
-    padding: 0 22px;
-    margin: 0 auto;
-  }
+  width: min(92vw, 1280px);
+  padding: 0 22px;
+  margin: 0 auto;
+}
 
   /* ===== Header / Nav ===== */
   header{
@@ -1098,6 +1098,41 @@ body::before{ opacity: 0.35; }
 }
 
 /* Shadows: calm depth */
+.card,
+.hs2-card,
+.framework,
+.dept-group-head{
+  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+}
+/* ===== Final cohesion pass (keep ONLY this at the bottom) ===== */
+:root{
+  --bg-quiet:#F6F6FB;
+  --muted:#444859;
+  --border: 1px solid rgba(201,202,219,0.58);
+}
+
+body::before{ opacity: 0.34; }
+
+.hub-structure2,
+.dept-group-head{
+  background: rgba(246,246,251,0.82);
+}
+
+.hs2-card,
+.card,
+.framework,
+.fw-panel{
+  background: #fff;
+}
+
+.hs2-subpanel{
+  background: rgba(246,246,251,0.74);
+}
+
+.hs2-boundary{
+  background: rgba(230,231,240,0.44);
+}
+
 .card,
 .hs2-card,
 .framework,
