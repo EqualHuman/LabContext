@@ -1368,6 +1368,125 @@ body::before{
   border-radius:999px;
   background: rgba(75,74,115,0.14);
 }
+/* =====================================================
+   LabContext – Card Interest & Rhythm Pass (calm, quiet)
+   ===================================================== */
+
+/* 1. Give cards a subtle directional anchor */
+.dept-hub,
+.card{
+  position: relative;
+}
+
+/* Left rail: appears on hover + always for primary cards */
+.dept-hub::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:14px;
+  bottom:14px;
+  width:4px;
+  border-radius:999px;
+  background: rgba(75,74,115,0.18);
+  opacity:0;
+  transition: opacity 160ms ease, background 160ms ease;
+}
+
+.dept-hub:hover::before{
+  opacity:1;
+  background: rgba(75,74,115,0.32);
+}
+
+/* Always show rail for Public Access */
+.dept-hub .meta-pill:not(.soft) ~ .dept-head{
+  position: relative;
+}
+.dept-hub .meta-pill:not(.soft){
+  font-weight:500;
+}
+.dept-hub .meta-pill:not(.soft)::before{
+  background: rgba(75,74,115,0.45);
+}
+
+/* 2. Make meta pills feel like system labels, not tags */
+.meta-row{
+  margin-bottom: 6px;
+}
+
+.meta-pill{
+  letter-spacing: 0.2px;
+  text-transform: none;
+}
+
+/* Slight visual distinction between Public vs Preview */
+.meta-pill.soft{
+  opacity:0.85;
+}
+
+/* 3. Card title emphasis (editorial, not louder) */
+.dept-head h4{
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.dept-head h4::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:36px;
+  height:2px;
+  border-radius:999px;
+  background: rgba(75,74,115,0.25);
+}
+
+/* 4. Reduce paragraph monotony with tighter rhythm */
+.dept-head p{
+  margin-top: 8px;
+}
+
+/* 5. CTA buttons: directional cue without adding color */
+.dept-cta{
+  position: relative;
+}
+
+.dept-cta::after{
+  content:"→";
+  margin-left:10px;
+  opacity:0.6;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.dept-cta:hover::after{
+  transform: translateX(2px);
+  opacity:0.9;
+}
+
+/* 6. Subtle lift on hover (less “cardy”, more reference) */
+.dept-hub:hover{
+  transform: translateY(-1px);
+}
+
+/* 7. Group headers: give them a quiet anchor line */
+.dept-group-head{
+  position: relative;
+}
+
+.dept-group-head::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  bottom:-6px;
+  width:48px;
+  height:2px;
+  border-radius:999px;
+  background: rgba(75,74,115,0.30);
+}
+
+/* 8. Reduce visual fatigue across large grids */
+.grid.dept-grid{
+  row-gap: 18px;
+}
 
 
 </style>
