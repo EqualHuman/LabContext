@@ -917,6 +917,38 @@
   .hs2-tight{
     margin-bottom: 0;
   }
+  /* ===== Structure block: make supporting notes feel lighter ===== */
+  .hub-structure2 .hs2-subpanel{
+    background: rgba(255,255,255,0.88);
+  }
+
+  /* Make the 2nd subpanel ("What a department hub is") look like a note, not a full block */
+  .hub-structure2 .hs2-card .hs2-subpanel:nth-of-type(2){
+    border-color: rgba(201,202,219,0.55);
+    background: transparent;
+    padding: 10px 12px;
+  }
+
+  /* Soften the boundary box so it reads like a gentle scope note */
+  .hub-structure2 .hs2-boundary{
+    background: rgba(230,231,240,0.45);
+    border-color: rgba(201,202,219,0.60);
+  }
+
+  .hub-structure2 .hs2-boundary-label{
+    opacity: 0.9;
+  }
+
+  /* Slightly reduce vertical density in the left column so it feels less "stacked" */
+  .hub-structure2 .hs2-text{
+    margin-bottom: 10px;
+  }
+  /* ===== Desktop-only content breathing room ===== */
+  @media (min-width: 1200px){
+    .container{
+      max-width: 1200px; /* was 1100px */
+    }
+  }
 
 </style>
 
