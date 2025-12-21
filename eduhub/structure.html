@@ -10,7 +10,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20251221a" />
 
-  
+  <style>
+  :root{
+    --tile-gap: 14px;
+  }
+
+  /* Force consistent spacing between ALL cards inside the tab content area */
+  .tabs .panel,
+  .tabs .stack{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--tile-gap) !important;
+    padding: var(--tile-gap) !important;
+    background: rgba(246,246,251,0.78) !important;
+  }
+
+  /* Kill margins that can create uneven “buffers” */
+  .tabs .card{
+    margin: 0 !important;
+  }
+
+  /* Optional: normalize inner spacing so paragraphs don’t create extra bottom gaps */
+  .tabs .card > *:last-child{
+    margin-bottom: 0 !important;
+  }
+      .dept-grid,
+  .grid,
+  .quick-grid,
+  .lenses-grid{
+    gap: var(--tile-gap) !important;
+  }
+
+</style>
+
 </head>
 <body>
   <header>
