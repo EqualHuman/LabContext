@@ -1487,6 +1487,157 @@ body::before{
 .grid.dept-grid{
   row-gap: 18px;
 }
+/* =========================================================
+   LabContext – Refinement Pass (no new elements, consistent)
+   Paste at end of <style>
+   ========================================================= */
+
+:root{
+  /* keep your palette, just tighten neutrals */
+  --bg-quiet: #FAFAFC;
+  --muted: #4A4E5E; /* slightly stronger for readability */
+  --border: 1px solid rgba(201,202,219,0.70);
+}
+
+/* Background: reduce visual “noise” so cards feel calmer */
+body::before{
+  opacity: 0.28;
+}
+
+/* Universal section spacing: breathe without changing layout */
+section{
+  padding-top: 22px;
+}
+
+/* Headings: consistent hierarchy, less “samey” */
+.section-head{
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201,202,219,0.55);
+}
+
+.section-head h3{
+  font-size: 22px;
+  letter-spacing: 0.1px;
+}
+
+.section-head p{
+  color: var(--muted);
+}
+
+/* Group headers: keep format, just refine contrast + spacing */
+.dept-group-head{
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(201,202,219,0.70);
+  box-shadow: 0 8px 18px rgba(20,21,26,0.04);
+}
+
+.dept-group-title{
+  letter-spacing: 0.1px;
+}
+
+/* GRID: keep your structure but reduce “tight boxed” feeling */
+.grid{
+  gap: 16px;
+}
+.grid.dept-grid{
+  row-gap: 18px;
+}
+
+/* CARDS: consistent surface + calmer depth */
+.card{
+  border: 1px solid rgba(201,202,219,0.70);
+  box-shadow: 0 8px 18px rgba(20,21,26,0.05);
+  padding: 16px;
+  background: #fff;
+}
+
+/* Hover: subtle, consistent (no new visuals, just calm lift) */
+.card:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(20,21,26,0.08);
+  border-color: rgba(75,74,115,0.28);
+}
+
+/* Department tiles: keep format consistent */
+.dept-hub{
+  min-height: 228px; /* slight bump to reduce cramped variance */
+  padding: 16px;     /* matches .card now */
+}
+
+/* Titles: small refinement for “editorial” feel */
+.card h4{
+  margin-bottom: 8px;
+  letter-spacing: 0.1px;
+}
+
+.card p{
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Meta pills: unify look + reduce “sticker” vibe */
+.meta-row{
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.meta-pill{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(250,250,252,0.95);
+  border: 1px solid rgba(201,202,219,0.70);
+  color: var(--muted);
+}
+
+.meta-pill.soft{
+  background: rgba(230,231,240,0.55);
+  border-color: rgba(201,202,219,0.65);
+  color: var(--indigo-deep);
+}
+
+/* Buttons: consistent weight + clearer click affordance */
+.dept-cta{
+  border: 1px solid rgba(75,74,115,0.28);
+  background: rgba(75,74,115,0.08);
+  color: var(--indigo-deep);
+  box-shadow: 0 8px 16px rgba(20,21,26,0.05);
+}
+
+.dept-cta:hover{
+  background: rgba(75,74,115,0.12);
+  border-color: rgba(75,74,115,0.40);
+  box-shadow: 0 12px 22px rgba(20,21,26,0.08);
+}
+
+.dept-cta.primary{
+  background: rgba(75,74,115,0.14);
+  border-color: rgba(75,74,115,0.44);
+}
+
+/* Access text: quieter + consistent */
+.dept-access{
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+/* Tighten typography consistency across key blocks */
+.hero p,
+.hs2-text,
+.card p{
+  letter-spacing: 0.1px;
+}
+
+/* Responsive: keep your rules, just reduce visual density on small screens */
+@media (max-width: 740px){
+  .card{
+    padding: 14px;
+  }
+  .dept-hub{
+    min-height: 0;
+  }
+}
 
 
 </style>
