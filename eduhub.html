@@ -143,14 +143,6 @@
 
   /* ===== Hero ===== */
   .hero{ padding: 46px 0 10px; }
-
-  .hero-grid{
-    display:grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 18px;
-    align-items: start;
-  }
-
   .hero-single{ max-width: 72ch; }
 
   .hero h1{
@@ -207,46 +199,6 @@
     background: rgba(230,231,240,0.45);
   }
 
-  .hero-card{
-    border: var(--border);
-    background:#fff;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 16px;
-    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-  }
-
-  .hero-card:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 14px 32px rgba(20,21,26,0.10);
-    border-color: rgba(75,74,115,0.35);
-  }
-
-  .hero-card h2{
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 18px;
-    margin: 0 0 10px;
-    color: var(--indigo-deep);
-  }
-
-  .quiet-list{
-    margin:0;
-    padding-left: 18px;
-    color: var(--muted);
-    font-size: 14px;
-  }
-
-  .boundary{
-    margin-top: 12px;
-    padding: 10px 12px;
-    border-radius: 14px;
-    background: rgba(230,231,240,0.75);
-    border: var(--border);
-    color: var(--indigo-deep);
-    font-size: 13px;
-  }
-
   /* ===== Sections ===== */
   section{ padding: 18px 0 0; }
 
@@ -270,8 +222,6 @@
     position: relative;
     display: inline-block;
   }
-
-  .section-head h3::before{ display:none; }
 
   .section-head h3::after{
     content:"";
@@ -355,7 +305,6 @@
     color: var(--indigo-deep);
     position: relative;
     z-index: 1;
-    text-align: left;
     line-height: 1.25;
     letter-spacing: 0.1px;
   }
@@ -369,52 +318,6 @@
     letter-spacing: 0.1px;
   }
 
-  /* ===== Concept map (legacy map block) ===== */
-  .map{
-    border: var(--border);
-    border-radius: var(--radius);
-    padding: 12px;
-    background: rgba(255,255,255,0.78);
-    box-shadow: none;
-  }
-
-  .map-grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  }
-
-  .zone{
-    border-radius: 16px;
-    border: 1px solid rgba(201,202,219,0.78);
-    padding: 10px 12px;
-    background: rgba(230,231,240,0.55);
-    transition: transform 180ms ease, border-color 180ms ease;
-  }
-
-  .zone:hover{
-    transform: translateY(-2px);
-    border-color: rgba(75,74,115,0.35);
-  }
-
-  .zone strong{
-    display:block;
-    font-size: 12.5px;
-    color: var(--indigo-deep);
-    margin-bottom: 6px;
-    letter-spacing: 0.2px;
-  }
-
-  .zone-list{
-    margin: 0;
-    padding-left: 16px;
-    color: var(--muted);
-    font-size: 12.5px;
-    line-height: 1.45;
-  }
-
-  .zone-list li{ margin: 6px 0; }
-
   /* ===== Small UI helpers ===== */
   .kicker{
     display:inline-block;
@@ -427,23 +330,6 @@
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
-  }
-
-  .subtle-link{
-    font-size: 14px;
-    color: var(--muted);
-    text-decoration: none;
-    border-bottom: 1px dashed rgba(80,84,100,0.35);
-    padding-bottom: 2px;
-    position: relative;
-    z-index: 1;
-    width: fit-content;
-  }
-
-  .subtle-link:hover{
-    color: var(--indigo-deep);
-    border-bottom-color: rgba(75,74,115,0.45);
-    text-decoration:none;
   }
 
   /* ===== Department group subheads ===== */
@@ -579,7 +465,7 @@
     margin: 0;
   }
 
-  /* Meta pills (final resolved) */
+  /* Meta pills */
   .meta-row{
     display:flex;
     gap:8px;
@@ -604,185 +490,6 @@
     color: var(--indigo-deep);
   }
 
-  /* ===== Footer ===== */
-  footer{
-    padding: 42px 0 54px;
-    margin-top: 20px;
-    border-top: 1px solid rgba(201,202,219,0.75);
-    background: #fff;
-  }
-
-  .footer-grid{
-    display:grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 18px;
-    align-items:start;
-  }
-
-  .footnote{
-    color: var(--muted);
-    font-size: 13px;
-    margin: 10px 0 0;
-    max-width: 80ch;
-  }
-
-  .small-links{
-    display:flex;
-    flex-wrap:wrap;
-    gap: 10px;
-    justify-content:flex-end;
-  }
-
-  .small-links a{
-    font-size: 13px;
-    color: var(--muted);
-    padding: 6px 10px;
-    border-radius: 10px;
-  }
-
-  .small-links a:hover{
-    background: rgba(230,231,240,0.65);
-    color: var(--indigo-deep);
-    text-decoration:none;
-  }
-
-  /* ===== Showcase layout helpers ===== */
-  .showcase-grid{ align-items: stretch; }
-  .stack{ display:grid; gap: 14px; }
-  .showcase-structure{ align-items: start; }
-  .stack-tight{ gap: 12px; }
-
-  .callout{
-    background: rgba(255,255,255,0.92);
-    border: 1px solid rgba(75,74,115,0.22);
-    box-shadow: var(--shadow);
-  }
-
-  /* Promo cards */
-  .promo-card{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .promo-card .dept-footer{ margin-top: auto; }
-  .promo-card .promo-body h4{ margin: 0 0 8px; }
-  .promo-card .promo-body p{ margin: 0; }
-
-  .membership-card{
-    background: rgba(255,255,255,0.94);
-    border-color: rgba(201,202,219,0.85);
-  }
-
-  .membership-card .dept-cta.primary,
-  .promo-membership .dept-cta.primary{
-    max-width: none;
-    width: 100%;
-  }
-
-  .kicker-membership{
-    background: rgba(75,74,115,0.10);
-    border-color: rgba(75,74,115,0.22);
-  }
-
-  .promo-membership{
-    background: rgba(246,246,251,0.82);
-    border-color: rgba(75,74,115,0.22);
-  }
-
-  .promo-membership::before{
-    width: 6px;
-  }
-
-  /* ===== Framework selector (tabs) ===== */
-  .framework{
-    margin-top: 12px;
-    border: var(--border);
-    border-radius: var(--radius);
-    background: #fff;
-    box-shadow: 0 10px 24px rgba(20,21,26,0.06);
-    overflow: hidden;
-  }
-
-  .framework-nav{
-    display: flex;
-    gap: 8px;
-    padding: 10px 10px;
-    border-bottom: 1px solid rgba(201,202,219,0.65);
-    background: rgba(250,250,252,0.95);
-    flex-wrap: wrap;
-    position: relative;
-  }
-
-  .framework-nav::after{
-    content:"";
-    display:block;
-    height: 1px;
-    background: rgba(201,202,219,0.70);
-    margin-top: 10px;
-  }
-
-  .fw-tab{
-    appearance: none;
-    border: 1px solid rgba(201,202,219,0.60);
-    background: rgba(255,255,255,0.96);
-    color: var(--muted);
-    border-radius: 999px;
-    padding: 8px 12px;
-    font: 500 13px/1 var(--sans);
-    cursor: pointer;
-    transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
-  }
-
-  .fw-tab:hover{
-    transform: translateY(-1px);
-    border-color: rgba(75,74,115,0.35);
-    background: rgba(230,231,240,0.45);
-    color: var(--indigo-deep);
-  }
-
-  .fw-tab.is-active{
-    color: var(--indigo-deep);
-    border-color: rgba(75,74,115,0.55);
-    background: rgba(75,74,115,0.16);
-    box-shadow: 0 10px 20px rgba(75,74,115,0.10);
-  }
-
-  .fw-tab:focus-visible{
-    outline: 3px solid rgba(75,74,115,0.22);
-    outline-offset: 2px;
-  }
-
-  .framework-panelwrap{ padding: 12px 12px; }
-
-  .fw-panel{
-    display: none;
-    border-radius: 16px;
-    border: 1px solid rgba(201,202,219,0.80);
-    background: #fff;
-    padding: 12px 14px;
-  }
-
-  .fw-panel.is-active{ display: block; }
-
-  .fw-panel strong{
-    display:block;
-    font-size: 13px;
-    color: var(--indigo-deep);
-    margin-bottom: 8px;
-    letter-spacing: 0.2px;
-  }
-
-  .fw-panel .zone-list{
-    margin: 0;
-    padding-left: 16px;
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
-  .fw-panel .zone-list li{ margin: 6px 0; }
-
   /* ===== Hub structure snapshot ===== */
   .hub-structure2{
     margin: 12px 0 14px;
@@ -804,7 +511,7 @@
   .hs2-card{
     border-radius: 16px;
     border: var(--border);
-    background: #fff;
+    background: rgba(255,255,255,0.92);
     padding: 14px 14px;
     position: relative;
     overflow: hidden;
@@ -846,14 +553,6 @@
     line-height: 1.25;
   }
 
-  .hs2-title-note{
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--muted);
-    margin-left: 6px;
-    letter-spacing: 0.2px;
-  }
-
   .hs2-text{
     margin: 0 0 10px;
     color: var(--muted);
@@ -873,7 +572,7 @@
     margin-top: 10px;
   }
 
-  /* Special-case the 2nd subpanel (existing behavior) */
+  /* Special-case the 2nd subpanel */
   .hub-structure2 .hs2-card .hs2-subpanel:nth-of-type(2){
     border-color: rgba(201,202,219,0.55);
     background: transparent;
@@ -922,24 +621,87 @@
     line-height: 1.5;
   }
 
-  .hs2-access{
+  /* ===== NEW: Lenses overview as a static map (no tabs here) ===== */
+  .lenses-map{
     margin-top: 12px;
     border-radius: 16px;
-    border: 1px solid rgba(201,202,219,0.80);
-    background: rgba(255,255,255,0.92);
-    padding: 12px 12px;
-    display: grid;
-    gap: 10px;
+    border: 1px solid rgba(201,202,219,0.78);
+    background: rgba(246,246,251,0.72);
+    padding: 12px;
   }
 
-  .hs2-access-row{
+  .lenses-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .lens{
+    border-radius: 14px;
+    border: 1px solid rgba(201,202,219,0.78);
+    background: rgba(255,255,255,0.84);
+    padding: 10px 12px;
+  }
+
+  .lens-title{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .lens-title strong{
+    font-size: 13px;
+    color: var(--indigo-deep);
+    letter-spacing: 0.2px;
+    font-weight: 500;
+  }
+
+  .lens-note{
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .lens ul{
+    margin: 0;
+    padding-left: 16px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .lens li{ margin: 6px 0; }
+
+  /* ===== NEW: Access legend (neutral, not salesy) ===== */
+  .access-legend{
+    border: var(--border);
+    border-radius: var(--radius);
+    background: rgba(246,246,251,0.82);
+    box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+    overflow: hidden;
+    margin-top: 10px;
+  }
+
+  .access-legend-inner{
+    padding: 14px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .legend-row{
     display: grid;
     grid-template-columns: 110px 1fr;
-    gap: 10px;
+    gap: 12px;
     align-items: start;
+    border-radius: 16px;
+    border: 1px solid rgba(201,202,219,0.72);
+    background: rgba(255,255,255,0.86);
+    padding: 12px;
   }
 
-  .hs2-access-pill{
+  .legend-pill{
     border-radius: 999px;
     padding: 6px 10px;
     font-size: 12.5px;
@@ -949,22 +711,62 @@
     width: fit-content;
   }
 
-  .hs2-access-pill-strong{
+  .legend-pill.strong{
     color: var(--indigo-deep);
     border-color: rgba(75,74,115,0.32);
     background: rgba(75,74,115,0.10);
   }
 
-  .hs2-access-text{
+  .legend-text{
     color: var(--muted);
     font-size: 13.5px;
     line-height: 1.45;
   }
 
+  /* ===== Footer ===== */
+  footer{
+    padding: 42px 0 54px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(201,202,219,0.75);
+    background: #fff;
+  }
+
+  .footer-grid{
+    display:grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 18px;
+    align-items:start;
+  }
+
+  .footnote{
+    color: var(--muted);
+    font-size: 13px;
+    margin: 10px 0 0;
+    max-width: 80ch;
+  }
+
+  .small-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px;
+    justify-content:flex-end;
+  }
+
+  .small-links a{
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 10px;
+    border-radius: 10px;
+  }
+
+  .small-links a:hover{
+    background: rgba(230,231,240,0.65);
+    color: var(--indigo-deep);
+    text-decoration:none;
+  }
+
   /* ===== Responsive ===== */
   @media (max-width: 920px){
-    .hero-grid{ grid-template-columns: 1fr; }
-    .map-grid{ grid-template-columns: repeat(2, 1fr); }
     .footer-grid{ grid-template-columns: 1fr; }
     .small-links{ justify-content:flex-start; }
     .hs2-grid{ grid-template-columns: 1fr; }
@@ -974,14 +776,14 @@
     .col-6,.col-4,.col-8{ grid-column: span 12; }
     .brand{ min-width:auto; }
     .brand .sub{ display:none; }
-    .map-grid{ grid-template-columns: 1fr; }
 
     .dept-group-head{
       flex-direction: column;
       align-items: flex-start;
     }
 
-    .hs2-access-row{ grid-template-columns: 1fr; }
+    .lenses-grid{ grid-template-columns: 1fr; }
+    .legend-row{ grid-template-columns: 1fr; }
   }
 
   @media (min-width: 1024px){
@@ -990,168 +792,11 @@
 
   /* ===== Reduced motion ===== */
   @media (prefers-reduced-motion: reduce){
-    .card, .hero-card, .pill, .zone, .navlinks a, .dept-cta, .fw-tab{
+    .card, .pill, .zone, .navlinks a, .dept-cta{
       transition: none !important;
     }
   }
-  /* ===== Patch: tighten promo row + simplify framework nav divider ===== */
-.promo-row{
-  margin-top: 12px;
-  align-items: stretch;
-}
-
-.promo-row .promo-card{
-  height: 100%;
-}
-
-/* Your framework nav currently adds an extra divider line via ::after.
-   This removes the “double-line” feeling and keeps it cleaner. */
-.framework-nav::after{
-  display: none;
-}
-/* ===== Layout fix: calm promo shelf + reduce nested-card feeling ===== */
-
-/* Make the right column stack feel editorial, not dashboardy */
-.hs2-card{
-  background: rgba(255,255,255,0.92);
-}
-
-/* Soften the framework container a bit (less "card inside card") */
-.framework{
-  background: rgba(255,255,255,0.88);
-  box-shadow: none;
-}
-
-.fw-panel{
-  background: rgba(255,255,255,0.80);
-  border-color: rgba(201,202,219,0.70);
-}
-
-/* Remove the extra divider line created by framework-nav::after */
-.framework-nav::after{
-  display: none;
-}
-
-/* Promo shelf: a lightweight section under the tabs */
-.promo-shelf{
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(201,202,219,0.55);
-}
-
-.promo-shelf-head{
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.promo-shelf-title{
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: 14.5px;
-  color: var(--indigo-deep);
-  letter-spacing: 0.1px;
-}
-
-.promo-shelf-note{
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
-/* Two-up grid that behaves nicely at all widths */
-.promo-shelf-grid{
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 12px;
-  align-items: stretch;
-}
-
-/* Promo mini cards: lighter, shorter, calmer */
-.promo-mini{
-  border-radius: 16px;
-  border: 1px solid rgba(201,202,219,0.72);
-  background: rgba(246,246,251,0.62);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: none;
-}
-
-.promo-mini-membership{
-  background: rgba(246,246,251,0.72);
-  border-color: rgba(75,74,115,0.22);
-}
-
-/* Typography inside promo minis */
-.promo-mini-top{
-  display: grid;
-  gap: 8px;
-}
-
-.promo-mini-title{
-  margin: 0;
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  color: var(--indigo-deep);
-  letter-spacing: 0.1px;
-}
-
-.promo-mini-text{
-  margin: 0;
-  color: var(--muted);
-  font-size: 13.5px;
-  line-height: 1.55;
-}
-
-/* Access model inside membership promo: compact and tidy */
-.promo-mini-access{
-  border-radius: 14px;
-  border: 1px solid rgba(201,202,219,0.65);
-  background: rgba(255,255,255,0.78);
-  padding: 10px;
-  display: grid;
-  gap: 8px;
-}
-
-.promo-mini-access-row{
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 10px;
-  align-items: start;
-}
-
-/* Footer area aligns CTAs at the bottom */
-.promo-mini-foot{
-  margin-top: auto;
-  display: grid;
-  gap: 8px;
-}
-
-/* Make the Free preview card feel less empty */
-.promo-mini .dept-access{
-  text-align: left;
-  font-size: 12px;
-}
-
-/* Responsive: stack promos on smaller widths */
-@media (max-width: 740px){
-  .promo-shelf-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .promo-mini-access-row{
-    grid-template-columns: 1fr;
-  }
-}
-
 </style>
-
-
 </head>
 
 <body>
@@ -1164,203 +809,181 @@
         </div>
 
         <nav class="navlinks" aria-label="Primary">
-          <a href="#membership">Membership</a>
           <a href="#departments">Departments</a>
           <a href="#about">About</a>
+          <a href="membership.html">Membership</a>
         </nav>
       </div>
     </div>
   </header>
 
   <main class="container">
-   <section class="hero" id="top">
-  <div class="hero-single">
-    <h1>Education Hub</h1>
-    <p>
-      A stable reference library for understanding how laboratory systems behave—
-      organized around mechanisms, constraints, patterns, and cross-department logic.
-    </p>
-
-    <div class="pill-row" aria-label="Core statements">
-      <div class="pill">Start anywhere</div>
-      <div class="pill">No progress tracking</div>
-      <div class="pill">Built for rereading</div>
-      <div class="pill">Concept-first</div>
-    </div>
-  </div>
-</section>
-
-
-  <!-- Structure + Showcase -->
-<section id="concepts">
-  <div class="section-head">
-    <h3>How the hub is structured</h3>
-    <p>
-      A reference library grouped by department. Each department uses the same four lenses, so once you learn the structure, every hub feels familiar.
-    </p>
-  </div>
-
-  <div class="hub-structure2" aria-label="Education Hub structure snapshot">
-    <div class="hs2-grid" role="group" aria-label="Hub structure overview">
-      <!-- Column 1 -->
-      <div class="hs2-card">
-        <div class="hs2-kicker">Education Hub</div>
-        <h4 class="hs2-title">How to use this library</h4>
-        <p class="hs2-text">
-          Read like a reference: start where something feels unclear, follow cross-links, and return later without needing a “finish line.”
+    <section class="hero" id="top">
+      <div class="hero-single">
+        <h1>Education Hub</h1>
+        <p>
+          A stable reference library for understanding how laboratory systems behave—
+          organized around mechanisms, constraints, patterns, and cross-department logic.
         </p>
 
-        <div class="hs2-subpanel" aria-label="How to use this library tips">
-          <ul class="hs2-list">
-            <li>You do not need to read in order.</li>
-            <li>Start with what feels unclear.</li>
-            <li>Use cross-links to build a mental model.</li>
-            <li>Leave, return, and reread without pressure.</li>
-          </ul>
-        </div>
-
-        <div class="hs2-subpanel" aria-label="What a department hub is">
-          <div class="hs2-subkicker">What a department hub is</div>
-          <p class="hs2-text hs2-tight">
-            Each department has a hub page that previews what’s inside and how it’s organized.
-          </p>
-        </div>
-
-        <div class="hs2-boundary" aria-label="Concept boundary">
-          <div class="hs2-boundary-label">Concept boundary</div>
-          <p class="hs2-boundary-text">
-            LabContext explains why results behave the way they do. It is not step-by-step procedure training or formal competency assessment.
-          </p>
+        <div class="pill-row" aria-label="Core statements">
+          <div class="pill">Start anywhere</div>
+          <div class="pill">No progress tracking</div>
+          <div class="pill">Built for rereading</div>
+          <div class="pill">Concept-first</div>
         </div>
       </div>
+    </section>
 
-      <!-- Column 2 -->
-      <div class="hs2-card">
-        <div class="hs2-kicker">Inside each department</div>
-        <h4 class="hs2-title">Four lenses <span class="hs2-title-note">(tabs)</span></h4>
-        <p class="hs2-text">
-          Every department uses the same four lenses. If you open Hematology and Chemistry, you’ll see the same structure—so patterns become easier to recognize across the site.
+    <!-- Structure -->
+    <section id="concepts">
+      <div class="section-head">
+        <h3>How the hub is structured</h3>
+        <p>
+          A reference library grouped by department. Each department uses the same four lenses, so once you learn the structure, every hub feels familiar.
         </p>
+      </div>
 
-        <div class="framework" aria-label="Four lenses overview">
-          <div class="framework-nav" role="tablist" aria-label="Framework lenses">
-            <button class="fw-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="fw-foundations" data-fw="foundations">
-              Foundations
-            </button>
-            <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-constraints" data-fw="constraints">
-              Constraints
-            </button>
-            <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-patterns" data-fw="patterns">
-              Patterns
-            </button>
-            <button class="fw-tab" type="button" role="tab" aria-selected="false" aria-controls="fw-interfaces" data-fw="interfaces">
-              Interfaces
-            </button>
-          </div>
+      <div class="hub-structure2" aria-label="Education Hub structure snapshot">
+        <div class="hs2-grid" role="group" aria-label="Hub structure overview">
+          <!-- Column 1 -->
+          <div class="hs2-card">
+            <div class="hs2-kicker">Education Hub</div>
+            <h4 class="hs2-title">How to use this library</h4>
+            <p class="hs2-text">
+              Read like a reference: start where something feels unclear, follow cross-links, and return later without needing a “finish line.”
+            </p>
 
-          <div class="framework-panelwrap">
-            <div class="fw-panel is-active" id="fw-foundations" role="tabpanel" aria-label="Foundations">
-              <strong>Foundations</strong>
-              <ul class="zone-list">
-                <li>What the department is measuring</li>
-                <li>The baseline logic that makes results behave the way they do</li>
-                <li>Terms and mental models used throughout the section</li>
+            <div class="hs2-subpanel" aria-label="How to use this library tips">
+              <ul class="hs2-list">
+                <li>You do not need to read in order.</li>
+                <li>Start with what feels unclear.</li>
+                <li>Use cross-links to build a mental model.</li>
+                <li>Leave, return, and reread without pressure.</li>
               </ul>
             </div>
 
-            <div class="fw-panel" id="fw-constraints" role="tabpanel" aria-label="Constraints">
-              <strong>Constraints</strong>
-              <ul class="zone-list">
-                <li>Assumptions that results quietly depend on</li>
-                <li>Common reasons a result can be “correct” but still misleading</li>
-                <li>Where interpretation breaks without context</li>
-              </ul>
+            <div class="hs2-subpanel" aria-label="What a department hub is">
+              <div class="hs2-subkicker">What a department hub is</div>
+              <p class="hs2-text hs2-tight">
+                Each department has a hub page that previews what’s inside and how it’s organized.
+              </p>
             </div>
 
-            <div class="fw-panel" id="fw-patterns" role="tabpanel" aria-label="Patterns">
-              <strong>Patterns</strong>
-              <ul class="zone-list">
-                <li>Recurring result behaviors that appear in real life</li>
-                <li>Which signals tend to move together (and which don’t)</li>
-                <li>Persistence over snapshots</li>
-              </ul>
-            </div>
-
-            <div class="fw-panel" id="fw-interfaces" role="tabpanel" aria-label="Interfaces">
-              <strong>Interfaces</strong>
-              <ul class="zone-list">
-                <li>Cross-department connections that prevent siloed interpretation</li>
-                <li>Shared signals across systems</li>
-                <li>Boundaries between pre-analytic, analytic, and reporting logic</li>
-              </ul>
+            <div class="hs2-boundary" aria-label="Concept boundary">
+              <div class="hs2-boundary-label">Concept boundary</div>
+              <p class="hs2-boundary-text">
+                LabContext explains why results behave the way they do. It is not step-by-step procedure training or formal competency assessment.
+              </p>
             </div>
           </div>
+
+          <!-- Column 2 -->
+          <div class="hs2-card">
+            <div class="hs2-kicker">Inside each department</div>
+            <h4 class="hs2-title">Four lenses</h4>
+            <p class="hs2-text">
+              Every department uses the same four lenses. If you open Hematology and Chemistry, you’ll see the same structure—so patterns become easier to recognize across the site.
+            </p>
+
+            <!-- Static overview (no tabs) -->
+            <div class="lenses-map" aria-label="Four lenses overview">
+              <div class="lenses-grid">
+                <div class="lens" aria-label="Foundations lens">
+                  <div class="lens-title">
+                    <strong>Foundations</strong>
+                    <span class="lens-note">baseline logic</span>
+                  </div>
+                  <ul>
+                    <li>What the department is measuring</li>
+                    <li>The logic that makes results behave the way they do</li>
+                    <li>Terms and mental models used throughout</li>
+                  </ul>
+                </div>
+
+                <div class="lens" aria-label="Constraints lens">
+                  <div class="lens-title">
+                    <strong>Constraints</strong>
+                    <span class="lens-note">where interpretation breaks</span>
+                  </div>
+                  <ul>
+                    <li>Assumptions that results quietly depend on</li>
+                    <li>How a result can be “correct” but misleading</li>
+                    <li>What context is required to interpret safely</li>
+                  </ul>
+                </div>
+
+                <div class="lens" aria-label="Patterns lens">
+                  <div class="lens-title">
+                    <strong>Patterns</strong>
+                    <span class="lens-note">recurring behaviors</span>
+                  </div>
+                  <ul>
+                    <li>Common result behaviors seen in real life</li>
+                    <li>Which signals move together (and which don’t)</li>
+                    <li>Persistence over snapshots</li>
+                  </ul>
+                </div>
+
+                <div class="lens" aria-label="Interfaces lens">
+                  <div class="lens-title">
+                    <strong>Interfaces</strong>
+                    <span class="lens-note">cross-department links</span>
+                  </div>
+                  <ul>
+                    <li>Connections that prevent siloed interpretation</li>
+                    <li>Shared signals across systems</li>
+                    <li>Boundaries between pre-analytic, analytic, reporting</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optional, non-salesy nudge to a concrete starting point -->
+            <div class="hs2-subpanel" aria-label="Suggested starting point">
+              <div class="hs2-subkicker">Suggested starting point</div>
+              <p class="hs2-text hs2-tight">
+                If you want a guided example of how the hubs read, start with <a href="orientation/index.html">Lab Orientation</a>.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-    <div class="promo-shelf" aria-label="Preview and membership">
-  <div class="promo-shelf-head">
-    <div class="promo-shelf-title">Explore this structure</div>
-    <div class="promo-shelf-note">Two ways to use the hub</div>
-  </div>
-
-  <div class="promo-shelf-grid">
-    <!-- Free preview -->
-    <div class="promo-mini">
-      <div class="promo-mini-top">
-        <span class="kicker">Free preview</span>
-        <h5 class="promo-mini-title">Lab Orientation</h5>
+    <!-- Access model (neutral legend) -->
+    <section id="access">
+      <div class="section-head">
+        <h3>Access model</h3>
+        <p>
+          No surprise paywalls while you browse. This explains what’s open by default and what requires membership—before you click deeper.
+        </p>
       </div>
 
-      <p class="promo-mini-text">
-        A free example of how department hubs work: what happens in the lab, how results are created,
-        and why interpretation is constrained.
-      </p>
+      <div class="access-legend" aria-label="Access legend">
+        <div class="access-legend-inner">
+          <div class="legend-row" aria-label="Public access">
+            <div class="legend-pill">Public</div>
+            <div class="legend-text">
+              Department hub pages (scope + structure) and the Orientation hub are readable without membership.
+            </div>
+          </div>
 
-      <div class="promo-mini-foot">
-        <div class="dept-access">Membership not required</div>
-        <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
-      </div>
-    </div>
-
-    <!-- Membership -->
-    <div class="promo-mini promo-mini-membership">
-      <div class="promo-mini-top">
-        <span class="kicker kicker-membership">Membership</span>
-        <h5 class="promo-mini-title">Want the full library inside these hubs?</h5>
-      </div>
-
-      <p class="promo-mini-text">
-        Unlock the full pages inside each department—explanations, diagrams, and cross-links built for navigation and rereading.
-      </p>
-
-      <div class="promo-mini-access" aria-label="Access model">
-        <div class="promo-mini-access-row">
-          <div class="hs2-access-pill">Public</div>
-          <div class="hs2-access-text">Hub previews: scope + structure</div>
-        </div>
-        <div class="promo-mini-access-row">
-          <div class="hs2-access-pill hs2-access-pill-strong">Membership</div>
-          <div class="hs2-access-text">Full pages: explanations + diagrams + cross-links</div>
+          <div class="legend-row" aria-label="Membership access">
+            <div class="legend-pill strong">Membership</div>
+            <div class="legend-text">
+              Full concept pages inside departments (explanations, diagrams, and cross-links built for navigation and rereading).
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="promo-mini-foot">
-        <a class="dept-cta primary" href="membership.html">View membership details</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Departments -->
     <section id="departments">
       <div class="section-head">
-        <h3>Browse what’s inside membership</h3>
-        <p>Each department hub preview shows scope and structure. Membership adds full concept pages and diagrams.</p>
+        <h3>Browse departments</h3>
+        <p>Open any hub to see scope + structure. The Orientation hub is a complete public example.</p>
       </div>
 
       <!-- Core Analytical Departments -->
@@ -1373,13 +996,13 @@
         <div class="grid dept-grid">
           <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill">Public Access</span>
- 
-</div>
+              <span class="meta-pill">Public</span>
+              <span class="meta-pill soft">Orientation hub</span>
+            </div>
 
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="orientation/index.html">Lab Orientation</a></h4>
-              <p>Free orientation hub: what happens in the lab, how results are created, and why interpretation is constrained.</p>
+              <p>Public orientation hub: what happens in the lab, how results are created, and why interpretation is constrained.</p>
             </div>
             <div class="dept-footer">
               <div class="dept-access">Membership not required</div>
@@ -1389,9 +1012,8 @@
 
           <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/hematology.html">Hematology</a></h4>
               <p>Cell populations, production, destruction, morphology, and pattern recognition across indices and smears.</p>
@@ -1401,11 +1023,10 @@
             </div>
           </article>
 
-         <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/coagulation.html">Coagulation / Hemostasis</a></h4>
               <p>Cascade logic, amplification, inhibition, fragility, and time-dependent system behavior.</p>
@@ -1415,11 +1036,10 @@
             </div>
           </article>
 
-      <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/chemistry.html">Clinical Chemistry</a></h4>
               <p>Quantitative analytes, chemical equilibria, enzymatic activity, interference, and matrix effects.</p>
@@ -1429,11 +1049,10 @@
             </div>
           </article>
 
-         <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/immunology-serology.html">Immunology / Serology</a></h4>
               <p>Antigen–antibody interactions, signal generation, cross-reactivity, and immune pattern behavior.</p>
@@ -1443,11 +1062,10 @@
             </div>
           </article>
 
-        <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/urinalysis-body-fluids.html">Urinalysis &amp; Body Fluids</a></h4>
               <p>Compartmentalized physiology, concentration logic, and indirect reflection of systemic processes.</p>
@@ -1457,11 +1075,10 @@
             </div>
           </article>
 
-        <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/microbiology.html">Microbiology</a></h4>
               <p>Taxonomy, growth constraints, detection probability, and time-based uncertainty.</p>
@@ -1471,11 +1088,10 @@
             </div>
           </article>
 
-        <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/transfusion.html">Transfusion Medicine (Blood Bank)</a></h4>
               <p>Compatibility logic, immunohematology, risk management, and exception-driven reasoning.</p>
@@ -1485,11 +1101,10 @@
             </div>
           </article>
 
-         <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/molecular-genetics.html">Molecular Diagnostics &amp; Genetics</a></h4>
               <p>Information transfer, amplification logic, mutation interpretation, and signal vs noise reasoning.</p>
@@ -1509,11 +1124,10 @@
         </div>
 
         <div class="grid dept-grid">
-         <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/preanalytical-variables.html">Pre-Analytical Variables &amp; Specimen Integrity</a></h4>
               <p>Collection, handling, transport, and patient factors as conceptual sources of error and bias.</p>
@@ -1523,11 +1137,10 @@
             </div>
           </article>
 
-        <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/poct.html">Point-of-Care Testing (POCT)</a></h4>
               <p>Decentralized testing constraints, environmental variability, and tradeoffs between speed and control.</p>
@@ -1537,11 +1150,10 @@
             </div>
           </article>
 
-  <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/operations-workflow.html">Laboratory Operations &amp; Workflow</a></h4>
               <p>Throughput, batching, prioritization, and system-level constraints that shape result behavior.</p>
@@ -1551,11 +1163,10 @@
             </div>
           </article>
 
-      <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/quality-safety-reliability.html">Quality, Safety, &amp; Reliability</a></h4>
               <p>Error taxonomy, safeguards, uncertainty, and why quality systems exist at all.</p>
@@ -1568,18 +1179,17 @@
       </div>
 
       <!-- Cross-Cutting Foundations -->
-     <div class="dept-group" aria-label="Pre-Analytical and Systems-Focused Departments">
+      <div class="dept-group" aria-label="Cross-Cutting Foundations">
         <div class="dept-group-head">
           <h4 class="dept-group-title">Cross-Cutting Foundations</h4>
           <p class="dept-group-desc">Conceptual anchors that prevent fragmentation across departments.</p>
         </div>
 
         <div class="grid dept-grid">
-        <article class="card col-4 dept-hub">
+          <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/anatomy-physiology-interpretation.html">Anatomy &amp; Physiology for Laboratory Interpretation</a></h4>
               <p>Physiology framed specifically around what laboratory data can and cannot reflect.</p>
@@ -1591,9 +1201,8 @@
 
           <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/measurement-science.html">Measurement Science &amp; Analytical Principles</a></h4>
               <p>Sensitivity, specificity, precision, accuracy, limits, bias, and uncertainty across all departments.</p>
@@ -1605,9 +1214,8 @@
 
           <article class="card col-4 dept-hub">
             <div class="meta-row">
-  <span class="meta-pill soft">Hub preview</span>
-</div>
-
+              <span class="meta-pill soft">Hub preview</span>
+            </div>
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/results-reporting.html">Results &amp; Reporting Interpretation</a></h4>
               <p>Reference ranges, flags, deltas, critical values, and communication limits.</p>
@@ -1619,22 +1227,37 @@
         </div>
       </div>
 
-      <!-- Dept section membership CTA -->
-     <article class="card col-12" style="margin-top:14px;">
-  <div class="meta-row">
-    <span class="meta-pill soft">Membership</span>
-  </div>
+      <!-- Minimal membership CTA (kept, but less “sales page” energy) -->
+      <article class="card col-12" style="margin-top:14px;" aria-label="Membership link">
+        <div class="meta-row">
+          <span class="meta-pill soft">Membership</span>
+        </div>
 
-  <h4 style="margin-bottom:8px;">Want the full library inside these hubs?</h4>
-  <p style="margin-bottom:12px;">
-    Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
-  </p>
+        <h4 style="margin-bottom:8px;">Looking for the full concept pages?</h4>
+        <p style="margin-bottom:12px;">
+          Membership unlocks the full concept pages and diagrams inside each department, plus cross-links built for navigation and rereading.
+        </p>
 
-  <a class="dept-cta primary" href="membership.html" style="max-width: 320px;">View membership details</a>
-</article>
+        <a class="dept-cta primary" href="membership.html" style="max-width: 320px;">View membership details</a>
+      </article>
+    </section>
+
+    <!-- About anchor placeholder -->
+    <section id="about">
+      <div class="section-head">
+        <h3>About</h3>
+        <p>LabContext is interpretive, not evaluative—built to make hidden logic visible.</p>
+      </div>
+
+      <article class="card col-12">
+        <h4>What LabContext is (and isn’t)</h4>
+        <p style="margin-bottom:0;">
+          LabContext explains why results behave the way they do, why patterns recur, and why those patterns change when constraints shift.
+          It does not teach procedures, provide validation protocols, or perform competency training.
+        </p>
+      </article>
     </section>
   </main>
-
 
   <footer>
     <div class="container">
@@ -1646,8 +1269,8 @@
           </div>
           <p class="footnote">
             LabContext is interpretive, not evaluative. It exists to make hidden logic visible:
-          why systems behave the way they do, why patterns recur, and why those patterns change when constraints shift.
-          It does not teach procedures, provide validation protocols, or perform competency training.
+            why systems behave the way they do, why patterns recur, and why those patterns change when constraints shift.
+            It does not teach procedures, provide validation protocols, or perform competency training.
           </p>
         </div>
 
@@ -1656,56 +1279,11 @@
           <a href="#">Blog</a>
           <a href="#">Materials &amp; Resources</a>
           <a href="#">Contact</a>
+          <a href="membership.html">Membership</a>
         </div>
       </div>
     </div>
   </footer>
-<script>
-  (function () {
-    const tabs = Array.from(document.querySelectorAll(".fw-tab"));
-    const panels = Array.from(document.querySelectorAll(".fw-panel"));
-    if (!tabs.length || !panels.length) return;
-
-    function activate(key) {
-      tabs.forEach((t) => {
-        const on = t.dataset.fw === key;
-        t.classList.toggle("is-active", on);
-        t.setAttribute("aria-selected", on ? "true" : "false");
-      });
-
-      panels.forEach((p) => {
-        const on = p.id === ("fw-" + key);
-        p.classList.toggle("is-active", on);
-      });
-    }
-
-    tabs.forEach((t) => {
-      t.addEventListener("click", () => activate(t.dataset.fw));
-
-      t.addEventListener("keydown", (e) => {
-        const i = tabs.indexOf(t);
-
-        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-          e.preventDefault();
-          const next = tabs[(i + 1) % tabs.length];
-          next.focus();
-          activate(next.dataset.fw);
-        }
-
-        if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-          e.preventDefault();
-          const prev = tabs[(i - 1 + tabs.length) % tabs.length];
-          prev.focus();
-          activate(prev.dataset.fw);
-        }
-      });
-    });
-
-    activate("foundations");
-  })();
-</script>
-
-
 
 </body>
 </html>
