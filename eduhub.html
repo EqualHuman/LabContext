@@ -994,6 +994,22 @@
       transition: none !important;
     }
   }
+  /* ===== Patch: tighten promo row + simplify framework nav divider ===== */
+.promo-row{
+  margin-top: 12px;
+  align-items: stretch;
+}
+
+.promo-row .promo-card{
+  height: 100%;
+}
+
+/* Your framework nav currently adds an extra divider line via ::after.
+   This removes the “double-line” feeling and keeps it cleaner. */
+.framework-nav::after{
+  display: none;
+}
+
 </style>
 
 
@@ -1045,7 +1061,6 @@
     </p>
   </div>
 
-  <!-- Structure diagram / snapshot -->
   <div class="hub-structure2" aria-label="Education Hub structure snapshot">
     <div class="hs2-grid" role="group" aria-label="Hub structure overview">
       <!-- Column 1 -->
@@ -1143,60 +1158,56 @@
           </div>
         </div>
 
-        
         <div class="grid promo-row" aria-label="Preview and membership">
-    <div class="col-4">
-      <div class="card promo-card promo-orientation">
-        <span class="kicker">Free preview</span>
-        <h4>Lab Orientation</h4>
-        <p>
-          A free example of how department hubs work: what happens in the lab, how results are created,
-          and why interpretation is constrained.
-        </p>
+          <div class="col-4">
+            <div class="card promo-card promo-orientation">
+              <span class="kicker">Free preview</span>
+              <h4>Lab Orientation</h4>
+              <p>
+                A free example of how department hubs work: what happens in the lab, how results are created,
+                and why interpretation is constrained.
+              </p>
 
-        <div class="dept-footer" style="padding-top:0;">
-          <div class="dept-access">Membership not required</div>
-          <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-8">
-      <div class="card promo-card promo-membership">
-        <span class="kicker kicker-membership">Membership</span>
-
-        <div class="promo-body">
-          <h4>Want the full library inside these hubs?</h4>
-          <p>
-            Membership unlocks the full pages inside each department—explanations, diagrams, and cross-links built for navigation and rereading.
-          </p>
-
-          <div class="hs2-access" aria-label="Access model">
-            <div class="hs2-access-row">
-              <div class="hs2-access-pill">Public</div>
-              <div class="hs2-access-text">Hub previews: scope + structure</div>
+              <div class="dept-footer" style="padding-top:0;">
+                <div class="dept-access">Membership not required</div>
+                <a class="dept-cta" href="orientation/index.html">Open Orientation hub</a>
+              </div>
             </div>
-            <div class="hs2-access-row">
-              <div class="hs2-access-pill hs2-access-pill-strong">Membership</div>
-              <div class="hs2-access-text">Full pages: explanations + diagrams + cross-links</div>
+          </div>
+
+          <div class="col-8">
+            <div class="card promo-card promo-membership">
+              <span class="kicker kicker-membership">Membership</span>
+
+              <div class="promo-body">
+                <h4>Want the full library inside these hubs?</h4>
+                <p>
+                  Membership unlocks the full pages inside each department—explanations, diagrams, and cross-links built for navigation and rereading.
+                </p>
+
+                <div class="hs2-access" aria-label="Access model">
+                  <div class="hs2-access-row">
+                    <div class="hs2-access-pill">Public</div>
+                    <div class="hs2-access-text">Hub previews: scope + structure</div>
+                  </div>
+                  <div class="hs2-access-row">
+                    <div class="hs2-access-pill hs2-access-pill-strong">Membership</div>
+                    <div class="hs2-access-text">Full pages: explanations + diagrams + cross-links</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dept-footer">
+                <a class="dept-cta primary" href="membership.html">View membership details</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="dept-footer">
-          <a class="dept-cta primary" href="membership.html">View membership details</a>
-        </div>
       </div>
     </div>
   </div>
-
-
-
-
-          </div>
-        </div>
-      </div>
-    </section>
+</section>
 
     <!-- Departments -->
     <section id="departments">
