@@ -1240,6 +1240,134 @@ body::before{
 .card h4, .hs2-title{
   letter-spacing: 0.1px;
 }
+/* ================================
+   Calm personality accents (no new colors, no gradients)
+   Paste at the VERY BOTTOM of <style>
+================================ */
+
+/* Small system tokens (still derived from your existing palette) */
+:root{
+  --surface: #fff;
+  --surface-quiet: rgba(246,246,251,0.82);
+  --hairline: rgba(201,202,219,0.58);
+  --accent-soft: rgba(75,74,115,0.14);
+  --accent-strong: rgba(75,74,115,0.32);
+}
+
+/* Unify borders so the page feels less “border soup” */
+.card,
+.hs2-card,
+.framework,
+.fw-panel,
+.hub-structure2,
+.dept-group-head{
+  border-color: var(--hairline);
+}
+
+/* Give grouped containers one quiet surface so sections “chunk” better */
+.hub-structure2,
+.dept-group-head{
+  background: var(--surface-quiet);
+}
+
+/* ---------- Card “header rule” (flat strip) ---------- */
+.card,
+.hs2-card{
+  position: relative;
+}
+
+.card::after,
+.hs2-card::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:12px;
+  height:2px;
+  border-radius:999px;
+  background: var(--accent-soft);
+  pointer-events:none;
+}
+
+.card:hover::after,
+.hs2-card:hover::after{
+  background: var(--accent-strong);
+}
+
+/* ---------- Meta pills: add a dot glyph (quiet lab “notation”) ---------- */
+.meta-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.meta-pill::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:999px;
+  background: rgba(75,74,115,0.30);
+  box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
+}
+
+/* ---------- CTAs: tiny arrow + subtle movement ---------- */
+.dept-cta{
+  position: relative;
+}
+
+.dept-cta::after{
+  content:"→";
+  margin-left:10px;
+  opacity:0.65;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.dept-cta:hover::after{
+  transform: translateX(2px);
+  opacity:0.9;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .dept-cta::after{ transition:none; }
+}
+
+/* ---------- Tabs: clearer active state (underline) ---------- */
+.framework-nav{
+  position: relative;
+  padding-bottom: 18px; /* room for underline */
+}
+
+.fw-tab{
+  position: relative;
+}
+
+.fw-tab.is-active::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:-9px;
+  height:2px;
+  border-radius:999px;
+  background: rgba(75,74,115,0.36);
+}
+
+/* ---------- Panels: subtle left rail (makes content feel “sectioned”) ---------- */
+.fw-panel{
+  position: relative;
+  padding-left: 16px;
+}
+
+.fw-panel::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:12px;
+  bottom:12px;
+  width:4px;
+  border-radius:999px;
+  background: rgba(75,74,115,0.14);
+}
 
 
 </style>
