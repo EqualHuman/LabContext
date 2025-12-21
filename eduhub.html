@@ -1139,6 +1139,107 @@ body::before{ opacity: 0.34; }
 .dept-group-head{
   box-shadow: 0 10px 24px rgba(20,21,26,0.06);
 }
+.card::after,
+.hs2-card::after{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height: 44px;
+  background: linear-gradient(
+    180deg,
+    rgba(75,74,115,0.10),
+    rgba(75,74,115,0.00)
+  );
+  pointer-events:none;
+}
+.section-head{
+  border-bottom: none;
+  padding-bottom: 14px;
+}
+
+.section-head h3{
+  padding-left: 0;
+}
+
+.section-head h3::before{ display:none; }
+
+.section-head h3{
+  position: relative;
+  display: inline-block;
+}
+
+.section-head h3::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width: 72px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(75,74,115,0.35);
+  box-shadow: 0 8px 18px rgba(75,74,115,0.10);
+}
+.meta-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.meta-pill{
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(201,202,219,0.75);
+  background: rgba(255,255,255,0.92);
+  color: var(--muted);
+}
+
+.meta-pill.soft{
+  background: rgba(230,231,240,0.60);
+  border-color: rgba(201,202,219,0.65);
+  color: var(--indigo-deep);
+}
+.framework-nav{
+  position: relative;
+}
+
+.fw-tab.is-active{
+  box-shadow: 0 10px 20px rgba(75,74,115,0.10);
+}
+.framework-nav::after{
+  content:"";
+  display:block;
+  height: 1px;
+  background: rgba(201,202,219,0.70);
+  margin-top: 10px;
+}
+body::before{
+  background-image:
+    linear-gradient(to right, rgba(75,74,115,0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201,202,219,0.08) 1px, transparent 1px),
+    radial-gradient(circle at 18% 22%, rgba(75,74,115,0.12) 0.6px, transparent 1px),
+    radial-gradient(circle at 72% 28%, rgba(201,202,219,0.12) 0.6px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 120px 120px, 140px 140px;
+  opacity: 0.30;
+}
+.promo-membership{
+  background: rgba(246,246,251,0.82);
+  border-color: rgba(75,74,115,0.22);
+}
+
+.promo-membership::before{
+  width: 6px; /* always show the accent bar */
+}
+.hero p, .card p, .hs2-text{
+  letter-spacing: 0.1px;
+}
+
+.card h4, .hs2-title{
+  letter-spacing: 0.1px;
+}
 
 
 </style>
@@ -1374,6 +1475,11 @@ body::before{ opacity: 0.34; }
           </article>
 
           <article class="card col-4 dept-hub">
+            <div class="meta-row">
+  <span class="meta-pill">Hub preview</span>
+  <span class="meta-pill soft">Concept-first</span>
+</div>
+
             <div class="dept-head">
               <h4><a class="dept-titlelink" href="departments/hematology.html">Hematology</a></h4>
               <p>Cell populations, production, destruction, morphology, and pattern recognition across indices and smears.</p>
