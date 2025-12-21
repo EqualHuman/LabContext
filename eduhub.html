@@ -1035,6 +1035,75 @@ body::before{
 .dept-group-head{
   box-shadow: 0 10px 24px rgba(20,21,26,0.06) !important;
 }
+/* ===== Desktop breathing room (wider, earlier trigger) ===== */
+@media (min-width: 1024px){
+  .container{
+    max-width: 1200px; /* +100px from 1100 */
+  }
+}
+/* ===== Cohesion pass: calmer contrast + fewer competing grays ===== */
+:root{
+  --bg-quiet:#F6F6FB;                 /* cooler quiet */
+  --muted:#444859;                    /* slightly stronger */
+}
+
+/* Subtle background grid: less dominant */
+body::before{ opacity: 0.35; }
+
+/* Make main cards feel consistent and clean */
+.card,
+.hs2-card,
+.framework,
+.fw-panel{
+  background: #fff;
+  border-color: rgba(201,202,219,0.58);
+}
+
+/* Give “grouped” containers a single quiet surface tint */
+.hub-structure2,
+.dept-group-head{
+  background: rgba(246,246,251,0.80);
+  border-color: rgba(201,202,219,0.55);
+}
+
+/* Supporting panels should read as intentional layers */
+.hs2-subpanel{
+  background: rgba(246,246,251,0.72);
+  border-color: rgba(201,202,219,0.55);
+}
+.hs2-boundary{
+  background: rgba(230,231,240,0.42);
+  border-color: rgba(201,202,219,0.55);
+}
+
+/* Tabs: clearer active state */
+.fw-tab{
+  background: rgba(255,255,255,0.96);
+  border-color: rgba(201,202,219,0.60);
+}
+.fw-tab.is-active{
+  background: rgba(75,74,115,0.16);
+  border-color: rgba(75,74,115,0.55);
+  color: var(--indigo-deep);
+}
+
+/* CTAs: slightly more contrast so they don’t disappear */
+.dept-cta{
+  background: rgba(75,74,115,0.10);
+  border-color: rgba(75,74,115,0.30);
+}
+.dept-cta.primary{
+  background: rgba(75,74,115,0.18);
+  border-color: rgba(75,74,115,0.55);
+}
+
+/* Shadows: calm depth */
+.card,
+.hs2-card,
+.framework,
+.dept-group-head{
+  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+}
 
 
 </style>
@@ -1047,7 +1116,7 @@ body::before{
       <div class="nav">
         <div class="brand">
           <div class="name">LabContext</div>
-          <div class="sub">Education Hub</div>
+          <div class="sub">Education Hub (TEST)</div>
         </div>
 
         <nav class="navlinks" aria-label="Primary">
