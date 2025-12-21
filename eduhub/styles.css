@@ -708,3 +708,47 @@ footer{
 footer{
   margin-top: calc(var(--space-unit) * 1.5);
 }
+/* =========================================
+   EDUHUB — HARD RESET SECTION SPACING
+   ========================================= */
+
+/* Master spacing unit */
+:root{
+  --space-unit: 16px;
+}
+
+/* 1. REMOVE default section margins inside tabs */
+.tabs section{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2. Force consistent spacing BETWEEN cards only */
+.tabs section > article.card{
+  margin-bottom: var(--space-unit);
+}
+
+/* Remove last-card extra space */
+.tabs section > article.card:last-child{
+  margin-bottom: 0;
+}
+
+/* 3. Normalize stack + panel rhythm */
+.tabs .stack,
+.tabs .panel{
+  padding: var(--space-unit);
+}
+
+/* 4. Kill internal element margins that add fake space */
+.card > *{
+  margin-top: 0;
+}
+
+.card > *:last-child{
+  margin-bottom: 0;
+}
+
+/* 5. Ensure grids obey the same vertical rhythm */
+.tabs .grid{
+  gap: var(--space-unit);
+}
