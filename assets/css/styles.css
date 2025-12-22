@@ -1306,3 +1306,57 @@ body.home .home-hero-aside{
     height: 118px;
   }
 }
+/* =========================================
+   HOME — Make the banner feel integrated (no boxed section)
+   ========================================= */
+
+/* Turn the banner into a masthead wash instead of a card */
+.home-banner{
+  /* remove the card look */
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  /* make it feel like a full-width header band */
+  width: 100%;
+  max-width: none;
+
+  padding: 34px 18px 26px;
+  margin: 0 0 16px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(246,246,251,0.92),
+    rgba(246,246,251,0.55)
+  );
+}
+
+/* Add a subtle divider under the masthead (optional but helps) */
+.home-banner::after{
+  content:"";
+  display:block;
+  width: min(92vw, 1280px);
+  height: 1px;
+  margin: 24px auto 0;
+  background: rgba(201,202,219,0.55);
+}
+
+/* Let the logo/title feel more “title page” */
+.home-banner-mark{
+  width: 150px;
+  height: 150px;
+  margin-bottom: 12px;
+}
+
+.home-banner-name{
+  font-size: clamp(38px, 4.8vw, 56px);
+}
+
+.home-banner-sub{
+  font-size: 14px;
+}
+
+/* Pull the rest of the hero back into the normal flow */
+.home-hero-grid{
+  margin-top: 10px;
+}
