@@ -972,3 +972,29 @@ button.btn{
 .home-tabs .panel{
   background: transparent;
 }
+/* =========================================
+   HOME — Make ALL vertical gaps equal
+   (panel becomes a stack; matches your top spacing)
+   ========================================= */
+
+.tabs .panel{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+  padding: var(--space);
+  background: rgba(246,246,251,0.78);
+}
+
+/* Each section inside the panel is also a stack */
+.tabs .panel > section{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+
+/* Cards should not introduce extra spacing */
+.tabs .panel .card{
+  margin: 0;
+}
