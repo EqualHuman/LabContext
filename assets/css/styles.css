@@ -1388,3 +1388,52 @@ body::before{
 footer{
   background: transparent;
 }
+/* =========================================
+   HOME TABS — Match EduHub (no purple slab behind content)
+   Paste at very bottom of styles.css
+   ========================================= */
+
+/* 1) Remove tinted background from the tab content area (the purple you hate) */
+.home-tabs .panel,
+.home-tabs .stack{
+  background: transparent;
+}
+
+/* Also neutralize the global panel tint if it leaks onto home */
+.tabs .panel,
+.tabs .stack{
+  background: transparent;
+}
+
+/* 2) Keep the section content feeling cohesive: let cards define structure */
+.home-tabs{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* 3) Keep the tabsbar as the only "UI strip" (like EduHub) */
+.home-tabs .tabsbar{
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(201,202,219,0.58);
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+/* 4) Ensure the panel padding stays comfortable without creating a slab */
+.home-tabs .panel{
+  padding: var(--space);
+}
+
+/* 5) Make sure sections keep consistent vertical rhythm */
+.home-tabs .panel > section{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+
+/* 6) Cards remain the calm “paper” units */
+.home-tabs .card{
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 8px 18px rgba(20,21,26,0.05);
+}
