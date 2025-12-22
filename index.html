@@ -118,224 +118,178 @@
 </section>
 
     <!-- NAV TABS (HOME) -->
-    <section class="tabs home-tabs" aria-label="Home content">
-      <div class="container">
-        <div class="tabsbar">
-<a class="btn tab is-active" href="#start">Start Here</a>
-<a class="btn tab" href="#how">How LabContext Works</a>
-<a class="btn tab" href="#anchors">Common Anchors</a>
-<a class="btn tab" href="#no-dead-ends">No Dead Ends</a>
+  <section id="home-tabs" aria-label="Home sections">
+  <div class="tabs home-tabs">
+    <div class="tabsbar" role="navigation" aria-label="Home sections">
+      <a class="tablink" href="#start-here">Start Here</a>
+      <a class="tablink" href="#how-it-works">How LabContext Works</a>
+      <a class="tablink" href="#common-anchors">Common Anchors</a>
+      <a class="tablink" href="#no-dead-ends">No Dead Ends</a>
+    </div>
 
-        </div>
+    <div class="panel">
+      <section aria-label="Home content">
 
-        <div class="panel">
-          <!-- START -->
-          <section id="start">
-            <div class="card">
-              <h2>Start anywhere. Return often.</h2>
-              <p>
-                This site is built like a reference system: you enter through confusion, follow cross-links,
-                and reread without pressure.
-              </p>
+        <!-- START HERE -->
+        <article class="card" id="start-here">
+          <h2>Start anywhere. Return often.</h2>
+          <p>
+            This site is built like a reference system: you enter through confusion,
+            follow cross-links, and reread without pressure.
+          </p>
 
-              <div class="grid dept-grid home-feature-grid">
-                <div class="card col-4 home-feature">
-                  <h3>Department maps</h3>
-                  <p>Start broad, then narrow: what lives where, and why it matters.</p>
-                  <div class="dept-footer">
-                    <span class="dept-access">Reference-first</span>
-                    <a class="btn primary" href="eduhub/index.html">Open Education Hub</a>
-                  </div>
-                </div>
-
-                <div class="card col-4 home-feature">
-                  <h3>Mechanisms</h3>
-                  <p>Explain the “why” under patterns: pathways, constraints, failure modes.</p>
-                  <div class="dept-footer">
-                    <span class="dept-access">Concept depth</span>
-<a class="btn ghost" href="eduhub/index.html">Browse Mechanisms</a>
-                  </div>
-                </div>
-
-                <div class="card col-4 home-feature">
-                  <h3>Interpretive context</h3>
-                  <p>Results and reporting, quality culture, instruments and assays.</p>
-                  <div class="dept-footer">
-                    <span class="dept-access">Calm analysis</span>
-                    <a class="btn ghost" href="blog/index.html">Open Blog</a>
-                  </div>
-                </div>
+          <div class="grid" style="grid-template-columns: repeat(12, 1fr); gap: var(--space); margin-top: var(--space);">
+            <div class="col-4">
+              <div class="card" style="box-shadow:none; background:transparent; border:none; padding:0;">
+                <h3>Department maps</h3>
+                <p>Start broad, then narrow: what lives where, and why it matters.</p>
+                <p class="mm-muted">Reference-first</p>
+                <a class="btn" href="eduhub/index.html">Open Education Hub</a>
               </div>
             </div>
 
-            <div class="card">
-              <h2>Quick entry points</h2>
-              <p>Pick the nearest door. You can always back out and switch lanes.</p>
-
-              <div class="quick-grid">
-                <div class="card home-entry">
-                  <h3>“I need a stable overview.”</h3>
-                  <p>Use the Education Hub map as your table of contents.</p>
-<a class="btn primary" href="eduhub/index.html">Education Hub map</a>
-                </div>
-
-                <div class="card home-entry">
-                  <h3>“I’m stuck interpreting something.”</h3>
-                  <p>Use the Blog categories to get context without turning it into test prep.</p>
-<a class="btn ghost" href="blog/categories.html">Blog categories</a>
-                </div>
-
-                <div class="card home-entry">
-                  <h3>“I want a printable artifact.”</h3>
-                  <p>Open Resources for print-native materials and curated pairings.</p>
-<a class="btn ghost" href="resources/index.html">Resources</a>
-                </div>
-
-                <div class="card home-entry">
-                  <h3>“I need a concrete topic.”</h3>
-                  <p>Start with a hub like Hematology and follow cross-links outward.</p>
-<a class="btn ghost" href="eduhub/hematology/index.html">Hematology</a>
-                </div>
+            <div class="col-4">
+              <div class="card" style="box-shadow:none; background:transparent; border:none; padding:0;">
+                <h3>Mechanisms</h3>
+                <p>Explain the “why” under patterns: pathways, constraints, failure modes.</p>
+                <p class="mm-muted">Concept depth</p>
+                <a class="btn" href="#">Browse Mechanisms</a>
               </div>
             </div>
-          </section>
 
-          <!-- HOW -->
-          <section id="how">
-            <div class="card">
-              <h2>How LabContext works</h2>
-              <p>
-                Most confusion comes from missing structure: what influences what, where errors enter, what the system can and cannot promise.
-                LabContext tries to make that structure visible.
-              </p>
-
-              <div class="grid dept-grid home-how-grid">
-                <div class="card col-4">
-                  <h3>Explain systems</h3>
-                  <p>Start with the model. Then map what can distort it (preanalytical, analytical, postanalytical).</p>
-                  <ul class="list">
-                    <li>Mechanisms and constraints</li>
-                    <li>Failure modes and tradeoffs</li>
-                    <li>Patterns that recur across departments</li>
-                  </ul>
-                </div>
-
-                <div class="card col-4">
-                  <h3>Link outward</h3>
-                  <p>Pages are designed to connect, not isolate. You should be able to “follow the why.”</p>
-                  <ul class="list">
-                    <li>Cross-links between hubs</li>
-                    <li>Definitions that stay stable</li>
-                    <li>Context that doesn’t overwrite the core</li>
-                  </ul>
-                </div>
-
-                <div class="card col-4">
-                  <h3>Protect boundaries</h3>
-                  <p>Explanation stays safe and durable when it avoids local procedure and evaluation framing.</p>
-                  <ul class="list">
-                    <li>No step-by-step workflows</li>
-                    <li>No competency claims</li>
-                    <li>No “readiness” language</li>
-                  </ul>
-                </div>
+            <div class="col-4">
+              <div class="card" style="box-shadow:none; background:transparent; border:none; padding:0;">
+                <h3>Interpretive context</h3>
+                <p>Results and reporting, quality culture, instruments and assays.</p>
+                <p class="mm-muted">Calm analysis</p>
+                <a class="btn" href="#">Open Blog</a>
               </div>
             </div>
-          </section>
+          </div>
+        </article>
 
-          <!-- ANCHORS -->
-          <section id="anchors">
-            <div class="card">
-              <h2>Common anchors</h2>
-              <p>These are reliable places to land when you’re not sure where a topic belongs.</p>
+        <!-- QUICK ENTRY POINTS -->
+        <article class="card">
+          <h2>Quick entry points</h2>
+          <p>Pick the nearest door. You can always back out and switch lanes.</p>
 
-              <div class="grid dept-grid">
-                <div class="card col-4 dept-hub">
-                  <div class="dept-head">
-                    <h3><a class="dept-titlelink" href="blog/categories.html">Blog categories</a></h3>
-                    <p>Technology, instruments/assays, results/reporting, quality, operations, education spotlight.</p>
-                  </div>
-                  <div class="dept-footer">
-                    <span class="dept-access">Interpretive context</span>
-                    <a class="btn ghost" href="blog/categories.html">Browse categories</a>
-                  </div>
-                </div>
+          <div class="quick-grid">
+            <div class="card" style="box-shadow:none;">
+              <h3>“I need a stable overview.”</h3>
+              <p>Use the Education Hub map as your table of contents.</p>
+              <a class="btn" href="eduhub/index.html">Education Hub map</a>
+            </div>
 
-                <div class="card col-4 dept-hub">
-                  <div class="dept-head">
-                    <h3><a class="dept-titlelink" href="eduhub/index.html">Education Hub map</a></h3>
-                    <p>Department hubs, concept maps, mechanisms all organized like a reference shelf.</p>
-                  </div>
-                  <div class="dept-footer">
-                    <span class="dept-access">Evergreen</span>
-                    <a class="btn ghost" href="eduhub/index.html">Open hub</a>
-                  </div>
-                </div>
+            <div class="card" style="box-shadow:none;">
+              <h3>“I’m stuck interpreting something.”</h3>
+              <p>Use the blog categories to get context without turning it into test prep.</p>
+              <a class="btn" href="#">Blog categories</a>
+            </div>
 
-                <div class="card col-4 dept-hub">
-                  <div class="dept-head">
-                    <h3><a class="dept-titlelink" href="resources/index.html">Resources</a></h3>
-                    <p>Print-native materials and external pairings, framed so they stay trustworthy.</p>
-                  </div>
-                  <div class="dept-footer">
-                    <span class="dept-access">Artifacts</span>
-                    <a class="btn ghost" href="resources/index.html">Open resources</a>
-                  </div>
-                </div>
-              </div>
+            <div class="card" style="box-shadow:none;">
+              <h3>“I want a printable artifact.”</h3>
+              <p>Open Resources for print-native materials and curated pairings.</p>
+              <a class="btn" href="#">Resources</a>
+            </div>
 
-              <div class="callout">
-                <div class="label">Note</div>
-                <p>
-                  Career paths will live in the Blog portion of LabContext (as interpretive context, not evaluation framing).
-                </p>
+            <div class="card" style="box-shadow:none;">
+              <h3>“I need a concrete topic.”</h3>
+              <p>Start with a hub like Hematology and follow cross-links outward.</p>
+              <a class="btn" href="#">Hematology</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- HOW IT WORKS -->
+        <article class="card" id="how-it-works">
+          <h2>How LabContext works</h2>
+          <p>
+            Most confusion comes from missing structure: what influences what, where errors enter,
+            what the system can and cannot promise. LabContext tries to make that structure visible.
+          </p>
+
+          <div class="grid" style="grid-template-columns: repeat(12, 1fr); gap: var(--space); margin-top: var(--space);">
+            <div class="col-4">
+              <div class="card" style="box-shadow:none;">
+                <h3>Explain systems</h3>
+                <ul class="list">
+                  <li>Mechanisms and constraints</li>
+                  <li>Failure modes and tradeoffs</li>
+                  <li>Patterns that recur across departments</li>
+                </ul>
               </div>
             </div>
-          </section>
 
-          <!-- NO DEAD ENDS -->
-          <section id="no-dead-ends">
-            <div class="card">
-              <h2>No dead ends</h2>
-              <p>
-                If a hub or topic page isn’t ready yet, it should still feel like a shelf in the same library:
-                calm, contextual, and linked back to stable anchors.
-              </p>
-
-              <div class="grid dept-grid">
-                <div class="card col-4 home-feature">
-                  <h3>Placeholder template</h3>
-                  <p>A calm “under construction” that’s not hype: explains what belongs here and points to nearest anchors.</p>
-                  <div class="dept-footer">
-                    <span class="dept-access">System page</span>
-                    <a class="btn ghost" href="system/placeholder.html">View placeholder</a>
-                  </div>
-                </div>
-
-                <div class="card col-4 home-feature">
-                  <h3>404 that feels intentional</h3>
-                  <p>A not-found page that still offers structure and an exit route back to maps.</p>
-                  <div class="dept-footer">
-                    <span class="dept-access">System page</span>
-                    <a class="btn ghost" href="system/not-found.html">View 404</a>
-                  </div>
-                </div>
-
-                <div class="card col-4 home-feature">
-                  <h3>Nearest anchors</h3>
-                  <p>Every unfinished page should include “nearest anchors” so the reader doesn’t lose momentum.</p>
-                  <div class="dept-footer">
-                    <span class="dept-access">Pattern</span>
-                    <a class="btn ghost" href="eduhub/index.html">Return to hub map</a>
-                  </div>
-                </div>
+            <div class="col-4">
+              <div class="card" style="box-shadow:none;">
+                <h3>Link outward</h3>
+                <ul class="list">
+                  <li>Cross-links between hubs</li>
+                  <li>Definitions that stay stable</li>
+                  <li>Context that doesn’t overwrite the core</li>
+                </ul>
               </div>
             </div>
-          </section>
 
-        </div><!-- /panel -->
-      </div><!-- /container -->
-    </section>
+            <div class="col-4">
+              <div class="card" style="box-shadow:none;">
+                <h3>Protect boundaries</h3>
+                <ul class="list">
+                  <li>No step-by-step workflows</li>
+                  <li>No competency claims</li>
+                  <li>No “readiness” language</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- COMMON ANCHORS -->
+        <article class="card" id="common-anchors">
+          <h2>Common anchors</h2>
+          <p>These are reliable places to land when you’re not sure where a topic belongs.</p>
+
+          <div class="grid" style="grid-template-columns: repeat(12, 1fr); gap: var(--space); margin-top: var(--space);">
+            <div class="col-4">
+              <div class="card" style="box-shadow:none;">
+                <h3>Blog categories</h3>
+                <p>Technology, instruments/assays, results/reporting, quality, operations, education spotlight.</p>
+                <a class="btn" href="#">Browse categories</a>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card" style="box-shadow:none;">
+                <h3>Education Hub map</h3>
+                <p>Department hubs, concept maps, mechanisms—organized like a reference shelf.</p>
+                <a class="btn" href="eduhub/index.html">Open hub</a>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card" style="box-shadow:none;">
+                <h3>Resources</h3>
+                <p>Print-native materials and external pairings, framed so they stay trustworthy.</p>
+                <a class="btn" href="#">Open resources</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- NO DEAD ENDS -->
+        <article class="card" id="no-dead-ends">
+          <h2>No dead ends</h2>
+          <p>
+            If a hub or topic page isn’t ready yet, it should still feel like a shelf in the same library:
+            calm, contextual, and linked back to stable anchors.
+          </p>
+        </article>
+
+      </section>
+    </div>
+  </div>
+</section>
+
   </main>
 
   <footer>
