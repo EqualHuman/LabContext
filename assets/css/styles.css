@@ -1,3 +1,11 @@
+/* =========================================================
+   LabContext — unified styles.css (copy/paste)
+   Calm, reference-first, low stimulation
+   ========================================================= */
+
+/* -----------------------------
+   Tokens
+------------------------------ */
 :root{
   --indigo:#4B4A73;
   --indigo-deep:#3A395C;
@@ -16,8 +24,8 @@
   --serif: "Source Serif 4", ui-serif, Georgia, serif;
   --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  /* EDUHUB — single source spacing */
-  --space: 14px; /* change this one number if you want */
+  /* Single source spacing */
+  --space: 14px;
 }
 
 *{ box-sizing:border-box; }
@@ -32,21 +40,26 @@ body{
   position: relative;
 }
 
-/* quiet grid texture */
+/* Subtle grid texture (uniform; no banding) */
 body::before{
   content:"";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  mask-image: linear-gradient(to bottom, black 52%, transparent 88%);
+
+  /* cohesive — no mask fades */
+  mask-image: none;
+  -webkit-mask-image: none;
+
+  opacity: 0.22;
+
   background-image:
-    linear-gradient(to right, rgba(75,74,115,0.10) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(201,202,219,0.08) 1px, transparent 1px),
-    radial-gradient(circle at 18% 22%, rgba(75,74,115,0.12) 0.6px, transparent 1px),
-    radial-gradient(circle at 72% 28%, rgba(201,202,219,0.12) 0.6px, transparent 1px);
+    linear-gradient(to right, rgba(75,74,115,0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201,202,219,0.06) 1px, transparent 1px),
+    radial-gradient(circle at 18% 22%, rgba(75,74,115,0.08) 0.6px, transparent 1px),
+    radial-gradient(circle at 72% 28%, rgba(201,202,219,0.08) 0.6px, transparent 1px);
   background-size: 64px 64px, 64px 64px, 120px 120px, 140px 140px;
-  opacity: 0.30;
 }
 
 header, main, footer{ position: relative; z-index: 1; }
@@ -60,10 +73,12 @@ a:hover{ text-decoration:underline; }
   margin: 0 auto;
 }
 
-/* Header / Nav */
+/* -----------------------------
+   Header / Nav
+------------------------------ */
 header{
-  position:sticky;
-  top:0;
+  position: sticky;
+  top: 0;
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(201,202,219,0.65);
@@ -74,15 +89,22 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding: 14px 0;
+  padding: 16px 0;
   gap: 18px;
 }
 
 .brand{
   display:flex;
-  align-items:baseline;
-  gap: 10px;
+  align-items:center;
+  gap: 12px;
   min-width: 240px;
+}
+
+.brand-mark{
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  object-fit: contain;
 }
 
 .brand .name{
@@ -90,14 +112,15 @@ header{
   font-weight: 500;
   letter-spacing: 0.2px;
   color: var(--indigo-deep);
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .brand .sub{
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--muted);
   border-left: 1px solid rgba(201,202,219,0.9);
   padding-left: 10px;
+  opacity: 0.9;
 }
 
 .navlinks{
@@ -122,7 +145,9 @@ header{
   transform: translateY(-1px);
 }
 
-/* Hero */
+/* -----------------------------
+   Hero
+------------------------------ */
 .hero{ padding: 46px 0 10px; }
 .hero-single{ max-width: 76ch; }
 
@@ -143,6 +168,60 @@ header{
   letter-spacing: 0.1px;
 }
 
+/* Home-only: grand “banner” block (only affects if you use these classes) */
+.home-banner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.home-banner-mark{
+  width: 118px;
+  height: 118px;
+  object-fit: contain;
+}
+
+.home-banner-name{
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(34px, 4.2vw, 46px);
+  line-height: 1.05;
+  letter-spacing: 0.3px;
+  color: var(--indigo-deep);
+  margin: 0;
+}
+
+.home-banner-sub{
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+}
+
+.home-hero-grid{
+  display:grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.home-hero-aside{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+@media (max-width:980px){
+  .home-hero-grid{ grid-template-columns: 1fr; }
+  .home-hero-aside{ margin-top: 10px; }
+}
+
+/* -----------------------------
+   Pills
+------------------------------ */
 .pill-row{
   display:flex;
   flex-wrap: wrap;
@@ -173,7 +252,166 @@ header{
   box-shadow: 0 0 0 3px rgba(75,74,115,0.10);
 }
 
-/* Tabs */
+/* -----------------------------
+   Cards
+------------------------------ */
+.card{
+  border: var(--border);
+  background: rgba(255,255,255,0.92);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+}
+
+.card h2, .card h3, .card h4{
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--indigo-deep);
+  line-height: 1.25;
+}
+.card h2{ font-size: 18px; }
+.card h3{ font-size: 18px; }
+.card h4{ font-size: 16px; }
+
+.card p{
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.card p:last-child{ margin-bottom: 0; }
+
+/* Lists */
+.list{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.list li{ margin: 6px 0; }
+
+/* Callout */
+.callout{
+  margin-top: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(201,202,219,0.60);
+  background: rgba(230,231,240,0.44);
+  padding: 12px 12px;
+}
+.callout .label{
+  font-size: 12.5px;
+  color: var(--indigo-deep);
+  letter-spacing: 0.2px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+.callout p{
+  margin: 0;
+  color: var(--indigo-deep);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* -----------------------------
+   Button system (calm colors + “card-like” interactions)
+   Apply to <a class="btn"> or <button class="btn">
+------------------------------ */
+.btn,
+.btn:visited,
+.dept-cta,
+.dept-cta:visited{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  /* keep your existing button background tone */
+  background: rgba(255,255,255,0.96);
+
+  border: 1px solid rgba(255,255,255,0.90);
+
+  /* card-like depth */
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(6px);
+
+  color: var(--indigo-deep);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+
+  transition: transform 0.5s, border-color 0.5s, box-shadow 0.5s, background 0.5s;
+}
+
+.btn:hover,
+.dept-cta:hover{
+  text-decoration: none;
+  border-color: rgba(20,21,26,0.85);
+  transform: scale(1.05);
+}
+
+.btn:active,
+.dept-cta:active{
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.btn:focus-visible,
+.dept-cta:focus-visible{
+  outline: 2px solid rgba(75,74,115,0.35);
+  outline-offset: 2px;
+}
+
+/* “tab” button variant for real tabs (EduHub-style) */
+.btn.tab,
+.btn.tab:visited{
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--muted);
+  border-color: rgba(201,202,219,0.60);
+  box-shadow: none;              /* tabs stay flatter */
+  backdrop-filter: none;
+  transform: none;               /* no scaling on hover for tabs */
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.btn.tab:hover{
+  border-color: rgba(75,74,115,0.35);
+  background: rgba(230,231,240,0.45);
+  color: var(--indigo-deep);
+}
+
+.btn.tab.is-active,
+.btn.tab.is-active:visited,
+.btn.tab[aria-current="page"],
+.btn.tab[aria-current="page"]:visited{
+  color: var(--indigo-deep);
+  border-color: rgba(75,74,115,0.40);
+  background: rgba(230,231,240,0.60);
+  box-shadow: none;
+}
+
+button.btn{
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Prevent “visited tabs” tinting */
+.tablink:visited{ color: var(--muted); }
+.tablink.is-active:visited,
+.tablink[aria-current="page"]:visited{ color: var(--indigo-deep); }
+
+/* -----------------------------
+   Tabs (EduHub-style)
+------------------------------ */
 .tabs{
   margin-top: 18px;
   border: var(--border);
@@ -199,233 +437,81 @@ header{
   color: var(--muted);
   border-radius: 999px;
   padding: 8px 12px;
-  font: 500 13px/1 var(--sans);
+  font: 600 13px/1 var(--sans);
   text-decoration:none;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
 .tablink:hover{
-  transform: translateY(-1px);
   border-color: rgba(75,74,115,0.35);
   background: rgba(230,231,240,0.45);
   color: var(--indigo-deep);
   text-decoration:none;
 }
 
-/* active state supports either .is-active OR aria-current="page" */
 .tablink.is-active,
 .tablink[aria-current="page"]{
   color: var(--indigo-deep);
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.16);
-  box-shadow: 0 10px 20px rgba(75,74,115,0.10);
+  border-color: rgba(75,74,115,0.40);
+  background: rgba(230,231,240,0.60);
+  box-shadow: none;
 }
 
-/* content wrappers (some pages use .panel, some use .stack) */
+/* Content wrappers */
 .panel,
 .stack{
-  padding: 16px;
-  background: rgba(246,246,251,0.78);
+  padding: var(--space);
+  background: transparent; /* no purple slab behind content */
 }
 
 .stack{
   display:flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space);
 }
 
 .stack-tight{ gap: 10px; }
 
-/* Cards */
-.card{
-  border: var(--border);
-  background: rgba(255,255,255,0.92);
-  border-radius: 16px;
-  padding: 14px;
-  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+/* Normalize spacing so everything keys off --space */
+.tabs section{ margin: 0; padding: 0; }
+.tabs .panel > section{
+  display:flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+.tabs .card{ margin: 0; }
+.tabs .card > *{ margin-top: 0; }
+.tabs .card > *:last-child{ margin-bottom: 0; }
+
+/* Home tabs: keep the tab bar look, but avoid a “boxed lower half” feeling */
+.home-tabs{
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
 }
 
-.panel .card,
-.stack .card{ margin: 0; }
-
-.card h2,
-.card h3,
-.card h4{
-  margin: 0 0 8px;
-  font-family: var(--serif);
-  font-weight: 500;
-  color: var(--indigo-deep);
-  line-height: 1.25;
+.home-tabs .panel,
+.home-tabs .stack{
+  padding: var(--space) 0; /* breathe without drawing a slab */
 }
 
-.card h2{ font-size: 18px; }
-.card h3{ font-size: 18px; }
-.card h4{ font-size: 16px; }
-
-.card p{
-  margin: 0 0 10px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.card p:last-child{ margin-bottom: 0; }
-
-/* Lists */
-.list{
-  margin: 0;
-  padding-left: 18px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-.list li{ margin: 6px 0; }
-
-/* Callout (optional) */
-.callout{
-  margin-top: 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(201,202,219,0.60);
-  background: rgba(230,231,240,0.44);
-  padding: 12px 12px;
-}
-.callout .label{
-  font-size: 12.5px;
-  color: var(--indigo-deep);
-  letter-spacing: 0.2px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  opacity: 0.9;
-}
-.callout p{
-  margin: 0;
-  color: var(--indigo-deep);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* How page: quick grid + lenses */
+/* -----------------------------
+   Grids + layout helpers
+------------------------------ */
 .quick-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: var(--space);
   margin-top: 10px;
 }
-
 @media (max-width:740px){
   .quick-grid{ grid-template-columns: 1fr; }
 }
 
-.visual-card{
-  border: 1px solid rgba(201,202,219,0.72);
-  background: rgba(246,246,251,0.70);
-  border-radius: 16px;
-  padding: 14px;
-  margin-top: 12px;
-}
-
-.visual-title{
-  font-size: 12.5px;
-  color: var(--indigo-deep);
-  font-weight: 500;
-  letter-spacing: 0.2px;
-  margin: 0 0 10px;
-}
-
-.visual-note{
-  margin: 10px 0 0;
-  font-size: 12.5px;
-  color: var(--muted);
-  line-height: 1.45;
-}
-
-/* Four-lens tile styling (used on how.html) */
-.lenses-map{ margin-top: 10px; }
-.lenses-grid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-@media (max-width:740px){
-  .lenses-grid{ grid-template-columns: 1fr; }
-}
-.lens{
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(255,255,255,0.86);
-  border-radius: 14px;
-  padding: 10px 12px;
-}
-.lens-title{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap: 10px;
-  color: var(--indigo-deep);
-}
-.lens-note{
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Access page: legend pills */
-.access-legend{
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(246,246,251,0.70);
-  border-radius: 16px;
-  padding: 12px;
-}
-.access-legend-inner{
-  display:flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.legend-row{
-  display:flex;
-  gap: 10px;
-  align-items: center;
-}
-.legend-pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(255,255,255,0.92);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 12px;
-  min-width: 86px;
-}
-.legend-pill.strong{
-  border-color: rgba(75,74,115,0.45);
-  color: var(--indigo-deep);
-  background: rgba(75,74,115,0.12);
-}
-.legend-text{
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.45;
-}
-
-/* Department groups + grid */
-.dept-group{ margin-top: 18px; }
-.dept-group-head{ margin-bottom: 10px; }
-.dept-group-title{
-  font-family: var(--serif);
-  font-weight: 500;
-  color: var(--indigo-deep);
-  margin: 0 0 4px;
-  font-size: 18px;
-  line-height: 1.25;
-}
-.dept-group-desc{
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
 /* 12-col grid helper */
-.grid{ display:grid; gap: 14px; }
+.grid{ display:grid; gap: var(--space); }
 .dept-grid{ grid-template-columns: repeat(12, 1fr); }
 
 .col-4{ grid-column: span 4; }
@@ -438,14 +524,10 @@ header{
   .col-4{ grid-column: span 12; }
 }
 
-/* Dept hub card internals */
+/* Dept hub internals */
 .dept-hub{ display:flex; flex-direction: column; gap: 10px; }
 
-.meta-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+.meta-row{ display:flex; flex-wrap: wrap; gap: 8px; }
 
 .meta-pill{
   display:inline-flex;
@@ -458,13 +540,7 @@ header{
   font-size: 12px;
 }
 
-.meta-pill.soft{
-  background: rgba(246,246,251,0.86);
-}
-
-.dept-head p{ margin: 0; }
-.dept-titlelink{ color: var(--indigo-deep); }
-.dept-titlelink:hover{ text-decoration: underline; }
+.meta-pill.soft{ background: rgba(246,246,251,0.86); }
 
 .dept-footer{
   margin-top: auto;
@@ -480,10 +556,8 @@ header{
   color: var(--muted);
 }
 
-/* Section head (used in access About block) */
-.section-head{
-  margin: 20px 0 10px;
-}
+/* Section head (access/about blocks) */
+.section-head{ margin: 20px 0 10px; }
 .section-head h3{
   margin: 0 0 6px;
   font-family: var(--serif);
@@ -498,12 +572,31 @@ header{
   font-size: 14px;
 }
 
-/* Footer */
+/* Dept groups */
+.dept-group{ margin-top: var(--space); }
+.dept-group-head{ margin-bottom: var(--space); }
+.dept-group-title{
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--indigo-deep);
+  margin: 0 0 4px;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.dept-group-desc{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* -----------------------------
+   Footer
+------------------------------ */
 footer{
   padding: 42px 0 54px;
   margin-top: 20px;
   border-top: 1px solid rgba(201,202,219,0.75);
-  background: #fff;
+  background: transparent; /* keep texture cohesive */
 }
 
 .footer-grid{
@@ -545,633 +638,3 @@ footer{
   .small-links{ justify-content:flex-start; }
   .brand .sub{ display:none; }
 }
-
-/* =========================================
-   EDUHUB — SINGLE SOURCE SPACING (GAP ONLY)
-   ========================================= */
-
-/* Kill default section spacing (this affects your panel > section layouts) */
-.tabs section{
-  margin: 0;
-  padding: 0;
-}
-
-/* Make EVERY content wrapper behave like a stack */
-.tabs .stack{
-  gap: var(--space);
-}
-
-.tabs .panel{
-  padding: var(--space);
-}
-
-/* IMPORTANT: index.html uses .panel > section to hold cards.
-   Turn that section into a stack so spacing is consistent. */
-.tabs .panel > section{
-  display: flex;
-  flex-direction: column;
-  gap: var(--space);
-}
-
-/* Ensure cards never add their own “buffer space” */
-.tabs .card{
-  margin: 0;
-}
-
-/* Normalize inner element margins so text doesn’t create fake gaps */
-.tabs .card > *{
-  margin-top: 0;
-}
-
-.tabs .card > *:last-child{
-  margin-bottom: 0;
-}
-
-/* Any grids inside cards / access page tiles should match the same spacing token */
-.tabs .grid,
-.tabs .dept-grid,
-.tabs .quick-grid,
-.tabs .lenses-grid{
-  gap: var(--space);
-}
-
-/* Dept groups: keep a consistent rhythm above headings too */
-.dept-group{
-  margin-top: var(--space);
-}
-
-.dept-group-head{
-  margin-bottom: var(--space);
-}
-
-.section-head{
-  margin: var(--space) 0;
-}
-
-/* =========================================
-   HOME — LANDING PAGE ENHANCEMENTS
-   ========================================= */
-
-.home-hero{
-  padding-bottom: 6px;
-}
-
-.home-eyebrow{
-  font-size: 13px;
-  color: var(--muted);
-  letter-spacing: 0.2px;
-  margin: 0 0 10px;
-  display: inline-flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.home-hero-grid{
-  display:grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 16px;
-  align-items: start;
-}
-
-.home-hero-aside{
-  display:flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 2px;
-}
-
-.home-actions{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.home-callout{
-  margin-top: 12px;
-}
-
-/* Aside cards */
-.home-card{
-  padding: 14px;
-}
-
-.home-mini-manifesto{
-  margin-top: 10px;
-  border: 1px solid rgba(201,202,219,0.65);
-  background: rgba(246,246,251,0.75);
-  border-radius: 16px;
-  padding: 10px 12px;
-}
-
-.mm-row{
-  display:flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 6px 0;
-  border-top: 1px solid rgba(201,202,219,0.55);
-}
-
-.mm-row:first-child{
-  border-top: none;
-}
-
-.mm-strong{
-  font-family: var(--serif);
-  font-weight: 500;
-  color: var(--indigo-deep);
-}
-
-.mm-muted{
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.home-surface{
-  display:flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.home-surface-title{
-  font-weight: 600;
-  color: var(--indigo-deep);
-  letter-spacing: 0.1px;
-}
-
-.home-surface p{
-  margin: 0;
-}
-
-.home-divider{
-  height: 1px;
-  background: rgba(201,202,219,0.62);
-  margin: 10px 0;
-}
-
-
-
-/* Feature cards on home */
-.home-feature-grid{
-  margin-top: 10px;
-}
-
-.home-feature{
-  position: relative;
-  overflow: hidden;
-}
-
-.home-entry{
-  background: rgba(255,255,255,0.92);
-}
-
-/* Responsive */
-@media (max-width: 980px){
-  .home-hero-grid{
-    grid-template-columns: 1fr;
-  }
-  .home-hero-aside{
-    margin-top: 10px;
-  }
-}
-
-/* =========================================
-   GLOBAL — ONE BUTTON SYSTEM (HOME + EDUHUB)
-   ========================================= */
-
-/* Universal button: works for <a> and <button> */
-.btn,
-.btn:visited{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  padding: 8px 12px;
-  border-radius: 12px;
-
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(255,255,255,0.96);
-  color: var(--indigo-deep);
-
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
-
-  text-decoration: none;
-  cursor: pointer;
-
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-/* Hover */
-.btn:hover{
-  text-decoration: none;
-  transform: translateY(-1px);
-  border-color: rgba(75,74,115,0.35);
-  background: rgba(230,231,240,0.45);
-  color: var(--indigo-deep);
-}
-
-/* Focus */
-.btn:focus-visible{
-  outline: 2px solid rgba(75,74,115,0.35);
-  outline-offset: 2px;
-}
-
-/* Primary */
-.btn.primary,
-.btn.primary:visited{
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.14);
-  color: var(--indigo-deep);
-}
-
-/* Quiet / secondary */
-.btn.ghost,
-.btn.ghost:visited{
-  background: rgba(255,255,255,0.92);
-  color: var(--indigo-deep);
-}
-
-/* Tab variant (pill-style) */
-.btn.tab,
-.btn.tab:visited{
-  border-radius: 999px;
-  padding: 8px 12px;
-  color: var(--muted);
-  background: rgba(255,255,255,0.96);
-  border-color: rgba(201,202,219,0.60);
-}
-
-/* Active tab */
-.btn.tab.is-active,
-.btn.tab.is-active:visited,
-.btn.tab[aria-current="page"],
-.btn.tab[aria-current="page"]:visited{
-  color: var(--indigo-deep);
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.16);
-  box-shadow: 0 10px 20px rgba(75,74,115,0.10);
-}
-
-/* Neutralize default button styles if any <button class="btn"> remains */
-button.btn{
-  appearance: none;
-  -webkit-appearance: none;
-  border: 1px solid rgba(201,202,219,0.70);
-}
-
-/* Optional: keep old classes around, mapped to the same system */
-.dept-cta,
-.dept-cta:visited{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
-  border-radius: 12px;
-
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(255,255,255,0.96);
-  color: var(--indigo-deep);
-
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.dept-cta:hover{
-  text-decoration: none;
-  transform: translateY(-1px);
-  border-color: rgba(75,74,115,0.35);
-  background: rgba(230,231,240,0.45);
-  color: var(--indigo-deep);
-}
-
-.dept-cta:focus-visible{
-  outline: 2px solid rgba(75,74,115,0.35);
-  outline-offset: 2px;
-  text-decoration: none;
-}
-
-.dept-cta.primary,
-.dept-cta.primary:visited{
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.14);
-  color: var(--indigo-deep);
-}
-
-/* Lock visited state for tab links only (prevents “tabs look different after click”) */
-.tablink:visited{
-  color: var(--muted);
-}
-.tablink.is-active:visited,
-.tablink[aria-current="page"]:visited{
-  color: var(--indigo-deep);
-}
-/* =========================================
-   LABCONTEXT — CONSOLIDATED OVERRIDES (CLEAN)
-   Paste at very bottom of styles.css
-   ========================================= */
-
-/* ---------- 1) Cohesive subtle background (no banding / no zones) ---------- */
-body::before{
-  /* keep the texture continuous */
-  mask-image: none;
-  -webkit-mask-image: none;
-
-  /* subtle but visible */
-  opacity: 0.22;
-
-  /* your original grid/dots, slightly softened */
-  background-image:
-    linear-gradient(to right, rgba(75,74,115,0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(201,202,219,0.07) 1px, transparent 1px),
-    radial-gradient(circle at 18% 22%, rgba(75,74,115,0.09) 0.6px, transparent 1px),
-    radial-gradient(circle at 72% 28%, rgba(201,202,219,0.10) 0.6px, transparent 1px);
-  background-size: 64px 64px, 64px 64px, 120px 120px, 140px 140px;
-}
-
-/* ---------- 2) Tabs content should NOT paint a purple slab ---------- */
-/* Keep .tabs container styling as-is (EduHub feel), but remove the panel tint */
-.panel,
-.stack{
-  background: transparent;
-}
-
-/* Optional: if you want the tab module slightly less “boxed”, uncomment */
-/*
-.tabs{
-  background: transparent;
-}
-*/
-
-/* ---------- 3) Button system -> “glass card” interaction (keep bg color) ---------- */
-/* Apply to all buttons EXCEPT tabs */
-.btn:not(.tab),
-.btn:not(.tab):visited{
-  /* keep your existing button background color */
-  background: rgba(255,255,255,0.96);
-  color: var(--indigo-deep);
-
-  /* “glass card” feel */
-  border: 1px solid rgba(255,255,255,0.90);
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(6px);
-
-  border-radius: 12px;
-  cursor: pointer;
-  user-select: none;
-
-  /* keep sizing consistent with your current system */
-  padding: 8px 12px;
-  font-weight: 600;
-  line-height: 1;
-
-  transition: transform 0.5s, border-color 0.5s, box-shadow 0.5s, background 0.5s, color 0.5s;
-}
-
-/* Keep “primary/ghost” from visually diverging (same background as requested) */
-.btn.primary:not(.tab),
-.btn.primary:not(.tab):visited,
-.btn.ghost:not(.tab),
-.btn.ghost:not(.tab):visited{
-  background: rgba(255,255,255,0.96);
-  border-color: rgba(255,255,255,0.90);
-  color: var(--indigo-deep);
-}
-
-/* Hover */
-.btn:not(.tab):hover{
-  border-color: rgba(20,21,26,0.85);
-  transform: scale(1.05);
-  text-decoration: none;
-}
-
-/* Active */
-.btn:not(.tab):active{
-  transform: scale(0.95) rotateZ(1.7deg);
-}
-
-/* Focus */
-.btn:not(.tab):focus-visible{
-  outline: 2px solid rgba(75,74,115,0.30);
-  outline-offset: 2px;
-  text-decoration: none;
-}
-
-/* Tabs should stay calm + pill-like (don’t inherit the card behavior) */
-.btn.tab,
-.btn.tab:visited{
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-weight: 500;
-  background: rgba(255,255,255,0.96);
-  border: 1px solid rgba(201,202,219,0.60);
-  color: var(--muted);
-  box-shadow: none;
-  backdrop-filter: none;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.btn.tab:hover{
-  background: rgba(246,246,251,0.92);
-  border-color: rgba(75,74,115,0.28);
-  color: var(--indigo-deep);
-  transform: none;
-}
-
-.btn.tab.is-active,
-.btn.tab.is-active:visited,
-.btn.tab[aria-current="page"],
-.btn.tab[aria-current="page"]:visited{
-  background: rgba(230,231,240,0.55);
-  border-color: rgba(75,74,115,0.30);
-  color: var(--indigo-deep);
-  box-shadow: none;
-}
-/* =========================================
-   SAFETY — prevent logo/images from blowing up layout
-   ========================================= */
-
-img{
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Header logo (top-left) */
-.brand img,
-.brand-mark{
-  width: 36px;
-  height: 36px;
-  max-width: 36px;
-  max-height: 36px;
-  object-fit: contain;
-  flex: 0 0 36px;
-}
-
-/* Homepage banner logo (if you have a large centered mark) */
-.home-banner-mark,
-.home-brand-mark{
-  width: 140px;
-  height: 140px;
-  max-width: 140px;
-  max-height: 140px;
-  object-fit: contain;
-}
-/* =========================================
-   BUTTONS — glass card interaction (keep current bg color)
-   Applies to .btn and .dept-cta (NOT .card)
-   ========================================= */
-
-.btn,
-.btn:visited,
-.dept-cta,
-.dept-cta:visited{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  padding: 8px 12px;
-  border-radius: 12px;
-
-  /* keep your current button background color */
-  background: rgba(255,255,255,0.96);
-  color: var(--indigo-deep);
-
-  /* glass interaction style */
-  border: 1px solid rgba(255,255,255,0.90);
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(6px);
-
-  cursor: pointer;
-  user-select: none;
-  font-weight: 600;
-  line-height: 1;
-  text-decoration: none;
-
-  transition: transform 0.5s, border-color 0.5s, box-shadow 0.5s, background 0.5s, color 0.5s;
-}
-
-.btn:hover,
-.dept-cta:hover{
-  border-color: rgba(20,21,26,0.85);
-  transform: scale(1.05);
-  text-decoration: none;
-}
-
-.btn:active,
-.dept-cta:active{
-  transform: scale(0.95) rotateZ(1.7deg);
-}
-
-.btn:focus-visible,
-.dept-cta:focus-visible{
-  outline: 2px solid rgba(75,74,115,0.30);
-  outline-offset: 2px;
-}
-
-/* Keep tabs calm (don’t turn your tab pills into big “glass” buttons) */
-.btn.tab,
-.btn.tab:visited{
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-weight: 500;
-
-  background: rgba(255,255,255,0.96);
-  border: 1px solid rgba(201,202,219,0.60);
-  color: var(--muted);
-
-  box-shadow: none;
-  backdrop-filter: none;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.btn.tab:hover{
-  background: rgba(246,246,251,0.92);
-  border-color: rgba(75,74,115,0.28);
-  color: var(--indigo-deep);
-  transform: none;
-}
-
-.btn.tab.is-active,
-.btn.tab.is-active:visited,
-.btn.tab[aria-current="page"],
-.btn.tab[aria-current="page"]:visited{
-  background: rgba(230,231,240,0.55);
-  border-color: rgba(75,74,115,0.30);
-  color: var(--indigo-deep);
-  box-shadow: none;
-}
-/* =========================================
-   HOME — Remove the big tabs container box (bottom half)
-   Keep only the tabsbar + individual cards
-   ========================================= */
-
-
-
-/* Make sure the panel doesn’t re-create a slab */
-.home-tabs .panel,
-.home-tabs .stack{
-  background: transparent;
-}
-
-/* =========================================
-   HOME TABS — Match EduHub tab module
-   Paste at very bottom of styles.css
-   ========================================= */
-
-/* The module container (boxed, rounded, calm) */
-.home-tabs.tabs{
-  margin-top: 18px;
-  border: var(--border);
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.92);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-/* Tabs row (strip) */
-.home-tabs .tabsbar{
-  display: flex;
-  gap: 8px;
-  padding: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-
-  border-bottom: 1px solid rgba(201,202,219,0.65);
-  background: rgba(250,250,252,0.96);
-
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* Panel surface (NEUTRAL — no purple tint) */
-.home-tabs .panel{
-  padding: var(--space);
-  background: rgba(255,255,255,0.78);
-}
-
-/* Each section is a stack so spacing is consistent */
-.home-tabs .panel > section{
-  display: flex;
-  flex-direction: column;
-  gap: var(--space);
-  margin: 0;
-  padding: 0;
-}
-
-/* Cards sit on top of the neutral surface */
-.home-tabs .card{
-  background: rgba(255,255,255,0.92);
-  border: var(--border);
-  border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
-}
-
-
