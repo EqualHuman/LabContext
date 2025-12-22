@@ -880,3 +880,95 @@ button.btn{
 .tablink[aria-current="page"]:visited{
   color: var(--indigo-deep);
 }
+/* =========================================
+   HOME FIXES — Reduce random emphasis + blend lower section
+   Paste at very bottom of styles.css
+   ========================================= */
+
+/* 1) Brand logo sizing */
+.brand-mark{
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  display: inline-block;
+  object-fit: contain;
+  margin-right: 6px;
+  transform: translateY(1px);
+}
+
+/* Make sure brand layout still feels clean */
+.brand{
+  align-items: center;
+}
+
+/* 2) Button system: remove "random loudness"
+   Make primary/ghost visually consistent; keep hierarchy via placement, not styling */
+.btn.primary,
+.btn.primary:visited{
+  background: rgba(255,255,255,0.96);
+  border-color: rgba(201,202,219,0.70);
+  color: var(--indigo-deep);
+  box-shadow: none;
+}
+
+.btn.ghost,
+.btn.ghost:visited{
+  background: rgba(255,255,255,0.96);
+  border-color: rgba(201,202,219,0.70);
+  color: var(--indigo-deep);
+}
+
+/* Reduce the "pop" so buttons don't look like they're competing */
+.btn:hover{
+  transform: none; /* removes the lift that reads as emphasis */
+  border-color: rgba(75,74,115,0.30);
+  background: rgba(246,246,251,0.92);
+  color: var(--indigo-deep);
+}
+
+/* Tabs: keep active state subtle and consistent */
+.btn.tab.is-active,
+.btn.tab.is-active:visited,
+.btn.tab[aria-current="page"],
+.btn.tab[aria-current="page"]:visited{
+  background: rgba(230,231,240,0.55);
+  border-color: rgba(75,74,115,0.30);
+  color: var(--indigo-deep);
+  box-shadow: none;
+}
+
+/* 3) Remove the "big floating box" effect on the bottom half
+   Keep structure but blend with the page texture */
+.tabs{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* Keep the tabs bar as the only framed element */
+.tabsbar{
+  border: 1px solid rgba(201,202,219,0.58);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.86);
+  box-shadow: none;
+  padding: 10px;
+}
+
+/* Panel should feel like content sitting on the page, not inside a container card */
+.panel,
+.stack{
+  background: transparent;
+  padding: 16px 0;
+}
+
+/* Cards keep your calm structure; slightly reduce shadow so the page feels unified */
+.card{
+  box-shadow: 0 8px 18px rgba(20,21,26,0.05);
+}
+
+/* Optional: slightly soften the home panel tone rule you added */
+.home-tabs .panel{
+  background: transparent;
+}
