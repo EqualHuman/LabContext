@@ -710,10 +710,7 @@ footer{
   margin: 10px 0;
 }
 
-/* Tabs spacing on home */
-.home-tabs{
-  margin-top: 18px;
-}
+
 
 /* Feature cards on home */
 .home-feature-grid{
@@ -727,11 +724,6 @@ footer{
 
 .home-entry{
   background: rgba(255,255,255,0.92);
-}
-
-/* Optional: give the homepage a slightly calmer panel tone */
-.home-tabs .panel{
-  background: rgba(246,246,251,0.66);
 }
 
 /* Responsive */
@@ -1121,13 +1113,7 @@ img{
    Keep only the tabsbar + individual cards
    ========================================= */
 
-.home-tabs.tabs{
-  border: none;
-  background: transparent;
-  box-shadow: none;
-  border-radius: 0;
-  overflow: visible;
-}
+
 
 /* Make sure the panel doesn’t re-create a slab */
 .home-tabs .panel,
@@ -1135,16 +1121,57 @@ img{
   background: transparent;
 }
 
-/* Keep the tabsbar as the only “UI strip” */
+/* =========================================
+   HOME TABS — Match EduHub tab module
+   Paste at very bottom of styles.css
+   ========================================= */
+
+/* The module container (boxed, rounded, calm) */
+.home-tabs.tabs{
+  margin-top: 18px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.92);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Tabs row (strip) */
 .home-tabs .tabsbar{
-  border: 1px solid rgba(201,202,219,0.58);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.86);
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(201,202,219,0.65);
+  background: rgba(250,250,252,0.96);
+
+  border-radius: 0;
   box-shadow: none;
 }
 
-/* Optional: slightly reduce the divider line so it doesn’t imply a box */
-.home-tabs .tabsbar{
-  border-bottom: none;
+/* Panel surface (NEUTRAL — no purple tint) */
+.home-tabs .panel{
+  padding: var(--space);
+  background: rgba(255,255,255,0.78);
 }
+
+/* Each section is a stack so spacing is consistent */
+.home-tabs .panel > section{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+  margin: 0;
+  padding: 0;
+}
+
+/* Cards sit on top of the neutral surface */
+.home-tabs .card{
+  background: rgba(255,255,255,0.92);
+  border: var(--border);
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(20,21,26,0.06);
+}
+
 
