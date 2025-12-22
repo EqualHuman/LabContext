@@ -1228,3 +1228,81 @@ body.home .home-hero-aside{
     height: 108px;
   }
 }
+/* =========================================
+   HOME — GRAND HERO BANNER (Landing only)
+   ========================================= */
+
+/* Give the hero area more “front door” presence */
+.home-hero{
+  padding: 38px 0 14px;
+}
+
+/* Full-width centered banner that sits ABOVE the 2-column hero grid */
+.home-banner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  margin: 6px 0 18px;
+  padding: 26px 18px 22px;
+
+  border: 1px solid rgba(201,202,219,0.62);
+  border-radius: 22px;
+
+  /* Calm “plate” without loud gradients */
+  background: rgba(246,246,251,0.78);
+
+  /* Subtle presence (no dramatic shadow) */
+  box-shadow: 0 10px 22px rgba(20,21,26,0.05);
+}
+
+/* Big logo mark (the “grand” cue) */
+.home-banner-mark{
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* Title styling: editorial, quiet authority */
+.home-banner-name{
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(36px, 4.6vw, 52px);
+  line-height: 1.05;
+  letter-spacing: 0.3px;
+  color: var(--indigo-deep);
+  margin: 0;
+}
+
+/* Subtitle: controlled + calm */
+.home-banner-sub{
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+  margin-top: 6px;
+}
+
+/* Let the grid content breathe below the banner */
+.home-hero-grid{
+  margin-top: 6px;
+}
+
+/* Optional: slightly reduce competition from the H1 since the banner is the title */
+.home-hero h1{
+  font-size: clamp(30px, 3.1vw, 40px);
+}
+
+/* Responsive tuning */
+@media (max-width: 740px){
+  .home-banner{
+    padding: 22px 14px 18px;
+    border-radius: 18px;
+  }
+  .home-banner-mark{
+    width: 118px;
+    height: 118px;
+  }
+}
