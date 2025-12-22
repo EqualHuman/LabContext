@@ -939,3 +939,76 @@ button.btn{
   border-color: rgba(75,74,115,0.55);
   background: rgba(75,74,115,0.14);
 }
+/* =========================================
+   GLOBAL — ONE BUTTON SYSTEM
+   Add right before </style>
+   ========================================= */
+
+.btn,
+.btn:visited{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(201,202,219,0.70);
+  background: rgba(255,255,255,0.96);
+  color: var(--indigo-deep);
+
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.btn:hover{
+  text-decoration: none;
+  transform: translateY(-1px);
+  border-color: rgba(75,74,115,0.35);
+  background: rgba(230,231,240,0.45);
+  color: var(--indigo-deep);
+}
+
+.btn:focus-visible{
+  outline: 2px solid rgba(75,74,115,0.35);
+  outline-offset: 2px;
+}
+
+.btn.primary,
+.btn.primary:visited{
+  border-color: rgba(75,74,115,0.55);
+  background: rgba(75,74,115,0.14);
+  color: var(--indigo-deep);
+}
+
+.btn.ghost,
+.btn.ghost:visited{
+  background: rgba(255,255,255,0.92);
+  color: var(--indigo-deep);
+}
+
+.btn.tab,
+.btn.tab:visited{
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.96);
+  border-color: rgba(201,202,219,0.60);
+}
+
+.btn.tab.is-active,
+.btn.tab.is-active:visited,
+.btn.tab[aria-current="page"],
+.btn.tab[aria-current="page"]:visited{
+  color: var(--indigo-deep);
+  border-color: rgba(75,74,115,0.55);
+  background: rgba(75,74,115,0.16);
+  box-shadow: 0 10px 20px rgba(75,74,115,0.10);
+}
