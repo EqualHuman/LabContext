@@ -1001,4 +1001,119 @@ body::before{
   color: var(--indigo-deep);
   box-shadow: none;
 }
+/* =========================================
+   SAFETY — prevent logo/images from blowing up layout
+   ========================================= */
+
+img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Header logo (top-left) */
+.brand img,
+.brand-mark{
+  width: 36px;
+  height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  object-fit: contain;
+  flex: 0 0 36px;
+}
+
+/* Homepage banner logo (if you have a large centered mark) */
+.home-banner-mark,
+.home-brand-mark{
+  width: 140px;
+  height: 140px;
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: contain;
+}
+/* =========================================
+   BUTTONS — glass card interaction (keep current bg color)
+   Applies to .btn and .dept-cta (NOT .card)
+   ========================================= */
+
+.btn,
+.btn:visited,
+.dept-cta,
+.dept-cta:visited{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  /* keep your current button background color */
+  background: rgba(255,255,255,0.96);
+  color: var(--indigo-deep);
+
+  /* glass interaction style */
+  border: 1px solid rgba(255,255,255,0.90);
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+
+  transition: transform 0.5s, border-color 0.5s, box-shadow 0.5s, background 0.5s, color 0.5s;
+}
+
+.btn:hover,
+.dept-cta:hover{
+  border-color: rgba(20,21,26,0.85);
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.btn:active,
+.dept-cta:active{
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.btn:focus-visible,
+.dept-cta:focus-visible{
+  outline: 2px solid rgba(75,74,115,0.30);
+  outline-offset: 2px;
+}
+
+/* Keep tabs calm (don’t turn your tab pills into big “glass” buttons) */
+.btn.tab,
+.btn.tab:visited{
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 500;
+
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(201,202,219,0.60);
+  color: var(--muted);
+
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.btn.tab:hover{
+  background: rgba(246,246,251,0.92);
+  border-color: rgba(75,74,115,0.28);
+  color: var(--indigo-deep);
+  transform: none;
+}
+
+.btn.tab.is-active,
+.btn.tab.is-active:visited,
+.btn.tab[aria-current="page"],
+.btn.tab[aria-current="page"]:visited{
+  background: rgba(230,231,240,0.55);
+  border-color: rgba(75,74,115,0.30);
+  color: var(--indigo-deep);
+  box-shadow: none;
+}
 
