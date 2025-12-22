@@ -1116,4 +1116,35 @@ img{
   color: var(--indigo-deep);
   box-shadow: none;
 }
+/* =========================================
+   HOME — Remove the big tabs container box (bottom half)
+   Keep only the tabsbar + individual cards
+   ========================================= */
+
+.home-tabs.tabs{
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* Make sure the panel doesn’t re-create a slab */
+.home-tabs .panel,
+.home-tabs .stack{
+  background: transparent;
+}
+
+/* Keep the tabsbar as the only “UI strip” */
+.home-tabs .tabsbar{
+  border: 1px solid rgba(201,202,219,0.58);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.86);
+  box-shadow: none;
+}
+
+/* Optional: slightly reduce the divider line so it doesn’t imply a box */
+.home-tabs .tabsbar{
+  border-bottom: none;
+}
 
