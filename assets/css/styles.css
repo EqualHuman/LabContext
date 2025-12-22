@@ -15,10 +15,12 @@
 
   --serif: "Source Serif 4", ui-serif, Georgia, serif;
   --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* EDUHUB — single source spacing */
+  --space: 14px; /* change this one number if you want */
 }
 
 *{ box-sizing:border-box; }
-
 html, body{ height:100%; }
 
 body{
@@ -207,6 +209,7 @@ header{
   border-color: rgba(75,74,115,0.35);
   background: rgba(230,231,240,0.45);
   color: var(--indigo-deep);
+  text-decoration:none;
 }
 
 /* active state supports either .is-active OR aria-current="page" */
@@ -477,33 +480,6 @@ header{
   color: var(--muted);
 }
 
-.dept-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(255,255,255,0.96);
-  color: var(--indigo-deep);
-  border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration:none;
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
-}
-
-.dept-cta:hover{
-  text-decoration:none;
-  transform: translateY(-1px);
-  border-color: rgba(75,74,115,0.35);
-  background: rgba(230,231,240,0.45);
-}
-
-.dept-cta.primary{
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.14);
-}
-
 /* Section head (used in access About block) */
 .section-head{
   margin: 20px 0 10px;
@@ -569,13 +545,10 @@ footer{
   .small-links{ justify-content:flex-start; }
   .brand .sub{ display:none; }
 }
+
 /* =========================================
    EDUHUB — SINGLE SOURCE SPACING (GAP ONLY)
    ========================================= */
-
-:root{
-  --space: 14px; /* change this one number if you want */
-}
 
 /* Kill default section spacing (this affects your panel > section layouts) */
 .tabs section{
@@ -634,9 +607,9 @@ footer{
 .section-head{
   margin: var(--space) 0;
 }
+
 /* =========================================
    HOME — LANDING PAGE ENHANCEMENTS
-   Add this chunk right before </style>
    ========================================= */
 
 .home-hero{
@@ -652,7 +625,6 @@ footer{
   gap: 10px;
   align-items: center;
 }
-
 
 .home-hero-grid{
   display:grid;
@@ -753,7 +725,6 @@ footer{
   overflow: hidden;
 }
 
-
 .home-entry{
   background: rgba(255,255,255,0.92);
 }
@@ -772,67 +743,9 @@ footer{
     margin-top: 10px;
   }
 }
-/* =========================================
-   HOME / GLOBAL — BUTTON COLOR NORMALIZER
-   Add right before </style>
-   ========================================= */
 
-/* 1) Lock button-like links so visited state cannot change them */
-a.dept-cta,
-a.dept-cta:visited{
-  color: var(--indigo-deep);
-  background: rgba(255,255,255,0.96);
-  border: 1px solid rgba(201,202,219,0.70);
-}
-
-/* 2) Primary button (ONLY when you add .primary) */
-a.dept-cta.primary,
-a.dept-cta.primary:visited{
-  color: var(--indigo-deep);
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.14);
-}
-
-/* 3) Hover state */
-a.dept-cta:hover{
-  color: var(--indigo-deep);
-  text-decoration: none;
-  border-color: rgba(75,74,115,0.35);
-  background: rgba(230,231,240,0.45);
-  transform: translateY(-1px);
-}
-
-/* 4) Focus state (keyboard accessibility) */
-a.dept-cta:focus-visible{
-  outline: 2px solid rgba(75,74,115,0.35);
-  outline-offset: 2px;
-  text-decoration: none;
-}
-
-/* 5) If any global visited rule exists, neutralize it without breaking normal links */
-a:visited{
-  color: var(--indigo-deep);
-}
-
-/* 6) Tabs: lock visited too (prevents “some tabs look different after click”) */
-a.tablink,
-a.tablink:visited{
-  color: var(--muted);
-  background: rgba(255,255,255,0.96);
-  border-color: rgba(201,202,219,0.60);
-}
-
-a.tablink.is-active,
-a.tablink.is-active:visited,
-a.tablink[aria-current="page"],
-a.tablink[aria-current="page"]:visited{
-  color: var(--indigo-deep);
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.16);
-}
 /* =========================================
    GLOBAL — ONE BUTTON SYSTEM (HOME + EDUHUB)
-   Add right before </style>
    ========================================= */
 
 /* Universal button: works for <a> and <button> */
@@ -890,7 +803,7 @@ a.tablink[aria-current="page"]:visited{
   color: var(--indigo-deep);
 }
 
-/* Tab variant (pill-style, matches your existing tab feel) */
+/* Tab variant (pill-style) */
 .btn.tab,
 .btn.tab:visited{
   border-radius: 999px;
@@ -918,7 +831,7 @@ button.btn{
   border: 1px solid rgba(201,202,219,0.70);
 }
 
-/* Optional: if you keep old classes around, map them to new system */
+/* Optional: keep old classes around, mapped to the same system */
 .dept-cta,
 .dept-cta:visited{
   display: inline-flex;
@@ -926,33 +839,6 @@ button.btn{
   justify-content: center;
   padding: 8px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(201,202,219,0.70);
-  background: rgba(255,255,255,0.96);
-  color: var(--indigo-deep);
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.dept-cta.primary,
-.dept-cta.primary:visited{
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.14);
-}
-/* =========================================
-   GLOBAL — ONE BUTTON SYSTEM
-   Add right before </style>
-   ========================================= */
-
-.btn,
-.btn:visited{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  padding: 8px 12px;
-  border-radius: 12px;
 
   border: 1px solid rgba(201,202,219,0.70);
   background: rgba(255,255,255,0.96);
@@ -960,15 +846,12 @@ button.btn{
 
   font-size: 13px;
   font-weight: 500;
-  line-height: 1;
-
   text-decoration: none;
-  cursor: pointer;
 
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
-.btn:hover{
+.dept-cta:hover{
   text-decoration: none;
   transform: translateY(-1px);
   border-color: rgba(75,74,115,0.35);
@@ -976,39 +859,24 @@ button.btn{
   color: var(--indigo-deep);
 }
 
-.btn:focus-visible{
+.dept-cta:focus-visible{
   outline: 2px solid rgba(75,74,115,0.35);
   outline-offset: 2px;
+  text-decoration: none;
 }
 
-.btn.primary,
-.btn.primary:visited{
+.dept-cta.primary,
+.dept-cta.primary:visited{
   border-color: rgba(75,74,115,0.55);
   background: rgba(75,74,115,0.14);
   color: var(--indigo-deep);
 }
 
-.btn.ghost,
-.btn.ghost:visited{
-  background: rgba(255,255,255,0.92);
-  color: var(--indigo-deep);
-}
-
-.btn.tab,
-.btn.tab:visited{
-  border-radius: 999px;
-  padding: 8px 12px;
+/* Lock visited state for tab links only (prevents “tabs look different after click”) */
+.tablink:visited{
   color: var(--muted);
-  background: rgba(255,255,255,0.96);
-  border-color: rgba(201,202,219,0.60);
 }
-
-.btn.tab.is-active,
-.btn.tab.is-active:visited,
-.btn.tab[aria-current="page"],
-.btn.tab[aria-current="page"]:visited{
+.tablink.is-active:visited,
+.tablink[aria-current="page"]:visited{
   color: var(--indigo-deep);
-  border-color: rgba(75,74,115,0.55);
-  background: rgba(75,74,115,0.16);
-  box-shadow: 0 10px 20px rgba(75,74,115,0.10);
 }
