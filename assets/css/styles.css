@@ -1133,3 +1133,98 @@ button.btn{
 body:not(.home) .home-brand{
   display: none;
 }
+/* =========================================
+   HOME — Landing banner polish (centered title page)
+   ========================================= */
+
+/* Make the hero area feel like a landing banner zone */
+body.home .home-hero{
+  padding: 34px 0 18px;
+}
+
+/* Give the left column a "cover page" rhythm */
+body.home .hero-single{
+  max-width: 72ch;
+}
+
+/* Center the landing brand, but keep hero content readable */
+body.home .home-brand{
+  margin: 4px 0 18px;
+  gap: 10px;
+}
+
+/* Bigger mark, less float */
+body.home .home-brand-mark{
+  width: 128px;
+  height: 128px;
+}
+
+/* Tighten brand typography */
+body.home .home-brand-name{
+  font-size: clamp(34px, 4.2vw, 44px);
+  letter-spacing: 0.3px;
+  line-height: 1.05;
+}
+
+body.home .home-brand-sub{
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+/* Eyebrow becomes a quiet kicker below the title block */
+body.home .home-eyebrow{
+  margin: 10px 0 10px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* Keep the big headline, but reduce competition with the centered brand */
+body.home .home-hero h1{
+  font-size: clamp(30px, 3.0vw, 38px);
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+
+/* If you want even less duplication, uncomment to visually soften h1 slightly */
+/*
+body.home .home-hero h1{
+  opacity: 0.92;
+}
+*/
+
+/* Banner backdrop (subtle, editorial, not a box) */
+body.home .hero.home-hero{
+  position: relative;
+}
+
+body.home .hero.home-hero::before{
+  content:"";
+  position: absolute;
+  inset: -10px -12px 0 -12px;
+  border-radius: 20px;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(246,246,251,0.92), rgba(246,246,251,0.55));
+  border: 1px solid rgba(201,202,219,0.55);
+  box-shadow: 0 10px 22px rgba(20,21,26,0.05);
+}
+
+/* Ensure content sits above the banner layer */
+body.home .hero.home-hero > .container{
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep the right "Three surfaces" card aligned with the banner */
+body.home .home-hero-aside{
+  margin-top: 4px;
+}
+
+/* Responsive: reduce mark size on small screens */
+@media (max-width: 740px){
+  body.home .home-brand-mark{
+    width: 108px;
+    height: 108px;
+  }
+}
