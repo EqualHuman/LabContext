@@ -54,9 +54,10 @@
             </div>
 
          <div class="home-actions">
-  <a class="btn primary" href="eduhub/index.html">Enter the Education Hub</a>
-  <a class="btn ghost" href="blog/index.html">Read the Blog</a>
-  <a class="btn ghost" href="eduhub/hematology/index.html">Start with Hematology</a>
+  <a class="btn ghost" href="eduhub/index.html">Open Hub Map</a>
+<a class="btn ghost" href="blog/index.html">Open Blog</a>
+<a class="btn ghost" href="resources/index.html">Open Resources</a>
+
 </div>
 
 
@@ -105,9 +106,10 @@
       <div class="container">
         <div class="tabsbar">
 <a class="btn tab is-active" href="#start">Start Here</a>
-          <a class="tablink" href="#how">How LabContext Works</a>
-          <a class="tablink" href="#anchors">Common Anchors</a>
-          <a class="tablink" href="#no-dead-ends">No Dead Ends</a>
+<a class="btn tab" href="#how">How LabContext Works</a>
+<a class="btn tab" href="#anchors">Common Anchors</a>
+<a class="btn tab" href="#no-dead-ends">No Dead Ends</a>
+
         </div>
 
         <div class="panel">
@@ -135,7 +137,7 @@
                   <p>Explain the “why” under patterns: pathways, constraints, failure modes.</p>
                   <div class="dept-footer">
                     <span class="dept-access">Concept depth</span>
-                    <a class="dept-cta" href="eduhub/index.html">Browse Mechanisms</a>
+<a class="btn ghost" href="eduhub/index.html">Browse Mechanisms</a>
                   </div>
                 </div>
 
@@ -345,29 +347,31 @@
     </div>
   </footer>
 
-  <script>
-    // optional: highlight tab when clicking hash links
-    (function(){
-      function setActive(hash){
-        var links = document.querySelectorAll('.tabsbar .tablink');
-        links.forEach(function(a){
-          var href = a.getAttribute('href') || '';
-          if(href === hash){
-            a.classList.add('is-active');
-            a.setAttribute('aria-current','page');
-          }else{
-            a.classList.remove('is-active');
-            a.removeAttribute('aria-current');
-          }
-        });
-      }
-      function onHash(){
-        var hash = window.location.hash || '#start';
-        setActive(hash);
-      }
-      window.addEventListener('hashchange', onHash);
-      onHash();
-    })();
-  </script>
+ <script>
+  (function(){
+    function setActive(hash){
+      var links = document.querySelectorAll('.tabsbar a.btn.tab');
+      links.forEach(function(a){
+        var href = a.getAttribute('href') || '';
+        if(href === hash){
+          a.classList.add('is-active');
+          a.setAttribute('aria-current','page');
+        }else{
+          a.classList.remove('is-active');
+          a.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function onHash(){
+      var hash = window.location.hash || '#start';
+      setActive(hash);
+    }
+
+    window.addEventListener('hashchange', onHash);
+    onHash();
+  })();
+</script>
+
 </body>
 </html>
