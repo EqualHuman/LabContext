@@ -1326,3 +1326,65 @@ body::before{
     radial-gradient(circle at 18% 22%, rgba(75,74,115,0.07) 0.6px, transparent 1px),
     radial-gradient(circle at 72% 28%, rgba(201,202,219,0.08) 0.6px, transparent 1px);
 }
+/* =========================================
+   COHESIVE BACKGROUND — no bands, no breaks
+   Paste at very bottom of styles.css
+   ========================================= */
+
+/* 1) Make the global texture UNIFORM (no top-heavy mask fade) */
+body::before{
+  mask-image: none;
+  -webkit-mask-image: none;
+
+  /* Keep it subtle and consistent */
+  opacity: 0.14;
+
+  /* Use mostly neutral grid so it doesn't read as a purple "zone" */
+  background-image:
+    linear-gradient(to right, rgba(201,202,219,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201,202,219,0.06) 1px, transparent 1px),
+    radial-gradient(circle at 18% 22%, rgba(201,202,219,0.07) 0.6px, transparent 1px),
+    radial-gradient(circle at 72% 28%, rgba(201,202,219,0.07) 0.6px, transparent 1px);
+}
+
+/* 2) Make the hero/banner stop behaving like a separate “tinted area” */
+.hero.home-hero{
+  background: transparent;
+}
+
+/* If you have a homepage banner block, make it feel like part of the page, not a card */
+.home-banner{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0 0 18px;
+  padding: 10px 0 6px;
+}
+
+/* 3) Remove “panel blocks” that create a second surface */
+.tabs{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.panel,
+.stack{
+  background: transparent;
+}
+
+/* Keep cards as the only intentional surfaces */
+.card{
+  background: rgba(255,255,255,0.92);
+}
+
+/* 4) Remove any section-divider feeling caused by heavy horizontal rules */
+.tabsbar{
+  box-shadow: none;
+}
+
+/* 5) Optional: keep borders quiet so nothing reads like a hard break */
+footer{
+  background: transparent;
+}
