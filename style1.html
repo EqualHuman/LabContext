@@ -1974,3 +1974,201 @@
       function closeDrawer(){
         els.drawerBack.setAttribute("data-open","false");
         els.drawer
+        els.drawer.setAttribute("data-open","false");
+      }
+
+      function updateQueueUI(){
+        const n = state.queue.length;
+        els.queueCount.textContent = String(n);
+        els.queueCount2.textContent = String(n);
+        els.mQueueCount.textContent = String(n);
+        els.queueHint.textContent = `${n} saved`;
+        els.qNote.textContent = n ? `Queue is stored locally. (${n} item${n===1?"":"s"})` : "Queue is stored locally.";
+      }
+
+      function renderQueueList(){
+        const items = state.queue
+          .map(id => POSTS.find(p => p.id === id))
+          .filter(Boolean);
+
+        if(!items.length){
+          els.qList.innerHTML = `
+            <div class="mini">
+              <h3 style="margin:0 0 6px;font-size:13px;letter-spacing:.2px;">Queue empty</h3>
+              <p style="margin:0;font-size:12px;color:var(--muted);line-height:1.45;">
+                Add posts from the cards (Add) or from the preview modal. Your queue stays in this browser.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        els.qList.innerHTML = items.map(p => {
+          const date = formatDate(p.date);
+          return `
+            <div class="qItem" data-open="${escapeHtml(p.id)}" tabindex="0" aria-label="Open queued article">
+              <div class="t">${escapeHtml(p.title)}</div>
+              <div class="m">
+                <span>${escapeHtml(p.category)}</span>
+                <span>•</span>
+                <span>${escapeHtml(date)}</span>
+                <span>•</span>
+                <span>${escapeHtml(String(p.minutes))} min</span>
+                <span>•</span>
+                <span>score ${escapeHtml(String(p.score))}</span>
+              </div>
+              <div class="row">
+                <span class="pill">${escapeHtml(p.tags.slice(0,2).join(", "))}</span>
+                <button class="rm" type="button" data-rm="${escapeHtml(p.id)}" aria-label="Remove from queue">Remove</button>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        // open from queue list
+        $$("[data-open]", els.qList).forEach(item => {
+          const id = item.getAttribute("data-open");
+          item.addEventListener("click", (e) => {
+            const t = e.target;
+            if(t && t.closest && t.closest("button[data-rm]")) return;
+            closeDrawer();
+            openModal(id);
+          });
+          item.addEventListener("keydown", (e) => {
+            if(e.key === "Enter" || e.key === " "){
+              e.preventDefault();
+              closeDrawer();
+              openModal(id);
+            }
+          });
+        });
+
+        // remove buttons
+        $$("button[data-rm]", els.qList).forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const id = btn.getAttribute("data-rm");
+            toggleQueue(id);
+            renderQueueList();
+          });
+        });
+      }
+
+      function clearFilters(){
+        state.q = "";
+        state.cat = "All";
+        state.tag = null;
+        state.sort = "newest";
+        els.search.value = "";
+        els.sort.value = "newest";
+        renderAll();
+      }
+
+      function openRandom(){
+        const list = visiblePosts();
+        if(!list.length) return;
+        const pick = list[Math.floor(Math.random() * list.length)];
+        openModal(pick.id);
+      }
+
+      function renderAll(){
+        markTabsAndChips();
+        renderCards();
+        updateQueueUI();
+      }
+
+      function init(){
+        // theme
+        setTheme(getTheme());
+        els.themeBtn.addEventListener("click", () => {
+          const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+          setTheme(next);
+        });
+
+        // search + sort
+        els.search.addEventListener("input", () => {
+          state.q = els.search.value;
+          renderAll();
+        });
+
+        els.sort.addEventListener("change", () => {
+          state.sort = els.sort.value;
+          renderAll();
+        });
+
+        // hero controls
+        els.randomBtn.addEventListener("click", openRandom);
+        els.clearBtn.addEventListener("click", clearFilters);
+
+        // modal controls
+        els.mClose.addEventListener("click", closeModal);
+        els.backdrop.addEventListener("click", (e) => {
+          if(e.target === els.backdrop) closeModal();
+        });
+
+        els.mAdd.addEventListener("click", () => {
+          if(!state.openId) return;
+          toggleQueue(state.openId);
+        });
+
+        els.mOpenQueue.addEventListener("click", () => {
+          closeModal();
+          openDrawer();
+        });
+
+        // drawer controls
+        els.openQueue.addEventListener("click", openDrawer);
+        els.openQueue2.addEventListener("click", openDrawer);
+        els.qClose.addEventListener("click", closeDrawer);
+        els.drawerBack.addEventListener("click", closeDrawer);
+
+        els.qClear.addEventListener("click", () => {
+          clearQueue();
+          renderQueueList();
+        });
+
+        // keyboard shortcuts
+        document.addEventListener("keydown", (e) => {
+          const key = e.key;
+
+          // "/" focuses search
+          if(key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey){
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+            const typing = tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable);
+            if(!typing){
+              e.preventDefault();
+              els.search.focus();
+            }
+          }
+
+          // "D" toggles theme
+          if((key === "d" || key === "D") && !e.metaKey && !e.ctrlKey && !e.altKey){
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+            const typing = tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable);
+            if(!typing){
+              const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+              setTheme(next);
+            }
+          }
+
+          // Esc closes modal/drawer
+          if(key === "Escape"){
+            const modalOpen = els.backdrop.getAttribute("data-open") === "true";
+            const drawerOpen = els.drawer.getAttribute("data-open") === "true";
+            if(modalOpen) closeModal();
+            if(drawerOpen) closeDrawer();
+          }
+        });
+
+        // build UI
+        buildTabs();
+        buildChips();
+        updateQueueUI();
+        renderAll();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
