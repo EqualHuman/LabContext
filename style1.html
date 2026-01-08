@@ -3,782 +3,1129 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light" />
-  <title>LabContext Blog</title>
-  <meta name="description" content="Interpretive writing on laboratory medicine: systems, constraints, patterns, and why they matter." />
+  <title>LabContext — Blog</title>
 
   <!-- Fonts (Brand-locked) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* LabContext canonical palette */
+      /* LabContext palette (canonical) */
       --indigo:#4B4A73;
       --indigo-deep:#3A395C;
       --indigo-soft:#E6E7F0;
       --lavender-gray:#C9CADB;
 
-      --ink:#14151a;
-      --muted:#555a66;
+      --ink:#14151f;
       --paper:#fbfbfd;
-      --paper-2:#f6f7fb;
-      --line:rgba(201,202,219,.75);
 
-      --serif:"Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
-      --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --radius:18px;
+      --shadow: 0 16px 40px rgba(20, 21, 31, 0.08);
+      --shadow-soft: 0 10px 24px rgba(20, 21, 31, 0.06);
 
-      --r-1:14px;
-      --r-2:18px;
-      --r-3:22px;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --serif: "Source Serif 4", ui-serif, Georgia, serif;
 
-      --shadow-1: 0 1px 0 rgba(20,21,26,.06), 0 12px 36px rgba(20,21,26,.06);
-      --shadow-2: 0 1px 0 rgba(20,21,26,.07), 0 18px 50px rgba(20,21,26,.09);
-      --max: 1180px;
+      --line: 1px solid var(--lavender-gray);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family:var(--sans);
-      background: radial-gradient(1200px 700px at 10% -10%, rgba(75,74,115,.08), transparent 55%),
-                  radial-gradient(900px 600px at 90% 10%, rgba(75,74,115,.06), transparent 60%),
-                  linear-gradient(180deg, var(--paper), var(--paper-2));
       color:var(--ink);
+      background:var(--paper);
       line-height:1.6;
-      letter-spacing:-0.01em;
+      overflow-x:hidden;
     }
 
-    a{color:inherit; text-decoration:none}
-    a:focus-visible, button:focus-visible, input:focus-visible{
-      outline: 3px solid rgba(75,74,115,.25);
-      outline-offset: 3px;
-      border-radius: 10px;
+    /* Subtle "lab paper" grid: low stimulation, functional texture */
+    .bg-grid{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:0.65;
+      background:
+        linear-gradient(to right, rgba(201,202,219,0.35) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(201,202,219,0.35) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse at 35% 20%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0) 80%);
     }
 
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 22px 64px}
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(251,251,253,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: var(--line);
+    }
+
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding: 18px 20px;
+    }
+
     .topbar{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(1.1) blur(10px);
-      background: linear-gradient(180deg, rgba(251,251,253,.92), rgba(251,251,253,.75));
-      border-bottom:1px solid rgba(201,202,219,.65);
-    }
-    .topbar-inner{
-      max-width:var(--max); margin:0 auto; padding:14px 22px;
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
     }
 
     .brand{
-      display:flex; align-items:center; gap:12px; min-width:240px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 240px;
     }
     .mark{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(145deg, rgba(75,74,115,.18), rgba(75,74,115,.06));
-      border:1px solid rgba(201,202,219,.7);
-      box-shadow: 0 6px 18px rgba(20,21,26,.06);
-      display:grid; place-items:center;
+      width:34px; height:34px;
+      border-radius:10px;
+      border: var(--line);
+      background: var(--indigo-soft);
+      display:grid;
+      place-items:center;
+      box-shadow: var(--shadow-soft);
     }
-    .mark svg{width:18px; height:18px}
+    .mark svg{ width:20px; height:20px; }
     .brand-title{
-      display:flex; flex-direction:column; gap:1px;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
     }
-    .brand-title strong{
-      font-family:var(--serif);
-      font-weight:600;
-      letter-spacing:-0.02em;
-      font-size:18px;
+    .brand-title b{
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      color: var(--indigo-deep);
+      font-size: 18px;
       line-height:1.1;
-      color:var(--indigo-deep);
     }
     .brand-title span{
-      font-size:12px; color:var(--muted);
-      letter-spacing:0.02em;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(58,57,92,0.75);
     }
 
-    .nav{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
       justify-content:flex-end;
     }
-    .nav a{
-      font-size:13px;
-      padding:9px 10px;
-      border-radius:999px;
-      border:1px solid transparent;
-      color:rgba(20,21,26,.86);
+    .navlink{
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:0.2px;
+      color: rgba(20,21,31,0.78);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
     }
-    .nav a:hover{
-      border-color: rgba(201,202,219,.8);
-      background: rgba(230,231,240,.55);
-    }
-    .nav .cta{
-      border-color: rgba(75,74,115,.35);
-      background: rgba(75,74,115,.08);
-      color: var(--indigo-deep);
+    .navlink:hover{
+      border-color: var(--lavender-gray);
+      background: rgba(230,231,240,0.55);
+      transform: translateY(-1px);
     }
 
-    /* Hero */
+    main{ padding: 26px 0 70px; }
+
     .hero{
-      padding: 28px 0 8px;
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 18px;
       align-items:stretch;
     }
-    @media (max-width: 980px){
-      .hero{grid-template-columns: 1fr; }
-      .brand{min-width:auto}
+
+    .panel{
+      background: #fff;
+      border: var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
-    .hero-card{
-      border-radius: var(--r-3);
-      border:1px solid rgba(201,202,219,.75);
-      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.52));
-      box-shadow: var(--shadow-2);
-      padding: 22px;
-      position:relative;
+    .hero-left{
+      padding: 22px 22px 18px;
       overflow:hidden;
+      position:relative;
     }
-    .hero-card::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(900px 400px at 20% 10%, rgba(75,74,115,.12), transparent 55%),
-                  radial-gradient(600px 300px at 90% 0%, rgba(75,74,115,.08), transparent 62%);
-      pointer-events:none;
-      opacity:.85;
-    }
-    .hero-card > *{position:relative}
 
     .kicker{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:12px; letter-spacing:.08em; text-transform:uppercase;
-      color: rgba(58,57,92,.78);
-      padding:7px 10px;
-      border-radius:999px;
-      background: rgba(230,231,240,.75);
-      border:1px solid rgba(201,202,219,.75);
-      width:fit-content;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.25px;
+      color: rgba(58,57,92,0.75);
+      text-transform: uppercase;
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
-    .kdot{
-      width:8px; height:8px; border-radius:999px;
-      background: rgba(75,74,115,.75);
-      box-shadow: 0 0 0 3px rgba(75,74,115,.16);
+    .kicker .dot{
+      width:10px; height:10px;
+      border-radius: 999px;
+      background: var(--indigo);
+      box-shadow: 0 0 0 4px rgba(230,231,240,0.85);
     }
 
     h1{
-      margin: 14px 0 10px;
+      margin: 12px 0 10px;
       font-family: var(--serif);
-      font-weight:600;
-      letter-spacing:-0.03em;
-      line-height:1.12;
-      font-size: clamp(32px, 4.2vw, 44px);
-      color: var(--ink);
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1.15;
+      color: var(--indigo-deep);
+      letter-spacing: 0.2px;
     }
-    .subhead{
-      margin:0 0 16px;
-      color: rgba(20,21,26,.72);
-      font-size:15.5px;
+    .lead{
+      margin: 0 0 16px;
+      font-size: 16px;
+      color: rgba(20,21,31,0.84);
       max-width: 62ch;
     }
 
-    .hero-actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 8px;
-      align-items:center;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 11px 14px;
-      border-radius: 14px;
-      border:1px solid rgba(201,202,219,.85);
-      background: rgba(255,255,255,.7);
-      box-shadow: var(--shadow-1);
-      font-size:13px;
-      font-weight:600;
-      color: rgba(20,21,26,.88);
-      cursor:pointer;
-    }
-    .btn:hover{box-shadow: var(--shadow-2)}
-    .btn.primary{
-      border-color: rgba(75,74,115,.35);
-      background: linear-gradient(180deg, rgba(75,74,115,.12), rgba(75,74,115,.08));
-      color: var(--indigo-deep);
-    }
-    .btn .icon{
-      width:16px; height:16px; opacity:.9;
-    }
-
-    /* Search + filters */
-    .tools{
-      display:flex; flex-direction:column; gap:12px;
-    }
-    .tool-card{
-      border-radius: var(--r-3);
-      border:1px solid rgba(201,202,219,.75);
-      background: rgba(255,255,255,.62);
-      box-shadow: var(--shadow-1);
-      padding: 16px;
-    }
-    .tool-title{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      margin-bottom: 10px;
-    }
-    .tool-title h2{
-      margin:0;
-      font-family: var(--serif);
-      font-weight:600;
-      letter-spacing:-0.02em;
-      font-size:18px;
-      color: var(--indigo-deep);
-    }
-    .tool-title small{color:rgba(20,21,26,.62); font-size:12px}
-    .search{
-      display:flex; gap:10px;
-      align-items:center;
-    }
-    .search input{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(201,202,219,.9);
-      background: rgba(251,251,253,.85);
-      font: 500 14px/1.2 var(--sans);
-      color: rgba(20,21,26,.9);
-    }
-    .filters{
-      margin-top:10px;
-      display:flex; gap:8px; flex-wrap:wrap;
+    .micro{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 0 0 16px;
     }
     .chip{
-      border-radius:999px;
-      padding:8px 10px;
-      border:1px solid rgba(201,202,219,.85);
-      background: rgba(230,231,240,.55);
-      color: rgba(20,21,26,.78);
-      font-size:12px;
-      cursor:pointer;
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: var(--line);
+      background: rgba(230,231,240,0.55);
+      color: rgba(58,57,92,0.92);
       user-select:none;
     }
-    .chip[aria-pressed="true"]{
-      border-color: rgba(75,74,115,.45);
-      background: rgba(75,74,115,.12);
-      color: var(--indigo-deep);
-      box-shadow: 0 10px 22px rgba(20,21,26,.06);
-    }
 
-    /* Layout below hero */
-    .grid{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1fr .42fr;
-      gap: 18px;
-      align-items:start;
+    /* Immersive Journey */
+    .journey{
+      margin-top: 10px;
+      border-top: var(--line);
+      padding-top: 16px;
     }
-    @media (max-width: 980px){
-      .grid{grid-template-columns:1fr}
-    }
-
-    .section{
-      border-radius: var(--r-3);
-      border:1px solid rgba(201,202,219,.75);
-      background: rgba(255,255,255,.58);
-      box-shadow: var(--shadow-1);
-      padding: 16px;
-    }
-    .section h3{
-      margin: 4px 0 12px;
-      font-family: var(--serif);
-      font-weight:600;
-      letter-spacing:-0.02em;
-      font-size: 20px;
-      color: var(--indigo-deep);
-    }
-    .section .hint{
-      margin:-8px 0 12px;
-      color: rgba(20,21,26,.62);
-      font-size: 13px;
-    }
-
-    /* Featured post */
-    .featured{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
-    .featured-card{
-      border-radius: var(--r-2);
-      border: 1px solid rgba(201,202,219,.85);
-      background: linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.58));
-      padding: 16px;
-      box-shadow: var(--shadow-1);
-    }
-    .meta{
-      display:flex; gap:10px; flex-wrap:wrap;
-      color: rgba(20,21,26,.60);
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(201,202,219,.8);
-      background: rgba(230,231,240,.55);
-      color: rgba(58,57,92,.88);
-      font-size: 12px;
-    }
-    .tag::before{
-      content:"";
-      width:7px; height:7px; border-radius:999px;
-      background: rgba(75,74,115,.7);
-      box-shadow: 0 0 0 3px rgba(75,74,115,.14);
-    }
-
-    .post-title{
-      margin:0;
-      font-family: var(--serif);
-      font-weight:600;
-      letter-spacing:-0.02em;
-      font-size: 22px;
-      line-height: 1.2;
-      color: rgba(20,21,26,.92);
-    }
-    .post-excerpt{
-      margin: 8px 0 0;
-      color: rgba(20,21,26,.72);
-      font-size: 14.5px;
-      max-width: 78ch;
-    }
-
-    /* Post list */
-    .posts{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
+    .journey-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
       gap: 12px;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
     }
-    @media (max-width: 720px){
-      .posts{grid-template-columns:1fr}
-    }
-
-    .card{
-      border-radius: var(--r-2);
-      border:1px solid rgba(201,202,219,.85);
-      background: rgba(251,251,253,.72);
-      box-shadow: var(--shadow-1);
-      padding: 14px;
+    .journey-head .title{
       display:flex;
       flex-direction:column;
-      gap: 10px;
-      min-height: 158px;
+      gap:4px;
+    }
+    .journey-head .title b{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
+      color: rgba(58,57,92,0.75);
+    }
+    .journey-head .title span{
+      font-size: 14px;
+      color: rgba(20,21,31,0.82);
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      appearance:none;
+      border: var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(20,21,31,0.82);
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(230,231,240,0.5);
+      border-color: var(--lavender-gray);
+    }
+    .btn:active{ transform: translateY(0px); }
+    .btn.primary{
+      background: var(--indigo-soft);
+      color: var(--indigo-deep);
+    }
+
+    .track-wrap{
+      position:relative;
+      padding: 18px 12px 14px;
+      border: var(--line);
+      border-radius: 16px;
+      background: rgba(230,231,240,0.25);
+      overflow:hidden;
+    }
+
+    .track{
+      position:relative;
+      height: 120px;
+      user-select:none;
+    }
+
+    /* Conveyor / signal line */
+    .line{
+      position:absolute;
+      left: 14px;
+      right: 14px;
+      top: 64px;
+      height: 2px;
+      background: rgba(201,202,219,0.95);
+    }
+
+    /* subtle moving dash overlay (low intensity) */
+    .line::after{
+      content:"";
+      position:absolute;
+      inset: -3px 0 -3px 0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(75,74,115,0.35) 0px,
+          rgba(75,74,115,0.35) 10px,
+          transparent 10px,
+          transparent 22px
+        );
+      opacity: 0.55;
+      mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 12%, rgba(0,0,0,0.9) 88%, rgba(0,0,0,0) 100%);
+      animation: dash 10s linear infinite;
+    }
+    @keyframes dash{
+      from{ transform: translateX(0px); }
+      to{ transform: translateX(44px); }
+    }
+
+    .stations{
+      position:absolute;
+      left: 14px;
+      right: 14px;
+      top: 22px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items:center;
+      pointer-events:auto;
+    }
+
+    .station{
+      position:relative;
+      border: var(--line);
+      border-radius: 14px;
+      background: rgba(251,251,253,0.95);
+      padding: 10px 12px 9px;
+      min-height: 64px;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      outline:none;
+    }
+    .station:hover{
+      transform: translateY(-1px);
+      background: rgba(230,231,240,0.55);
+    }
+    .station[aria-current="true"]{
+      border-color: rgba(75,74,115,0.85);
+      box-shadow: 0 10px 22px rgba(58,57,92,0.10);
+    }
+    .station .label{
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
+      color: rgba(58,57,92,0.75);
+      margin-bottom: 6px;
+    }
+    .station .desc{
+      font-size: 13px;
+      color: rgba(20,21,31,0.84);
+      line-height: 1.35;
+    }
+
+    /* Station status indicator */
+    .status{
+      position:absolute;
+      right: 10px;
+      top: 10px;
+      display:flex;
+      align-items:center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(58,57,92,0.75);
+    }
+    .status i{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: rgba(201,202,219,0.95);
+      box-shadow: 0 0 0 4px rgba(230,231,240,0.8);
+    }
+    .station[aria-current="true"] .status i{
+      background: rgba(75,74,115,0.92);
+    }
+    .station.done .status i{
+      background: rgba(58,57,92,0.85);
+    }
+
+    /* Draggable specimen "tube" */
+    .tube{
+      position:absolute;
+      top: 46px;
+      left: 14px;
+      width: 92px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,202,219,0.95);
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(20,21,31,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 10px 0 12px;
+      cursor: grab;
+      touch-action: none;
+      transform: translateX(0px);
+      transition: box-shadow .15s ease, transform .05s linear;
+    }
+    .tube:active{ cursor: grabbing; }
+    .tube .cap{
+      width: 14px; height: 22px;
+      border-radius: 7px;
+      background: rgba(230,231,240,0.9);
+      border: 1px solid rgba(201,202,219,0.95);
+    }
+    .tube .fill{
+      flex:1;
+      height: 18px;
+      margin: 0 10px;
+      border-radius: 999px;
+      background: rgba(230,231,240,0.75);
+      border: 1px solid rgba(201,202,219,0.85);
       position:relative;
       overflow:hidden;
     }
-    .card::after{
+    .tube .fill::after{
       content:"";
-      position:absolute; inset:auto -40px -60px auto;
-      width:180px; height:180px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(75,74,115,.12), transparent 60%);
-      transform: rotate(10deg);
-      pointer-events:none;
+      position:absolute;
+      left:0; top:0; bottom:0;
+      width: 45%;
+      background: rgba(75,74,115,0.35);
     }
-    .card > *{position:relative}
-    .card:hover{box-shadow: var(--shadow-2)}
-    .card h4{
-      margin:0;
+    .tube .id{
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(58,57,92,0.78);
+      letter-spacing: 0.2px;
+      white-space:nowrap;
+    }
+
+    /* Progress marker that follows the tube */
+    .progress{
+      position:absolute;
+      left: 14px;
+      top: 64px;
+      height: 2px;
+      width: 0px;
+      background: rgba(75,74,115,0.85);
+      transition: width .08s linear;
+    }
+
+    .hint{
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(58,57,92,0.70);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      border: var(--line);
+      background: rgba(230,231,240,0.55);
+      padding: 5px 8px;
+      border-radius: 10px;
+      color: rgba(58,57,92,0.85);
+    }
+
+    /* Right panel: "Report output" */
+    .hero-right{
+      padding: 18px 18px 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      min-height: 420px;
+    }
+
+    .report-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .report-head b{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
+      color: rgba(58,57,92,0.75);
+    }
+    .badge{
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: var(--line);
+      background: rgba(230,231,240,0.55);
+      color: rgba(58,57,92,0.85);
+      white-space:nowrap;
+    }
+
+    .readout{
+      border: var(--line);
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      background: rgba(230,231,240,0.25);
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(201,202,219,0.65);
+    }
+    .row:last-child{ border-bottom: 0; }
+    .row .k{
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(58,57,92,0.70);
+      text-transform: uppercase;
+      letter-spacing: 0.25px;
+    }
+    .row .v{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(20,21,31,0.82);
+      text-align:right;
+      max-width: 220px;
+    }
+
+    .posts{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      overflow:auto;
+      padding-right: 4px;
+    }
+    .post{
+      border: var(--line);
+      border-radius: 16px;
+      padding: 12px 12px 11px;
+      background:#fff;
+      box-shadow: 0 10px 20px rgba(20,21,31,0.05);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .post:hover{
+      transform: translateY(-1px);
+      background: rgba(230,231,240,0.45);
+      border-color: rgba(201,202,219,0.95);
+    }
+    .post a{
+      color: inherit;
+      text-decoration:none;
+      display:block;
+    }
+    .post .t{
       font-family: var(--serif);
-      font-weight:600;
-      letter-spacing:-0.02em;
-      font-size: 18px;
-      line-height:1.22;
-      color: rgba(20,21,26,.92);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.2;
+      color: var(--indigo-deep);
+      margin: 0 0 6px;
+    }
+    .post .s{
+      font-size: 13px;
+      color: rgba(20,21,31,0.82);
+      margin: 0 0 8px;
+    }
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .tag{
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: var(--line);
+      background: rgba(230,231,240,0.55);
+      color: rgba(58,57,92,0.85);
+    }
+
+    /* Lower content */
+    .below{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .card{
+      padding: 18px 18px 16px;
+    }
+    .card h2{
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--indigo-deep);
     }
     .card p{
-      margin:0;
-      color: rgba(20,21,26,.70);
-      font-size: 13.5px;
+      margin: 0 0 10px;
+      color: rgba(20,21,31,0.84);
+      font-size: 14px;
+      max-width: 70ch;
     }
-    .card .row{
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      color: rgba(20,21,26,.55);
-      font-size: 12px;
-      margin-top:auto;
+
+    .linklist{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 10px;
     }
     .pill{
       display:inline-flex;
       align-items:center;
-      padding: 6px 10px;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: var(--line);
+      background: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-decoration:none;
+      color: rgba(20,21,31,0.82);
+      transition: transform .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      background: rgba(230,231,240,0.55);
+    }
+    .pill i{
+      width:10px; height:10px;
       border-radius:999px;
-      border:1px solid rgba(201,202,219,.85);
-      background: rgba(230,231,240,.50);
-      color: rgba(58,57,92,.86);
-      font-size: 12px;
-      white-space:nowrap;
+      background: rgba(75,74,115,0.85);
+      box-shadow: 0 0 0 4px rgba(230,231,240,0.9);
     }
 
-    /* Sidebar */
-    .side-stack{display:flex; flex-direction:column; gap:12px}
-    .mini{
-      border-radius: var(--r-3);
-      border:1px solid rgba(201,202,219,.75);
-      background: rgba(255,255,255,.62);
-      box-shadow: var(--shadow-1);
-      padding: 16px;
-    }
-    .mini h5{
-      margin:0 0 10px;
-      font-family: var(--serif);
-      font-weight:600;
-      letter-spacing:-0.02em;
-      font-size: 16px;
-      color: var(--indigo-deep);
-    }
-    .mini p{
-      margin:0 0 12px;
-      color: rgba(20,21,26,.70);
-      font-size: 13.5px;
-    }
-    .mini ul{
-      margin:0; padding:0; list-style:none;
-      display:flex; flex-direction:column; gap:10px;
-    }
-    .mini li a{
-      display:flex; gap:10px;
-      padding: 10px 10px;
-      border-radius: 14px;
-      border:1px solid rgba(201,202,219,.85);
-      background: rgba(251,251,253,.75);
-    }
-    .mini li a:hover{
-      background: rgba(230,231,240,.55);
-    }
-    .mini .li-title{
-      font-weight:600;
-      font-size: 13px;
-      color: rgba(20,21,26,.86);
-      line-height:1.25;
-    }
-    .mini .li-sub{
-      font-size: 12px;
-      color: rgba(20,21,26,.60);
-      margin-top:2px;
-    }
-
-    /* Footer */
     footer{
       margin-top: 18px;
-      border-top:1px solid rgba(201,202,219,.75);
-      padding-top: 18px;
-      color: rgba(20,21,26,.62);
+      padding: 24px 0 0;
+      border-top: var(--line);
+      color: rgba(20,21,31,0.65);
       font-size: 13px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      align-items:center; justify-content:space-between;
     }
-    .foot-links{display:flex; gap:10px; flex-wrap:wrap}
-    .foot-links a{
-      padding: 8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(201,202,219,.75);
-      background: rgba(230,231,240,.45);
-    }
-    .foot-links a:hover{background: rgba(230,231,240,.65)}
 
-    /* “No results” */
-    .empty{
-      display:none;
-      border-radius: var(--r-2);
-      border:1px dashed rgba(201,202,219,.95);
-      background: rgba(230,231,240,.35);
-      padding: 14px;
-      color: rgba(20,21,26,.70);
-      font-size: 13.5px;
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .hero-right{ min-height: unset; }
+      .below{ grid-template-columns: 1fr; }
+      h1{ font-size: 32px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .line::after{ animation: none; }
+      .station, .btn, .post, .pill, .navlink{ transition:none; }
+      .station:hover, .btn:hover, .post:hover, .pill:hover, .navlink:hover{ transform:none; }
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#" aria-label="LabContext home">
-        <div class="mark" aria-hidden="true">
-          <!-- Minimal mark (indigo “LC” glyph) -->
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M7.2 6.2v11.6h6.4" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M17.2 7.2c-1.9-1-4.6-.3-5.2 2.4-.6 2.6 1.5 3.8 3.6 4.1 2.1.3 2.8 1.5 2.5 3-.4 2-2.8 2.7-4.9 1.8" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="brand-title">
-          <strong>LabContext</strong>
-          <span>Blog — interpretation, systems, constraints</span>
-        </div>
-      </a>
+  <div class="bg-grid" aria-hidden="true"></div>
 
-      <nav class="nav" aria-label="Primary">
-        <a href="#" title="Education hub">Education Hub</a>
-        <a href="#" title="Blog index" class="cta">Blog</a>
-        <a href="#" title="Resources">Resources</a>
-        <a href="#" title="About">About</a>
-      </nav>
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">
+            <!-- simple "lab mark" icon -->
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 3v6.1l-4.4 7.7A3.2 3.2 0 0 0 7.4 21h9.2a3.2 3.2 0 0 0 2.8-4.2L15 9.1V3" stroke="#3A395C" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M8.2 13.2h7.6" stroke="#4B4A73" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="brand-title">
+            <b>LabContext</b>
+            <span>Blog / interpretive layer</span>
+          </div>
+        </div>
+
+        <nav aria-label="Primary">
+          <a class="navlink" href="#journey">Journey</a>
+          <a class="navlink" href="#latest">Latest outputs</a>
+          <a class="navlink" href="#categories">Categories</a>
+          <a class="navlink" href="#about">About</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero" aria-label="Blog introduction and tools">
-      <div class="hero-card">
-        <div class="kicker"><span class="kdot"></span> Lab medicine, explained without procedures</div>
-        <h1>Interpretive writing for when “knowing the answer” still doesn’t explain the system.</h1>
-        <p class="subhead">
-          Posts here connect new tools, recurring confusion points, and real-world lab behavior back to durable mechanisms and constraints.
-          No workflows. No optimization. Just clarity.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#latest">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M7 7h10M7 12h10M7 17h7" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Browse latest
-          </a>
-          <a class="btn" href="#categories">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M7 7h4v4H7V7Zm6 0h4v4h-4V7ZM7 13h4v4H7v-4Zm6 0h4v4h-4v-4Z" stroke="rgba(20,21,26,.75)" stroke-width="1.8" stroke-linejoin="round"/>
-            </svg>
-            Categories
-          </a>
-          <a class="btn" href="#featured">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3l2.6 5.7 6.2.7-4.6 4 1.4 6.1L12 16.9 6.4 19.5l1.4-6.1-4.6-4 6.2-.7L12 3Z"
-                    stroke="rgba(20,21,26,.75)" stroke-width="1.6" stroke-linejoin="round"/>
-            </svg>
-            Featured
-          </a>
-        </div>
-      </div>
-
-      <div class="tools">
-        <div class="tool-card" aria-label="Search and filters">
-          <div class="tool-title">
-            <h2>Find a post</h2>
-            <small id="countLabel">0 visible</small>
+  <main>
+    <div class="wrap">
+      <section class="hero" aria-label="Homepage">
+        <div class="panel hero-left">
+          <div class="kicker">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Lab systems, interpreted</span>
           </div>
 
-          <div class="search">
-            <input id="q" type="search" placeholder="Search: automation, reference ranges, dilution, flags, constraints..." aria-label="Search posts" />
-          </div>
-
-          <div class="filters" id="categories" aria-label="Category filters">
-            <button class="chip" type="button" aria-pressed="true" data-cat="all">All</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Educational Extension">Educational Extension</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Technology & Assay Context">Technology & Assay Context</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Results & Reporting">Results & Reporting</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Quality, Safety, Reliability">Quality, Safety, Reliability</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Science & Public Health">Science & Public Health</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Lab Operations & Workflow (Conceptual)">Lab Operations & Workflow (Conceptual)</button>
-            <button class="chip" type="button" aria-pressed="false" data-cat="Education Spotlight">Education Spotlight</button>
-          </div>
-        </div>
-
-        <div class="tool-card" aria-label="Editorial rule">
-          <div class="tool-title">
-            <h2>Editorial rule</h2>
-            <small>Scope discipline</small>
-          </div>
-          <p style="margin:0;color:rgba(20,21,26,.70);font-size:13.5px">
-            Every post must explain a mechanism, constraint, pattern, or interface. If it requires telling someone what to do, it doesn’t belong.
+          <h1>Move a specimen through the system.</h1>
+          <p class="lead">
+            Drag the tube across stations. The “report” updates with what the system is assuming, where it can mislead,
+            and which posts map to that layer of the journey.
           </p>
-        </div>
-      </div>
-    </section>
 
-    <section class="grid" aria-label="Featured and latest posts">
-      <div class="section" id="featured">
-        <h3>Featured</h3>
-        <p class="hint">A strong starting point. Built for rereading.</p>
+          <div class="micro" aria-label="Page traits">
+            <span class="chip">CONCEPT-FIRST</span>
+            <span class="chip">NON-PROCEDURAL</span>
+            <span class="chip">INTERPRETIVE</span>
+          </div>
 
-        <div class="featured">
-          <a class="featured-card" href="#post-1" aria-label="Featured post">
-            <div class="meta">
-              <span class="tag">Educational Extension</span>
-              <span>8 min</span>
-              <span>Updated: 2026-01-08</span>
+          <div id="journey" class="journey" aria-label="Specimen Journey">
+            <div class="journey-head">
+              <div class="title">
+                <b>Specimen Journey</b>
+                <span>Interactive model: collection → measurement → reporting</span>
+              </div>
+              <div class="controls">
+                <button class="btn primary" id="resetBtn" type="button">Reset tube</button>
+                <button class="btn" id="shuffleBtn" type="button">New specimen ID</button>
+              </div>
             </div>
-            <h4 class="post-title">Why “normal” results can coexist with serious system strain</h4>
-            <p class="post-excerpt">
-              Reference intervals are statistical fences, not health guarantees. This post shows how compensation, compartment mismatch, and time-lag can produce plausible numbers while the upstream system is changing.
-            </p>
-          </a>
-        </div>
-      </div>
 
-      <aside class="side-stack" aria-label="Sidebar">
-        <div class="mini">
-          <h5>Start here</h5>
-          <p>Three posts that map the vibe of the blog.</p>
-          <ul>
-            <li>
-              <a href="#post-2">
-                <div>
-                  <div class="li-title">Automation looks confident because it compresses uncertainty</div>
-                  <div class="li-sub">Technology & Assay Context • 7 min</div>
+            <div class="track-wrap">
+              <div class="track" id="track" aria-label="Journey track">
+                <div class="stations" role="tablist" aria-label="Stations">
+                  <button class="station" id="st0" role="tab" aria-selected="true" aria-current="true" data-station="0" type="button">
+                    <div class="status"><i aria-hidden="true"></i><span>ACTIVE</span></div>
+                    <div class="label">Pre-Analytical</div>
+                    <div class="desc">The specimen exists before the analyzer does.</div>
+                  </button>
+
+                  <button class="station" id="st1" role="tab" aria-selected="false" aria-current="false" data-station="1" type="button">
+                    <div class="status"><i aria-hidden="true"></i><span>STANDBY</span></div>
+                    <div class="label">Analytical</div>
+                    <div class="desc">Measurement is assumption-driven.</div>
+                  </button>
+
+                  <button class="station" id="st2" role="tab" aria-selected="false" aria-current="false" data-station="2" type="button">
+                    <div class="status"><i aria-hidden="true"></i><span>STANDBY</span></div>
+                    <div class="label">Post-Analytical</div>
+                    <div class="desc">Numbers need context to mean anything.</div>
+                  </button>
                 </div>
-              </a>
-            </li>
-            <li>
-              <a href="#post-3">
-                <div>
-                  <div class="li-title">Why results get misread: the hidden assumptions in “clean numbers”</div>
-                  <div class="li-sub">Results & Reporting • 6 min</div>
+
+                <div class="line" aria-hidden="true"></div>
+                <div class="progress" id="progress" aria-hidden="true"></div>
+
+                <div class="tube" id="tube" role="slider" aria-label="Specimen tube" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                  <div class="cap" aria-hidden="true"></div>
+                  <div class="fill" aria-hidden="true"></div>
+                  <div class="id" id="tubeId">LC-47219</div>
                 </div>
-              </a>
-            </li>
-            <li>
-              <a href="#post-4">
-                <div>
-                  <div class="li-title">Quality systems aren’t bureaucracy — they’re constraint control</div>
-                  <div class="li-sub">Quality, Safety, Reliability • 6 min</div>
-                </div>
-              </a>
-            </li>
-          </ul>
+              </div>
+
+              <div class="hint" aria-label="Controls hint">
+                <span>Drag the tube, click a station, or use</span>
+                <span class="kbd">←</span><span class="kbd">→</span>
+                <span>when the tube is focused.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="mini">
-          <h5>Category logic</h5>
-          <p style="margin-bottom:0">
-            Blog posts interpret what’s changing without destabilizing the Hub. Canonical explanations live in the Education Hub.
+        <aside class="panel hero-right" aria-label="Report Output">
+          <div class="report-head">
+            <b id="reportTitle">Report output</b>
+            <span class="badge" id="phaseBadge">PHASE: PRE-ANALYTICAL</span>
+          </div>
+
+          <div class="readout" aria-label="Readout">
+            <div class="row">
+              <div class="k">Specimen ID</div>
+              <div class="v" id="r_id">LC-47219</div>
+            </div>
+            <div class="row">
+              <div class="k">System focus</div>
+              <div class="v" id="r_focus">Collection / handling constraints</div>
+            </div>
+            <div class="row">
+              <div class="k">Hidden assumption</div>
+              <div class="v" id="r_assumption">The specimen represents the patient state cleanly</div>
+            </div>
+            <div class="row">
+              <div class="k">Where it breaks</div>
+              <div class="v" id="r_breaks">Interference before analysis looks like biology</div>
+            </div>
+          </div>
+
+          <div class="posts" id="posts" aria-label="Posts mapped to station"></div>
+        </aside>
+      </section>
+
+      <section class="below" aria-label="Below fold">
+        <div class="panel card" id="latest">
+          <h2>Latest outputs</h2>
+          <p>
+            Keep this as your “live bench board.” It can be a simple list now, then you can swap it to real post data later.
           </p>
+          <div class="linklist" id="latestLinks"></div>
         </div>
-      </aside>
-    </section>
 
-    <section class="section" id="latest" aria-label="Latest posts">
-      <h3>Latest</h3>
-      <p class="hint">Filter by category or search a phrase. The list updates instantly.</p>
-
-      <div class="empty" id="empty">
-        No posts match your filters. Try “all” or remove search terms.
-      </div>
-
-      <div class="posts" id="postGrid">
-        <!-- Sample cards — replace with real posts later -->
-        <a class="card" href="#post-1" data-cat="Educational Extension" data-title="Why “normal” results can coexist with serious system strain" data-desc="Reference intervals, compensation, and time-lag.">
-          <div class="meta">
-            <span class="tag">Educational Extension</span><span>8 min</span><span>2026-01-08</span>
+        <div class="panel card" id="categories">
+          <h2>Browse by lab behavior</h2>
+          <p>
+            Categories that feel like systems thinking (not departments). These are clickable placeholders you can wire later.
+          </p>
+          <div class="linklist">
+            <a class="pill" href="#"><i aria-hidden="true"></i>Assumptions</a>
+            <a class="pill" href="#"><i aria-hidden="true"></i>Interferences</a>
+            <a class="pill" href="#"><i aria-hidden="true"></i>Tradeoffs</a>
+            <a class="pill" href="#"><i aria-hidden="true"></i>Patterns</a>
+            <a class="pill" href="#"><i aria-hidden="true"></i>Reporting</a>
+            <a class="pill" href="#"><i aria-hidden="true"></i>Quality signals</a>
           </div>
-          <h4>Why “normal” results can coexist with serious system strain</h4>
-          <p>Normal is a population boundary. Systems can compensate while upstream constraints shift.</p>
-          <div class="row"><span class="pill">Interfaces</span><span>Read →</span></div>
-        </a>
+        </div>
+      </section>
 
-        <a class="card" href="#post-2" data-cat="Technology & Assay Context" data-title="Automation looks confident because it compresses uncertainty" data-desc="Assumptions, edge behavior, and silent failure modes.">
-          <div class="meta">
-            <span class="tag">Technology & Assay Context</span><span>7 min</span><span>2026-01-05</span>
-          </div>
-          <h4>Automation looks confident because it compresses uncertainty</h4>
-          <p>Why plausible output can still be wrong: assumption stacks, boundary behavior, and lossy flags.</p>
-          <div class="row"><span class="pill">Assumptions</span><span>Read →</span></div>
-        </a>
-
-        <a class="card" href="#post-3" data-cat="Results & Reporting" data-title="Why results get misread: hidden assumptions in clean numbers" data-desc="Concentration vs mass, plasma shifts, and interpretation drift.">
-          <div class="meta">
-            <span class="tag">Results & Reporting</span><span>6 min</span><span>2025-12-28</span>
-          </div>
-          <h4>Why results get misread: hidden assumptions in “clean numbers”</h4>
-          <p>Most confusion isn’t missing facts. It’s missing the constraints inside the number.</p>
-          <div class="row"><span class="pill">Constraints</span><span>Read →</span></div>
-        </a>
-
-        <a class="card" href="#post-4" data-cat="Quality, Safety, Reliability" data-title="Quality systems aren’t bureaucracy — they’re constraint control" data-desc="QC and QA as system design, not compliance theater.">
-          <div class="meta">
-            <span class="tag">Quality, Safety, Reliability</span><span>6 min</span><span>2025-12-18</span>
-          </div>
-          <h4>Quality systems aren’t bureaucracy — they’re constraint control</h4>
-          <p>Why safeguards exist, what they’re actually trying to detect, and why they fail quietly.</p>
-          <div class="row"><span class="pill">Reliability</span><span>Read →</span></div>
-        </a>
-
-        <a class="card" href="#post-5" data-cat="Science & Public Health" data-title="What “surveillance testing” means and what it does not" data-desc="Signal vs diagnosis, trends vs individuals.">
-          <div class="meta">
-            <span class="tag">Science & Public Health</span><span>5 min</span><span>2025-11-30</span>
-          </div>
-          <h4>What “surveillance testing” means — and what it does not</h4>
-          <p>Population signals are not individual answers. This post clarifies the difference without hype.</p>
-          <div class="row"><span class="pill">Public health</span><span>Read →</span></div>
-        </a>
-
-        <a class="card" href="#post-6" data-cat="Lab Operations & Workflow (Conceptual)" data-title="Turnaround time is a system property, not a promise" data-desc="Bottlenecks, batching, and queue logic.">
-          <div class="meta">
-            <span class="tag">Lab Operations & Workflow (Conceptual)</span><span>6 min</span><span>2025-11-15</span>
-          </div>
-          <h4>Turnaround time is a system property, not a promise</h4>
-          <p>Queue logic, batching effects, and why small disruptions create big delays.</p>
-          <div class="row"><span class="pill">Systems</span><span>Read →</span></div>
-        </a>
-      </div>
-    </section>
-
-    <footer>
-      <div>© <span id="year"></span> LabContext — Blog</div>
-      <div class="foot-links" aria-label="Footer links">
-        <a href="#">Archive</a>
-        <a href="#">RSS</a>
-        <a href="#">Style</a>
-        <a href="#">Contact</a>
-      </div>
-    </footer>
+      <section class="panel card" id="about" aria-label="About" style="margin-top:18px;">
+        <h2>About this interface</h2>
+        <p>
+          The homepage behaves like a lab system surface: you move a specimen through layers, and the site shows
+          what changes, what stays constant, and where interpretation commonly fails.
+        </p>
+        <footer>
+          <div>LabContext Blog — interpretive layer.</div>
+        </footer>
+      </section>
+    </div>
   </main>
 
   <script>
     (function(){
-      const year = document.getElementById("year");
-      year.textContent = new Date().getFullYear();
+      const track = document.getElementById("track");
+      const tube = document.getElementById("tube");
+      const progress = document.getElementById("progress");
 
-      const q = document.getElementById("q");
-      const chips = Array.from(document.querySelectorAll(".chip"));
-      const cards = Array.from(document.querySelectorAll("#postGrid .card"));
-      const empty = document.getElementById("empty");
-      const countLabel = document.getElementById("countLabel");
+      const tubeId = document.getElementById("tubeId");
+      const r_id = document.getElementById("r_id");
+      const phaseBadge = document.getElementById("phaseBadge");
 
-      let activeCat = "all";
+      const r_focus = document.getElementById("r_focus");
+      const r_assumption = document.getElementById("r_assumption");
+      const r_breaks = document.getElementById("r_breaks");
 
-      function norm(s){ return (s || "").toLowerCase().trim(); }
+      const postsEl = document.getElementById("posts");
+      const latestLinksEl = document.getElementById("latestLinks");
 
-      function apply(){
-        const term = norm(q.value);
-        let visible = 0;
+      const resetBtn = document.getElementById("resetBtn");
+      const shuffleBtn = document.getElementById("shuffleBtn");
 
-        cards.forEach(card => {
-          const cat = card.getAttribute("data-cat") || "";
-          const title = card.getAttribute("data-title") || "";
-          const desc = card.getAttribute("data-desc") || "";
-          const hay = norm(title + " " + desc + " " + cat);
+      const stationBtns = [
+        document.getElementById("st0"),
+        document.getElementById("st1"),
+        document.getElementById("st2")
+      ];
 
-          const catOk = (activeCat === "all") || (cat === activeCat);
-          const termOk = !term || hay.includes(term);
+      // Demo data (replace with your real blog data later)
+      const phaseData = [
+        {
+          phase: "PRE-ANALYTICAL",
+          focus: "Collection / handling constraints",
+          assumption: "The specimen represents the patient state cleanly",
+          breaks: "Interference before analysis looks like biology",
+          posts: [
+            { title: "Hemolysis: a specimen event mistaken for physiology", blurb: "How upstream damage masquerades as downstream meaning.", tags:["interference","constraints"], href:"#"},
+            { title: "Why time is a variable (even when the number is correct)", blurb: "Delays create distortions that look like trends.", tags:["timing","pre-analytics"], href:"#"},
+            { title: "When stability is an illusion", blurb: "What “unchanged” can hide in a changing specimen.", tags:["assumptions"], href:"#"}
+          ]
+        },
+        {
+          phase: "ANALYTICAL",
+          focus: "Measurement + model assumptions",
+          assumption: "The measurement model fits the population in front of it",
+          breaks: "Edge cases compress into plausible-looking outputs",
+          posts: [
+            { title: "Analyzer assumptions: what gets averaged away", blurb: "The instrument is not lying; it’s summarizing.", tags:["assumptions","measurement"], href:"#"},
+            { title: "Extreme values behave differently", blurb: "Linearity, saturation, and why confidence can be misleading.", tags:["limits","tradeoffs"], href:"#"},
+            { title: "Flags are lossy summaries", blurb: "What a ‘clean’ report can’t tell you.", tags:["reporting","assumptions"], href:"#"}
+          ]
+        },
+        {
+          phase: "POST-ANALYTICAL",
+          focus: "Interpretation + communication constraints",
+          assumption: "Readers share the same mental model of the number",
+          breaks: "Context gaps get filled with certainty instead of constraints",
+          posts: [
+            { title: "Reference range: a fence, not a verdict", blurb: "What “normal” is allowed to mean, and what it can’t mean.", tags:["interpretation","ranges"], href:"#"},
+            { title: "A number is not the system", blurb: "Why results can be correct while conclusions fail.", tags:["constraints","patterns"], href:"#"},
+            { title: "Patterns recur for structural reasons", blurb: "Stop labeling; start asking what constraints produce the shape.", tags:["patterns"], href:"#"}
+          ]
+        }
+      ];
 
-          const show = catOk && termOk;
-          card.style.display = show ? "" : "none";
-          if(show) visible++;
-        });
+      const latestDemo = [
+        {label:"Output: Why normal results can coexist with severe system failure", href:"#"},
+        {label:"Output: When automation fails quietly", href:"#"},
+        {label:"Output: Plasma volume shifts and false stability", href:"#"},
+        {label:"Output: Mixed constraints produce deceptive averages", href:"#"}
+      ];
 
-        empty.style.display = visible ? "none" : "block";
-        countLabel.textContent = visible + " visible";
+      function randomId(){
+        const n = Math.floor(10000 + Math.random() * 89999);
+        return "LC-" + n;
       }
 
-      chips.forEach(chip => {
-        chip.addEventListener("click", () => {
-          chips.forEach(c => c.setAttribute("aria-pressed", "false"));
-          chip.setAttribute("aria-pressed", "true");
-          activeCat = chip.getAttribute("data-cat") || "all";
-          apply();
+      function clamp(v, min, max){
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function trackMetrics(){
+        const r = track.getBoundingClientRect();
+        const minX = 14;
+        const maxX = r.width - 14 - tube.offsetWidth;
+        return { r, minX, maxX };
+      }
+
+      let dragging = false;
+      let startPointerX = 0;
+      let startTubeX = 0;
+      let tubeX = 0;
+
+      function setTubeX(px){
+        const m = trackMetrics();
+        tubeX = clamp(px, m.minX, m.maxX);
+        tube.style.transform = "translateX(" + tubeX + "px)";
+        const progressWidth = clamp(tubeX + (tube.offsetWidth / 2) - m.minX, 0, (m.maxX - m.minX) + tube.offsetWidth/2);
+        progress.style.width = progressWidth + "px";
+
+        const pct = Math.round(((tubeX - m.minX) / (m.maxX - m.minX)) * 100);
+        tube.setAttribute("aria-valuenow", String(isFinite(pct) ? pct : 0));
+
+        updatePhaseFromPosition();
+      }
+
+      function stationCenters(){
+        const m = trackMetrics();
+        const usable = (m.maxX - m.minX);
+        return [
+          m.minX + usable * 0.0,
+          m.minX + usable * 0.5,
+          m.minX + usable * 1.0
+        ];
+      }
+
+      function nearestStationIndex(){
+        const centers = stationCenters();
+        const tubeCenter = tubeX + tube.offsetWidth / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        for (let i=0;i<centers.length;i++){
+          const d = Math.abs(tubeCenter - (centers[i] + tube.offsetWidth/2));
+          if (d < bestDist){ bestDist = d; best = i; }
+        }
+        return best;
+      }
+
+      function updateStationUI(activeIdx){
+        stationBtns.forEach((btn, idx) => {
+          const isActive = idx === activeIdx;
+          btn.setAttribute("aria-selected", isActive ? "true" : "false");
+          btn.setAttribute("aria-current", isActive ? "true" : "false");
+
+          if (idx < activeIdx){
+            btn.classList.add("done");
+            btn.querySelector(".status span").textContent = "DONE";
+          } else if (idx === activeIdx){
+            btn.classList.remove("done");
+            btn.querySelector(".status span").textContent = "ACTIVE";
+          } else {
+            btn.classList.remove("done");
+            btn.querySelector(".status span").textContent = "STANDBY";
+          }
+        });
+      }
+
+      function renderPosts(phaseIdx){
+        const data = phaseData[phaseIdx];
+        postsEl.innerHTML = "";
+        data.posts.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "post";
+          card.innerHTML =
+            '<a href="' + p.href + '">' +
+              '<div class="t">' + escapeHtml(p.title) + '</div>' +
+              '<div class="s">' + escapeHtml(p.blurb) + '</div>' +
+              '<div class="meta">' + p.tags.map(t => '<span class="tag">' + escapeHtml(t) + '</span>').join("") + '</div>' +
+            '</a>';
+          postsEl.appendChild(card);
+        });
+      }
+
+      function updateReadout(phaseIdx){
+        const data = phaseData[phaseIdx];
+        phaseBadge.textContent = "PHASE: " + data.phase;
+        r_focus.textContent = data.focus;
+        r_assumption.textContent = data.assumption;
+        r_breaks.textContent = data.breaks;
+      }
+
+      function updatePhaseFromPosition(){
+        const idx = nearestStationIndex();
+        updateStationUI(idx);
+        updateReadout(idx);
+        renderPosts(idx);
+      }
+
+      function snapToStation(idx){
+        const m = trackMetrics();
+        const usable = (m.maxX - m.minX);
+        const positions = [m.minX, m.minX + usable * 0.5, m.maxX];
+        setTubeX(positions[idx]);
+      }
+
+      // Basic HTML escape for demo strings
+      function escapeHtml(s){
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+      }
+
+      function initLatest(){
+        latestLinksEl.innerHTML = "";
+        latestDemo.forEach(item => {
+          const a = document.createElement("a");
+          a.className = "pill";
+          a.href = item.href;
+          a.innerHTML = '<i aria-hidden="true"></i>' + escapeHtml(item.label);
+          latestLinksEl.appendChild(a);
+        });
+      }
+
+      // Pointer (drag) interactions
+      tube.addEventListener("pointerdown", (e) => {
+        dragging = true;
+        tube.setPointerCapture(e.pointerId);
+        startPointerX = e.clientX;
+        startTubeX = tubeX;
+      });
+
+      tube.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startPointerX;
+        setTubeX(startTubeX + dx);
+      });
+
+      tube.addEventListener("pointerup", (e) => {
+        dragging = false;
+        const idx = nearestStationIndex();
+        snapToStation(idx);
+      });
+
+      tube.addEventListener("pointercancel", () => {
+        dragging = false;
+        const idx = nearestStationIndex();
+        snapToStation(idx);
+      });
+
+      // Keyboard interactions
+      tube.addEventListener("keydown", (e) => {
+        const step = 18;
+        if (e.key === "ArrowRight"){
+          e.preventDefault();
+          setTubeX(tubeX + step);
+        }
+        if (e.key === "ArrowLeft"){
+          e.preventDefault();
+          setTubeX(tubeX - step);
+        }
+        if (e.key === "Enter"){
+          e.preventDefault();
+          const idx = nearestStationIndex();
+          snapToStation(idx);
+        }
+      });
+
+      // Station click jumps
+      stationBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.getAttribute("data-station"));
+          snapToStation(idx);
         });
       });
 
-      q.addEventListener("input", apply);
+      // Buttons
+      resetBtn.addEventListener("click", () => {
+        snapToStation(0);
+        tube.focus();
+      });
 
-      apply();
+      shuffleBtn.addEventListener("click", () => {
+        const id = randomId();
+        tubeId.textContent = id;
+        r_id.textContent = id;
+      });
+
+      // Initialize
+      function boot(){
+        initLatest();
+        const id = randomId();
+        tubeId.textContent = id;
+        r_id.textContent = id;
+
+        // Start at station 0
+        setTubeX(14);
+        snapToStation(0);
+      }
+
+      // Recalculate on resize (keeps snap points aligned)
+      window.addEventListener("resize", () => {
+        const idx = nearestStationIndex();
+        snapToStation(idx);
+      });
+
+      boot();
     })();
   </script>
 </body>
