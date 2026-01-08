@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>LabContext — Blog</title>
+  <meta name="description" content="Interpretive writing on laboratory medicine: mechanisms, constraints, patterns, and interfaces." />
+
+  <!-- Brand fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Canon palette */
+      --indigo:#4B4A73;
+      --indigo-deep:#3A395C;
+      --indigo-soft:#E6E7F0;
+      --lavender-gray:#C9CADB;
+
+      --ink:#13141a;
+      --muted:#525866;
+      --paper:#ffffff;
+      --paper-2:#f6f7fb;
+
+      --serif:"Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
+      --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+
+      --max: 1220px;
+      --r1: 14px;
+      --r2: 18px;
+      --r3: 24px;
+
+      --line: rgba(201,202,219,.75);
+      --shadow: 0 1px 0 rgba(19,20,26,.06), 0 18px 55px rgba(19,20,26,.10);
+      --shadow2: 0 1px 0 rgba(19,20,26,.07), 0 26px 70px rgba(19,20,26,.12);
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(900px 600px at 18% 8%, rgba(75,74,115,.10), transparent 55%),
+        radial-gradient(800px 520px at 88% 14%, rgba(75,74,115,.08), transparent 60%),
+        linear-gradient(180deg, var(--paper), var(--paper-2));
+      line-height:1.6;
+      letter-spacing:-0.01em;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:focus-visible, button:focus-visible, input:focus-visible{
+      outline: 3px solid rgba(75,74,115,.25);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding: 26px 20px 70px;}
+
+    /* Top bar (fresh: minimal, high-contrast type, no pills) */
+    .top{
+      position:sticky; top:0; z-index:50;
+      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.72));
+      backdrop-filter: blur(12px) saturate(1.05);
+      border-bottom: 1px solid rgba(201,202,219,.70);
+    }
+    .top-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 14px 20px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius: 12px;
+      border:1px solid rgba(201,202,219,.85);
+      background: linear-gradient(155deg, rgba(75,74,115,.16), rgba(75,74,115,.05));
+      box-shadow: 0 16px 40px rgba(19,20,26,.10);
+      display:grid; place-items:center;
+    }
+    .logo svg{width:18px; height:18px}
+    .brand-text{display:flex; flex-direction:column; gap:0}
+    .brand-text strong{
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 18px;
+      line-height:1.1;
+      color: var(--indigo-deep);
+    }
+    .brand-text span{
+      font-size:12px;
+      color: rgba(19,20,26,.62);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-top:2px;
+    }
+
+    .nav{
+      display:flex; gap:16px; flex-wrap:wrap;
+      align-items:center; justify-content:flex-end;
+      font-size:13px;
+      color: rgba(19,20,26,.78);
+    }
+    .nav a{
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color .18s var(--ease), color .18s var(--ease);
+    }
+    .nav a:hover{
+      border-bottom-color: rgba(75,74,115,.55);
+      color: rgba(19,20,26,.92);
+    }
+    .nav .active{
+      color: rgba(19,20,26,.95);
+      border-bottom-color: rgba(75,74,115,.85);
+    }
+
+    /* Hero (fresh layout: split headline + “index rail”) */
+    .hero{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr;}
+    }
+
+    .panel{
+      border-radius: var(--r3);
+      border:1px solid rgba(201,202,219,.80);
+      background: rgba(255,255,255,.68);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(760px 360px at 18% 18%, rgba(75,74,115,.14), transparent 58%),
+        radial-gradient(600px 280px at 90% 0%, rgba(75,74,115,.08), transparent 62%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .panel > *{position:relative}
+
+    .hero-left{padding: 22px 22px 18px;}
+    .eyebrow{
+      display:flex; align-items:center; gap:10px;
+      font-size:12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(58,57,92,.86);
+    }
+    .eyebrow .bar{
+      width: 34px; height: 2px;
+      background: rgba(75,74,115,.75);
+      border-radius: 999px;
+      box-shadow: 0 0 0 3px rgba(75,74,115,.12);
+    }
+    h1{
+      margin: 12px 0 10px;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.035em;
+      line-height:1.08;
+      font-size: clamp(34px, 4.5vw, 54px);
+      color: rgba(19,20,26,.96);
+    }
+    .lead{
+      margin:0;
+      max-width: 70ch;
+      color: rgba(19,20,26,.72);
+      font-size: 15.5px;
+    }
+
+    .hero-actions{
+      margin-top: 16px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      border-radius: 16px;
+      border:1px solid rgba(201,202,219,.92);
+      background: rgba(255,255,255,.72);
+      padding: 11px 14px;
+      font-size:13px;
+      font-weight:600;
+      color: rgba(19,20,26,.88);
+      box-shadow: 0 1px 0 rgba(19,20,26,.06), 0 14px 40px rgba(19,20,26,.08);
+      transition: transform .16s var(--ease), box-shadow .16s var(--ease);
+      cursor:pointer;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow2);
+    }
+    .btn.primary{
+      border-color: rgba(75,74,115,.42);
+      background: linear-gradient(180deg, rgba(75,74,115,.13), rgba(75,74,115,.08));
+      color: var(--indigo-deep);
+    }
+    .btn svg{width:16px; height:16px; opacity:.9}
+
+    /* Right: “Index rail” with interactive filter/search */
+    .hero-right{padding: 18px;}
+    .rail-head{
+      display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+      margin-bottom: 10px;
+    }
+    .rail-head h2{
+      margin:0;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 18px;
+      color: var(--indigo-deep);
+    }
+    .rail-head small{
+      font-size:12px;
+      color: rgba(19,20,26,.60);
+    }
+    .search{
+      width:100%;
+      border:1px solid rgba(201,202,219,.92);
+      background: rgba(246,247,251,.75);
+      border-radius: 16px;
+      padding: 12px 12px;
+      font: 500 14px/1 var(--sans);
+      color: rgba(19,20,26,.90);
+    }
+
+    .cats{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 560px){
+      .cats{grid-template-columns: 1fr;}
+    }
+    .cat{
+      border-radius: 18px;
+      border:1px solid rgba(201,202,219,.85);
+      background: rgba(255,255,255,.60);
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+      cursor:pointer;
+      transition: transform .16s var(--ease), border-color .16s var(--ease), box-shadow .16s var(--ease);
+      user-select:none;
+      min-height: 92px;
+    }
+    .cat:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(19,20,26,.06), 0 18px 50px rgba(19,20,26,.10);
+    }
+    .cat[aria-pressed="true"]{
+      border-color: rgba(75,74,115,.55);
+      box-shadow: 0 1px 0 rgba(19,20,26,.06), 0 22px 60px rgba(19,20,26,.12);
+      background: linear-gradient(180deg, rgba(230,231,240,.70), rgba(255,255,255,.55));
+    }
+    .cat .t{
+      font-weight:700;
+      font-size: 13px;
+      color: rgba(19,20,26,.88);
+      letter-spacing:-0.01em;
+    }
+    .cat .d{
+      font-size: 12.5px;
+      color: rgba(19,20,26,.66);
+      line-height:1.35;
+    }
+    .cat .k{
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(58,57,92,.78);
+    }
+
+    /* Section headers (modern: thin rule + serif title) */
+    .section{
+      margin-top: 18px;
+      border-radius: var(--r3);
+      border:1px solid rgba(201,202,219,.78);
+      background: rgba(255,255,255,.58);
+      box-shadow: 0 1px 0 rgba(19,20,26,.05), 0 14px 45px rgba(19,20,26,.08);
+      padding: 18px;
+    }
+    .sect-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(201,202,219,.70);
+      margin-bottom: 14px;
+    }
+    .sect-head h3{
+      margin:0;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 22px;
+      color: var(--indigo-deep);
+      line-height:1.15;
+    }
+    .sect-head p{
+      margin:0;
+      color: rgba(19,20,26,.62);
+      font-size: 13px;
+      max-width: 60ch;
+      text-align:right;
+    }
+    @media (max-width: 760px){
+      .sect-head{align-items:flex-start; flex-direction:column;}
+      .sect-head p{text-align:left;}
+    }
+
+    /* Featured strip (fresh: horizontally scrolling editorial cards) */
+    .strip{
+      display:flex;
+      gap: 12px;
+      overflow:auto;
+      padding-bottom: 6px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .strip::-webkit-scrollbar{height:10px}
+    .strip::-webkit-scrollbar-thumb{background: rgba(201,202,219,.9); border-radius:999px}
+    .strip::-webkit-scrollbar-track{background: rgba(230,231,240,.45); border-radius:999px}
+
+    .fcard{
+      flex: 0 0 420px;
+      scroll-snap-align: start;
+      border-radius: 22px;
+      border:1px solid rgba(201,202,219,.88);
+      background: rgba(251,251,253,.78);
+      box-shadow: 0 1px 0 rgba(19,20,26,.06), 0 18px 55px rgba(19,20,26,.10);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .16s var(--ease), box-shadow .16s var(--ease);
+      min-height: 170px;
+    }
+    .fcard:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow2);
+    }
+    .fcard::after{
+      content:"";
+      position:absolute; inset:auto -70px -90px auto;
+      width: 240px; height: 240px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(75,74,115,.14), transparent 60%);
+      pointer-events:none;
+    }
+    .fcard > *{position:relative}
+
+    .meta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: rgba(19,20,26,.58);
+      font-size: 12px;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(201,202,219,.88);
+      background: rgba(230,231,240,.55);
+      color: rgba(58,57,92,.90);
+      font-size:12px;
+    }
+    .badge::before{
+      content:"";
+      width:7px; height:7px; border-radius:999px;
+      background: rgba(75,74,115,.78);
+      box-shadow: 0 0 0 3px rgba(75,74,115,.14);
+    }
+    .title{
+      margin: 10px 0 6px;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 22px;
+      line-height:1.18;
+      color: rgba(19,20,26,.93);
+    }
+    .desc{
+      margin:0;
+      color: rgba(19,20,26,.72);
+      font-size: 14px;
+      max-width: 76ch;
+    }
+    .arrow{
+      margin-top: 10px;
+      display:inline-flex; gap:10px; align-items:center;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(58,57,92,.88);
+    }
+    .arrow svg{width:16px; height:16px; opacity:.85}
+
+    /* Masonry-ish grid (fresh: varied sizes) */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: repeat(6, 1fr);}
+    }
+    @media (max-width: 640px){
+      .grid{grid-template-columns: repeat(1, 1fr);}
+    }
+
+    .card{
+      border-radius: 22px;
+      border:1px solid rgba(201,202,219,.88);
+      background: rgba(251,251,253,.76);
+      box-shadow: 0 1px 0 rgba(19,20,26,.06), 0 16px 48px rgba(19,20,26,.09);
+      padding: 14px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .16s var(--ease), box-shadow .16s var(--ease);
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      min-height: 150px;
+    }
+    .card:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow2);
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 240px at 18% 22%, rgba(75,74,115,.10), transparent 60%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+
+    .card h4{
+      margin:0;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 18px;
+      line-height:1.22;
+      color: rgba(19,20,26,.93);
+    }
+    .card p{
+      margin:0;
+      color: rgba(19,20,26,.70);
+      font-size: 13.5px;
+      max-width: 70ch;
+    }
+    .row{
+      margin-top:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      color: rgba(19,20,26,.56);
+      font-size: 12px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(201,202,219,.88);
+      background: rgba(230,231,240,.52);
+      color: rgba(58,57,92,.88);
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    /* Column spans for modern editorial layout */
+    .span-6{grid-column: span 6;}
+    .span-5{grid-column: span 5;}
+    .span-4{grid-column: span 4;}
+    .span-3{grid-column: span 3;}
+    .span-7{grid-column: span 7;}
+    .span-12{grid-column: span 12;}
+
+    @media (max-width: 980px){
+      .span-7,.span-6,.span-5,.span-4,.span-3{grid-column: span 6;}
+      .span-12{grid-column: span 6;}
+    }
+    @media (max-width: 640px){
+      .span-7,.span-6,.span-5,.span-4,.span-3,.span-12{grid-column: span 1;}
+    }
+
+    /* Empty state */
+    .empty{
+      display:none;
+      border-radius: 22px;
+      border:1px dashed rgba(201,202,219,.95);
+      background: rgba(230,231,240,.35);
+      padding: 14px;
+      color: rgba(19,20,26,.72);
+      font-size: 13.5px;
+    }
+
+    /* Footer (fresh: simple, typographic) */
+    footer{
+      margin-top: 18px;
+      border-top: 1px solid rgba(201,202,219,.75);
+      padding-top: 16px;
+      display:flex;
+      justify-content:space-between;
+      gap: 14px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      color: rgba(19,20,26,.62);
+      font-size: 13px;
+    }
+    .foot-links{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .foot-links a{
+      border-bottom: 1px solid rgba(201,202,219,.0);
+      padding-bottom: 2px;
+    }
+    .foot-links a:hover{
+      border-bottom-color: rgba(75,74,115,.55);
+      color: rgba(19,20,26,.86);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top" aria-label="Top navigation">
+    <div class="top-inner">
+      <a class="brand" href="#" aria-label="LabContext home">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7.2 6.2v11.6h6.4" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.2 7.2c-1.9-1-4.6-.3-5.2 2.4-.6 2.6 1.5 3.8 3.6 4.1 2.1.3 2.8 1.5 2.5 3-.4 2-2.8 2.7-4.9 1.8"
+                  stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>LabContext</strong>
+          <span>Blog</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#" title="Education Hub">Education</a>
+        <a href="#" class="active" title="Blog">Blog</a>
+        <a href="#" title="Resources">Resources</a>
+        <a href="#" title="About">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" aria-label="Blog hero">
+      <div class="panel hero-left">
+        <div class="eyebrow"><span class="bar"></span> laboratory medicine, interpreted</div>
+        <h1>Blog posts that explain the system behind the result.</h1>
+        <p class="lead">
+          This is the time-aware layer: new tools, recurring confusion points, and lab-world pressures—mapped back to mechanisms, constraints, patterns, and interfaces.
+          No procedures. No “what to do.” Just explanation.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#featured">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 7h12M6 12h12M6 17h8" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Read featured
+          </a>
+          <a class="btn" href="#latest">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M8 7h8M8 12h8M8 17h5" stroke="rgba(19,20,26,.78)" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Browse latest
+          </a>
+          <a class="btn" href="#archive">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 4h10l1 3H6l1-3Zm-1 5h12v11H6V9Zm4 3h4" stroke="rgba(19,20,26,.78)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+            Archive
+          </a>
+        </div>
+      </div>
+
+      <div class="panel hero-right" aria-label="Search and category index">
+        <div class="rail-head">
+          <h2>Index</h2>
+          <small id="countLabel">0 shown</small>
+        </div>
+
+        <input id="q" class="search" type="search" placeholder="Search posts: automation, reference ranges, dilution, flags..." aria-label="Search posts" />
+
+        <div class="cats" id="cats" aria-label="Category filters">
+          <div class="cat" role="button" tabindex="0" aria-pressed="true" data-cat="all">
+            <div class="k">Filter</div>
+            <div class="t">All posts</div>
+            <div class="d">Everything currently listed on this page.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Educational Extension">
+            <div class="k">Category</div>
+            <div class="t">Educational Extension</div>
+            <div class="d">Concepts meeting real-world behavior.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Technology & Assay Context">
+            <div class="k">Category</div>
+            <div class="t">Technology & Assay Context</div>
+            <div class="d">What changes, what doesn’t, and why.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Results & Reporting">
+            <div class="k">Category</div>
+            <div class="t">Results & Reporting</div>
+            <div class="d">Interpretation limits and misreads.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Quality, Safety, Reliability">
+            <div class="k">Category</div>
+            <div class="t">Quality, Safety, Reliability</div>
+            <div class="d">Why safeguards exist and where they fail.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Science & Public Health">
+            <div class="k">Category</div>
+            <div class="t">Science & Public Health</div>
+            <div class="d">Lab signals at population scale.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Lab Operations (Conceptual)">
+            <div class="k">Category</div>
+            <div class="t">Lab Operations (Conceptual)</div>
+            <div class="d">Systems behavior without workflows.</div>
+          </div>
+
+          <div class="cat" role="button" tabindex="0" aria-pressed="false" data-cat="Education Spotlight">
+            <div class="k">Category</div>
+            <div class="t">Education Spotlight</div>
+            <div class="d">Teaching structure, not test prep.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED STRIP -->
+    <section class="section" id="featured" aria-label="Featured posts">
+      <div class="sect-head">
+        <h3>Featured</h3>
+        <p>High-signal posts that hold up on reread.</p>
+      </div>
+
+      <div class="strip">
+        <a class="fcard" href="#post-1" data-cat="Educational Extension" data-title="Why “normal” results can coexist with serious system strain" data-desc="Reference intervals, compensation, and time-lag.">
+          <div class="meta">
+            <span class="badge">Educational Extension</span>
+            <span>8 min</span>
+            <span>2026-01-08</span>
+          </div>
+          <div class="title">Why “normal” results can coexist with serious system strain</div>
+          <p class="desc">Normal is a statistical fence. Compensation and timing can keep numbers plausible while upstream constraints shift.</p>
+          <div class="arrow">Open <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12h10m0 0-4-4m4 4-4 4" stroke="rgba(58,57,92,.90)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+
+        <a class="fcard" href="#post-2" data-cat="Technology & Assay Context" data-title="Automation looks confident because it compresses uncertainty" data-desc="Assumptions, edges, and silent failure modes.">
+          <div class="meta">
+            <span class="badge">Technology & Assay Context</span>
+            <span>7 min</span>
+            <span>2026-01-05</span>
+          </div>
+          <div class="title">Automation looks confident because it compresses uncertainty</div>
+          <p class="desc">Why plausible output can still be wrong: assumption stacks, boundary behavior, and lossy flags.</p>
+          <div class="arrow">Open <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12h10m0 0-4-4m4 4-4 4" stroke="rgba(58,57,92,.90)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+
+        <a class="fcard" href="#post-3" data-cat="Results & Reporting" data-title="Clean numbers still carry assumptions" data-desc="Concentration vs mass and interpretation drift.">
+          <div class="meta">
+            <span class="badge">Results & Reporting</span>
+            <span>6 min</span>
+            <span>2025-12-28</span>
+          </div>
+          <div class="title">Clean numbers still carry assumptions</div>
+          <p class="desc">Most confusion isn’t missing facts. It’s missing the constraints inside the number.</p>
+          <div class="arrow">Open <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12h10m0 0-4-4m4 4-4 4" stroke="rgba(58,57,92,.90)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- LATEST GRID -->
+    <section class="section" id="latest" aria-label="Latest posts">
+      <div class="sect-head">
+        <h3>Latest</h3>
+        <p>Filter by category or search a phrase. Updates instantly.</p>
+      </div>
+
+      <div class="empty" id="empty">No matches. Clear the search or switch to “All posts.”</div>
+
+      <div class="grid" id="grid">
+        <!-- Replace these cards with your real posts later -->
+        <a class="card span-7" href="#post-4" data-cat="Quality, Safety, Reliability" data-title="Quality systems aren’t bureaucracy — they’re constraint control" data-desc="QC/QA as system design, not compliance theater.">
+          <div class="meta"><span class="badge">Quality, Safety, Reliability</span><span>6 min</span><span>2025-12-18</span></div>
+          <h4>Quality systems aren’t bureaucracy — they’re constraint control</h4>
+          <p>Why safeguards exist, what they’re actually detecting, and why failures can be quiet.</p>
+          <div class="row"><span class="pill">Reliability</span><span>Read →</span></div>
+        </a>
+
+        <a class="card span-5" href="#post-5" data-cat="Lab Operations (Conceptual)" data-title="Turnaround time is a system property, not a promise" data-desc="Queue logic, batching effects, and bottlenecks.">
+          <div class="meta"><span class="badge">Lab Operations (Conceptual)</span><span>6 min</span><span>2025-11-15</span></div>
+          <h4>Turnaround time is a system property, not a promise</h4>
+          <p>Queue logic explains delays better than individual blame. Bottlenecks compound.</p>
+          <div class="row"><span class="pill">Systems</span><span>Read →</span></div>
+        </a>
+
+        <a class="card span-6" href="#post-6" data-cat="Science & Public Health" data-title="What surveillance testing means (and doesn’t)" data-desc="Signal vs diagnosis; trends vs individuals.">
+          <div class="meta"><span class="badge">Science & Public Health</span><span>5 min</span><span>2025-11-30</span></div>
+          <h4>What “surveillance testing” means — and what it doesn’t</h4>
+          <p>Population signals are not individual answers. This clarifies the difference without hype.</p>
+          <div class="row"><span class="pill">Signal</span><span>Read →</span></div>
+        </a>
+
+        <a class="card span-6" href="#post-7" data-cat="Educational Extension" data-title="Why mixed etiologies break neat categories" data-desc="Averages hide multi-population behavior.">
+          <div class="meta"><span class="badge">Educational Extension</span><span>7 min</span><span>2025-10-26</span></div>
+          <h4>Why mixed etiologies break neat categories</h4>
+          <p>When opposing forces coexist, indices can cancel out and still look “normal.”</p>
+          <div class="row"><span class="pill">Patterns</span><span>Read →</span></div>
+        </a>
+
+        <a class="card span-4" href="#post-8" data-cat="Education Spotlight" data-title="Teaching constraints first fixes memorization fatigue" data-desc="Architecture beats volume.">
+          <div class="meta"><span class="badge">Education Spotlight</span><span>4 min</span><span>2025-10-02</span></div>
+          <h4>Teaching constraints first fixes memorization fatigue</h4>
+          <p>Students don’t need more facts. They need structure that predicts behavior.</p>
+          <div class="row"><span class="pill">Instruction</span><span>Read →</span></div>
+        </a>
+
+        <a class="card span-4" href="#post-9" data-cat="Results & Reporting" data-title="Concentration vs mass: the hidden trap" data-desc="Plasma volume shifts change numbers without changing biology.">
+          <div class="meta"><span class="badge">Results & Reporting</span><span>5 min</span><span>2025-09-18</span></div>
+          <h4>Concentration vs mass: the hidden trap</h4>
+          <p>Some “improvements” are dilution. Some “worsening” is concentration.</p>
+          <div class="row"><span class="pill">Constraints</span><span>Read →</span></div>
+        </a>
+
+        <a class="card span-4" href="#post-10" data-cat="Technology & Assay Context" data-title="When analyzers fail at the edges" data-desc="Linearity, separation, and boundary behavior.">
+          <div class="meta"><span class="badge">Technology & Assay Context</span><span>6 min</span><span>2025-08-21</span></div>
+          <h4>When analyzers fail at the edges</h4>
+          <p>Extreme values are a different measurement regime. “Normal logic” stops working.</p>
+          <div class="row"><span class="pill">Edges</span><span>Read →</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ARCHIVE (placeholder section for later) -->
+    <section class="section" id="archive" aria-label="Archive">
+      <div class="sect-head">
+        <h3>Archive</h3>
+        <p>When you’re ready: month/year filters, tags, RSS.</p>
+      </div>
+      <p style="margin:0;color:rgba(19,20,26,.70);font-size:14px">
+        This section is a stub. If you tell me how you’re storing posts (static HTML files, a JSON list, or a CMS),
+        I’ll wire real archive navigation into this layout.
+      </p>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> LabContext</div>
+      <div class="foot-links" aria-label="Footer links">
+        <a href="#">RSS</a>
+        <a href="#">Archive</a>
+        <a href="#">Contact</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const q = document.getElementById("q");
+      const cards = Array.from(document.querySelectorAll("#featured .fcard, #grid .card"));
+      const latestCards = Array.from(document.querySelectorAll("#grid .card"));
+      const empty = document.getElementById("empty");
+      const countLabel = document.getElementById("countLabel");
+      const cats = Array.from(document.querySelectorAll(".cat"));
+
+      let activeCat = "all";
+
+      function norm(s){ return (s || "").toLowerCase().trim(); }
+
+      function setPressed(target){
+        cats.forEach(c => c.setAttribute("aria-pressed","false"));
+        target.setAttribute("aria-pressed","true");
+      }
+
+      function apply(){
+        const term = norm(q.value);
+        let visible = 0;
+
+        latestCards.forEach(card => {
+          const cat = card.getAttribute("data-cat") || "";
+          const title = card.getAttribute("data-title") || "";
+          const desc = card.getAttribute("data-desc") || "";
+          const hay = norm(title + " " + desc + " " + cat);
+
+          const catOk = (activeCat === "all") || (cat === activeCat);
+          const termOk = !term || hay.includes(term);
+
+          const show = catOk && termOk;
+          card.style.display = show ? "" : "none";
+          if(show) visible++;
+        });
+
+        empty.style.display = visible ? "none" : "block";
+        countLabel.textContent = visible + " shown";
+      }
+
+      function handleCat(el){
+        activeCat = el.getAttribute("data-cat") || "all";
+        setPressed(el);
+        apply();
+      }
+
+      cats.forEach(el => {
+        el.addEventListener("click", () => handleCat(el));
+        el.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " "){
+            e.preventDefault();
+            handleCat(el);
+          }
+        });
+      });
+
+      q.addEventListener("input", apply);
+
+      apply();
+    })();
+  </script>
+</body>
+</html>
