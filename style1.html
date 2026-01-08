@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>LabContext Blog</title>
+  <meta name="description" content="Interpretive writing on laboratory medicine: systems, constraints, patterns, and why they matter." />
+
+  <!-- Fonts (Brand-locked) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* LabContext canonical palette */
+      --indigo:#4B4A73;
+      --indigo-deep:#3A395C;
+      --indigo-soft:#E6E7F0;
+      --lavender-gray:#C9CADB;
+
+      --ink:#14151a;
+      --muted:#555a66;
+      --paper:#fbfbfd;
+      --paper-2:#f6f7fb;
+      --line:rgba(201,202,219,.75);
+
+      --serif:"Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
+      --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+      --r-1:14px;
+      --r-2:18px;
+      --r-3:22px;
+
+      --shadow-1: 0 1px 0 rgba(20,21,26,.06), 0 12px 36px rgba(20,21,26,.06);
+      --shadow-2: 0 1px 0 rgba(20,21,26,.07), 0 18px 50px rgba(20,21,26,.09);
+      --max: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 700px at 10% -10%, rgba(75,74,115,.08), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(75,74,115,.06), transparent 60%),
+                  linear-gradient(180deg, var(--paper), var(--paper-2));
+      color:var(--ink);
+      line-height:1.6;
+      letter-spacing:-0.01em;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:focus-visible, button:focus-visible, input:focus-visible{
+      outline: 3px solid rgba(75,74,115,.25);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 22px 64px}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(1.1) blur(10px);
+      background: linear-gradient(180deg, rgba(251,251,253,.92), rgba(251,251,253,.75));
+      border-bottom:1px solid rgba(201,202,219,.65);
+    }
+    .topbar-inner{
+      max-width:var(--max); margin:0 auto; padding:14px 22px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:240px;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(145deg, rgba(75,74,115,.18), rgba(75,74,115,.06));
+      border:1px solid rgba(201,202,219,.7);
+      box-shadow: 0 6px 18px rgba(20,21,26,.06);
+      display:grid; place-items:center;
+    }
+    .mark svg{width:18px; height:18px}
+    .brand-title{
+      display:flex; flex-direction:column; gap:1px;
+    }
+    .brand-title strong{
+      font-family:var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size:18px;
+      line-height:1.1;
+      color:var(--indigo-deep);
+    }
+    .brand-title span{
+      font-size:12px; color:var(--muted);
+      letter-spacing:0.02em;
+    }
+
+    .nav{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:13px;
+      padding:9px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      color:rgba(20,21,26,.86);
+    }
+    .nav a:hover{
+      border-color: rgba(201,202,219,.8);
+      background: rgba(230,231,240,.55);
+    }
+    .nav .cta{
+      border-color: rgba(75,74,115,.35);
+      background: rgba(75,74,115,.08);
+      color: var(--indigo-deep);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 28px 0 8px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr; }
+      .brand{min-width:auto}
+    }
+
+    .hero-card{
+      border-radius: var(--r-3);
+      border:1px solid rgba(201,202,219,.75);
+      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.52));
+      box-shadow: var(--shadow-2);
+      padding: 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(900px 400px at 20% 10%, rgba(75,74,115,.12), transparent 55%),
+                  radial-gradient(600px 300px at 90% 0%, rgba(75,74,115,.08), transparent 62%);
+      pointer-events:none;
+      opacity:.85;
+    }
+    .hero-card > *{position:relative}
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+      color: rgba(58,57,92,.78);
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(230,231,240,.75);
+      border:1px solid rgba(201,202,219,.75);
+      width:fit-content;
+    }
+    .kdot{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(75,74,115,.75);
+      box-shadow: 0 0 0 3px rgba(75,74,115,.16);
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.03em;
+      line-height:1.12;
+      font-size: clamp(32px, 4.2vw, 44px);
+      color: var(--ink);
+    }
+    .subhead{
+      margin:0 0 16px;
+      color: rgba(20,21,26,.72);
+      font-size:15.5px;
+      max-width: 62ch;
+    }
+
+    .hero-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 8px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(201,202,219,.85);
+      background: rgba(255,255,255,.7);
+      box-shadow: var(--shadow-1);
+      font-size:13px;
+      font-weight:600;
+      color: rgba(20,21,26,.88);
+      cursor:pointer;
+    }
+    .btn:hover{box-shadow: var(--shadow-2)}
+    .btn.primary{
+      border-color: rgba(75,74,115,.35);
+      background: linear-gradient(180deg, rgba(75,74,115,.12), rgba(75,74,115,.08));
+      color: var(--indigo-deep);
+    }
+    .btn .icon{
+      width:16px; height:16px; opacity:.9;
+    }
+
+    /* Search + filters */
+    .tools{
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .tool-card{
+      border-radius: var(--r-3);
+      border:1px solid rgba(201,202,219,.75);
+      background: rgba(255,255,255,.62);
+      box-shadow: var(--shadow-1);
+      padding: 16px;
+    }
+    .tool-title{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom: 10px;
+    }
+    .tool-title h2{
+      margin:0;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size:18px;
+      color: var(--indigo-deep);
+    }
+    .tool-title small{color:rgba(20,21,26,.62); font-size:12px}
+    .search{
+      display:flex; gap:10px;
+      align-items:center;
+    }
+    .search input{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(201,202,219,.9);
+      background: rgba(251,251,253,.85);
+      font: 500 14px/1.2 var(--sans);
+      color: rgba(20,21,26,.9);
+    }
+    .filters{
+      margin-top:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .chip{
+      border-radius:999px;
+      padding:8px 10px;
+      border:1px solid rgba(201,202,219,.85);
+      background: rgba(230,231,240,.55);
+      color: rgba(20,21,26,.78);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chip[aria-pressed="true"]{
+      border-color: rgba(75,74,115,.45);
+      background: rgba(75,74,115,.12);
+      color: var(--indigo-deep);
+      box-shadow: 0 10px 22px rgba(20,21,26,.06);
+    }
+
+    /* Layout below hero */
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr .42fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .section{
+      border-radius: var(--r-3);
+      border:1px solid rgba(201,202,219,.75);
+      background: rgba(255,255,255,.58);
+      box-shadow: var(--shadow-1);
+      padding: 16px;
+    }
+    .section h3{
+      margin: 4px 0 12px;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 20px;
+      color: var(--indigo-deep);
+    }
+    .section .hint{
+      margin:-8px 0 12px;
+      color: rgba(20,21,26,.62);
+      font-size: 13px;
+    }
+
+    /* Featured post */
+    .featured{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    .featured-card{
+      border-radius: var(--r-2);
+      border: 1px solid rgba(201,202,219,.85);
+      background: linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.58));
+      padding: 16px;
+      box-shadow: var(--shadow-1);
+    }
+    .meta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: rgba(20,21,26,.60);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,202,219,.8);
+      background: rgba(230,231,240,.55);
+      color: rgba(58,57,92,.88);
+      font-size: 12px;
+    }
+    .tag::before{
+      content:"";
+      width:7px; height:7px; border-radius:999px;
+      background: rgba(75,74,115,.7);
+      box-shadow: 0 0 0 3px rgba(75,74,115,.14);
+    }
+
+    .post-title{
+      margin:0;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 22px;
+      line-height: 1.2;
+      color: rgba(20,21,26,.92);
+    }
+    .post-excerpt{
+      margin: 8px 0 0;
+      color: rgba(20,21,26,.72);
+      font-size: 14.5px;
+      max-width: 78ch;
+    }
+
+    /* Post list */
+    .posts{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 720px){
+      .posts{grid-template-columns:1fr}
+    }
+
+    .card{
+      border-radius: var(--r-2);
+      border:1px solid rgba(201,202,219,.85);
+      background: rgba(251,251,253,.72);
+      box-shadow: var(--shadow-1);
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      min-height: 158px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:auto -40px -60px auto;
+      width:180px; height:180px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(75,74,115,.12), transparent 60%);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+    .card:hover{box-shadow: var(--shadow-2)}
+    .card h4{
+      margin:0;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 18px;
+      line-height:1.22;
+      color: rgba(20,21,26,.92);
+    }
+    .card p{
+      margin:0;
+      color: rgba(20,21,26,.70);
+      font-size: 13.5px;
+    }
+    .card .row{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      color: rgba(20,21,26,.55);
+      font-size: 12px;
+      margin-top:auto;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(201,202,219,.85);
+      background: rgba(230,231,240,.50);
+      color: rgba(58,57,92,.86);
+      font-size: 12px;
+      white-space:nowrap;
+    }
+
+    /* Sidebar */
+    .side-stack{display:flex; flex-direction:column; gap:12px}
+    .mini{
+      border-radius: var(--r-3);
+      border:1px solid rgba(201,202,219,.75);
+      background: rgba(255,255,255,.62);
+      box-shadow: var(--shadow-1);
+      padding: 16px;
+    }
+    .mini h5{
+      margin:0 0 10px;
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      font-size: 16px;
+      color: var(--indigo-deep);
+    }
+    .mini p{
+      margin:0 0 12px;
+      color: rgba(20,21,26,.70);
+      font-size: 13.5px;
+    }
+    .mini ul{
+      margin:0; padding:0; list-style:none;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .mini li a{
+      display:flex; gap:10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(201,202,219,.85);
+      background: rgba(251,251,253,.75);
+    }
+    .mini li a:hover{
+      background: rgba(230,231,240,.55);
+    }
+    .mini .li-title{
+      font-weight:600;
+      font-size: 13px;
+      color: rgba(20,21,26,.86);
+      line-height:1.25;
+    }
+    .mini .li-sub{
+      font-size: 12px;
+      color: rgba(20,21,26,.60);
+      margin-top:2px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      border-top:1px solid rgba(201,202,219,.75);
+      padding-top: 18px;
+      color: rgba(20,21,26,.62);
+      font-size: 13px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+    }
+    .foot-links{display:flex; gap:10px; flex-wrap:wrap}
+    .foot-links a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(201,202,219,.75);
+      background: rgba(230,231,240,.45);
+    }
+    .foot-links a:hover{background: rgba(230,231,240,.65)}
+
+    /* “No results” */
+    .empty{
+      display:none;
+      border-radius: var(--r-2);
+      border:1px dashed rgba(201,202,219,.95);
+      background: rgba(230,231,240,.35);
+      padding: 14px;
+      color: rgba(20,21,26,.70);
+      font-size: 13.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#" aria-label="LabContext home">
+        <div class="mark" aria-hidden="true">
+          <!-- Minimal mark (indigo “LC” glyph) -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7.2 6.2v11.6h6.4" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.2 7.2c-1.9-1-4.6-.3-5.2 2.4-.6 2.6 1.5 3.8 3.6 4.1 2.1.3 2.8 1.5 2.5 3-.4 2-2.8 2.7-4.9 1.8" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <strong>LabContext</strong>
+          <span>Blog — interpretation, systems, constraints</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#" title="Education hub">Education Hub</a>
+        <a href="#" title="Blog index" class="cta">Blog</a>
+        <a href="#" title="Resources">Resources</a>
+        <a href="#" title="About">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-label="Blog introduction and tools">
+      <div class="hero-card">
+        <div class="kicker"><span class="kdot"></span> Lab medicine, explained without procedures</div>
+        <h1>Interpretive writing for when “knowing the answer” still doesn’t explain the system.</h1>
+        <p class="subhead">
+          Posts here connect new tools, recurring confusion points, and real-world lab behavior back to durable mechanisms and constraints.
+          No workflows. No optimization. Just clarity.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#latest">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 7h10M7 12h10M7 17h7" stroke="rgba(58,57,92,.92)" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Browse latest
+          </a>
+          <a class="btn" href="#categories">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 7h4v4H7V7Zm6 0h4v4h-4V7ZM7 13h4v4H7v-4Zm6 0h4v4h-4v-4Z" stroke="rgba(20,21,26,.75)" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            Categories
+          </a>
+          <a class="btn" href="#featured">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3l2.6 5.7 6.2.7-4.6 4 1.4 6.1L12 16.9 6.4 19.5l1.4-6.1-4.6-4 6.2-.7L12 3Z"
+                    stroke="rgba(20,21,26,.75)" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            Featured
+          </a>
+        </div>
+      </div>
+
+      <div class="tools">
+        <div class="tool-card" aria-label="Search and filters">
+          <div class="tool-title">
+            <h2>Find a post</h2>
+            <small id="countLabel">0 visible</small>
+          </div>
+
+          <div class="search">
+            <input id="q" type="search" placeholder="Search: automation, reference ranges, dilution, flags, constraints..." aria-label="Search posts" />
+          </div>
+
+          <div class="filters" id="categories" aria-label="Category filters">
+            <button class="chip" type="button" aria-pressed="true" data-cat="all">All</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Educational Extension">Educational Extension</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Technology & Assay Context">Technology & Assay Context</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Results & Reporting">Results & Reporting</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Quality, Safety, Reliability">Quality, Safety, Reliability</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Science & Public Health">Science & Public Health</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Lab Operations & Workflow (Conceptual)">Lab Operations & Workflow (Conceptual)</button>
+            <button class="chip" type="button" aria-pressed="false" data-cat="Education Spotlight">Education Spotlight</button>
+          </div>
+        </div>
+
+        <div class="tool-card" aria-label="Editorial rule">
+          <div class="tool-title">
+            <h2>Editorial rule</h2>
+            <small>Scope discipline</small>
+          </div>
+          <p style="margin:0;color:rgba(20,21,26,.70);font-size:13.5px">
+            Every post must explain a mechanism, constraint, pattern, or interface. If it requires telling someone what to do, it doesn’t belong.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Featured and latest posts">
+      <div class="section" id="featured">
+        <h3>Featured</h3>
+        <p class="hint">A strong starting point. Built for rereading.</p>
+
+        <div class="featured">
+          <a class="featured-card" href="#post-1" aria-label="Featured post">
+            <div class="meta">
+              <span class="tag">Educational Extension</span>
+              <span>8 min</span>
+              <span>Updated: 2026-01-08</span>
+            </div>
+            <h4 class="post-title">Why “normal” results can coexist with serious system strain</h4>
+            <p class="post-excerpt">
+              Reference intervals are statistical fences, not health guarantees. This post shows how compensation, compartment mismatch, and time-lag can produce plausible numbers while the upstream system is changing.
+            </p>
+          </a>
+        </div>
+      </div>
+
+      <aside class="side-stack" aria-label="Sidebar">
+        <div class="mini">
+          <h5>Start here</h5>
+          <p>Three posts that map the vibe of the blog.</p>
+          <ul>
+            <li>
+              <a href="#post-2">
+                <div>
+                  <div class="li-title">Automation looks confident because it compresses uncertainty</div>
+                  <div class="li-sub">Technology & Assay Context • 7 min</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#post-3">
+                <div>
+                  <div class="li-title">Why results get misread: the hidden assumptions in “clean numbers”</div>
+                  <div class="li-sub">Results & Reporting • 6 min</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#post-4">
+                <div>
+                  <div class="li-title">Quality systems aren’t bureaucracy — they’re constraint control</div>
+                  <div class="li-sub">Quality, Safety, Reliability • 6 min</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mini">
+          <h5>Category logic</h5>
+          <p style="margin-bottom:0">
+            Blog posts interpret what’s changing without destabilizing the Hub. Canonical explanations live in the Education Hub.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="latest" aria-label="Latest posts">
+      <h3>Latest</h3>
+      <p class="hint">Filter by category or search a phrase. The list updates instantly.</p>
+
+      <div class="empty" id="empty">
+        No posts match your filters. Try “all” or remove search terms.
+      </div>
+
+      <div class="posts" id="postGrid">
+        <!-- Sample cards — replace with real posts later -->
+        <a class="card" href="#post-1" data-cat="Educational Extension" data-title="Why “normal” results can coexist with serious system strain" data-desc="Reference intervals, compensation, and time-lag.">
+          <div class="meta">
+            <span class="tag">Educational Extension</span><span>8 min</span><span>2026-01-08</span>
+          </div>
+          <h4>Why “normal” results can coexist with serious system strain</h4>
+          <p>Normal is a population boundary. Systems can compensate while upstream constraints shift.</p>
+          <div class="row"><span class="pill">Interfaces</span><span>Read →</span></div>
+        </a>
+
+        <a class="card" href="#post-2" data-cat="Technology & Assay Context" data-title="Automation looks confident because it compresses uncertainty" data-desc="Assumptions, edge behavior, and silent failure modes.">
+          <div class="meta">
+            <span class="tag">Technology & Assay Context</span><span>7 min</span><span>2026-01-05</span>
+          </div>
+          <h4>Automation looks confident because it compresses uncertainty</h4>
+          <p>Why plausible output can still be wrong: assumption stacks, boundary behavior, and lossy flags.</p>
+          <div class="row"><span class="pill">Assumptions</span><span>Read →</span></div>
+        </a>
+
+        <a class="card" href="#post-3" data-cat="Results & Reporting" data-title="Why results get misread: hidden assumptions in clean numbers" data-desc="Concentration vs mass, plasma shifts, and interpretation drift.">
+          <div class="meta">
+            <span class="tag">Results & Reporting</span><span>6 min</span><span>2025-12-28</span>
+          </div>
+          <h4>Why results get misread: hidden assumptions in “clean numbers”</h4>
+          <p>Most confusion isn’t missing facts. It’s missing the constraints inside the number.</p>
+          <div class="row"><span class="pill">Constraints</span><span>Read →</span></div>
+        </a>
+
+        <a class="card" href="#post-4" data-cat="Quality, Safety, Reliability" data-title="Quality systems aren’t bureaucracy — they’re constraint control" data-desc="QC and QA as system design, not compliance theater.">
+          <div class="meta">
+            <span class="tag">Quality, Safety, Reliability</span><span>6 min</span><span>2025-12-18</span>
+          </div>
+          <h4>Quality systems aren’t bureaucracy — they’re constraint control</h4>
+          <p>Why safeguards exist, what they’re actually trying to detect, and why they fail quietly.</p>
+          <div class="row"><span class="pill">Reliability</span><span>Read →</span></div>
+        </a>
+
+        <a class="card" href="#post-5" data-cat="Science & Public Health" data-title="What “surveillance testing” means and what it does not" data-desc="Signal vs diagnosis, trends vs individuals.">
+          <div class="meta">
+            <span class="tag">Science & Public Health</span><span>5 min</span><span>2025-11-30</span>
+          </div>
+          <h4>What “surveillance testing” means — and what it does not</h4>
+          <p>Population signals are not individual answers. This post clarifies the difference without hype.</p>
+          <div class="row"><span class="pill">Public health</span><span>Read →</span></div>
+        </a>
+
+        <a class="card" href="#post-6" data-cat="Lab Operations & Workflow (Conceptual)" data-title="Turnaround time is a system property, not a promise" data-desc="Bottlenecks, batching, and queue logic.">
+          <div class="meta">
+            <span class="tag">Lab Operations & Workflow (Conceptual)</span><span>6 min</span><span>2025-11-15</span>
+          </div>
+          <h4>Turnaround time is a system property, not a promise</h4>
+          <p>Queue logic, batching effects, and why small disruptions create big delays.</p>
+          <div class="row"><span class="pill">Systems</span><span>Read →</span></div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> LabContext — Blog</div>
+      <div class="foot-links" aria-label="Footer links">
+        <a href="#">Archive</a>
+        <a href="#">RSS</a>
+        <a href="#">Style</a>
+        <a href="#">Contact</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const year = document.getElementById("year");
+      year.textContent = new Date().getFullYear();
+
+      const q = document.getElementById("q");
+      const chips = Array.from(document.querySelectorAll(".chip"));
+      const cards = Array.from(document.querySelectorAll("#postGrid .card"));
+      const empty = document.getElementById("empty");
+      const countLabel = document.getElementById("countLabel");
+
+      let activeCat = "all";
+
+      function norm(s){ return (s || "").toLowerCase().trim(); }
+
+      function apply(){
+        const term = norm(q.value);
+        let visible = 0;
+
+        cards.forEach(card => {
+          const cat = card.getAttribute("data-cat") || "";
+          const title = card.getAttribute("data-title") || "";
+          const desc = card.getAttribute("data-desc") || "";
+          const hay = norm(title + " " + desc + " " + cat);
+
+          const catOk = (activeCat === "all") || (cat === activeCat);
+          const termOk = !term || hay.includes(term);
+
+          const show = catOk && termOk;
+          card.style.display = show ? "" : "none";
+          if(show) visible++;
+        });
+
+        empty.style.display = visible ? "none" : "block";
+        countLabel.textContent = visible + " visible";
+      }
+
+      chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          chips.forEach(c => c.setAttribute("aria-pressed", "false"));
+          chip.setAttribute("aria-pressed", "true");
+          activeCat = chip.getAttribute("data-cat") || "all";
+          apply();
+        });
+      });
+
+      q.addEventListener("input", apply);
+
+      apply();
+    })();
+  </script>
+</body>
+</html>
