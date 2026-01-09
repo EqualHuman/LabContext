@@ -5,370 +5,386 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LabContext — Clear Lab Science for Real Life</title>
   <meta name="description" content="LabContext makes lab science understandable—without the lecture." />
+
   <style>
     :root{
-      /* NEW VIBE: clinical daylight + cobalt + mint */
-      --bg: #f3fbff;          /* airy aqua */
-      --panel: rgba(255,255,255,.72);
-      --panel-2: rgba(255,255,255,.52);
-      --ink: #06121c;         /* crisp navy-black */
-      --muted: #3b5567;       /* slate teal */
-      --line: rgba(6,18,28,.10);
-      --cobalt: #1a4cff;
-      --mint: #2ee9c6;
-      --warn: #ff4d6d;
-      --radius: 22px;
-      --shadow: 0 20px 55px rgba(0, 40, 80, .12);
+      --paper: #fbfaf7;
+      --ink: #10121a;
+      --muted: rgba(16,18,26,.70);
+      --faint: rgba(16,18,26,.08);
+      --rule: rgba(16,18,26,.16);
+      --accent: #2c2a6f; /* indigo, not electric */
+
+      --radius: 12px;
 
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+
     body{
-      margin:0;
-      font-family: var(--sans);
+      margin: 0;
       color: var(--ink);
       background:
-        radial-gradient(900px 500px at 18% 12%, rgba(46,233,198,.22), transparent 60%),
-        radial-gradient(900px 520px at 82% 10%, rgba(26,76,255,.18), transparent 58%),
-        radial-gradient(700px 520px at 50% 100%, rgba(255,77,109,.10), transparent 60%),
-        linear-gradient(180deg, #f7fdff, var(--bg));
-      letter-spacing:-0.01em;
+        linear-gradient(0deg, rgba(255,255,255,.65), rgba(255,255,255,.65)),
+        radial-gradient(1200px 800px at 50% 0%, rgba(44,42,111,.06), transparent 55%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(16,18,26,.03) 0px,
+          rgba(16,18,26,.03) 1px,
+          transparent 1px,
+          transparent 28px
+        ),
+        var(--paper);
+      font-family: var(--sans);
+      letter-spacing: -0.01em;
+      line-height: 1.45;
     }
 
-    a{color:inherit;text-decoration:none}
+    a{ color: inherit; text-decoration: none; }
     a:focus-visible, button:focus-visible{
-      outline: 3px solid rgba(26,76,255,.35);
+      outline: 3px solid rgba(44,42,111,.25);
       outline-offset: 3px;
-      border-radius: 14px;
+      border-radius: 10px;
     }
 
-    .wrap{
-      max-width: 1040px;
+    /* PAGE */
+    .page{
+      max-width: 980px;
       margin: 0 auto;
-      padding: 22px 18px 42px;
+      padding: 28px 18px 60px;
     }
 
-    /* HEADER: "specimen label" + bench tabs */
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      border-bottom: 1px solid rgba(6,18,28,.08);
-      background: linear-gradient(180deg, rgba(243,251,255,.85), rgba(243,251,255,.55));
-      backdrop-filter: blur(14px);
-    }
-    .header-inner{
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 14px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
+    /* MASTHEAD (not an app header) */
+    .masthead{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
     }
 
-    .label{
-      display:flex;
-      align-items:center;
+    .mark{
+      display: inline-flex;
+      align-items: center;
       gap: 12px;
-      min-width: 210px;
     }
 
-    /* a "tube cap" icon */
-    .cap{
+    .stamp{
       width: 44px;
       height: 44px;
-      border-radius: 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(16,18,26,.14);
       background:
-        linear-gradient(135deg, rgba(26,76,255,.95), rgba(46,233,198,.85));
-      box-shadow: 0 18px 35px rgba(0,40,80,.18);
-      position:relative;
-      overflow:hidden;
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.8), transparent 45%),
+        linear-gradient(135deg, rgba(44,42,111,.95), rgba(44,42,111,.55));
+      position: relative;
     }
-    .cap::before{
+    .stamp::after{
       content:"";
       position:absolute;
-      left: 10px;
-      right: 10px;
-      top: 10px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.55);
-      transform: skewX(-12deg);
-    }
-    .cap::after{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background:
-        radial-gradient(circle at 40% 40%, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(255,255,255,.18), transparent 55%);
-      transform: rotate(18deg);
+      inset: 7px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.30);
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,.18) 0 2px,
+        transparent 2px 6px
+      );
+      opacity: .55;
     }
 
-    .brandtext{
-      display:flex;
-      flex-direction:column;
-      gap: 2px;
+    .brand{
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: 1px;
     }
-    .brandtext strong{
+    .brand strong{
       font-size: 14px;
-      letter-spacing: .08em;
+      letter-spacing: .14em;
       text-transform: uppercase;
     }
-    .brandtext span{
+    .brand .sub{
       font-family: var(--mono);
       font-size: 11px;
-      color: rgba(6,18,28,.60);
+      color: rgba(16,18,26,.62);
     }
 
-    nav{
-      display:flex;
-      align-items:center;
-      gap: 8px;
+    /* NAV as simple index links */
+    .nav{
+      display: flex;
       flex-wrap: wrap;
-      justify-content:flex-end;
+      gap: 10px 14px;
+      justify-content: flex-end;
+      padding-top: 4px;
     }
-
-    .tab{
-      font-size: 13px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(6,18,28,.10);
-      background: rgba(255,255,255,.52);
-      color: rgba(6,18,28,.78);
-      transition: transform .12s ease, background .12s ease;
-    }
-    .tab:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.76);
-    }
-
-    .tab.primary{
-      border-color: rgba(26,76,255,.25);
-      background:
-        linear-gradient(180deg, rgba(26,76,255,.14), rgba(255,255,255,.60));
-    }
-
-    /* HERO: "glass tray on lab bench" */
-    main{
-      padding-top: 18px;
-    }
-
-    .tray{
-      border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.55);
-      overflow:hidden;
-      position:relative;
-    }
-
-    /* NEW motif: "barcode + measurement ticks" instead of diagram lines */
-    .tray::before{
-      content:"";
-      position:absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(6,18,28,.06) 0 2px,
-          transparent 2px 7px
-        );
-      opacity: .18;
-      mask-image: radial-gradient(closest-side at 18% 28%, rgba(0,0,0,.9), transparent 62%);
-      pointer-events:none;
-    }
-    .tray::after{
-      content:"";
-      position:absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 64px;
-      background:
-        linear-gradient(90deg, rgba(26,76,255,.22), rgba(46,233,198,.18), rgba(255,77,109,.14));
-      opacity:.55;
-      pointer-events:none;
-    }
-
-    .tray-inner{
-      padding: 34px 26px 28px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 22px;
-      align-items:start;
-    }
-
-    .kicker{
+    .nav a{
       font-family: var(--mono);
       font-size: 12px;
-      color: rgba(6,18,28,.60);
-      letter-spacing: .02em;
-      margin-bottom: 10px;
+      color: rgba(16,18,26,.72);
+      padding: 2px 0;
+      border-bottom: 1px solid transparent;
+    }
+    .nav a:hover{
+      color: rgba(16,18,26,.92);
+      border-bottom-color: rgba(16,18,26,.20);
+    }
+    .nav a.primary{
+      color: rgba(44,42,111,.92);
+      border-bottom-color: rgba(44,42,111,.25);
     }
 
-    h2{
-      margin: 0 0 10px;
-      font-size: clamp(28px, 4.2vw, 44px);
+    /* CONTENT LAYOUT: a printed page rhythm */
+    .content{
+      padding-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    /* TOP LINE: looks like a document label */
+    .docline{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: baseline;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(16,18,26,.62);
+    }
+    .docline .chip{
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 3px 10px;
+      border: 1px solid rgba(16,18,26,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+    }
+    .docline .dot{
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(44,42,111,.80);
+      display: inline-block;
+      transform: translateY(1px);
+    }
+
+    /* TITLE: serif for "reference" vibe */
+    h1{
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(34px, 5vw, 54px);
       line-height: 1.04;
       letter-spacing: -0.03em;
     }
 
     .lede{
-      margin: 0 0 16px;
-      font-size: 16px;
-      color: rgba(6,18,28,.72);
-      max-width: 60ch;
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(16,18,26,.78);
+      max-width: 72ch;
     }
 
-    .pills{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px;
-      margin-top: 10px;
+    /* RULED BOXES: not cards, more like sections on a page */
+    .panel{
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.58);
+      border-radius: var(--radius);
+      overflow: hidden;
     }
-    .pill{
+
+    .panel .panel-head{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: baseline;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--faint);
+      background: rgba(255,255,255,.45);
+    }
+
+    .panel .panel-head .title{
       font-family: var(--mono);
       font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(6,18,28,.10);
-      background: rgba(255,255,255,.50);
-      color: rgba(6,18,28,.70);
-    }
-    .pill b{
-      font-weight: 700;
-      color: rgba(6,18,28,.85);
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: rgba(16,18,26,.68);
     }
 
-    /* Right column: "specimen card" */
-    .spec{
-      border-radius: 18px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(6,18,28,.10);
-      padding: 14px 14px 12px;
-      position:relative;
-      overflow:hidden;
-    }
-    .spec .row{
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
+    .panel .panel-head .meta{
       font-family: var(--mono);
       font-size: 11px;
-      color: rgba(6,18,28,.62);
-      border-bottom: 1px dashed rgba(6,18,28,.16);
-      padding-bottom: 10px;
-      margin-bottom: 10px;
+      color: rgba(16,18,26,.58);
     }
-    .spec .row .tag{
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(26,76,255,.12);
-      color: rgba(26,76,255,.92);
-      border: 1px solid rgba(26,76,255,.20);
-      font-weight: 700;
-      letter-spacing: .02em;
+
+    .panel .panel-body{
+      padding: 14px 16px 16px;
     }
-    .spec p{
+
+    .bullets{
       margin: 0;
-      font-size: 13px;
-      color: rgba(6,18,28,.72);
-      line-height: 1.45;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+      color: rgba(16,18,26,.76);
     }
-    .spec p + p{ margin-top: 10px; }
+    .bullets li{
+      line-height: 1.55;
+    }
+    .bullets b{
+      color: rgba(16,18,26,.90);
+    }
 
-    /* Footer: clean, “shift report” */
-    footer{
-      margin-top: 18px;
-      padding: 18px 6px 0;
-      color: rgba(6,18,28,.60);
-      font-size: 12px;
-    }
-    .footer-inner{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
+    /* TWO-COLUMN “WHAT IT IS / ISN’T” without modern card styling */
+    .split{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 14px;
-      padding: 14px 12px;
-      border-top: 1px solid rgba(6,18,28,.10);
+      margin-top: 6px;
     }
-    .footer-inner .mono{
+    .box{
+      border: 1px solid rgba(16,18,26,.14);
+      background: rgba(255,255,255,.52);
+      border-radius: 10px;
+      padding: 12px 12px 10px;
+      min-height: 92px;
+    }
+    .box h3{
+      margin: 0 0 8px;
       font-family: var(--mono);
-      letter-spacing:.02em;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(16,18,26,.70);
+    }
+    .box p{
+      margin: 0;
+      font-size: 14px;
+      color: rgba(16,18,26,.76);
+      line-height: 1.55;
     }
 
-    /* Responsive */
-    @media (max-width: 860px){
-      .tray-inner{ grid-template-columns: 1fr; }
-      .label{ min-width: unset; }
+    /* FOOTER: looks like document footer, not site footer */
+    .footer{
+      margin-top: 26px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+      color: rgba(16,18,26,.62);
+    }
+    .footer .label{
+      font-family: var(--mono);
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 6px;
+      color: rgba(16,18,26,.62);
+    }
+    .footer .desc{
+      font-size: 12px;
+      color: rgba(16,18,26,.62);
+    }
+    .footer .right{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(16,18,26,.62);
+      text-align: right;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 820px){
+      .masthead{ grid-template-columns: 1fr; }
+      .nav{ justify-content: flex-start; }
+      .split{ grid-template-columns: 1fr; }
+      .footer{ grid-template-columns: 1fr; }
+      .footer .right{ text-align: left; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="header-inner">
-      <a class="label" href="#" aria-label="LabContext home">
-        <div class="cap" aria-hidden="true"></div>
-        <div class="brandtext">
+  <div class="page">
+    <header class="masthead" aria-label="LabContext masthead">
+      <a class="mark" href="#" aria-label="LabContext home">
+        <div class="stamp" aria-hidden="true"></div>
+        <div class="brand">
           <strong>LabContext</strong>
-          <span>specimen: clarity • sample: curiosity</span>
+          <div class="sub">specimen: clarity • sample: curiosity</div>
         </div>
       </a>
 
-      <nav aria-label="Primary">
-        <a class="tab" href="#">Explore</a>
-        <a class="tab" href="#">Topics</a>
-        <a class="tab" href="#">About</a>
-        <a class="tab primary" href="#">Start Here</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#">Explore</a>
+        <a href="#">Topics</a>
+        <a href="#">About</a>
+        <a class="primary" href="#">Start Here</a>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <div class="wrap">
-    <main>
-      <section class="tray" aria-label="LabContext introduction">
-        <div class="tray-inner">
-          <div>
-            <div class="kicker">LABCONTEXT / HOME</div>
-            <h2>Lab science,<br>made usable.</h2>
-            <p class="lede">
-              We translate lab medicine into plain meaning—what a test measures, what it suggests,
-              and why it matters—without turning it into a lecture.
-            </p>
+    <main class="content" aria-label="LabContext introduction">
+      <div class="docline">
+        <span class="chip"><span class="dot" aria-hidden="true"></span> LC-0001</span>
+        <span>LABCONTEXT / HOME</span>
+        <span>REV: 01</span>
+      </div>
 
-            <div class="pills" aria-label="What you’ll find">
-              <div class="pill"><b>Concept-first</b> explanations</div>
-              <div class="pill"><b>Quick orientation</b> to terms</div>
-              <div class="pill"><b>Clean takeaways</b> you can trust</div>
+      <h1>Lab science, made usable.</h1>
+
+      <p class="lede">
+        We translate lab medicine into plain meaning—what a test measures, what it suggests,
+        and why it matters—without turning it into a lecture.
+      </p>
+
+      <section class="panel" aria-label="What you’ll find here">
+        <div class="panel-head">
+          <div class="title">What you’ll find</div>
+          <div class="meta">overview</div>
+        </div>
+        <div class="panel-body">
+          <ul class="bullets">
+            <li><b>Concept-first explanations</b> that start with what the test is actually measuring.</li>
+            <li><b>Quick orientation</b> to common terms so results feel less like a foreign language.</li>
+            <li><b>Clean takeaways</b> that focus on meaning, limits, and why the result matters.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="What LabContext is and isn’t">
+        <div class="panel-head">
+          <div class="title">Scope</div>
+          <div class="meta">boundaries</div>
+        </div>
+        <div class="panel-body">
+          <div class="split">
+            <div class="box">
+              <h3>What LabContext is</h3>
+              <p>A calm place to get your bearings when lab words feel like a foreign language.</p>
+            </div>
+            <div class="box">
+              <h3>What it isn’t</h3>
+              <p>Medical advice, panic fuel, or a list of scary worst-cases.</p>
             </div>
           </div>
-
-          <aside class="spec" aria-label="Specimen card">
-            <div class="row">
-              <span>ACCESSION: LC-0001</span>
-              <span class="tag">READY</span>
-            </div>
-            <p><b>What LabContext is:</b> a calm place to get your bearings when lab words feel like a foreign language.</p>
-            <p><b>What it isn’t:</b> medical advice, panic fuel, or a list of scary worst-cases.</p>
-          </aside>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div class="footer-inner">
-        <div>
-          <div class="mono">LabContext • shift report</div>
-          <div>Clear explanations. Low noise. High trust.</div>
-        </div>
-        <div class="mono">© <span id="year"></span> LabContext</div>
+    <footer class="footer" aria-label="LabContext footer">
+      <div>
+        <div class="label">Shift report</div>
+        <div class="desc">Clear explanations. Low noise. High trust.</div>
       </div>
+      <div class="right">© <span id="year"></span> LabContext</div>
     </footer>
   </div>
 
