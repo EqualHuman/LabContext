@@ -7,30 +7,33 @@
 
   <style>
     :root{
-      --bg:#fbfbfd;
-      --paper:#ffffff;
-      --text:#0f172a;
+      --bg:#f6f7fb;
+      --surface:#ffffff;
+      --ink:#0f172a;
       --muted:#475569;
       --muted2:#64748b;
       --border:#e2e8f0;
       --accent:#1f3fb6;
-
-      --max:1120px;
-      --measure:72ch;
+      --accent2:#2f56d6;
+      --accentSoft: rgba(31,63,182,0.10);
+      --shadow: 0 18px 55px rgba(15,23,42,0.10);
+      --shadow2: 0 10px 28px rgba(15,23,42,0.08);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1120px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-
     body{
       margin:0;
-      color:var(--text);
-      background:
-        radial-gradient(900px 520px at 15% 0%, rgba(31,63,182,0.08), transparent 60%),
-        radial-gradient(900px 520px at 85% 10%, rgba(31,63,182,0.06), transparent 65%),
-        linear-gradient(180deg, var(--bg), #f7f8fb);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      line-height:1.55;
+      color: var(--ink);
+      background:
+        radial-gradient(950px 520px at 16% 8%, rgba(47,86,214,0.10), transparent 60%),
+        radial-gradient(900px 560px at 82% 12%, rgba(31,63,182,0.08), transparent 62%),
+        linear-gradient(180deg, #f6f7fb, #f3f5fb 55%, #f6f7fb);
+      overflow-x:hidden;
     }
 
     a{ color:inherit; }
@@ -45,7 +48,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(251,251,253,0.92);
+      background: rgba(246,247,251,0.88);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
@@ -61,254 +64,404 @@
       align-items:center;
       gap: .7rem;
       text-decoration:none;
-    }
-    .mark{
-      width: 12px;
-      height: 12px;
-      border-radius: 99px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(31,63,182,0.10);
-    }
-    .brand-name{
-      font-weight: 800;
+      font-weight: 850;
       letter-spacing: -0.2px;
-      font-size: 1.02rem;
+    }
+    .brand-mark{
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      border: 1px solid rgba(31,63,182,0.20);
+      background:
+        radial-gradient(140% 120% at 20% 18%, rgba(47,86,214,0.28), transparent 55%),
+        radial-gradient(120% 120% at 78% 22%, rgba(31,63,182,0.18), transparent 60%),
+        linear-gradient(180deg, #ffffff, #eef2ff);
+      box-shadow: 0 14px 30px rgba(31,63,182,0.10);
     }
     .nav{
       display:flex;
-      gap: .8rem;
+      align-items:center;
+      gap: .6rem;
       flex-wrap: wrap;
       justify-content:flex-end;
-      align-items:center;
     }
     .nav a{
       text-decoration:none;
       color: var(--muted);
       font-weight: 650;
       font-size: .95rem;
-      padding: .45rem .55rem;
-      border-radius: 10px;
+      padding: .45rem .6rem;
+      border-radius: 12px;
       border: 1px solid transparent;
     }
     .nav a:hover{
       background: rgba(15,23,42,0.04);
       border-color: var(--border);
-      color: var(--text);
+      color: var(--ink);
     }
     .nav .cta{
-      color: var(--accent);
-      border-color: rgba(31,63,182,0.20);
-      background: rgba(31,63,182,0.06);
+      color: #ffffff;
+      background: linear-gradient(180deg, rgba(47,86,214,0.96), rgba(31,63,182,0.96));
+      border-color: rgba(31,63,182,0.22);
+      box-shadow: 0 12px 26px rgba(31,63,182,0.18);
+      padding: .5rem .75rem;
     }
     .nav .cta:hover{
-      background: rgba(31,63,182,0.10);
+      filter: brightness(1.03);
+      background: linear-gradient(180deg, rgba(47,86,214,1), rgba(31,63,182,1));
       border-color: rgba(31,63,182,0.28);
     }
 
-    /* Page header */
-    .mast{
-      padding: 2.75rem 0 1.5rem;
+    /* Hero */
+    .hero{
+      padding: 3.2rem 0 1.75rem;
     }
-    .kicker{
-      display:inline-block;
-      color: var(--muted2);
-      font-weight: 750;
-      font-size: .92rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.15rem;
+      align-items: stretch;
     }
-    .mast h1{
-      margin: 0 0 .65rem;
-      font-size: clamp(2.2rem, 3.2vw, 3.0rem);
-      line-height: 1.08;
-      letter-spacing: -0.9px;
-      max-width: var(--measure);
+    .hero-left{
+      padding: 1.25rem 0;
     }
-    .mast p{
-      margin: 0 0 1.35rem;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding: .42rem .7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(31,63,182,0.18);
+      background: rgba(255,255,255,0.70);
       color: var(--muted);
-      font-size: 1.08rem;
-      max-width: var(--measure);
+      font-weight: 700;
+      font-size: .92rem;
     }
-
-    .searchrow{
+    .eyedot{
+      width: 9px; height: 9px;
+      border-radius: 99px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 5px rgba(47,86,214,0.14);
+    }
+    .hero h1{
+      margin: .95rem 0 .7rem;
+      font-size: clamp(2.3rem, 3.6vw, 3.25rem);
+      line-height: 1.06;
+      letter-spacing: -0.95px;
+      max-width: 22ch;
+    }
+    .hero p{
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 1.07rem;
+      max-width: 62ch;
+    }
+    .hero-actions{
       display:flex;
-      gap: .7rem;
+      gap: .75rem;
       flex-wrap: wrap;
       align-items:center;
-      margin-top: 1rem;
-    }
-    .searchrow input{
-      flex: 1;
-      min-width: 240px;
-      padding: .95rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.85);
-      font-size: 1rem;
-      outline: none;
-    }
-    .searchrow input:focus{
-      border-color: rgba(31,63,182,0.35);
-      box-shadow: 0 0 0 4px rgba(31,63,182,0.10);
+      margin-top: .25rem;
     }
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: .95rem 1rem;
-      border-radius: 12px;
-      border: 1px solid rgba(31,63,182,0.22);
-      background: rgba(31,63,182,0.08);
-      color: var(--accent);
-      font-weight: 750;
+      gap:.55rem;
+      padding: .95rem 1.05rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.85);
       text-decoration:none;
+      font-weight: 780;
+      color: var(--ink);
+      box-shadow: var(--shadow2);
       white-space: nowrap;
     }
     .btn:hover{
-      background: rgba(31,63,182,0.12);
-      border-color: rgba(31,63,182,0.30);
+      background: rgba(15,23,42,0.03);
     }
     .btn.primary{
-      background: var(--accent);
+      background: linear-gradient(180deg, rgba(47,86,214,0.98), rgba(31,63,182,0.98));
       color: #ffffff;
-      border-color: rgba(31,63,182,0.35);
+      border-color: rgba(31,63,182,0.22);
+      box-shadow: 0 18px 38px rgba(31,63,182,0.20);
     }
     .btn.primary:hover{
       filter: brightness(1.03);
     }
-
-    /* Layout */
-    .rule{
-      border-top: 1px solid var(--border);
-      margin: 1.75rem 0 0;
+    .btn.ghost{
+      background: transparent;
+      border-color: rgba(15,23,42,0.12);
+      box-shadow: none;
+    }
+    .btn.ghost:hover{
+      background: rgba(15,23,42,0.04);
     }
 
-    .columns{
-      display:grid;
-      grid-template-columns: 1.1fr 0.9fr 0.9fr;
-      gap: 2rem;
-      padding: 1.75rem 0 0;
+    .hero-right{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.52));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+      padding: 1.35rem;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
     }
-
-    .col-title{
-      margin: 0 0 .85rem;
-      font-size: 1.05rem;
+    .hero-right::before{
+      content:"";
+      position:absolute;
+      inset:-150px -140px auto auto;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(47,86,214,0.24), transparent 62%);
+      pointer-events:none;
+    }
+    .hero-right::after{
+      content:"";
+      position:absolute;
+      inset:auto -120px -180px auto;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 40% 40%, rgba(31,63,182,0.16), transparent 64%);
+      pointer-events:none;
+    }
+    .panel-title{
+      margin: 0 0 .35rem;
+      font-weight: 900;
       letter-spacing: -0.2px;
-      font-weight: 850;
+      position: relative;
+      z-index: 1;
     }
-    .col-sub{
-      margin: 0 0 1.05rem;
+    .panel-text{
+      margin: 0 0 1rem;
       color: var(--muted);
       font-size: .98rem;
+      position: relative;
+      z-index: 1;
+      max-width: 52ch;
+    }
+    .panel-links{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .65rem;
+      position: relative;
+      z-index: 1;
+    }
+    .linkbox{
+      border: 1px solid rgba(15,23,42,0.10);
+      background: rgba(255,255,255,0.70);
+      border-radius: 14px;
+      padding: .85rem .9rem;
+      text-decoration:none;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.06);
+    }
+    .linkbox:hover{
+      border-color: rgba(31,63,182,0.22);
+      background: rgba(31,63,182,0.05);
+    }
+    .linkbox b{
+      display:block;
+      font-weight: 900;
+      letter-spacing: -0.15px;
+      margin-bottom: .18rem;
+    }
+    .linkbox span{
+      color: var(--muted);
+      font-size: .92rem;
     }
 
-    /* Lists */
-    .list{
-      border-top: 1px solid var(--border);
+    /* Value props */
+    .props{
+      padding: 1.25rem 0 0;
     }
-    .item{
-      display:block;
-      padding: 1.05rem 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration:none;
+    .prop-row{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .95rem;
+      margin-top: 1rem;
     }
-    .item:hover .it-title{
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
+    .prop{
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.82);
+      box-shadow: 0 12px 30px rgba(15,23,42,0.07);
+      padding: 1.15rem;
     }
-    .it-title{
-      margin: 0 0 .3rem;
-      font-weight: 850;
+    .prop h3{
+      margin: 0 0 .35rem;
+      font-size: 1.02rem;
+      font-weight: 900;
       letter-spacing: -0.2px;
-      line-height: 1.25;
     }
-    .it-desc{
+    .prop p{
       margin: 0;
       color: var(--muted);
       font-size: .95rem;
     }
-    .it-meta{
-      margin-top: .55rem;
-      display:flex;
-      gap:.55rem;
-      flex-wrap: wrap;
-      color: var(--muted2);
-      font-size: .86rem;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      padding: .25rem .55rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15,23,42,0.02);
-    }
 
-    /* Topic index */
-    .topics{
-      padding: 2.25rem 0 0;
+    /* Guided paths */
+    .section{
+      padding: 2.1rem 0 0;
     }
-    .topics-header{
+    .section-head{
       display:flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 1rem;
       margin-bottom: .85rem;
     }
-    .topics-header h2{
+    .section-head h2{
       margin: 0;
-      font-size: 1.1rem;
-      font-weight: 900;
+      font-size: 1.15rem;
+      font-weight: 950;
       letter-spacing: -0.2px;
     }
-    .topics-header a{
-      color: var(--accent);
-      text-decoration:none;
-      font-weight: 800;
+    .section-head .hint{
+      color: var(--muted2);
+      font-weight: 650;
       font-size: .95rem;
     }
-    .topics-header a:hover{
-      text-decoration: underline;
-      text-underline-offset: 4px;
+
+    .paths{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .95rem;
+    }
+    .path{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow2);
+      padding: 1.2rem;
+      position: relative;
+      overflow:hidden;
+    }
+    .path::before{
+      content:"";
+      position:absolute;
+      inset:-160px auto auto -160px;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 35% 35%, rgba(47,86,214,0.12), transparent 65%);
+      pointer-events:none;
+    }
+    .path h3{
+      margin: 0 0 .35rem;
+      font-weight: 950;
+      letter-spacing: -0.2px;
+      position: relative;
+      z-index: 1;
+    }
+    .path p{
+      margin: 0 0 .85rem;
+      color: var(--muted);
+      font-size: .95rem;
+      position: relative;
+      z-index: 1;
+      max-width: 62ch;
+    }
+    .path-links{
+      display:flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      position: relative;
+      z-index: 1;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,0.10);
+      background: rgba(15,23,42,0.02);
+      text-decoration:none;
+      color: var(--muted);
+      font-weight: 750;
+      font-size: .92rem;
+    }
+    .pill:hover{
+      background: rgba(31,63,182,0.06);
+      border-color: rgba(31,63,182,0.18);
+      color: var(--ink);
     }
 
-    .topic-grid{
+    /* Steps */
+    .steps{
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: .8rem 1.2rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
+      grid-template-columns: repeat(3, 1fr);
+      gap: .95rem;
     }
-    .topic-link{
-      text-decoration:none;
-      padding: .85rem .9rem;
+    .step{
       border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.75);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.06);
+      padding: 1.15rem;
     }
-    .topic-link:hover{
-      border-color: rgba(31,63,182,0.22);
-      background: rgba(31,63,182,0.05);
+    .stepnum{
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 950;
+      color: var(--accent);
+      background: var(--accentSoft);
+      border: 1px solid rgba(31,63,182,0.18);
+      margin-bottom: .6rem;
     }
-    .topic-name{
-      font-weight: 900;
-      letter-spacing: -0.15px;
-      margin: 0 0 .15rem;
-      font-size: .98rem;
+    .step h3{
+      margin: 0 0 .35rem;
+      font-weight: 950;
+      letter-spacing: -0.2px;
     }
-    .topic-note{
+    .step p{
       margin: 0;
       color: var(--muted);
-      font-size: .9rem;
+      font-size: .95rem;
+    }
+
+    /* Bottom CTA */
+    .cta-band{
+      margin-top: 2.25rem;
+      border: 1px solid rgba(31,63,182,0.18);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(900px 420px at 15% 15%, rgba(47,86,214,0.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.70));
+      box-shadow: var(--shadow);
+      padding: 1.35rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cta-band h3{
+      margin: 0 0 .2rem;
+      font-weight: 950;
+      letter-spacing: -0.2px;
+    }
+    .cta-band p{
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 70ch;
     }
 
     /* Footer */
     .footer{
-      margin-top: 3rem;
-      padding: 2rem 0 3.2rem;
+      margin-top: 2.75rem;
+      padding: 2rem 0 3rem;
       border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: .92rem;
@@ -319,7 +472,7 @@
       gap: 1rem;
       align-items:start;
     }
-    .footer strong{ color: var(--text); }
+    .footer strong{ color: var(--ink); }
     .footer-links{
       display:flex;
       flex-wrap: wrap;
@@ -336,20 +489,23 @@
     .footer-links a:hover{
       background: rgba(15,23,42,0.04);
       border-color: var(--border);
-      color: var(--text);
+      color: var(--ink);
     }
 
     /* Responsive */
-    @media (max-width: 1000px){
-      .columns{ grid-template-columns: 1fr; gap: 1.75rem; }
-      .topic-grid{ grid-template-columns: 1fr 1fr; }
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .panel-links{ grid-template-columns: 1fr; }
+      .prop-row{ grid-template-columns: 1fr; }
+      .paths{ grid-template-columns: 1fr; }
+      .steps{ grid-template-columns: 1fr; }
       .footer-grid{ grid-template-columns: 1fr; }
       .footer-links{ justify-content:flex-start; }
     }
     @media (max-width: 520px){
-      .topic-grid{ grid-template-columns: 1fr; }
-      .searchrow{ flex-direction: column; align-items: stretch; }
-      .btn{ width: 100%; }
+      .hero h1{ max-width: 100%; }
+      .btn{ width: 100%; justify-content:center; }
+      .hero-actions{ width: 100%; }
     }
   </style>
 </head>
@@ -359,188 +515,174 @@
     <div class="container">
       <div class="topbar-inner">
         <a class="brand" href="index.html">
-          <span class="mark" aria-hidden="true"></span>
-          <span class="brand-name">LabContext</span>
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>LabContext</span>
         </a>
 
         <nav class="nav" aria-label="Primary navigation">
-          <a href="#start">Start</a>
+          <a href="#paths">Start</a>
+          <a href="#how">How it works</a>
           <a href="#topics">Topics</a>
-          <a href="#latest">Latest</a>
-          <a class="cta" href="#featured">Featured</a>
+          <a class="cta" href="#paths">Get Started</a>
         </nav>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="mast" id="start">
-      <div class="kicker">Laboratory science, explained</div>
-      <h1>Clarity-first explanations for lab tests, mechanisms, and interpretation.</h1>
-      <p>
-        LabContext is built like a reference: calm structure, readable pages, and concepts that connect
-        results to physiology and method limitations.
-      </p>
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow"><span class="eyedot" aria-hidden="true"></span> Laboratory science, explained</div>
+          <h1>Understand lab results by learning what the lab is measuring.</h1>
+          <p>
+            A structured reference hub for concepts, mechanisms, and interpretation. Built to be calm, readable,
+            and consistent across topics.
+          </p>
 
-      <div class="searchrow" role="search" aria-label="Site search">
-        <input type="search" placeholder="Search: CBC, hemolysis, immunoassay, PT/INR, CRP..." aria-label="Search" />
-        <a class="btn primary" href="#topics">Browse Topics</a>
-        <a class="btn" href="#featured">Start with Featured</a>
+          <div class="hero-actions">
+            <a class="btn primary" href="#topics">Browse Topics</a>
+            <a class="btn ghost" href="#paths">Pick a Starting Path</a>
+          </div>
+        </div>
+
+        <aside class="hero-right" aria-label="Quick start panel">
+          <div>
+            <p class="panel-title">Quick start</p>
+            <p class="panel-text">Choose a path. Everything else can stay empty until you’re ready to add content.</p>
+          </div>
+
+          <div class="panel-links">
+            <a class="linkbox" href="#paths">
+              <b>New to lab results</b>
+              <span>Start with foundations</span>
+            </a>
+            <a class="linkbox" href="#topics">
+              <b>Browse by department</b>
+              <span>Heme, Chem, Micro, Coag</span>
+            </a>
+            <a class="linkbox" href="#how">
+              <b>How the lab works</b>
+              <span>From sample to number</span>
+            </a>
+            <a class="linkbox" href="#topics">
+              <b>Quality & reliability</b>
+              <span>Interference, QC, errors</span>
+            </a>
+          </div>
+        </aside>
       </div>
-
-      <div class="rule"></div>
     </section>
 
-    <section class="columns">
-      <div>
-        <h2 class="col-title" id="featured">Featured</h2>
-        <p class="col-sub">Best entry points. Read these first if you want the mental model.</p>
-
-        <div class="list">
-          <a class="item" href="#">
-            <p class="it-title">What a Complete Blood Count Actually Tells You</p>
-            <p class="it-desc">A practical way to interpret RBC indices and WBC patterns without memorizing trivia.</p>
-            <div class="it-meta">
-              <span class="pill">Hematology</span>
-              <span class="pill">Interpretation</span>
-            </div>
-          </a>
-
-          <a class="item" href="#">
-            <p class="it-title">Why Reference Ranges Aren’t Universal</p>
-            <p class="it-desc">How “normal” is built, why methods differ, and why two labs can both be right.</p>
-            <div class="it-meta">
-              <span class="pill">Concepts</span>
-              <span class="pill">Quality</span>
-            </div>
-          </a>
-
-          <a class="item" href="#">
-            <p class="it-title">How Immunoassays Detect Disease</p>
-            <p class="it-desc">Signal vs specificity, interference, and what the lab is actually measuring.</p>
-            <div class="it-meta">
-              <span class="pill">Chemistry</span>
-              <span class="pill">Assays</span>
-            </div>
-          </a>
+    <section class="props" aria-label="Value propositions">
+      <div class="prop-row">
+        <div class="prop">
+          <h3>Concept-first</h3>
+          <p>Explanations focus on mental models so results make sense across topics.</p>
         </div>
-      </div>
-
-      <div>
-        <h2 class="col-title">Start Here</h2>
-        <p class="col-sub">Orientation reads that make the rest of the site click.</p>
-
-        <div class="list">
-          <a class="item" href="#">
-            <p class="it-title">How the Lab Turns Samples Into Numbers</p>
-            <p class="it-desc">A map of analyzers, assays, and where error can creep in.</p>
-            <div class="it-meta">
-              <span class="pill">Foundations</span>
-              <span class="pill">Workflow</span>
-            </div>
-          </a>
-
-          <a class="item" href="#">
-            <p class="it-title">Pre-Analytical Errors</p>
-            <p class="it-desc">Why the sample matters as much as the patient and the instrument.</p>
-            <div class="it-meta">
-              <span class="pill">Quality</span>
-              <span class="pill">Specimens</span>
-            </div>
-          </a>
-
-          <a class="item" href="#">
-            <p class="it-title">Interference: When the Number Lies</p>
-            <p class="it-desc">Hemolysis, lipemia, icterus, and method-specific distortion.</p>
-            <div class="it-meta">
-              <span class="pill">Chemistry</span>
-              <span class="pill">Reliability</span>
-            </div>
-          </a>
+        <div class="prop">
+          <h3>Method-aware</h3>
+          <p>Built around what instruments measure, plus limitations and interference.</p>
         </div>
-      </div>
-
-      <div>
-        <h2 class="col-title" id="latest">Latest</h2>
-        <p class="col-sub">Newest additions and refreshed pages.</p>
-
-        <div class="list">
-          <a class="item" href="#">
-            <p class="it-title">PT/INR in Plain Language</p>
-            <p class="it-desc">What clotting time represents and why INR exists.</p>
-            <div class="it-meta">
-              <span class="pill">Coagulation</span>
-              <span class="pill">Mechanisms</span>
-            </div>
-          </a>
-
-          <a class="item" href="#">
-            <p class="it-title">CRP vs ESR</p>
-            <p class="it-desc">Two inflammation markers that behave differently and mean different things.</p>
-            <div class="it-meta">
-              <span class="pill">Interpretation</span>
-              <span class="pill">Physiology</span>
-            </div>
-          </a>
-
-          <a class="item" href="#">
-            <p class="it-title">Hemolysis, Lipemia, Icterus: A Quick Reference</p>
-            <p class="it-desc">What the flags imply and why the same interference can affect different tests.</p>
-            <div class="it-meta">
-              <span class="pill">Specimens</span>
-              <span class="pill">Chemistry</span>
-            </div>
-          </a>
+        <div class="prop">
+          <h3>Structured</h3>
+          <p>Consistent layout and navigation so you’re never lost in the site.</p>
         </div>
       </div>
     </section>
 
-    <section class="topics" id="topics">
-      <div class="topics-header">
-        <h2>Browse by topic</h2>
-        <a href="#">Explore all</a>
+    <section class="section" id="paths" aria-label="Starting paths">
+      <div class="section-head">
+        <h2>Pick a starting path</h2>
+        <div class="hint">A real landing page should guide people. This does.</div>
       </div>
 
-      <div class="topic-grid">
-        <a class="topic-link" href="#">
-          <p class="topic-name">Hematology</p>
-          <p class="topic-note">CBC, indices, differentials, morphology</p>
-        </a>
+      <div class="paths">
+        <div class="path">
+          <h3>Path 1: Foundations</h3>
+          <p>For students and curious humans. Build the mental model first, then go deeper.</p>
+          <div class="path-links">
+            <a class="pill" href="#">Reference ranges</a>
+            <a class="pill" href="#">Specimen integrity</a>
+            <a class="pill" href="#">Assay basics</a>
+            <a class="pill" href="#">Flags & reporting</a>
+          </div>
+        </div>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Chemistry</p>
-          <p class="topic-note">Electrolytes, enzymes, interference</p>
-        </a>
+        <div class="path">
+          <h3>Path 2: By department</h3>
+          <p>Jump in where you already have context, then connect concepts across departments.</p>
+          <div class="path-links">
+            <a class="pill" href="#">Hematology</a>
+            <a class="pill" href="#">Chemistry</a>
+            <a class="pill" href="#">Microbiology</a>
+            <a class="pill" href="#">Coagulation</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Microbiology</p>
-          <p class="topic-note">Culture logic, ID methods, susceptibility</p>
-        </a>
+    <section class="section" id="how" aria-label="How it works">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <div class="hint">Simple structure you can build into later.</div>
+      </div>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Coagulation</p>
-          <p class="topic-note">PT/INR, aPTT, mixing studies</p>
-        </a>
+      <div class="steps">
+        <div class="step">
+          <div class="stepnum">1</div>
+          <h3>Start with the concept</h3>
+          <p>What is being measured, and what does the number represent biologically?</p>
+        </div>
+        <div class="step">
+          <div class="stepnum">2</div>
+          <h3>Understand the method</h3>
+          <p>How instruments generate the signal, and what can bias the result.</p>
+        </div>
+        <div class="step">
+          <div class="stepnum">3</div>
+          <h3>Interpret the context</h3>
+          <p>Reference ranges, patterns, and why “abnormal” isn’t always alarming.</p>
+        </div>
+      </div>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Blood Bank</p>
-          <p class="topic-note">Antibodies, compatibility, transfusion basics</p>
-        </a>
+      <div class="cta-band">
+        <div>
+          <h3>Ready to build this into a full site?</h3>
+          <p>Next step is wiring real pages into these paths (no filler needed, just stubs that look intentional).</p>
+        </div>
+        <div>
+          <a class="btn primary" href="#topics">Go to Topics</a>
+        </div>
+      </div>
+    </section>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Quality & Reliability</p>
-          <p class="topic-note">QC, bias, precision, pre-analytical</p>
-        </a>
+    <section class="section" id="topics" aria-label="Topics">
+      <div class="section-head">
+        <h2>Topics</h2>
+        <div class="hint">Keep these as placeholders until content exists.</div>
+      </div>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Instruments & Assays</p>
-          <p class="topic-note">Immunoassays, spectrophotometry, ISE</p>
-        </a>
+      <div class="paths">
+        <div class="path">
+          <h3>Education Hub</h3>
+          <p>Concepts by department, mechanisms, and foundational explanations.</p>
+          <div class="path-links">
+            <a class="pill" href="#">Anatomy & Physiology</a>
+            <a class="pill" href="#">Mechanisms</a>
+            <a class="pill" href="#">Concepts by department</a>
+          </div>
+        </div>
 
-        <a class="topic-link" href="#">
-          <p class="topic-name">Results & Reporting</p>
-          <p class="topic-note">Reference ranges, flags, delta checks</p>
-        </a>
+        <div class="path">
+          <h3>Blog</h3>
+          <p>Curiosity-driven articles that introduce lab science without procedural depth.</p>
+          <div class="path-links">
+            <a class="pill" href="#">Instruments & assays</a>
+            <a class="pill" href="#">Quality & reliability</a>
+            <a class="pill" href="#">Results & reporting</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -550,7 +692,6 @@
           <strong>LabContext</strong><br />
           A calm reference project focused on clarity, context, and understanding in laboratory medicine.
         </div>
-
         <div class="footer-links" aria-label="Footer links">
           <a href="#">About</a>
           <a href="#">Blog</a>
