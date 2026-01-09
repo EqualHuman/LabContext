@@ -6,125 +6,614 @@
 <title>LabContext</title>
 
 <style>
-:root {
-  --bg: #f9fafb;
-  --text: #1f2933;
-  --muted: #6b7280;
-  --accent: #3b5bcc;
-  --border: #e5e7eb;
+:root{
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --muted:#475569;
+  --muted2:#64748b;
+  --border:#e2e8f0;
+  --accent:#2f56d6;
+  --accent2:#1e40af;
+  --shadow:0 10px 30px rgba(15, 23, 42, 0.08);
+  --radius:18px;
+  --radius2:14px;
 }
 
-* {
-  box-sizing: border-box;
-}
+*{ box-sizing:border-box; }
 
-body {
-  margin: 0;
+html,body{ height:100%; }
+
+body{
+  margin:0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-main {
-  max-width: 760px;
+a{ color:inherit; }
+
+.container{
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 1.25rem;
+  padding: 0 1.25rem;
 }
 
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.5rem;
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: rgba(248,250,252,0.85);
+  border-bottom: 1px solid var(--border);
 }
 
-p.lead {
-  color: var(--muted);
-  margin-bottom: 3rem;
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0.9rem 0;
+  gap: 1rem;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap: .75rem;
+  text-decoration:none;
+  font-weight: 750;
+  letter-spacing: .2px;
+}
+
+.brand-mark{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(140% 120% at 20% 20%, rgba(47,86,214,0.28), transparent 55%),
+    radial-gradient(120% 120% at 80% 20%, rgba(30,64,175,0.20), transparent 60%),
+    linear-gradient(180deg, #ffffff, #f1f5f9);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+}
+
+.brand-name{
   font-size: 1.05rem;
 }
 
-.section {
-  margin-bottom: 3rem;
+.nav{
+  display:flex;
+  align-items:center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  justify-content:flex-end;
 }
 
-.section h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.list {
-  border-top: 1px solid var(--border);
-}
-
-.item {
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.item a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.item p {
-  margin: 0.25rem 0 0;
+.nav a{
+  text-decoration:none;
   color: var(--muted);
-  font-size: 0.95rem;
-}
-  /* Header separation */
-h1 {
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
+  font-weight: 550;
+  font-size: .95rem;
+  padding: .45rem .6rem;
+  border-radius: 10px;
 }
 
-/* Footer */
-footer {
-  margin-top: 5rem;
-  padding-top: 2rem;
+.nav a:hover{
+  background: rgba(15, 23, 42, 0.05);
+  color: var(--text);
+}
+
+.nav .cta{
+  background: rgba(47,86,214,0.10);
+  color: var(--accent2);
+  border: 1px solid rgba(47,86,214,0.22);
+}
+
+.nav .cta:hover{
+  background: rgba(47,86,214,0.16);
+}
+
+.hero{
+  padding: 3.25rem 0 2.25rem;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.hero-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.15rem;
+  position: relative;
+  overflow:hidden;
+}
+
+.hero-card::before{
+  content:"";
+  position:absolute;
+  inset:-120px -120px auto auto;
+  width: 320px;
+  height: 320px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, rgba(47,86,214,0.30), transparent 60%);
+  filter: blur(2px);
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding: .4rem .7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.75);
+  color: var(--muted);
+  font-size: .9rem;
+  position: relative;
+  z-index: 1;
+}
+
+.dot{
+  width: 8px; height: 8px;
+  border-radius: 99px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(47,86,214,0.14);
+}
+
+.hero h1{
+  margin: .9rem 0 .6rem;
+  font-size: clamp(2rem, 3.1vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero p{
+  margin: 0 0 1.35rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  position: relative;
+  z-index: 1;
+  max-width: 56ch;
+}
+
+.search{
+  display:flex;
+  gap:.75rem;
+  align-items:center;
+  position: relative;
+  z-index: 1;
+}
+
+.search input{
+  flex: 1;
+  padding: .95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+}
+
+.search input:focus{
+  border-color: rgba(47,86,214,0.45);
+  box-shadow: 0 0 0 4px rgba(47,86,214,0.12);
+}
+
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  padding: .95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(47,86,214,0.25);
+  background: linear-gradient(180deg, rgba(47,86,214,0.95), rgba(30,64,175,0.95));
+  color: #ffffff;
+  font-weight: 650;
+  text-decoration:none;
+  cursor:pointer;
+  white-space: nowrap;
+}
+
+.button:hover{
+  filter: brightness(1.02);
+}
+
+.subcards{
+  display:grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.side-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.35rem;
+  box-shadow: var(--shadow);
+}
+
+.side-title{
+  font-weight: 700;
+  margin: 0 0 .35rem;
+  font-size: 1rem;
+}
+
+.side-text{
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.pills{
+  display:flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  padding: .45rem .7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(15,23,42,0.03);
+  color: var(--muted);
+  text-decoration:none;
+  font-weight: 550;
+  font-size: .9rem;
+}
+
+.pill:hover{
+  background: rgba(15,23,42,0.06);
+  color: var(--text);
+}
+
+.section{
+  padding: 1.25rem 0 0;
+}
+
+.section-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap: 1rem;
+  margin-bottom: .9rem;
+}
+
+.section-header h2{
+  margin:0;
+  font-size: 1.15rem;
+  letter-spacing: -0.2px;
+}
+
+.section-header a{
+  color: var(--accent2);
+  text-decoration:none;
+  font-weight: 650;
+  font-size: .95rem;
+}
+
+.section-header a:hover{
+  text-decoration: underline;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 1.15rem;
+  box-shadow: 0 10px 24px rgba(15,23,42,0.06);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(15,23,42,0.09);
+  border-color: rgba(47,86,214,0.26);
+}
+
+.card a{
+  text-decoration:none;
+}
+
+.card-title{
+  margin: 0 0 .35rem;
+  font-weight: 760;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+}
+
+.card-desc{
+  margin: 0 0 .85rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.meta{
+  display:flex;
+  gap:.5rem;
+  flex-wrap: wrap;
+}
+
+.tag{
+  font-size: .82rem;
+  color: var(--muted2);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.7);
+  padding: .28rem .55rem;
+  border-radius: 999px;
+}
+
+.split{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.footer{
+  margin-top: 3.5rem;
+  padding: 2rem 0 3rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: .9rem;
 }
 
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 1rem;
+  align-items:start;
+}
+
+.small-links{
+  display:flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  justify-content:flex-end;
+}
+
+.small-links a{
+  color: var(--muted);
+  text-decoration:none;
+  padding: .35rem .5rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+.small-links a:hover{
+  border-color: var(--border);
+  background: rgba(15,23,42,0.03);
+}
+
+@media (max-width: 980px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .subcards{ grid-template-rows: auto; grid-template-columns: 1fr; }
+  .grid{ grid-template-columns: 1fr; }
+  .split{ grid-template-columns: 1fr; }
+  .footer-grid{ grid-template-columns: 1fr; }
+  .small-links{ justify-content:flex-start; }
+}
+
+@media (max-width: 520px){
+  .search{ flex-direction: column; align-items: stretch; }
+  .button{ width: 100%; }
+}
 </style>
+
 </head>
 
 <body>
-<main>
 
-<h1>LabContext</h1>
-<p class="lead">
-Clear explanations of laboratory science, physiology, and diagnostic concepts.
-</p>
+<header class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">LabContext</span>
+      </a>
 
-<div class="section">
-<h2>Featured Articles</h2>
+      <nav class="nav" aria-label="Primary">
+        <a href="#featured">Featured</a>
+        <a href="#topics">Topics</a>
+        <a href="#latest">Latest</a>
+        <a class="cta" href="#start">Start Here</a>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<div class="list">
+<main class="container">
+  <section class="hero" id="start">
+    <div class="hero-grid">
+      <div class="hero-card">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> Quiet, clear lab science—without the noise</div>
+        <h1>Understand lab results by learning what the lab is actually measuring.</h1>
+        <p>
+          LabContext is a calm reference hub for students and curious humans: concepts, mechanisms, and
+          the “why” behind common tests—written to be understandable without being shallow.
+        </p>
 
-<div class="item">
-<a href="#">What a Complete Blood Count Actually Tells You</a>
-<p>How common lab values are generated and interpreted.</p>
-</div>
+        <div class="search" role="search" aria-label="Site search">
+          <input type="search" placeholder="Search topics (e.g., CBC, hemolysis, immunoassay, PT/INR)" aria-label="Search">
+          <a class="button" href="#topics">Browse topics</a>
+        </div>
+      </div>
 
-<div class="item">
-<a href="#">Why Reference Ranges Aren’t Universal</a>
-<p>How population statistics shape “normal” results.</p>
-</div>
+      <div class="subcards">
+        <aside class="side-card">
+          <p class="side-title">Start here</p>
+          <p class="side-text">If you’re new, these are the quickest “orientation” reads.</p>
+          <div class="pills">
+            <a class="pill" href="#">How the lab turns samples into numbers</a>
+            <a class="pill" href="#">Reference ranges explained</a>
+            <a class="pill" href="#">Pre-analytical errors</a>
+          </div>
+        </aside>
 
-<div class="item">
-<a href="#">How Immunoassays Detect Disease</a>
-<p>The logic behind antibody-based testing.</p>
-</div>
+        <aside class="side-card">
+          <p class="side-title">What’s inside</p>
+          <p class="side-text">A simple structure you can trust and navigate.</p>
+          <div class="pills">
+            <a class="pill" href="#">Education Hub</a>
+            <a class="pill" href="#">Mechanisms</a>
+            <a class="pill" href="#">Instruments & assays</a>
+            <a class="pill" href="#">Quality & reliability</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-</div>
-</div>
-<footer>
-  LabContext is an educational reference project focused on clarity, context, and understanding.
-</footer>
+  <section class="section" id="featured">
+    <div class="section-header">
+      <h2>Featured articles</h2>
+      <a href="#">View all</a>
+    </div>
 
+    <div class="grid">
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">What a Complete Blood Count Actually Tells You</h3>
+          <p class="card-desc">A practical mental model for RBC indices, WBC differentials, and what “abnormal” often really means.</p>
+          <div class="meta">
+            <span class="tag">Hematology</span>
+            <span class="tag">Results & reporting</span>
+          </div>
+        </a>
+      </article>
+
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">Why Reference Ranges Aren’t Universal</h3>
+          <p class="card-desc">How “normal” is built from populations, method differences, and why two labs can both be right.</p>
+          <div class="meta">
+            <span class="tag">Concepts</span>
+            <span class="tag">Quality</span>
+          </div>
+        </a>
+      </article>
+
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">How Immunoassays Detect Disease</h3>
+          <p class="card-desc">The logic behind antibody-based testing—signal, specificity, interference, and what can go wrong.</p>
+          <div class="meta">
+            <span class="tag">Chemistry</span>
+            <span class="tag">Assays</span>
+          </div>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="topics">
+    <div class="section-header">
+      <h2>Browse by topic</h2>
+      <a href="#">Explore hub</a>
+    </div>
+
+    <div class="split">
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">Concepts by department</h3>
+          <p class="card-desc">Heme, Chem, Micro, BB, Coag—learn the “rules of the game” that make results make sense.</p>
+          <div class="meta">
+            <span class="tag">Education</span>
+            <span class="tag">Structure</span>
+          </div>
+        </a>
+      </article>
+
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">Quality, safety, reliability</h3>
+          <p class="card-desc">How labs reduce error: pre-analytical issues, controls, interference, and meaningful uncertainty.</p>
+          <div class="meta">
+            <span class="tag">Quality</span>
+            <span class="tag">Interpretation</span>
+          </div>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="latest">
+    <div class="section-header">
+      <h2>Latest</h2>
+      <a href="#">See updates</a>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">Hemolysis, Lipemia, Icterus: Why Some Samples “Don’t Behave”</h3>
+          <p class="card-desc">What those flags mean and how interference can distort a number without changing the patient.</p>
+          <div class="meta">
+            <span class="tag">Specimen integrity</span>
+            <span class="tag">Chemistry</span>
+          </div>
+        </a>
+      </article>
+
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">PT/INR in Plain Language</h3>
+          <p class="card-desc">A clear explanation of clotting time, pathways, and why INR exists (without turning into a textbook).</p>
+          <div class="meta">
+            <span class="tag">Coagulation</span>
+            <span class="tag">Mechanisms</span>
+          </div>
+        </a>
+      </article>
+
+      <article class="card">
+        <a href="#">
+          <h3 class="card-title">CRP vs ESR</h3>
+          <p class="card-desc">Two “inflammation” markers that behave very differently—and when each becomes informative.</p>
+          <div class="meta">
+            <span class="tag">Inflammation</span>
+            <span class="tag">Interpretation</span>
+          </div>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <strong>LabContext</strong><br>
+        A calm reference project focused on clarity, context, and understanding in laboratory medicine.
+      </div>
+      <div class="small-links" aria-label="Footer links">
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Education</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
 </main>
+
 </body>
+
 </html>
 
