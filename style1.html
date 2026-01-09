@@ -3,388 +3,236 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LabContext — Clear Lab Science for Real Life</title>
-  <meta name="description" content="LabContext makes lab science understandable—without the lecture." />
+  <title>LabContext</title>
 
   <style>
     :root{
-      --paper: #fbfaf7;
-      --ink: #10121a;
-      --muted: rgba(16,18,26,.70);
-      --faint: rgba(16,18,26,.08);
-      --rule: rgba(16,18,26,.16);
-      --accent: #2c2a6f; /* indigo, not electric */
+      --bg: #f4f5f7;
+      --ink: #0f1220;
+      --muted: rgba(15,18,32,.65);
+      --rule: rgba(15,18,32,.14);
+      --accent: #5b5bf7;
 
-      --radius: 12px;
-
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
     *{ box-sizing: border-box; }
-    html, body{ height: 100%; }
-
     body{
-      margin: 0;
-      color: var(--ink);
-      background:
-        linear-gradient(0deg, rgba(255,255,255,.65), rgba(255,255,255,.65)),
-        radial-gradient(1200px 800px at 50% 0%, rgba(44,42,111,.06), transparent 55%),
-        repeating-linear-gradient(
-          0deg,
-          rgba(16,18,26,.03) 0px,
-          rgba(16,18,26,.03) 1px,
-          transparent 1px,
-          transparent 28px
-        ),
-        var(--paper);
+      margin:0;
       font-family: var(--sans);
-      letter-spacing: -0.01em;
-      line-height: 1.45;
+      background: var(--bg);
+      color: var(--ink);
     }
 
     a{ color: inherit; text-decoration: none; }
-    a:focus-visible, button:focus-visible{
-      outline: 3px solid rgba(44,42,111,.25);
-      outline-offset: 3px;
-      border-radius: 10px;
-    }
 
-    /* PAGE */
-    .page{
-      max-width: 980px;
+    /* FRAME */
+    .frame{
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 28px 18px 60px;
+      padding: 28px 24px 60px;
     }
 
-    /* MASTHEAD (not an app header) */
-    .masthead{
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: start;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .mark{
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .stamp{
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      border: 1px solid rgba(16,18,26,.14);
-      background:
-        radial-gradient(circle at 35% 30%, rgba(255,255,255,.8), transparent 45%),
-        linear-gradient(135deg, rgba(44,42,111,.95), rgba(44,42,111,.55));
-      position: relative;
-    }
-    .stamp::after{
-      content:"";
-      position:absolute;
-      inset: 7px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.30);
-      background: repeating-linear-gradient(
-        90deg,
-        rgba(255,255,255,.18) 0 2px,
-        transparent 2px 6px
-      );
-      opacity: .55;
+    /* HEADER */
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom: 40px;
     }
 
     .brand{
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      padding-top: 1px;
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .brand strong{
-      font-size: 14px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+
+    .brand-mark{
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      background: linear-gradient(135deg, #5b5bf7, #7be7c4);
     }
-    .brand .sub{
+
+    .brand-name{
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:13px;
+    }
+
+    nav{
+      display:flex;
+      gap:20px;
+      font-size:13px;
+      color: var(--muted);
+    }
+
+    nav a:hover{
+      color: var(--ink);
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .hero-copy{
+      display:flex;
+      flex-direction:column;
+      gap:24px;
+    }
+
+    .hero-label{
       font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(16,18,26,.62);
+      font-size:12px;
+      letter-spacing:.12em;
+      color: var(--muted);
     }
 
-    /* NAV as simple index links */
-    .nav{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      justify-content: flex-end;
-      padding-top: 4px;
-    }
-    .nav a{
-      font-family: var(--mono);
-      font-size: 12px;
-      color: rgba(16,18,26,.72);
-      padding: 2px 0;
-      border-bottom: 1px solid transparent;
-    }
-    .nav a:hover{
-      color: rgba(16,18,26,.92);
-      border-bottom-color: rgba(16,18,26,.20);
-    }
-    .nav a.primary{
-      color: rgba(44,42,111,.92);
-      border-bottom-color: rgba(44,42,111,.25);
-    }
-
-    /* CONTENT LAYOUT: a printed page rhythm */
-    .content{
-      padding-top: 26px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 22px;
-    }
-
-    /* TOP LINE: looks like a document label */
-    .docline{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      align-items: baseline;
-      font-family: var(--mono);
-      font-size: 12px;
-      color: rgba(16,18,26,.62);
-    }
-    .docline .chip{
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      padding: 3px 10px;
-      border: 1px solid rgba(16,18,26,.14);
-      border-radius: 999px;
-      background: rgba(255,255,255,.55);
-    }
-    .docline .dot{
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(44,42,111,.80);
-      display: inline-block;
-      transform: translateY(1px);
-    }
-
-    /* TITLE: serif for "reference" vibe */
     h1{
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1.04;
-      letter-spacing: -0.03em;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height:1.02;
+      margin:0;
+      letter-spacing:-0.03em;
     }
 
-    .lede{
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.6;
-      color: rgba(16,18,26,.78);
-      max-width: 72ch;
+    .hero-desc{
+      font-size:18px;
+      line-height:1.6;
+      color: var(--muted);
+      max-width: 44ch;
     }
 
-    /* RULED BOXES: not cards, more like sections on a page */
-    .panel{
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,.58);
-      border-radius: var(--radius);
-      overflow: hidden;
+    /* HERO OBJECT (abstract instead of UI) */
+    .hero-object{
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.65), transparent 40%),
+        linear-gradient(135deg, #5b5bf7, #7be7c4);
+      box-shadow: 0 40px 80px rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
     }
 
-    .panel .panel-head{
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: baseline;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--faint);
-      background: rgba(255,255,255,.45);
+    .hero-object::after{
+      content:"";
+      position:absolute;
+      inset:16%;
+      border-radius:20px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,.25) 0 2px,
+          transparent 2px 8px
+        );
+      opacity:.55;
     }
 
-    .panel .panel-head .title{
+    /* META STRIP */
+    .meta{
+      margin-top: 48px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:24px;
+    }
+
+    .meta-item{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .meta-item span{
       font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      color: rgba(16,18,26,.68);
+      font-size:12px;
+      color: var(--muted);
     }
 
-    .panel .panel-head .meta{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(16,18,26,.58);
+    .meta-item strong{
+      font-size:15px;
+      font-weight:500;
     }
 
-    .panel .panel-body{
-      padding: 14px 16px 16px;
-    }
-
-    .bullets{
-      margin: 0;
-      padding-left: 18px;
-      display: grid;
-      gap: 10px;
-      color: rgba(16,18,26,.76);
-    }
-    .bullets li{
-      line-height: 1.55;
-    }
-    .bullets b{
-      color: rgba(16,18,26,.90);
-    }
-
-    /* TWO-COLUMN “WHAT IT IS / ISN’T” without modern card styling */
-    .split{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 6px;
-    }
-    .box{
-      border: 1px solid rgba(16,18,26,.14);
-      background: rgba(255,255,255,.52);
-      border-radius: 10px;
-      padding: 12px 12px 10px;
-      min-height: 92px;
-    }
-    .box h3{
-      margin: 0 0 8px;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(16,18,26,.70);
-    }
-    .box p{
-      margin: 0;
-      font-size: 14px;
-      color: rgba(16,18,26,.76);
-      line-height: 1.55;
-    }
-
-    /* FOOTER: looks like document footer, not site footer */
-    .footer{
-      margin-top: 26px;
+    /* FOOTER */
+    footer{
+      margin-top: 64px;
       padding-top: 16px;
       border-top: 1px solid var(--rule);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: start;
-      color: rgba(16,18,26,.62);
-    }
-    .footer .label{
-      font-family: var(--mono);
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      font-size: 11px;
-      margin-bottom: 6px;
-      color: rgba(16,18,26,.62);
-    }
-    .footer .desc{
-      font-size: 12px;
-      color: rgba(16,18,26,.62);
-    }
-    .footer .right{
-      font-family: var(--mono);
-      font-size: 12px;
-      color: rgba(16,18,26,.62);
-      text-align: right;
+      font-size:12px;
+      color: var(--muted);
+      display:flex;
+      justify-content:space-between;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 820px){
-      .masthead{ grid-template-columns: 1fr; }
-      .nav{ justify-content: flex-start; }
-      .split{ grid-template-columns: 1fr; }
-      .footer{ grid-template-columns: 1fr; }
-      .footer .right{ text-align: left; }
+    @media (max-width: 900px){
+      .hero{
+        grid-template-columns: 1fr;
+      }
+      .hero-object{
+        order:-1;
+      }
+      .meta{
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <header class="masthead" aria-label="LabContext masthead">
-      <a class="mark" href="#" aria-label="LabContext home">
-        <div class="stamp" aria-hidden="true"></div>
-        <div class="brand">
-          <strong>LabContext</strong>
-          <div class="sub">specimen: clarity • sample: curiosity</div>
-        </div>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
+  <div class="frame">
+    <header>
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-name">LabContext</div>
+      </div>
+      <nav>
         <a href="#">Explore</a>
         <a href="#">Topics</a>
         <a href="#">About</a>
-        <a class="primary" href="#">Start Here</a>
       </nav>
     </header>
 
-    <main class="content" aria-label="LabContext introduction">
-      <div class="docline">
-        <span class="chip"><span class="dot" aria-hidden="true"></span> LC-0001</span>
-        <span>LABCONTEXT / HOME</span>
-        <span>REV: 01</span>
-      </div>
-
-      <h1>Lab science, made usable.</h1>
-
-      <p class="lede">
-        We translate lab medicine into plain meaning—what a test measures, what it suggests,
-        and why it matters—without turning it into a lecture.
-      </p>
-
-      <section class="panel" aria-label="What you’ll find here">
-        <div class="panel-head">
-          <div class="title">What you’ll find</div>
-          <div class="meta">overview</div>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="hero-label">CLEAR LAB SCIENCE</div>
+          <h1>Understanding tests<br>without the noise.</h1>
+          <p class="hero-desc">
+            LabContext reframes laboratory medicine around meaning, limits,
+            and interpretation — not panic, not procedures.
+          </p>
         </div>
-        <div class="panel-body">
-          <ul class="bullets">
-            <li><b>Concept-first explanations</b> that start with what the test is actually measuring.</li>
-            <li><b>Quick orientation</b> to common terms so results feel less like a foreign language.</li>
-            <li><b>Clean takeaways</b> that focus on meaning, limits, and why the result matters.</li>
-          </ul>
-        </div>
+
+        <div class="hero-object" aria-hidden="true"></div>
       </section>
 
-      <section class="panel" aria-label="What LabContext is and isn’t">
-        <div class="panel-head">
-          <div class="title">Scope</div>
-          <div class="meta">boundaries</div>
+      <section class="meta">
+        <div class="meta-item">
+          <span>Focus</span>
+          <strong>Concept-first explanations</strong>
         </div>
-        <div class="panel-body">
-          <div class="split">
-            <div class="box">
-              <h3>What LabContext is</h3>
-              <p>A calm place to get your bearings when lab words feel like a foreign language.</p>
-            </div>
-            <div class="box">
-              <h3>What it isn’t</h3>
-              <p>Medical advice, panic fuel, or a list of scary worst-cases.</p>
-            </div>
-          </div>
+        <div class="meta-item">
+          <span>Audience</span>
+          <strong>Patients, students, curious minds</strong>
+        </div>
+        <div class="meta-item">
+          <span>Position</span>
+          <strong>Interpretation, not advice</strong>
         </div>
       </section>
     </main>
 
-    <footer class="footer" aria-label="LabContext footer">
-      <div>
-        <div class="label">Shift report</div>
-        <div class="desc">Clear explanations. Low noise. High trust.</div>
-      </div>
-      <div class="right">© <span id="year"></span> LabContext</div>
+    <footer>
+      <div>LabContext</div>
+      <div>© <span id="year"></span></div>
     </footer>
   </div>
 
