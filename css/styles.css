@@ -79,28 +79,27 @@ a:focus-visible{
   z-index: 9999;
 }
 
-/* Frame */
+/* Frame *//* Frame becomes the light "page". Margin reveals the charcoal surround. */
 .frame{
-  min-height: 100vh;
-  padding: 48px; /* controls charcoal thickness */
+  min-height: calc(100vh - 96px);
+  margin: 48px;              /* controls charcoal thickness */
+  padding: 22px;             /* inner breathing room */
   background: var(--bg);
   border-radius: 26px;
+  box-shadow:
+    0 0 0 1px rgba(55, 59, 93, 0.14),   /* hairline frame */
+    var(--shadow);                     /* lift */
 }
+
 @media (max-width: 820px){
   .frame{
-    padding: 28px;
+    min-height: calc(100vh - 56px);
+    margin: 28px;
+    padding: 18px;
     border-radius: 20px;
   }
 }
 
-.frame::after{
-  content:"";
-  position: fixed;
-  inset: 26px;
-  border: 1px solid rgba(55, 59, 93, 0.10);
-  border-radius: 16px;
-  pointer-events: none;
-}
 
 .wrap{
   width: 100%;
