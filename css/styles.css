@@ -82,7 +82,7 @@ a:focus-visible{
 /* Frame *//* Frame becomes the light "page". Margin reveals the charcoal surround. */
 .frame{
   min-height: calc(100vh - 96px);
-  margin: 35px;              /* controls charcoal thickness */
+  margin: 25px;              /* controls charcoal thickness */
   padding: 18px;             /* inner breathing room */
   background: var(--bg);
   border-radius: 26px;
