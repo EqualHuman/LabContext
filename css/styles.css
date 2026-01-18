@@ -92,6 +92,7 @@ a:focus-visible{
   border: 1px solid rgba(55, 59, 93, 0.20);
   border-radius: 18px;
   pointer-events: none;
+    border-color: #2B2F36;
 }
 
 .frame::after{
