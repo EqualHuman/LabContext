@@ -85,15 +85,7 @@ a:focus-visible{
   padding: 18px;
 }
 
-.frame::before{
-  content:"";
-  position: fixed;
-  inset: 14px;
-  border: 1px solid rgba(55, 59, 93, 0.20);
-  border-radius: 18px;
-  pointer-events: none;
-    border-color: #2B2F36;
-}
+
 
 .frame::after{
   content:"";
@@ -1021,4 +1013,14 @@ a:focus-visible{
 
 @media (prefers-reduced-motion: reduce){
   .hub-tile{ transition: none; }
+}
+/* Outer canvas: charcoal surround */
+html,
+body{
+  background: #2B2F36;
+}
+/* Inner framed page surface */
+.frame{
+  background: var(--bg);
+  border-radius: 22px;
 }
