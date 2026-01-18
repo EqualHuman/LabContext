@@ -1069,3 +1069,135 @@ a:focus-visible{
   .page-home .news-grid{ grid-template-columns: 1fr; }
   .page-home .front-item{ grid-template-columns: 1fr; }
 }
+/* --- Global vibe shift: cleaner / newer / less "aged paper" --- */
+
+:root{
+  /* Background + surfaces (cleaner, brighter) */
+  --bg: #F7F8FA;
+  --surface: #FFFFFF;
+  --surface-2: #EEF1F5;
+
+  /* Text */
+  --ink: #111827;
+  --muted: rgba(17, 24, 39, 0.68);
+  --subtle: rgba(17, 24, 39, 0.52);
+
+  /* Indigo system (slightly crisper) */
+  --indigo: #4F547A;
+  --indigo-deep: #373B5D;
+
+  /* Borders + shadow (cleaner, less beige haze) */
+  --border: rgba(55, 59, 93, 0.14);
+  --border-strong: rgba(55, 59, 93, 0.22);
+  --shadow: 0 14px 40px rgba(17, 24, 39, 0.10);
+
+  /* Focus ring */
+  --focus: 0 0 0 3px rgba(79, 84, 122, 0.18);
+}
+
+/* Base page color + type tone */
+body{
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Make link color feel “editorial” rather than default-web blue */
+a{
+  color: inherit;
+  text-decoration-color: rgba(55, 59, 93, 0.28);
+}
+a:hover{
+  text-decoration-color: rgba(55, 59, 93, 0.46);
+}
+
+/* Frame: lighter and more modern */
+.frame::before{
+  border-color: rgba(55, 59, 93, 0.20);
+}
+.frame::after{
+  border-color: rgba(55, 59, 93, 0.10);
+}
+
+/* Header: less sepia, more glassy */
+.site-header{
+  background: rgba(247, 248, 250, 0.86);
+  border-bottom-color: rgba(55, 59, 93, 0.10);
+}
+
+/* Nav: a bit cleaner */
+.nav-link{
+  color: rgba(17, 24, 39, 0.82);
+}
+.nav-link:hover{
+  background: rgba(255,255,255,0.72);
+  border-color: rgba(55, 59, 93, 0.12);
+}
+.nav-link[aria-current="page"]{
+  background: rgba(79, 84, 122, 0.08);
+  border-color: rgba(79, 84, 122, 0.18);
+  color: rgba(55, 59, 93, 0.96);
+}
+
+/* Cards + tiles: shift away from beige tint */
+.hero-card .card,
+.band-card,
+.hub-tile,
+.note-card,
+.news-col,
+.front-card,
+.structure{
+  background: rgba(255,255,255,0.88);
+  border-color: rgba(55, 59, 93, 0.12);
+}
+
+/* Secondary blocks that were “taupe” become cool neutral */
+.note-card{
+  background: rgba(238, 241, 245, 0.72);
+}
+
+.callout,
+.quick-link,
+.story,
+.brief{
+  background: rgba(238, 241, 245, 0.58);
+  border-color: rgba(55, 59, 93, 0.10);
+}
+
+/* Rules/lines: cleaner */
+.section-head,
+.card-rule,
+.front-rule,
+.masthead-rule,
+.news-line{
+  border-bottom-color: rgba(55, 59, 93, 0.10);
+}
+.card-rule,
+.front-rule,
+.masthead-rule,
+.news-line{
+  background: rgba(55, 59, 93, 0.12);
+}
+
+/* Tags/chips: less creamy */
+.meta-chip,
+.tag,
+.mini-link{
+  background: rgba(238, 241, 245, 0.72);
+  border-color: rgba(55, 59, 93, 0.12);
+}
+
+/* Footer: cleaner */
+.site-footer{
+  border-top-color: rgba(55, 59, 93, 0.10);
+}
+.footer-sub,
+.footer-meta{
+  color: rgba(17, 24, 39, 0.58);
+}
+
+/* Optional: slightly sharper headings site-wide */
+.hero-title,
+.page-title,
+.section-title{
+  color: rgba(17, 24, 39, 0.94);
+}
