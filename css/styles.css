@@ -83,7 +83,7 @@ a:focus-visible{
 .frame{
   min-height: calc(100vh - 96px);
   margin: 48px;              /* controls charcoal thickness */
-  padding: 22px;             /* inner breathing room */
+  padding: 18px;             /* inner breathing room */
   background: var(--bg);
   border-radius: 26px;
   box-shadow:
